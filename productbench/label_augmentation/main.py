@@ -1,4 +1,6 @@
 import json
+import os
+from openai import OpenAI
 
 def load_data(file_path):
   """Loads the label augmentation data from a JSON file."""
@@ -10,5 +12,57 @@ def augment_label(label: str) -> str:
   return "augmented label"
 
 def evaluate_augmentation(augmented_label: str, ground_truth: str) -> float:
-  """Placeholder function to simulate LLM-based evaluation."""
-  return 0.8
+  """
+  Evaluates the quality of the augmented label against the ground truth using an LLM.
+  Returns a score between 0.0 and 1.0.
+  Falls back to a token overlap metric if the OpenAI API key is missing or an error occurs.
+  """
+  api_key = os.environ.get("OPENAI_API_KEY")
+
+  if api_key:
+    try:
+      client = OpenAI(api_key=api_key)
+      prompt = (
+          f"Compare the augmented label with the ground truth label.\n"
+          f"Augmented Label: {augmented_label}\n"
+          f"Ground Truth: {ground_truth}\n"
+          f"Rate the semantic similarity and correctness on a scale from 0.0 to 1.0, "
+          f"where 1.0 means they are identical in meaning and 0.0 means they are completely unrelated.\n"
+          f"Return ONLY the numeric score."
+      )
+
+      response = client.chat.completions.create(
+          model="gpt-3.5-turbo",
+          messages=[
+              {"role": "system", "content": "You are a helpful assistant that evaluates semantic similarity."},
+              {"role": "user", "content": prompt}
+          ],
+          temperature=0,
+          max_tokens=10
+      )
+
+      content = response.choices[0].message.content.strip()
+      try:
+        score = float(content)
+        return max(0.0, min(1.0, score))
+      except ValueError:
+        # If LLM returns non-numeric, fallback or log error.
+        # For robustness, we'll try to extract a number or fall back.
+        pass
+
+    except Exception as e:
+      # Log the error if needed, but for now we proceed to fallback
+      # print(f"LLM evaluation failed: {e}")
+      pass
+
+  # Fallback: Token overlap (Jaccard Similarity)
+  aug_tokens = set(augmented_label.lower().split())
+  gt_tokens = set(ground_truth.lower().split())
+
+  if not aug_tokens or not gt_tokens:
+      return 0.0
+
+  intersection = aug_tokens.intersection(gt_tokens)
+  union = aug_tokens.union(gt_tokens)
+
+  return len(intersection) / len(union)
