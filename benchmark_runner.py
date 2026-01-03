@@ -8,119 +8,129 @@ from productbench.label_augmentation.main import load_data as load_label_data
 from productbench.product_reranking.main import load_data as load_rerank_data, calculate_ranking_distance
 
 # List of models to benchmark
+
 MODELS = [
-    # --- The "Must Benchmark" Frontier (Latest Releases) ---
+    # --- 🌟 The "Next-Gen" Frontier (Verified from your screenshots) ---
     {
-        "model": "Ministral 3 14B (Dec 2025 Release)",
-        "openrouter_id": "mistralai/ministral-14b-2512",
+        "model": "Qwen 3 14B",
+        "openrouter_id": "qwen/qwen3-14b",  # From Image 5
         "params": "14B",
+        "note": "The new 2026 standard. Likely outperforms Qwen 2.5 significantly."
     },
     {
         "model": "Microsoft Phi-4",
-        "openrouter_id": "microsoft/phi-4",
-        "params": "14B",
+        "openrouter_id": "microsoft/phi-4",  # From Image 5
+        "params": "14B",  # Estimated based on Phi series (usually 14B for mid-size)
+        "note": "Latest reasoning model from Microsoft. Pure synthetic data excellence."
     },
     {
-        "model": "DeepSeek R1 Distill Qwen 14B",
-        "openrouter_id": "deepseek/deepseek-r1-distill-qwen-14b",
-        "params": "14B",
+        "model": "Google Gemma 3 12B Instruct",
+        "openrouter_id": "google/gemma-3-12b-it",  # From Image 2
+        "params": "12B",
+        "note": "A new weight class for Gemma. Perfect balance for 16GB VRAM cards."
     },
+    # --- 🧠 Specialized Reasoning & "Thinking" Models ---
     {
-        "model": "Qwen 2.5 14B Instruct",
-        "openrouter_id": "qwen/qwen-2.5-14b-instruct",
-        "params": "14B",
-    },
-
-    # --- The Granite Family (IBM Enterprise) ---
-    {
-        "model": "Granite 3.0 8B Instruct",
-        "openrouter_id": "ibm/granite-3.0-8b-instruct",
-        "params": "8B",
-    },
-    {
-        "model": "Granite 4.0 Micro (3B)",
-        "openrouter_id": "ibm-granite/granite-4.0-h-micro",
-        "params": "3B",
+        "model": "GLM-4.1V 9B Thinking",
+        "openrouter_id": "thudm/glm-4.1v-9b-thinking",  # From Image 3
+        "params": "9B",
+        "note": "Explicitly labeled 'Thinking'. Good for complex logic/reranking."
     },
 
-    # --- Tool Use & RAG Specialists ---
+    # --- 🛠️ Tool Use & Agent Specialists ---
     {
-        "model": "Cohere Command R7B (12-2024)",
-        "openrouter_id": "cohere/command-r7b-12-2024",
+        "model": "Cohere Command R7B (Dec 2024)",
+        "openrouter_id": "cohere/command-r7b-12-2024",  # From Image 3
         "params": "7B",
+        "note": "Verified 12-2024 update. Best-in-class citation and tool use."
     },
     {
         "model": "Mistral Nemo 12B",
-        "openrouter_id": "mistralai/mistral-nemo",
+        "openrouter_id": "mistralai/mistral-nemo",  # From Image 1
         "params": "12B",
+        "note": "Reliable workhorse. Tekken tokenizer is efficient for JSON."
     },
     {
-        "model": "GLM-4 9B Chat",
-        "openrouter_id": "thudm/glm-4-9b-chat",
-        "params": "9B",
-    },
-
-    # --- High Knowledge & Creative Generalists ---
-    {
-        "model": "Gemma 2 9B Instruct",
-        "openrouter_id": "google/gemma-2-9b-it",
-        "params": "9B",
-    },
-    {
-        "model": "Yi 1.5 9B Chat",
-        "openrouter_id": "01-ai/yi-1.5-9b-chat",
-        "params": "9B",
-    },
-    {
-        "model": "InternLM 2.5 20B Chat",
-        "openrouter_id": "internlm/internlm-2.5-20b-chat",
-        "params": "20B",
+        "model": "Mistral Small 3 (24B) [Jan 2026]",
+        "openrouter_id": "mistralai/mistral-small-24b-instruct-2501",  # From Image 2
+        "params": "24B",
+        "note": "Slightly over 20B, but verified in your list and highly capable."
     },
 
-    # --- Efficient & Multilingual (<10B) ---
+    # --- ⚡ High Efficiency Edge Models (<10B) ---
     {
-        "model": "Aya Expanse 8B",
-        "openrouter_id": "cohere/aya-expanse-8b",
+        "model": "Google Gemma 3 4B Instruct",
+        "openrouter_id": "google/gemma-3-4b-it",  # From Image 1
+        "params": "4B",
+        "note": "New generation 4B. Likely beats older 7B models."
+    },
+    {
+        "model": "Qwen 3 8B",
+        "openrouter_id": "qwen/qwen3-8b",  # From Image 3
         "params": "8B",
+        "note": "The smaller sibling of the Qwen 3 14B."
     },
     {
-        "model": "Qwen 2.5 7B Instruct",
-        "openrouter_id": "qwen/qwen-2.5-7b-instruct",
-        "params": "7B",
+        "model": "IBM Granite 4.0 Micro",
+        "openrouter_id": "ibm-granite/granite-4.0-h-micro",  # From Image 1
+        "params": "Unknown (Micro)",
+        "note": "Enterprise edge model. Good for strict formatting tests."
     },
     {
-        "model": "Microsoft Phi-3.5 Mini",
-        "openrouter_id": "microsoft/phi-3.5-mini-128k-instruct",
-        "params": "3.8B",
+        "model": "Mistral Ministral 3B",
+        "openrouter_id": "mistralai/ministral-3b",  # From Image 3
+        "params": "3B",
+        "note": "Mistral's tiniest edge model. Good baseline."
     },
     {
-        "model": "Solar 10.7B Instruct",
-        "openrouter_id": "upstage/solar-10.7b-instruct-v1",
-        "params": "10.7B",
+        "model": "NVIDIA Nemotron Nano 9B v2",
+        "openrouter_id": "nvidia/nemotron-nano-9b-v2",  # From Image 4
+        "params": "9B",
+        "note": "NVIDIA's optimized small model for RAG/Synthetic data."
     },
 
-    # --- Unique Architectures (MoE / Vision) ---
-    {
-        "model": "DeepSeek V2 Lite Chat",
-        "openrouter_id": "deepseek/deepseek-v2-lite-chat",
-        "params": "16B (MoE)",
-    },
+    # --- 👁️ Multimodal & Novel Architectures ---
     {
         "model": "Pixtral 12B",
-        "openrouter_id": "mistralai/pixtral-12b",
+        "openrouter_id": "mistralai/pixtral-12b",  # From Image 7
         "params": "12B",
+        "note": "Vision capable, based on Nemo. Strong generalist."
     },
     {
-        "model": "Mistral 7B Instruct v0.3",
-        "openrouter_id": "mistralai/mistral-7b-instruct-v0.3",
+        "model": "Liquid LFM2 8B",
+        "openrouter_id": "liquid/lfm2-8b-a1b",  # From Image 4
+        "params": "8B",
+        "note": "Liquid Neural Network. Non-transformer architecture. Good wildcard."
+    },
+    {
+        "model": "Microsoft Phi-4 Multimodal",
+        "openrouter_id": "microsoft/phi-4-multimodal-instruct",  # From Image 4
+        "params": "14B (Est)",
+        "note": "Multimodal version of Phi-4. Good for visual label verification."
+    },
+    {
+        "model" : "gemini-2.0-flash-001",
+        "openrouter_id": "google/gemini-2.0-flash-001",
+        "params": "Unknown",
+        "note": "Google's Gemini 2 Flash model. Good for comparison with Gemini 3."
+    },
+
+    # --- 🌍 Open & Multilingual ---
+    {
+        "model": "AllenAI OLMo 3 7B",
+        "openrouter_id": "allenai/olmo-3-7b-instruct",  # From Image 7
         "params": "7B",
+        "note": "Fully open source (data/weights). Great for reproducibility."
     },
     {
-        "model": "NVIDIA Nemotron-4 4B Instruct",
-        "openrouter_id": "nvidia/nemotron-4-mini-instruct",
-        "params": "4B",
+        "model": "Amazon Nova Micro 1.0",
+        "openrouter_id": "amazon/nova-micro-v1",  # From Image 3
+        "params": "Unknown (Micro)",
+        "note": "Amazon's edge model. Worth testing against Granite."
     }
 ]
+
+
 
 # Semaphore to limit concurrent requests
 CONCURRENCY_LIMIT = 20
@@ -135,7 +145,7 @@ async def augment_label_async(client: AsyncOpenAI, label: str, model: str) -> st
             model=model,
             messages=[
                 {"role": "system", "content": "You are a helpful assistant that improves product labels. Your goal is to make the label more descriptive and human-readable, expanding abbreviations and adding missing context if possible."},
-                {"role": "user", "content": f"Augment this product label: '{label}'"}
+                {"role": "user", "content": f"Augment this product label, output nothing else: '{label}'"}
             ],
             temperature=0.3,
             max_tokens=60
