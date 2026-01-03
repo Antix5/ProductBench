@@ -1,0 +1,202 @@
+[
+  {
+    "label": "Tétines FIZZ 160g",
+    "ground_truth": "fizzing candy"
+  },
+  {
+    "label": "BEUR. Doux GOURM. 200g plaq.",
+    "ground_truth": "Beurre doux gourmand 200g plaquette"
+  },
+  {
+    "label": "Pdt vapeur 1kg",
+    "ground_truth": "Pommes de terre pour cuisson à la vapeur 1kg"
+  },
+  {
+    "label": "Jus d'orange brique",
+    "ground_truth": "Jus d'orange à base de concentré en brique"
+  },
+  {
+    "label": "Câble HDMI 2.0",
+    "ground_truth": "Câble HDMI haute vitesse avec support 4K"
+  },
+  {
+    "label": "Fromage rapé",
+    "ground_truth": "Fromage à pâte dure rapé (type Emmental ou Gruyère)"
+  },
+  {
+    "label": "Pain de mie complet",
+    "ground_truth": "Pain de mie à la farine de blé complète"
+  },
+  {
+    "label": "Eau min. nat. 1.5L",
+    "ground_truth": "Eau minérale naturelle 1.5L"
+  },
+  {
+    "label": "Crème fraîche épaisse",
+    "ground_truth": "Crème fraîche épaisse entière à 30% de matière grasse"
+  },
+  {
+    "label": "Saucisson sec pur porc",
+    "ground_truth": "Saucisson sec traditionnel pur porc"
+  },
+  {
+    "label": "Yaourt nature",
+    "ground_truth": "Yaourt nature au lait entier sans sucre"
+  },
+  {
+    "label": "Huile d'olive vierge extra",
+    "ground_truth": "Huile d'olive vierge extra extraite à froid"
+  },
+  {
+    "label": "Tablette de chocolat noir",
+    "ground_truth": "Tablette de chocolat noir à 70% de cacao"
+  },
+  {
+    "label": "Café moulu",
+    "ground_truth": "Café moulu pur arabica pour cafetière filtre"
+  },
+  {
+    "label": "Thon au naturel",
+    "ground_truth": "Conserve de thon albacore au naturel"
+  },
+  {
+    "label": "Lentilles vertes",
+    "ground_truth": "Sachet de lentilles vertes du Puy sèches"
+  },
+  {
+    "label": "Riz basmati",
+    "ground_truth": "Riz basmati blanc long grain"
+  },
+  {
+    "label": "Pâtes penne",
+    "ground_truth": "Pâtes alimentaires de semoule de blé dur de forme penne"
+  },
+  {
+    "label": "Miel de fleurs",
+    "ground_truth": "Miel polyfloral liquide"
+  },
+  {
+    "label": "Vinaigre de vin rouge",
+    "ground_truth": "Vinaigre de vin rouge d'Orléans"
+  },
+  {
+    "label": "Moutarde de Dijon",
+    "ground_truth": "Moutarde forte de Dijon"
+  },
+  {
+    "label": "Sel fin",
+    "ground_truth": "Sel fin de table iodé"
+  },
+  {
+    "label": "Poivre noir moulu",
+    "ground_truth": "Poivre noir de Kampot moulu"
+  },
+  {
+    "label": "Herbes de Provence",
+    "ground_truth": "Mélange d'herbes aromatiques séchées de Provence"
+  },
+  {
+    "label": "Oignons jaunes",
+    "ground_truth": "Filet d'oignons jaunes"
+  },
+  {
+    "label": "Ail",
+    "ground_truth": "Tête d'ail blanc"
+  },
+  {
+    "label": "Carottes",
+    "ground_truth": "Sachet de carottes fraîches lavées"
+  },
+  {
+    "label": "Tomates",
+    "ground_truth": "Grappe de tomates rondes"
+  },
+  {
+    "label": "Salade verte",
+    "ground_truth": "Laitue fraîche entière"
+  },
+  {
+    "label": "Pommes",
+    "ground_truth": "Pommes de variété Golden Delicious"
+  },
+  {
+    "label": "Bananes",
+    "ground_truth": "Bananes Cavendish"
+  },
+  {
+    "label": "Oranges",
+    "ground_truth": "Oranges à jus de variété Valencia"
+  },
+  {
+    "label": "Citrons",
+    "ground_truth": "Citrons jaunes non traités"
+  },
+  {
+    "label": "Oeufs",
+    "ground_truth": "Boîte de 6 oeufs frais de poules élevées en plein air"
+  },
+  {
+    "label": "Lait",
+    "ground_truth": "Bouteille de lait demi-écrémé stérilisé UHT"
+  },
+  {
+    "label": "Farine",
+    "ground_truth": "Paquet de farine de blé type T55"
+  },
+  {
+    "label": "Sucre",
+    "ground_truth": "Paquet de sucre en poudre blanc"
+  },
+  {
+    "label": "Levure chimique",
+    "ground_truth": "Sachet de levure chimique"
+  },
+  {
+    "label": "Papier toilette",
+    "ground_truth": "Paquet de 6 rouleaux de papier toilette double épaisseur"
+  },
+  {
+    "label": "Liquide vaisselle",
+    "ground_truth": "Flacon de liquide vaisselle dégraissant au citron"
+  },
+  {
+    "label": "Lessive",
+    "ground_truth": "Bouteille de lessive liquide pour machine à laver"
+  },
+  {
+    "label": "Dentifrice",
+    "ground_truth": "Tube de dentifrice au fluor"
+  },
+  {
+    "label": "Savon",
+    "ground_truth": "Pain de savon de Marseille"
+  },
+  {
+    "label": "Shampooing",
+    "ground_truth": "Bouteille de shampooing pour cheveux normaux"
+  },
+  {
+    "label": "Piles AA",
+    "ground_truth": "Paquet de 4 piles alcalines AA"
+  },
+  {
+    "label": "Ampoule LED",
+    "ground_truth": "Ampoule LED culot E27 60W équivalent"
+  },
+  {
+    "label": "Sac poubelle",
+    "ground_truth": "Rouleau de sacs poubelle 30L avec liens"
+  },
+  {
+    "label": "Éponges",
+    "ground_truth": "Lot de 3 éponges à récurer"
+  },
+  {
+    "label": "Film alimentaire",
+    "ground_truth": "Rouleau de film plastique alimentaire étirable"
+  },
+  {
+    "label": "Papier aluminium",
+    "ground_truth": "Rouleau de papier aluminium"
+  }
+]

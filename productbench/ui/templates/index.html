@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProductBench Leaderboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>ProductBench Leaderboard</h1>
+
+    <div id="chart-container">
+        <canvas id="performance-chart"></canvas>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Model</th>
+                <th>Label Augmentation Score</th>
+                <th>Product Reranking Distance</th>
+                <th>Token Count</th>
+                <th>Estimated Cost ($)</th>
+            </tr>
+        </thead>
+        <tbody id="leaderboard-body">
+            {% for row in leaderboard %}
+            <tr>
+                <td>{{ row.model }}</td>
+                <td>{{ row.label_augmentation_score }}</td>
+                <td>{{ row.product_reranking_distance }}</td>
+                <td>{{ row.token_count }}</td>
+                <td>{{ row.estimated_cost }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const leaderboardData = {{ leaderboard | tojson }};
+
+        const chartData = leaderboardData.map(row => ({
+            x: parseFloat(row.estimated_cost),
+            y: parseFloat(row.label_augmentation_score),
+            label: row.model
+        }));
+
+        // Calculate Pareto Frontier
+        chartData.sort((a, b) => a.x - b.x);
+        const paretoFrontier = [];
+        let maxPerformance = -1;
+        for (const point of chartData) {
+            if (point.y > maxPerformance) {
+                maxPerformance = point.y;
+                paretoFrontier.push(point);
+            }
+        }
+
+        const ctx = document.getElementById('performance-chart').getContext('2d');
+        new Chart(ctx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Models',
+                    data: chartData,
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    pointRadius: 8,
+                    pointHoverRadius: 10
+                }, {
+                    label: 'Pareto Frontier',
+                    data: paretoFrontier,
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    type: 'line',
+                    showLine: true,
+                    fill: false,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom',
+                        title: {
+                            display: true,
+                            text: 'Estimated Cost ($)'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Performance (Label Augmentation Score)'
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.data[context.dataIndex].label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                label += `(Cost: ${context.parsed.x}, Score: ${context.parsed.y})`;
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

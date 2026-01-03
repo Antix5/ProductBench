@@ -1,0 +1,502 @@
+[
+  {
+    "query": "BEUR. Doux GOURM. 200g plaq.",
+    "products": [
+      "Beurre salé allégé 20% de matière grasse",
+      "Beurre ou huile de beurre 80%",
+      "Plaquette de fois de canard",
+      "Beurre doux Gastronomique 200g"
+    ],
+    "ground_truth": [3, 1]
+  },
+  {
+    "query": "Fromage rapé",
+    "products": [
+      "Mozzarella en tranches",
+      "Parmesan en copeaux",
+      "Emmental rapé 200g",
+      "Cheddar en bloc"
+    ],
+    "ground_truth": [2, 1]
+  },
+  {
+    "query": "Jus d'orange",
+    "products": [
+      "Nectar d'orange",
+      "Jus de pomme pur jus",
+      "Jus d'orange pressé frais 1L",
+      "Boisson à l'orange"
+    ],
+    "ground_truth": [2]
+  },
+  {
+    "query": "Pain complet",
+    "products": [
+      "Baguette tradition",
+      "Pain de mie blanc",
+      "Pain de seigle",
+      "Pain de campagne à la farine complète"
+    ],
+    "ground_truth": [3, 2]
+  },
+  {
+    "query": "Yaourt 0%",
+    "products": [
+      "Yaourt nature au lait entier",
+      "Fromage blanc 20% MG",
+      "Yaourt aux fruits 0% MG",
+      "Yaourt grec"
+    ],
+    "ground_truth": [2]
+  },
+  {
+    "query": "Chocolat noir dessert",
+    "products": [
+      "Tablette de chocolat au lait",
+      "Chocolat noir 70% dégustation",
+      "Chocolat en poudre",
+      "Chocolat pâtissier 52% cacao"
+    ],
+    "ground_truth": [3, 1]
+  },
+  {
+    "query": "Eau gazeuse",
+    "products": [
+      "Eau de source plate 1.5L",
+      "Limonade artisanale",
+      "Eau minérale naturelle pétillante",
+      "Sirop de grenadine"
+    ],
+    "ground_truth": [2, 1]
+  },
+  {
+    "query": "Saucisson à l'ail",
+    "products": [
+      "Saucisse de Morteau",
+      "Chorizo doux",
+      "Saucisson sec pur porc",
+      "Saucisson à cuire à l'ail fumé"
+    ],
+    "ground_truth": [3]
+  },
+  {
+    "query": "Pâtes fraîches",
+    "products": [
+      "Penne rigate (sèches)",
+      "Nouilles chinoises instantanées",
+      "Raviolis frais au boeuf",
+      "Semoule de couscous"
+    ],
+    "ground_truth": [2]
+  },
+  {
+    "query": "Crème solaire enfant",
+    "products": [
+      "Lait après-soleil",
+      "Crème solaire SPF 30 adulte",
+      "Huile sèche bronzante",
+      "Spray solaire très haute protection 50+ pour enfants"
+    ],
+    "ground_truth": [3]
+  },
+  {
+    "query": "lessive peaux sensibles",
+    "products": [
+      "Assouplissant concentré",
+      "Lessive liquide classique",
+      "Lessive hypoallergénique testée dermatologiquement",
+      "Détachant avant lavage"
+    ],
+    "ground_truth": [2]
+  },
+  {
+    "query": "Café en grains",
+    "products": [
+      "Café soluble",
+      "Dosettes de café compatibles",
+      "Café moulu pour expresso",
+      "Paquet de café en grains pur arabica"
+    ],
+    "ground_truth": [3]
+  },
+  {
+    "query": "Thé vert menthe",
+    "products": [
+      "Infusion verveine",
+      "Thé noir English Breakfast",
+      "Thé vert nature de Chine",
+      "Thé vert à la menthe en sachets"
+    ],
+    "ground_truth": [3, 2]
+  },
+  {
+    "query": "Vin rouge Bordeaux",
+    "products": [
+      "Vin blanc d'Alsace",
+      "Champagne brut",
+      "Saint-Émilion Grand Cru",
+      "Vin rosé de Provence"
+    ],
+    "ground_truth": [2]
+  },
+  {
+    "query": "Bière blonde légère",
+    "products": [
+      "Bière brune d'abbaye",
+      "Cidre brut",
+      "Bière blanche fruitée",
+      "Pilsner lager à 4.5%"
+    ],
+    "ground_truth": [3]
+  },
+  {
+    "query": "Céréales petit déjeuner enfant",
+    "products": [
+      "Muesli croustillant aux fruits secs",
+      "Flocons d'avoine bio",
+      "Céréales chocolatées enrichies en vitamines",
+      "Barre de céréales"
+    ],
+    "ground_truth": [2, 0]
+  },
+  {
+    "query": "Shampooing cheveux gras",
+    "products": [
+      "Après-shampooing pour cheveux secs",
+      "Masque capillaire nourrissant",
+      "Shampooing purifiant à l'argile",
+      "Shampooing sec"
+    ],
+    "ground_truth": [2, 3]
+  },
+  {
+    "query": "Piles AAA",
+    "products": [
+      "Batterie externe pour smartphone",
+      "Piles AA rechargeables",
+      "Chargeur de piles",
+      "Lot de 4 piles alcalines AAA"
+    ],
+    "ground_truth": [3]
+  },
+  {
+    "query": "Nourriture pour chaton",
+    "products": [
+      "Croquettes pour chien adulte",
+      "Pâtée pour chat senior",
+      "Litière pour chat",
+      "Croquettes complètes pour chaton de 2 à 12 mois"
+    ],
+    "ground_truth": [3]
+  },
+  {
+    "query": "Gluten free bread",
+    "products": [
+      "Pain de mie complet",
+      "Préparation pour pain sans gluten",
+      "Galettes de riz",
+      "Pain de maïs"
+    ],
+    "ground_truth": [1, 2, 3]
+  },
+  {
+    "query": "Huile végétale pour friture",
+    "products": [
+      "Huile d'olive vierge extra",
+      "Vinaigre balsamique",
+      "Huile de tournesol",
+      "Huile de sésame"
+    ],
+    "ground_truth": [2]
+  },
+  {
+    "query": "Lait d'amande",
+    "products": [
+      "Lait de vache entier",
+      "Boisson au soja",
+      "Crème de coco",
+      "Boisson végétale à base d'amandes sans sucre"
+    ],
+    "ground_truth": [3, 1]
+  },
+  {
+    "query": "Gâteau au chocolat",
+    "products": [
+      "Tarte aux pommes",
+      "Mousse au chocolat",
+      "Fondant au chocolat prêt à cuire",
+      "Farine de blé"
+    ],
+    "ground_truth": [2, 1]
+  },
+  {
+    "query": "Dentifrice blancheur",
+    "products": [
+      "Bain de bouche protection caries",
+      "Dentifrice dents sensibles",
+      "Brosse à dents électrique",
+      "Dentifrice action blancheur au charbon"
+    ],
+    "ground_truth": [3]
+  },
+  {
+    "query": "Pizza 4 fromages",
+    "products": [
+      "Quiche lorraine",
+      "Pizza Reine (jambon, champignons)",
+      "Lasanne à la bolognaise",
+      "Pizza surgelée aux quatre fromages"
+    ],
+    "ground_truth": [3]
+  },
+  {
+    "query": "riz thai",
+    "products": [
+      "Riz basmati",
+      "Riz rond pour risotto",
+      "Semoule de blé",
+      "Riz parfumé au jasmin"
+    ],
+    "ground_truth": [3, 0]
+  },
+  {
+    "query": "Moutarde forte",
+    "products": [
+      "Ketchup",
+      "Moutarde à l'ancienne",
+      "Mayonnaise",
+      "Moutarde de Dijon extra-forte"
+    ],
+    "ground_truth": [3, 1]
+  },
+  {
+    "query": "Haricots verts fins",
+    "products": [
+      "Petits pois en conserve",
+      "Haricots blancs secs",
+      "Flageolets verts",
+      "Conserve de haricots verts extra-fins"
+    ],
+    "ground_truth": [3]
+  },
+  {
+    "query": "Compote de pommes",
+    "products": [
+      "Confiture de fraises",
+      "Purée de pommes de terre",
+      "Yaourt aux fruits",
+      "Gourdes de compote de pommes sans sucre ajouté"
+    ],
+    "ground_truth": [3]
+  },
+  {
+    "query": "Steak haché pur boeuf",
+    "products": [
+      "Saucisses de porc",
+      "Escalope de dinde",
+      "Steak de soja",
+      "Steak haché 5% MG pur boeuf"
+    ],
+    "ground_truth": [3]
+  },
+  {
+    "query": "Chips sel & vinaigre",
+    "products": [
+      "Bretzels salés",
+      "Chips saveur paprika",
+      "Tuiles apéritives à la crème et oignon",
+      "Chips de pomme de terre saveur sel et vinaigre"
+    ],
+    "ground_truth": [3]
+  },
+  {
+    "query": "Sirop d'érable",
+    "products": [
+      "Miel d'acacia",
+      "Sucre en poudre",
+      "Sirop d'agave",
+      "Pur sirop d'érable du Canada"
+    ],
+    "ground_truth": [3, 2, 0]
+  },
+  {
+    "query": "Tofu fumé",
+    "products": [
+      "Seitan nature",
+      "Tempeh",
+      "Tofu soyeux",
+      "Bloc de tofu fumé aux amandes et sésame"
+    ],
+    "ground_truth": [3]
+  },
+  {
+    "query": "Vinaigre de cidre",
+    "products": [
+      "Vinaigre de vin rouge",
+      "Jus de citron",
+      "Vinaigre balsamique",
+      "Vinaigre de cidre bio non pasteurisé"
+    ],
+    "ground_truth": [3]
+  },
+  {
+    "query": "farine de sarrasin",
+    "products": [
+      "Farine de blé T55",
+      "Fécule de maïs (Maïzena)",
+      "Polenta",
+      "Farine de blé noir bio"
+    ],
+    "ground_truth": [3]
+  },
+  {
+    "query": "pâte feuilletée",
+    "products": [
+      "Pâte brisée",
+      "Pâte à pizza",
+      "Feuilles de brick",
+      "Rouleau de pâte feuilletée pur beurre"
+    ],
+    "ground_truth": [3, 0]
+  },
+  {
+    "query": "petits pois carottes",
+    "products": [
+      "Conserve de maïs doux",
+      "Jardinière de légumes",
+      "Purée de carottes",
+      "Conserve de petits pois et jeunes carottes"
+    ],
+    "ground_truth": [3, 1]
+  },
+  {
+    "query": "tablettes lave-vaisselle",
+    "products": [
+      "Liquide de rinçage",
+      "Sel régénérant",
+      "Nettoyant machine",
+      "Tablettes lave-vaisselle tout-en-un"
+    ],
+    "ground_truth": [3]
+  },
+  {
+    "query": "crème dessert chocolat",
+    "products": [
+      "Mousse au chocolat",
+      "Flan au caramel",
+      "Yaourt au chocolat",
+      "Danette crème dessert saveur chocolat"
+    ],
+    "ground_truth": [3, 0, 2]
+  },
+  {
+    "query": "Jambon blanc découenné dégraissé",
+    "products": [
+      "Jambon cru de Parme",
+      "Lardons fumés",
+      "Mousse de canard",
+      "2 tranches de jambon cuit supérieur"
+    ],
+    "ground_truth": [3]
+  },
+  {
+    "query": "Poivre noir",
+    "products": [
+      "Piment de Cayenne",
+      "Baies roses",
+      "Poivre blanc de Penja",
+      "Moulin à poivre noir de Madagascar"
+    ],
+    "ground_truth": [3, 2]
+  },
+  {
+    "query": "Cacahuètes grillées salées",
+    "products": [
+      "Noix de cajou non salées",
+      "Amandes effilées",
+      "Pistaches",
+      "Arachides grillées à sec et salées pour apéritif"
+    ],
+    "ground_truth": [3]
+  },
+  {
+    "query": "Gel douche hydratant",
+    "products": [
+      "Savon de Marseille",
+      "Huile de douche surgras",
+      "Exfoliant corporel",
+      "Crème de douche nourrissante au beurre de karité"
+    ],
+    "ground_truth": [3, 1]
+  },
+  {
+    "query": "Coton-tiges",
+    "products": [
+      "Disques de coton démaquillants",
+      "Lingettes pour bébé",
+      "Cure-dents",
+      "Bâtonnets ouatés"
+    ],
+    "ground_truth": [3, 0]
+  },
+  {
+    "query": "Sacs congélation",
+    "products": [
+      "Film alimentaire étirable",
+      "Papier aluminium",
+      "Sacs poubelle",
+      "Sacs avec fermeture zip pour congélateur"
+    ],
+    "ground_truth": [3]
+  },
+  {
+    "query": "Miel liquide",
+    "products": [
+      "Miel crémeux",
+      "Sirop d'érable",
+      "Confiture d'abricots",
+      "Miel de fleurs liquide"
+    ],
+    "ground_truth": [3, 0]
+  },
+  {
+    "query": "Lentilles corail",
+    "products": [
+      "Lentilles vertes du Puy",
+      "Pois chiches secs",
+      "Haricots rouges en conserve",
+      "Sachet de lentilles corail sèches"
+    ],
+    "ground_truth": [3]
+  },
+  {
+    "query": "boisson énergisante",
+    "products": [
+      "Jus de fruits multivitaminé",
+      "Café froid",
+      "Boisson isotonique pour le sport",
+      "Canette de boisson énergisante à la taurine"
+    ],
+    "ground_truth": [3]
+  },
+  {
+    "query": "Bouillon de volaille",
+    "products": [
+      "Fond de veau",
+      "Bouillon de légumes",
+      "Soupe de poulet en brique",
+      "Cubes de bouillon de poule dégraissé"
+    ],
+    "ground_truth": [3, 1]
+  },
+  {
+    "query": "Sardines à l'huile",
+    "products": [
+      "Filets de maquereaux à la moutarde",
+      "Thon au naturel",
+      "Anchois à l'huile",
+      "Conserve de sardines à l'huile d'olive vierge extra"
+    ],
+    "ground_truth": [3]
+  }
+]
