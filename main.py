@@ -25,14 +25,19 @@ def get_benchmark_results():
         # Format scores to 4 decimal places string
         aug_score = item.get("aug_score", 0.0)
         rerank_dist = item.get("rerank_dist", 0.0)
+        actual_cost = item.get("actual_cost", 0.0)
+        time_taken = item.get("time_taken", 0.0)
 
         label_score_str = f"{aug_score:.4f}"
         rerank_dist_str = f"{rerank_dist:.4f}"
+        actual_cost_str = f"${actual_cost:.6f}"
+        time_taken_str = f"{time_taken:.2f}s"
 
-        token_count = item.get("tokens", 0)
+        token_count = item.get("input_tokens", 0) + item.get("output_tokens", 0)
         note = item.get("note", "")
+        details = item.get("details", {})
 
-        # Parse Params to number for chart
+        # Parse Params to number for chart (if needed, though we use cost for X axis now)
         params_val = 0.0
         match = re.search(r'([\d\.]+)B', params_str)
         if match:
@@ -44,8 +49,13 @@ def get_benchmark_results():
             "params_val": params_val,
             "label_augmentation_score": label_score_str,
             "product_reranking_distance": rerank_dist_str,
+            "actual_cost": actual_cost,
+            "actual_cost_str": actual_cost_str,
+            "time_taken": time_taken,
+            "time_taken_str": time_taken_str,
             "token_count": token_count,
             "note": note,
+            "details": details
         })
 
     return results
