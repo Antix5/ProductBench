@@ -4,39 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProductBench Leaderboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>ProductBench Leaderboard</h1>
+        <header>
+            <h1>ProductBench Leaderboard</h1>
+            <p class="subtitle">Benchmarking LLMs on Product Knowledge Tasks</p>
+        </header>
 
-        <div id="chart-container">
-            <canvas id="performance-chart"></canvas>
+        <div class="card chart-card">
+            <h2>Model Size vs. Performance</h2>
+            <div class="chart-container">
+                <canvas id="performance-chart"></canvas>
+            </div>
         </div>
 
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Model</th>
-                        <th>Label Augmentation Score</th>
-                        <th>Product Reranking Distance</th>
-                        <th>Token Count</th>
-                        <th>Estimated Cost ($)</th>
-                    </tr>
-                </thead>
-                <tbody id="leaderboard-body">
-                    {% for row in leaderboard %}
-                    <tr>
-                        <td>{{ row.model }}</td>
-                        <td>{{ row.label_augmentation_score }}</td>
-                        <td>{{ row.product_reranking_distance }}</td>
-                        <td>{{ row.token_count }}</td>
-                        <td>{{ row.estimated_cost }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+        <div class="card table-card">
+            <h2>Detailed Results</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>Params</th>
+                            <th>Label Augmentation Score</th>
+                            <th>Product Reranking Distance</th>
+                            <th>Token Count</th>
+                            <th>Note</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboard-body">
+                        {% for row in leaderboard %}
+                        <tr class="{% if row.note %}skipped{% endif %}">
+                            <td class="model-name">{{ row.model }}</td>
+                            <td><span class="badge params-badge">{{ row.params }}</span></td>
+                            <td>{{ row.label_augmentation_score }}</td>
+                            <td>{{ row.product_reranking_distance }}</td>
+                            <td>{{ row.token_count }}</td>
+                            <td>
+                                {% if row.note %}
+                                    <span class="badge note-badge">{{ row.note }}</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -44,16 +62,31 @@
     <script>
         const leaderboardData = {{ leaderboard | tojson }};
 
-        const chartData = leaderboardData.map(row => ({
-            x: parseFloat(row.estimated_cost),
-            y: parseFloat(row.label_augmentation_score),
-            label: row.model
-        }));
+        // Filter out skipped models or models with 0 score for the chart if desired
+        // Or keep them to show they are 0.
+        // Let's filter out those with 0 score to make the chart cleaner, or maybe just plot them.
+        // If note is present (skipped), we probably shouldn't plot them or plot them differently.
 
-        // Calculate Pareto Frontier
+        const chartData = leaderboardData
+            .filter(row => row.params_val > 0 && !row.note) // Exclude skipped/error models
+            .map(row => ({
+                x: parseFloat(row.params_val),
+                y: parseFloat(row.label_augmentation_score),
+                label: row.model
+            }));
+
+        // Calculate Pareto Frontier (maximize Y for minimized X? No, usually Maximize Y for given X)
+        // Here X is Size (smaller is better? or bigger is better?)
+        // Usually we want Max Performance (Y) for Min Size (X).
+
         chartData.sort((a, b) => a.x - b.x);
         const paretoFrontier = [];
         let maxPerformance = -1;
+
+        // For pareto frontier of Max Score vs Min Size:
+        // We iterate from smallest size to largest.
+        // If current score > max_so_far, it's on the frontier.
+
         for (const point of chartData) {
             if (point.y > maxPerformance) {
                 maxPerformance = point.y;
@@ -68,22 +101,22 @@
                 datasets: [{
                     label: 'Models',
                     data: chartData,
-                    backgroundColor: 'rgba(52, 152, 219, 0.6)',
-                    borderColor: 'rgba(52, 152, 219, 1)',
-                    pointRadius: 8,
-                    pointHoverRadius: 10,
-                    pointBackgroundColor: 'rgba(52, 152, 219, 1)'
+                    backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                    borderColor: 'rgba(59, 130, 246, 1)',
+                    pointRadius: 6,
+                    pointHoverRadius: 8,
+                    pointBackgroundColor: 'rgba(59, 130, 246, 1)'
                 }, {
                     label: 'Pareto Frontier',
                     data: paretoFrontier,
-                    borderColor: 'rgba(46, 204, 113, 1)',
-                    backgroundColor: 'rgba(46, 204, 113, 0.2)',
+                    borderColor: 'rgba(16, 185, 129, 0.8)',
+                    backgroundColor: 'rgba(16, 185, 129, 0.2)',
                     type: 'line',
                     showLine: true,
                     fill: false,
                     pointRadius: 0,
                     borderWidth: 2,
-                    tension: 0.2
+                    tension: 0.1
                 }]
             },
             options: {
@@ -95,28 +128,34 @@
                         position: 'bottom',
                         title: {
                             display: true,
-                            text: 'Estimated Cost ($)',
+                            text: 'Model Size (Billions of Parameters)',
                             font: {
                                 size: 14,
-                                weight: 'bold'
-                            }
+                                weight: '500',
+                                family: 'Inter'
+                            },
+                            color: '#64748b'
                         },
                         grid: {
-                            color: '#eee'
+                            color: '#f1f5f9'
                         }
                     },
                     y: {
                         title: {
                             display: true,
-                            text: 'Performance (Label Augmentation Score)',
+                            text: 'Label Augmentation Score',
                             font: {
                                 size: 14,
-                                weight: 'bold'
-                            }
+                                weight: '500',
+                                family: 'Inter'
+                            },
+                            color: '#64748b'
                         },
                         grid: {
-                            color: '#eee'
-                        }
+                            color: '#f1f5f9'
+                        },
+                        min: 0,
+                        max: 1.0
                     }
                 },
                 plugins: {
@@ -124,20 +163,25 @@
                         position: 'top',
                         labels: {
                             font: {
-                                size: 12
-                            }
+                                size: 12,
+                                family: 'Inter'
+                            },
+                            usePointStyle: true
                         }
                     },
                     tooltip: {
-                        backgroundColor: 'rgba(44, 62, 80, 0.9)',
+                        backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                        titleFont: { family: 'Inter', size: 13 },
+                        bodyFont: { family: 'Inter', size: 12 },
                         padding: 10,
+                        cornerRadius: 4,
                         callbacks: {
                             label: function(context) {
                                 let label = context.dataset.data[context.dataIndex].label || '';
                                 if (label) {
                                     label += ': ';
                                 }
-                                label += `(Cost: ${context.parsed.x}, Score: ${context.parsed.y})`;
+                                label += `(${context.parsed.x}B params, Score: ${context.parsed.y})`;
                                 return label;
                             }
                         }
