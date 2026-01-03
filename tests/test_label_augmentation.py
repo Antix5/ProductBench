@@ -4,7 +4,7 @@ from productbench.label_augmentation.main import augment_label, evaluate_augment
 
 class TestLabelAugmentation(unittest.TestCase):
 
-    @patch('productbench.label_augmentation.main.client')
+    @patch('productbench.label_augmentation.main.default_client')
     def test_augment_label_success(self, mock_client):
         # Setup mock response
         mock_response = MagicMock()
@@ -12,11 +12,12 @@ class TestLabelAugmentation(unittest.TestCase):
         mock_client.chat.completions.create.return_value = mock_response
         mock_client.api_key = "dummy_key"
 
+        # Call without explicit client, so it uses default_client
         result = augment_label("Original Label")
         self.assertEqual(result, "Augmented Label")
         mock_client.chat.completions.create.assert_called_once()
 
-    @patch('productbench.label_augmentation.main.client')
+    @patch('productbench.label_augmentation.main.default_client')
     def test_augment_label_no_api_key(self, mock_client):
         # Simulate no API key
         mock_client.api_key = None
