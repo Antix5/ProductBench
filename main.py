@@ -1,85 +1,56 @@
-import tiktoken
-from productbench.label_augmentation.main import (
-    load_data as load_label_data,
-    augment_label,
-    evaluate_augmentation,
-)
-from productbench.product_reranking.main import (
-    load_data as load_rerank_data,
-    rerank_products,
-    calculate_ranking_distance,
-)
+import json
+import re
 from productbench.ui.app import create_app
 
-def run_benchmarks():
-    """Runs the benchmarks and returns the leaderboard data."""
-    models = ["model-a", "model-b"]
-    leaderboard_data = []
+def get_benchmark_results():
+    """Reads the benchmark results from BENCHMARK_RESULTS.json and returns the leaderboard data."""
+    filepath = "BENCHMARK_RESULTS.json"
 
-    # Initialize tokenizer with fallback
     try:
-        encoding = tiktoken.get_encoding("cl100k_base")
-    except Exception:
-        # Fallback to gpt2 encoding if cl100k_base is not available
-        try:
-            encoding = tiktoken.get_encoding("gpt2")
-        except Exception:
-            # Last resort fallback if no tokenizer works
-            encoding = None
+        with open(filepath, 'r') as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        print(f"Error: {filepath} not found.")
+        return []
+    except json.JSONDecodeError:
+        print(f"Error: Failed to decode JSON from {filepath}.")
+        return []
 
-    def count_tokens(text):
-        if encoding:
-            return len(encoding.encode(text))
-        else:
-            # Rough estimation if tokenizer fails
-            return len(text) // 4
+    results = []
+    for item in data:
+        # Normalize fields for the UI
+        model = item.get("model", "Unknown")
+        params_str = item.get("params", "?")
 
-    for model in models:
-        token_count = 0
+        # Format scores to 4 decimal places string
+        aug_score = item.get("aug_score", 0.0)
+        rerank_dist = item.get("rerank_dist", 0.0)
 
-        # Label Augmentation
-        label_data = load_label_data("productbench/data/label_augmentation.json")
-        total_score = 0
-        for item in label_data:
-            augmented_label = augment_label(item["label"])
-            # Count tokens for input (label) and output (augmented_label)
-            token_count += count_tokens(item["label"]) + count_tokens(augmented_label)
-            total_score += evaluate_augmentation(augmented_label, item["ground_truth"])
+        label_score_str = f"{aug_score:.4f}"
+        rerank_dist_str = f"{rerank_dist:.4f}"
 
-        avg_score = total_score / len(label_data) if label_data else 0
+        token_count = item.get("tokens", 0)
+        note = item.get("note", "")
 
-        # Product Reranking
-        rerank_data = load_rerank_data("productbench/data/product_reranking.json")
-        total_distance = 0
-        for item in rerank_data:
-            reranked_products = rerank_products(item["query"], item["products"])
+        # Parse Params to number for chart
+        params_val = 0.0
+        match = re.search(r'([\d\.]+)B', params_str)
+        if match:
+            params_val = float(match.group(1))
 
-            # Count tokens for input (query + list of products)
-            token_count += count_tokens(item["query"])
-            for product in item["products"]:
-                token_count += count_tokens(product)
+        results.append({
+            "model": model,
+            "params": params_str,
+            "params_val": params_val,
+            "label_augmentation_score": label_score_str,
+            "product_reranking_distance": rerank_dist_str,
+            "token_count": token_count,
+            "note": note,
+        })
 
-            total_distance += calculate_ranking_distance(
-                reranked_products, item["ground_truth"]
-            )
-
-        avg_distance = total_distance / len(rerank_data) if rerank_data else 0
-
-        cost = 0.0
-        score = avg_score
-
-        leaderboard_data.append(
-            {
-                "model": model,
-                "label_augmentation_score": f"{score:.2f}",
-                "product_reranking_distance": f"{avg_distance:.2f}",
-                "token_count": token_count,
-                "estimated_cost": f"{cost:.2f}",
-            }
-        )
-    return leaderboard_data
+    return results
 
 if __name__ == "__main__":
-    leaderboard = run_benchmarks()
+    leaderboard = get_benchmark_results()
     app = create_app(leaderboard)
     app.run(port=5001, debug=True)

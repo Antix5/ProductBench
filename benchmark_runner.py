@@ -392,7 +392,11 @@ async def run_benchmarks_async():
     with open("BENCHMARK_RESULTS.md", "w") as f:
         f.write(markdown_output)
 
-    print("\nBenchmark completed. Results saved to BENCHMARK_RESULTS.md")
+    # Save JSON Report
+    with open("BENCHMARK_RESULTS.json", "w") as f:
+        json.dump(results, f, indent=4)
+
+    print("\nBenchmark completed. Results saved to BENCHMARK_RESULTS.md and BENCHMARK_RESULTS.json")
 
 if __name__ == "__main__":
     asyncio.run(run_benchmarks_async())
