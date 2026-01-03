@@ -5,26 +5,26 @@
   },
   {
     "label": "BEUR. Doux GOURM. 200g plaq.",
-    "ground_truth": "Beurre doux gourmand 200g plaquette"
+    "ground_truth": "Beurre doux haut en matière grasse"
   },
   {
-    "label": "Pdt vapeur 1kg",
-    "ground_truth": "Pommes de terre pour cuisson à la vapeur 1kg"
+    "label": "PDT vap. 1kg",
+    "ground_truth": "Pommes de terre pour cuisson à la vapeur"
   },
   {
-    "label": "Jus d'orange brique",
-    "ground_truth": "Jus d'orange à base de concentré en brique"
+    "label": "ORANGE BRICK 1L",
+    "ground_truth": "Jus d'orange en brique"
   },
   {
-    "label": "Câble HDMI 2.0",
-    "ground_truth": "Câble HDMI haute vitesse avec support 4K"
+    "label": "HDMI 2.0 ultraspeed / RAYON:MULTIMEDIA",
+    "ground_truth": "Câble HDMI haute vitesse"
   },
   {
-    "label": "Fromage rapé",
+    "label": "FROMA. RAPE. FONDENT CARRF.CLASSIQUE 200g",
     "ground_truth": "Fromage à pâte dure rapé (type Emmental ou Gruyère)"
   },
   {
-    "label": "Pain de mie complet",
+    "label": "PAIN MIE COMP. 500G",
     "ground_truth": "Pain de mie à la farine de blé complète"
   },
   {
@@ -36,80 +36,80 @@
     "ground_truth": "Crème fraîche épaisse entière à 30% de matière grasse"
   },
   {
-    "label": "Saucisson sec pur porc",
-    "ground_truth": "Saucisson sec traditionnel pur porc"
+    "label": "SCSSON.PUR.PORC Nos Régions ont du talent 200g",
+    "ground_truth": "Saucisson sec à base de porc"
   },
   {
-    "label": "Yaourt nature",
-    "ground_truth": "Yaourt nature au lait entier sans sucre"
+    "label": "YRT NAT",
+    "ground_truth": "Yaourt nature"
   },
   {
-    "label": "Huile d'olive vierge extra",
-    "ground_truth": "Huile d'olive vierge extra extraite à froid"
+    "label": "HLE OLV. VIERGE",
+    "ground_truth": "Huile d'olive vierge"
   },
   {
-    "label": "Tablette de chocolat noir",
+    "label": "CHOCO. NOIR 70% Lindt 100G",
     "ground_truth": "Tablette de chocolat noir à 70% de cacao"
   },
   {
-    "label": "Café moulu",
-    "ground_truth": "Café moulu pur arabica pour cafetière filtre"
+    "label": "CAFFE MLLU ARABICA 250G",
+    "ground_truth": "Café moulu"
   },
   {
-    "label": "Thon au naturel",
-    "ground_truth": "Conserve de thon albacore au naturel"
+    "label": "THON. NAT. 160G à l'huile d'olive",
+    "ground_truth": "Conserve de thon dans de l'huile d'olive"
   },
   {
-    "label": "Lentilles vertes",
-    "ground_truth": "Sachet de lentilles vertes du Puy sèches"
+    "label": "LENTIL.VRT VRAC",
+    "ground_truth": "lentilles vertes sèche"
   },
   {
-    "label": "Riz basmati",
-    "ground_truth": "Riz basmati blanc long grain"
+    "label": "LENTIL.VRT 500G BTE",
+    "ground_truth": "lentilles vertes cuites en boites"
   },
   {
-    "label": "Pâtes penne",
+    "label": "PENNE RIG. LUSTUC",
     "ground_truth": "Pâtes alimentaires de semoule de blé dur de forme penne"
   },
   {
-    "label": "Miel de fleurs",
-    "ground_truth": "Miel polyfloral liquide"
+    "label": "MEL di fiore",
+    "ground_truth": "Miel"
   },
   {
-    "label": "Vinaigre de vin rouge",
-    "ground_truth": "Vinaigre de vin rouge d'Orléans"
+    "label": "Vinaigre VINO ROSSO",
+    "ground_truth": "Vinaigre de vin rouge"
   },
   {
     "label": "Moutarde de Dijon",
-    "ground_truth": "Moutarde forte de Dijon"
+    "ground_truth": "Moutarde de Dijon"
   },
   {
-    "label": "Sel fin",
+    "label": "BALEINE IODE",
     "ground_truth": "Sel fin de table iodé"
   },
   {
-    "label": "Poivre noir moulu",
-    "ground_truth": "Poivre noir de Kampot moulu"
+    "label": "Poivre noir de kampot moulu",
+    "ground_truth": "Poivre noir moulu"
   },
   {
-    "label": "Herbes de Provence",
-    "ground_truth": "Mélange d'herbes aromatiques séchées de Provence"
+    "label": "HRB PROVENCE",
+    "ground_truth": "Mélange d'herbes aromatiques de Provence"
   },
   {
     "label": "Oignons jaunes",
-    "ground_truth": "Filet d'oignons jaunes"
+    "ground_truth": "Oignons jaunes"
   },
   {
     "label": "Ail",
-    "ground_truth": "Tête d'ail blanc"
+    "ground_truth": "Ail blanc"
   },
   {
-    "label": "Carottes",
-    "ground_truth": "Sachet de carottes fraîches lavées"
+    "label": "Carottes SURG",
+    "ground_truth": "Carottes surgelées"
   },
   {
     "label": "Tomates",
-    "ground_truth": "Grappe de tomates rondes"
+    "ground_truth": "Tomates rondes"
   },
   {
     "label": "Salade verte",
@@ -117,166 +117,130 @@
   },
   {
     "label": "Pommes",
-    "ground_truth": "Pommes de variété Golden Delicious"
+    "ground_truth": "Pommes"
   },
   {
-    "label": "Bananes",
-    "ground_truth": "Bananes Cavendish"
+    "label": "BANANA B DE COLOMBIA",
+    "ground_truth": "Bananes Buro"
   },
   {
-    "label": "Oranges",
-    "ground_truth": "Oranges à jus de variété Valencia"
+    "label": "ORANGE JUS | Gamme : Fruits",
+    "ground_truth": "Oranges à jus"
   },
   {
-    "label": "Citrons",
-    "ground_truth": "Citrons jaunes non traités"
+    "label": "CTRON J",
+    "ground_truth": "Citrons jaunes"
   },
   {
     "label": "Oeufs",
-    "ground_truth": "Boîte de 6 oeufs frais de poules élevées en plein air"
+    "ground_truth": "Oeuf de poule"
   },
   {
-    "label": "Lait",
-    "ground_truth": "Bouteille de lait demi-écrémé stérilisé UHT"
+    "label": "Lait UHT bouteille verte",
+    "ground_truth": "Bouteille de lait écrémé stérilisé UHT"
   },
   {
     "label": "Farine",
-    "ground_truth": "Paquet de farine de blé type T55"
+    "ground_truth": "Farine de blé type T55"
   },
   {
     "label": "Sucre",
-    "ground_truth": "Paquet de sucre en poudre blanc"
+    "ground_truth": "Sucre en poudre blanc"
   },
   {
     "label": "Levure chimique",
-    "ground_truth": "Sachet de levure chimique"
+    "ground_truth": "Levure chimique"
   },
   {
-    "label": "Papier toilette",
-    "ground_truth": "Paquet de 6 rouleaux de papier toilette double épaisseur"
+    "label": "Papier hygienique",
+    "ground_truth": "Papier toilette"
   },
   {
-    "label": "Liquide vaisselle",
-    "ground_truth": "Flacon de liquide vaisselle dégraissant au citron"
+    "label": "Liquide vaisselle citr. 500ml",
+    "ground_truth": "Liquide vaisselle"
   },
   {
-    "label": "Lessive",
-    "ground_truth": "Bouteille de lessive liquide pour machine à laver"
-  },
-  {
-    "label": "Dentifrice",
-    "ground_truth": "Tube de dentifrice au fluor"
-  },
-  {
-    "label": "Savon",
-    "ground_truth": "Pain de savon de Marseille"
-  },
-  {
-    "label": "Shampooing",
-    "ground_truth": "Bouteille de shampooing pour cheveux normaux"
-  },
-  {
-    "label": "Piles AA",
-    "ground_truth": "Paquet de 4 piles alcalines AA"
-  },
-  {
-    "label": "Ampoule LED",
-    "ground_truth": "Ampoule LED culot E27 60W équivalent"
-  },
-  {
-    "label": "Sac poubelle",
-    "ground_truth": "Rouleau de sacs poubelle 30L avec liens"
-  },
-  {
-    "label": "Éponges",
-    "ground_truth": "Lot de 3 éponges à récurer"
-  },
-  {
-    "label": "Film alimentaire",
-    "ground_truth": "Rouleau de film plastique alimentaire étirable"
-  },
-  {
-    "label": "Papier aluminium",
-    "ground_truth": "Rouleau de papier aluminium"
+    "label": "ALU. ALIM 2M",
+    "ground_truth": "Papier aluminium"
   },
   {
     "label": "Coca 33cl",
-    "ground_truth": "Coca-Cola Original Taste Canette 33cl"
+    "ground_truth": "Boisson gazeuse coca-cola"
   },
   {
     "label": "Nutella 750",
-    "ground_truth": "Pâte à tartiner aux noisettes et au cacao Nutella Pot de 750g"
+    "ground_truth": "Pâte à tartiner aux noisettes et au cacao Nutella"
   },
   {
     "label": "H&S Shmp",
-    "ground_truth": "Shampooing antipelliculaire Head & Shoulders"
+    "ground_truth": "Shampooing"
   },
   {
     "label": "Pringles Oignon",
-    "ground_truth": "Tuiles salées Pringles Sour Cream & Onion (Crème et Oignon)"
+    "ground_truth": "Chips de pomme de terre reconstitué"
   },
   {
     "label": "St Moret",
-    "ground_truth": "Spécialité fromagère St Môret Ligne & Plaisir"
+    "ground_truth": "Spécialité fromagère type St Môret"
   },
   {
     "label": "Kind. Bueno",
-    "ground_truth": "Barres chocolatées Kinder Bueno"
+    "ground_truth": "Barres chocolatées"
   },
   {
     "label": "M&Ms",
-    "ground_truth": "Billes de chocolat M&M's Peanut (Cacahuète)"
+    "ground_truth": "Cacahuète enrobé de chocolat"
   },
   {
     "label": "H. Daza",
-    "ground_truth": "Crème glacée Häagen-Dazs Macadamia Nut Brittle"
+    "ground_truth": "Crème glacée"
   },
   {
     "label": "Lays Barbq",
-    "ground_truth": "Chips Lay's Saveur Barbecue"
+    "ground_truth": "Chips saveur barbecue"
   },
   {
     "label": "Red Bull SF",
-    "ground_truth": "Boisson énergisante Red Bull Sugarfree (Sans Sucres)"
+    "ground_truth": "Boisson énergisante sans sucre"
   },
   {
     "label": "Sony WH-1000XM5",
-    "ground_truth": "Casque sans fil à réduction de bruit Sony WH-1000XM5"
+    "ground_truth": "Casque sans fil à réduction de bruit"
   },
   {
     "label": "Logi MX Master 3S",
-    "ground_truth": "Souris sans fil performante Logitech MX Master 3S"
+    "ground_truth": "Souris sans fil"
   },
   {
     "label": "MacBook Air M2",
-    "ground_truth": "Ordinateur portable Apple MacBook Air avec puce M2"
+    "ground_truth": "Ordinateur portable puce ARM"
   },
   {
     "label": "Sam. Gal. S23",
-    "ground_truth": "Smartphone Samsung Galaxy S23 5G"
+    "ground_truth": "Smartphone"
   },
   {
     "label": "Nespresso Cap.",
-    "ground_truth": "Capsules de café Nespresso Original"
+    "ground_truth": "Capsules de café"
   },
   {
     "label": "Dyson V15",
-    "ground_truth": "Aspirateur sans fil Dyson V15 Detect"
+    "ground_truth": "Aspirateur sans fil"
   },
   {
     "label": "Lego Harry P.",
-    "ground_truth": "Jeu de construction LEGO Harry Potter Poudlard"
+    "ground_truth": "Jeu de construction LEGO"
   },
   {
     "label": "PlaySt. 5",
-    "ground_truth": "Console de jeux Sony PlayStation 5"
+    "ground_truth": "Console de jeux"
   },
   {
     "label": "Xbox Ser. X",
-    "ground_truth": "Console de jeux Microsoft Xbox Series X"
+    "ground_truth": "Console de jeux"
   },
   {
     "label": "Nike AF1",
-    "ground_truth": "Chaussures baskets Nike Air Force 1 '07"
+    "ground_truth": "Chaussures baskets"
   }
 ]

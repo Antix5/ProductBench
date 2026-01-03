@@ -1,136 +1,127 @@
-import os
-import json
 import asyncio
-import tiktoken
+import json
+import os
+import re
 import time
-import math
-from openai import AsyncOpenAI, OpenAIError
+
+from openai import AsyncOpenAI
+
 from productbench.label_augmentation.main import load_data as load_label_data
-from productbench.product_reranking.main import load_data as load_rerank_data, calculate_ranking_distance
+from productbench.product_reranking.main import calculate_ranking_distance
+from productbench.product_reranking.main import load_data as load_rerank_data
 
 # List of models to benchmark
 
 MODELS = [
-    # --- 🌟 The "Next-Gen" Frontier ---
     {
-        "model": "Qwen 3 14B",
-        "openrouter_id": "qwen/qwen3-14b",
-        "params": "14B",
-        "note": "The new 2026 standard. Likely outperforms Qwen 2.5 significantly."
+        "model": "Mimo V2 Flash",
+        "openrouter_id": "xiaomi/mimo-v2-flash:free",
+        "params": "300B",
+        "note": "",
+    },
+    {
+        "model": "Deepseek V3.2",
+        "openrouter_id": "deepseek/deepseek-v3.2",
+        "params": "600B",
+        "note": "",
+    },
+    {
+        "model": "Kimi k2 0905",
+        "openrouter_id": "moonshotai/kimi-k2-0905",
+        "params": "1T",
+        "note": "",
     },
     {
         "model": "Microsoft Phi-4",
         "openrouter_id": "microsoft/phi-4",
         "params": "14B",
-        "note": "Latest reasoning model from Microsoft. Pure synthetic data excellence."
+        "note": "",
     },
     {
         "model": "Google Gemma 3 12B Instruct",
         "openrouter_id": "google/gemma-3-12b-it",
         "params": "12B",
-        "note": "A new weight class for Gemma. Perfect balance for 16GB VRAM cards."
+        "note": "",
     },
-    # --- 🧠 Specialized Reasoning & "Thinking" Models ---
     {
-        "model": "GLM-4.1V 9B Thinking",
-        "openrouter_id": "thudm/glm-4.1v-9b-thinking",
-        "params": "9B",
-        "note": "Explicitly labeled 'Thinking'. Good for complex logic/reranking."
-    },
-
-    # --- 🛠️ Tool Use & Agent Specialists ---
-    {
-        "model": "Cohere Command R7B (Dec 2024)",
+        "model": "Cohere Command R7B",
         "openrouter_id": "cohere/command-r7b-12-2024",
         "params": "7B",
-        "note": "Verified 12-2024 update. Best-in-class citation and tool use."
+        "note": "",
     },
     {
         "model": "Mistral Nemo 12B",
         "openrouter_id": "mistralai/mistral-nemo",
         "params": "12B",
-        "note": "Reliable workhorse. Tekken tokenizer is efficient for JSON."
+        "note": "",
     },
     {
-        "model": "Mistral Small 3 (24B) [Jan 2026]",
+        "model": "Mistral Small 3",
         "openrouter_id": "mistralai/mistral-small-24b-instruct-2501",
         "params": "24B",
-        "note": "Slightly over 20B, but verified in your list and highly capable."
+        "note": "",
     },
-
-    # --- ⚡ High Efficiency Edge Models (<10B) ---
     {
         "model": "Google Gemma 3 4B Instruct",
         "openrouter_id": "google/gemma-3-4b-it",
         "params": "4B",
-        "note": "New generation 4B. Likely beats older 7B models."
-    },
-    {
-        "model": "Qwen 3 8B",
-        "openrouter_id": "qwen/qwen3-8b",
-        "params": "8B",
-        "note": "The smaller sibling of the Qwen 3 14B."
-    },
-    {
-        "model": "IBM Granite 4.0 Micro",
-        "openrouter_id": "ibm-granite/granite-4.0-h-micro",
-        "params": "Unknown (Micro)",
-        "note": "Enterprise edge model. Good for strict formatting tests."
+        "note": "",
     },
     {
         "model": "Mistral Ministral 3B",
         "openrouter_id": "mistralai/ministral-3b",
         "params": "3B",
-        "note": "Mistral's tiniest edge model. Good baseline."
+        "note": "",
     },
     {
-        "model": "NVIDIA Nemotron Nano 9B v2",
-        "openrouter_id": "nvidia/nemotron-nano-9b-v2",
-        "params": "9B",
-        "note": "NVIDIA's optimized small model for RAG/Synthetic data."
-    },
-
-    # --- 👁️ Multimodal & Novel Architectures ---
-    {
-        "model": "Pixtral 12B",
-        "openrouter_id": "mistralai/pixtral-12b",
-        "params": "12B",
-        "note": "Vision capable, based on Nemo. Strong generalist."
+        "model": "Ministral 14B 2512",
+        "openrouter_id": "mistralai/ministral-14b-2512",
+        "params": "14B",
+        "note": "",
     },
     {
-        "model": "Liquid LFM2 8B",
-        "openrouter_id": "liquid/lfm2-8b-a1b",
-        "params": "8B",
-        "note": "Liquid Neural Network. Non-transformer architecture. Good wildcard."
+        "model": "Ministral 8B 2512",
+        "openrouter_id": "mistralai/ministral-8b-2512",
+        "params": "14B",
+        "note": "",
     },
     {
-        "model": "Microsoft Phi-4 Multimodal",
-        "openrouter_id": "microsoft/phi-4-multimodal-instruct",
-        "params": "14B (Est)",
-        "note": "Multimodal version of Phi-4. Good for visual label verification."
+        "model": "Ministral 3B 2512",
+        "openrouter_id": "mistralai/ministral-3b-2512",
+        "params": "14B",
+        "note": "",
     },
     {
-        "model" : "gemini-2.0-flash-001",
+        "model": "Mistral Large 3 2512",
+        "openrouter_id": "mistralai/mistral-large-2512",
+        "params": "675B MOE",
+        "note": "",
+    },
+    {
+        "model": "Gemini 2.0 flash",
         "openrouter_id": "google/gemini-2.0-flash-001",
         "params": "Unknown",
-        "note": "Google's Gemini 2 Flash model. Good for comparison with Gemini 3."
+        "note": "Google's Gemini 2 Flash model. Reference model",
     },
-
-    # --- 🌍 Open & Multilingual ---
     {
-        "model": "AllenAI OLMo 3 7B",
-        "openrouter_id": "allenai/olmo-3-7b-instruct",
-        "params": "7B",
-        "note": "Fully open source (data/weights). Great for reproducibility."
+        "model": "Gemini 3 flash (Judge)",
+        "openrouter_id": "google/gemini-3-flash-preview",
+        "params": "Unknown",
+        "note": "This model is here to see how the judge model self evaluate.",
+    },
+    {
+        "model": "Gemini 2.5 Flash lite",
+        "openrouter_id": "google/gemini-2.5-flash-lite",
+        "params": "Unknown",
+        "note": "",
     },
     {
         "model": "Amazon Nova Micro 1.0",
         "openrouter_id": "amazon/nova-micro-v1",
         "params": "Unknown (Micro)",
-        "note": "Amazon's edge model. Worth testing against Granite."
-    }
+        "note": "",
+    },
 ]
-
 
 
 # Semaphore to limit concurrent requests
@@ -147,6 +138,7 @@ except FileNotFoundError:
 
 # --- Async Helper Functions (copied and adapted from libraries) ---
 
+
 def extract_content_and_reasoning(response):
     """
     Extracts content and potential reasoning from an OpenAI/OpenRouter response object.
@@ -156,7 +148,7 @@ def extract_content_and_reasoning(response):
     content = message.content
 
     # Check for refusal
-    if getattr(message, 'refusal', None):
+    if getattr(message, "refusal", None):
         return None, f"REFUSAL: {message.refusal}"
 
     # Handle None content (sometimes happens with pure reasoning models or tool calls)
@@ -167,9 +159,9 @@ def extract_content_and_reasoning(response):
 
     # Try to find reasoning
     reasoning = None
-    if hasattr(message, 'reasoning') and message.reasoning:
+    if hasattr(message, "reasoning") and message.reasoning:
         reasoning = message.reasoning
-    elif hasattr(message, 'reasoning_content') and message.reasoning_content:
+    elif hasattr(message, "reasoning_content") and message.reasoning_content:
         reasoning = message.reasoning_content
     # OpenRouter sometimes puts it in extra_fields or directly on the object if using standard OpenAI lib
     # but the python lib maps known fields.
@@ -179,18 +171,48 @@ def extract_content_and_reasoning(response):
 
     return content, raw_dump
 
-async def augment_label_async(client: AsyncOpenAI, label: str, model: str) -> tuple[str, str, int, int]:
+
+async def augment_label_async(
+    client: AsyncOpenAI, label: str, model: str
+) -> tuple[str, str, int, int]:
     """Uses an LLM to augment the product label (Async). Returns (content, raw_output, prompt_tokens, completion_tokens)."""
     try:
         response = await client.chat.completions.create(
             model=model,
             messages=[
-                {"role": "system", "content": "You are a helpful assistant that improves product labels. Your goal is to make the label more descriptive and human-readable, expanding abbreviations and adding missing context if possible."},
-                {"role": "user", "content": f"Augment this product label, output nothing else: '{label}'"}
+                {
+                    "role": "system",
+                    "content": """You are an expert E-commerce Query Normalizer. Your task is to extract the core product category and technical specifications from a label, removing specific commercial branding.""",
+                },
+                {
+                    "role": "user",
+                    "content": f"""Analyze the input label and output a clean, generic product description.
+
+            Strict Rules:
+            1. **Identify the Category:** You MUST convert the input into its generic product type (e.g., 'iPhone 13' -> 'Smartphone', 'Air Jordan' -> 'Basketball Shoes').
+            2. **Remove Brand Names:** Do not include the manufacturer or brand name (e.g., remove 'Samsung', 'Nike', 'Apple', 'Sony') unless it is essential to describe the object type (e.g., 'Jeep').
+            3. **Keep Key Specs:** Retain important technical details (e.g., '5G', '128GB', 'Wireless', 'Men\'s').
+            4. **No Fluff:** Remove marketing words ('Promo', 'Best', 'Sale').
+            5. **Output:** Return ONLY the cleaned descriptive string between <response> and </response> tags
+            Examples:
+            Input: 'SAM GAL S21 5G 128GB PROMO!!'
+            Output: <response>5G Smartphone 128GB</response>
+
+            Input: 'NK Air Zoom Pegasus 38 M - RUN'
+            Output: <response>Men's Running Shoes</response>
+
+            Input: 'PXL 5 GOOGLE 128'
+            Output: <response>Smartphone 128GB</response>
+
+            Input: '{label}'
+            Output:""",
+                },
             ],
             temperature=0.3,
-            max_tokens=200, # Increased slightly to allow for some reasoning if needed, though we ask for nothing else
-            extra_body={ "include_reasoning": True } # Request reasoning for supported models
+            max_tokens=200,  # Increased slightly to allow for some reasoning if needed, though we ask for nothing else
+            extra_body={
+                "include_reasoning": False
+            },  # Request reasoning for supported models
         )
 
         content, raw_dump = extract_content_and_reasoning(response)
@@ -202,53 +224,99 @@ async def augment_label_async(client: AsyncOpenAI, label: str, model: str) -> tu
             completion_tokens = response.usage.completion_tokens
 
         if not content and not raw_dump:
-             return f"Augmented: {label} (Empty Response)", "Empty Response Object", prompt_tokens, completion_tokens
+            return (
+                "",
+                "Empty Response Object",
+                prompt_tokens,
+                completion_tokens,
+            )
 
         # If content is empty but we have reasoning, maybe the model thought the reasoning was the answer?
         # Or it just failed to output content.
-        if not content.strip():
-             return f"Augmented: {label} (No Content)", raw_dump, prompt_tokens, completion_tokens
+        if not content.strip():  # pyright: ignore[reportOptionalMemberAccess]
+            return (
+                "",
+                raw_dump,
+                prompt_tokens,
+                completion_tokens,
+            )
 
-        return content.strip(), raw_dump, prompt_tokens, completion_tokens
+        # Use regex to extract content between <response> tags
+        content_str = str(content) if content is not None else ""
+
+        match = re.search(r"<response>(.*?)</response>", content_str, re.DOTALL)
+        if match:
+            content = match.group(1).strip()
+        else:
+            # Model didn't use response tags, return empty string for automatic 0 score
+            return "", raw_dump, prompt_tokens, completion_tokens
+
+        return content.strip(), raw_dump, prompt_tokens, completion_tokens  # pyright: ignore[reportOptionalMemberAccess]
 
     except Exception as e:
         # print(f"Error calling OpenAI API (augment): {e}")
         return f"Augmented: {label} (Error)", str(e), 0, 0
 
-async def evaluate_augmentation_async(client: AsyncOpenAI, augmented_label: str, ground_truth: str, model: str) -> float:
+
+async def evaluate_augmentation_async(
+    client: AsyncOpenAI,
+    source_label: str,
+    augmented_label: str,
+    ground_truth: str,
+    model: str,
+) -> float:
     """Evaluates the quality of the augmented label (Async)."""
-    if "Augmented:" in augmented_label and "(Error)" in augmented_label:
-         return 0.0
-    if "Augmented:" in augmented_label and "(No Content)" in augmented_label:
-         return 0.0
+    if len(augmented_label) == 0:
+        return 0.0
 
     try:
-        prompt = (
-            f"Compare the augmented label with the ground truth label.\n"
-            f"Augmented Label: {augmented_label}\n"
-            f"Ground Truth: {ground_truth}\n"
-            f"Rate the semantic similarity and correctness on a scale from 0.0 to 1.0, "
-            f"where 1.0 means they are identical in meaning and 0.0 means they are completely unrelated.\n"
-            f"Return ONLY the numeric score."
-        )
+        prompt = f"""
+            You are an expert Search Relevance Evaluator for a Retrieval-Augmented Generation (RAG) system. Your task is to rate the quality of an "Augmented Label" by comparing it to a "Ground Truth" label, using the "Source Label" for context.
+
+            ### Input Data
+            * **Source Label:** {source_label} (The original raw query)
+            * **Augmented Label:** {augmented_label} (The generated expansion/normalization)
+            * **Ground Truth:** {ground_truth} (The expected correct category or intent)
+
+            ### Evaluation Criteria
+            Score the semantic similarity and correctness on a scale from 0.0 to 1.0 based on the following rules:
+
+            1.  **Core Meaning (Highest Priority):** The Augmented Label must match the intent and category of the Ground Truth.
+            2.  **Brand/Entity Constraints:**
+                * **Bad:** If the Ground Truth is a generic category (e.g., "smartphone") and the Augmented Label contains ONLY a specific brand or commercial name (e.g., "Pixel 5"), penalize the score heavily (near 0.0).
+                * **Good:** Specific brands are allowed ONLY if the generic product type is also present (e.g., "Pixel 5 smartphone" is acceptable).
+            3.  **No Fluff:** The Augmented Label should not contain marketing buzzwords (e.g., "Best," "Amazing," "Cheap") or unnecessary filler words.
+            4.  **Language Agnostic:** Ignore language differences; focus purely on semantic meaning.
+
+            ### Scoring Rubric
+            * **1.0 (Perfect):** The Augmented Label conveys the exact same meaning as the Ground Truth, matches the category, and contains no fluff.
+            * **0.5 (Partial):** The Augmented Label captures the general meaning but misses the specific product category (e.g., listing a brand name without the product type) or includes minor fluff.
+            * **0.0 (Fail):** The Augmented Label is unrelated, misleading, purely a specific commercial name without a category (when GT is a category), or uses heavy marketing language.
+
+            ### Output
+            Return **ONLY** the numeric score (e.g., 0.8). Do not add explanations or text.
+        """
 
         response = await client.chat.completions.create(
             model=model,
             messages=[
-                {"role": "system", "content": "You are a helpful assistant that evaluates semantic similarity."},
-                {"role": "user", "content": prompt}
+                {
+                    "role": "system",
+                    "content": "You are a helpful assistant",
+                },
+                {"role": "user", "content": prompt},
             ],
             temperature=0,
-            max_tokens=10
+            max_tokens=10,
         )
 
-        content = response.choices[0].message.content.strip()
+        content = response.choices[0].message.content.strip()  # pyright: ignore[reportOptionalMemberAccess]
         try:
             score = float(content)
             return max(0.0, min(1.0, score))
         except ValueError:
             pass
-    except Exception as e:
+    except Exception:
         # print(f"LLM evaluation failed: {e}")
         pass
 
@@ -263,7 +331,10 @@ async def evaluate_augmentation_async(client: AsyncOpenAI, augmented_label: str,
     union = aug_tokens.union(gt_tokens)
     return len(intersection) / len(union)
 
-async def rerank_products_async(client: AsyncOpenAI, query: str, products: list, model: str) -> tuple[list, str, int, int]:
+
+async def rerank_products_async(
+    client: AsyncOpenAI, query: str, products: list, model: str
+) -> tuple[list, str, int, int]:
     """Reranks products using an LLM (Async). Returns (indices, raw_output, prompt_tokens, completion_tokens)."""
     products_formatted = "\n".join([f"{i}: {p}" for i, p in enumerate(products)])
 
@@ -275,24 +346,27 @@ async def rerank_products_async(client: AsyncOpenAI, query: str, products: list,
     {products_formatted}
 
     Rank the products above based on their relevance to the query.
-    Return the result as a JSON list of integers, representing the indices of the products in descending order of relevance.
+    Return the result as a JSON list of integers between <response> and </response> tags, representing the indices of the products in descending order of relevance.
     Do not include any explanation, just the JSON list.
-    Example output: [1, 0, 3, 2]
+    Example output: <response>[1, 0, 3, 2]</response>
     """
 
     try:
         response = await client.chat.completions.create(
             model=model,
             messages=[
-                {"role": "system", "content": "You are a helpful assistant that ranks products."},
-                {"role": "user", "content": prompt}
+                {
+                    "role": "system",
+                    "content": "You are a helpful assistant that ranks products.",
+                },
+                {"role": "user", "content": prompt},
             ],
             temperature=0,
-            extra_body={ "include_reasoning": True }
+            extra_body={"include_reasoning": False},
         )
 
         content, raw_dump = extract_content_and_reasoning(response)
-        original_content = raw_dump # Store the full dump for debugging
+        original_content = raw_dump  # Store the full dump for debugging
 
         prompt_tokens = 0
         completion_tokens = 0
@@ -301,14 +375,25 @@ async def rerank_products_async(client: AsyncOpenAI, query: str, products: list,
             completion_tokens = response.usage.completion_tokens
 
         if not content:
-             return list(range(len(products))), original_content, prompt_tokens, completion_tokens
+            return (
+                list(range(len(products))),
+                original_content,
+                prompt_tokens,
+                completion_tokens,
+            )
+
+        # Use regex to extract content between <response> tags
+        content_str = str(content) if content is not None else ""
+        match = re.search(r"<response>(.*?)</response>", content_str, re.DOTALL)
+        if match:
+            content = match.group(1).strip()
 
         # Clean potential markdown code blocks
         clean_content = content
         if "```json" in clean_content:
             clean_content = clean_content.replace("```json", "").replace("```", "")
         elif "```" in clean_content:
-             clean_content = clean_content.replace("```", "")
+            clean_content = clean_content.replace("```", "")
 
         # Try to extract JSON list if there's extra text
         if "[" in clean_content and "]" in clean_content:
@@ -318,7 +403,9 @@ async def rerank_products_async(client: AsyncOpenAI, query: str, products: list,
 
         try:
             ranked_indices = json.loads(clean_content)
-            if isinstance(ranked_indices, list) and all(isinstance(i, int) for i in ranked_indices):
+            if isinstance(ranked_indices, list) and all(
+                isinstance(i, int) for i in ranked_indices
+            ):
                 valid_indices = [i for i in ranked_indices if 0 <= i < len(products)]
                 existing_set = set(valid_indices)
                 for i in range(len(products)):
@@ -326,13 +413,24 @@ async def rerank_products_async(client: AsyncOpenAI, query: str, products: list,
                         valid_indices.append(i)
                 return valid_indices, original_content, prompt_tokens, completion_tokens
             else:
-                return list(range(len(products))), original_content, prompt_tokens, completion_tokens
+                return (
+                    list(range(len(products))),
+                    original_content,
+                    prompt_tokens,
+                    completion_tokens,
+                )
         except json.JSONDecodeError:
-             return list(range(len(products))), original_content, prompt_tokens, completion_tokens
+            return (
+                list(range(len(products))),
+                original_content,
+                prompt_tokens,
+                completion_tokens,
+            )
 
     except Exception as e:
         # print(f"Error calling OpenAI API (rerank): {e}")
         return list(range(len(products))), str(e), 0, 0
+
 
 async def check_model_health_async(client: AsyncOpenAI, model_id: str) -> bool:
     """Checks if the model is available (Async)."""
@@ -341,21 +439,27 @@ async def check_model_health_async(client: AsyncOpenAI, model_id: str) -> bool:
         await client.chat.completions.create(
             model=model_id,
             messages=[{"role": "user", "content": "Hi"}],
-            max_tokens=5,
-            timeout=10
+            max_tokens=16,
+            timeout=10,
         )
         return True
     except Exception as e:
         print(f"  ! Model {model_id} health check failed: {e}")
         return False
 
+
 # --- Main Benchmark Logic ---
+
 
 async def process_label_item(sem, client, item, model_id, eval_model):
     """Process a single label augmentation item."""
     async with sem:
-        augmented_label, raw_output, p_tokens, c_tokens = await augment_label_async(client, item["label"], model_id)
-        score = await evaluate_augmentation_async(client, augmented_label, item["ground_truth"], eval_model)
+        augmented_label, raw_output, p_tokens, c_tokens = await augment_label_async(
+            client, item["label"], model_id
+        )
+        score = await evaluate_augmentation_async(
+            client, item["label"], augmented_label, item["ground_truth"], eval_model
+        )
         # Note: We are NOT counting tokens for evaluation in the model cost, only the model's generation cost.
 
         detail = {
@@ -363,14 +467,17 @@ async def process_label_item(sem, client, item, model_id, eval_model):
             "ground_truth": item["ground_truth"],
             "output": augmented_label,
             "raw_output": raw_output,
-            "score": score
+            "score": score,
         }
         return score, p_tokens, c_tokens, detail
+
 
 async def process_rerank_item(sem, client, item, model_id):
     """Process a single product reranking item."""
     async with sem:
-        reranked_indices, raw_output, p_tokens, c_tokens = await rerank_products_async(client, item["query"], item["products"], model_id)
+        reranked_indices, raw_output, p_tokens, c_tokens = await rerank_products_async(
+            client, item["query"], item["products"], model_id
+        )
         distance = calculate_ranking_distance(reranked_indices, item["ground_truth"])
 
         detail = {
@@ -378,10 +485,11 @@ async def process_rerank_item(sem, client, item, model_id):
             "products": item["products"],
             "reranked_indices": reranked_indices,
             "raw_output": raw_output,
-            "distance": distance
+            "distance": distance,
         }
 
         return distance, p_tokens, c_tokens, detail
+
 
 async def run_benchmarks_async():
     openrouter_key = os.environ.get("OPENROUTER_KEY")
@@ -419,26 +527,28 @@ async def run_benchmarks_async():
 
         start_time = time.time()
 
-        try: # Safety net for the entire model process
+        try:  # Safety net for the entire model process
             # Health Check
             is_healthy = await check_model_health_async(client, model_id)
             if not is_healthy:
                 print(f"Skipping {model_name} due to health check failure.")
-                results.append({
-                    "model": model_name,
-                    "id": model_id,
-                    "params": params,
-                    "price_input": input_price_per_m,
-                    "price_output": output_price_per_m,
-                    "aug_score": 0.0,
-                    "rerank_dist": 0.0,
-                    "input_tokens": 0,
-                    "output_tokens": 0,
-                    "actual_cost": 0.0,
-                    "time_taken": 0,
-                    "note": "Skipped (Unavailable)",
-                    "details": {}
-                })
+                results.append(
+                    {
+                        "model": model_name,
+                        "id": model_id,
+                        "params": params,
+                        "price_input": input_price_per_m,
+                        "price_output": output_price_per_m,
+                        "aug_score": 0.0,
+                        "rerank_dist": 0.0,
+                        "input_tokens": 0,
+                        "output_tokens": 0,
+                        "actual_cost": 0.0,
+                        "time_taken": 0,
+                        "note": "Skipped (Unavailable)",
+                        "details": {},
+                    }
+                )
                 continue
 
             # --- Label Augmentation ---
@@ -455,11 +565,21 @@ async def run_benchmarks_async():
             label_details = [r[3] for r in label_results]
             avg_aug_score = total_aug_score / len(label_data) if label_data else 0
 
+            # Calculate per-item cost for label augmentation
+            avg_aug_input_tokens = (
+                total_aug_p_tokens / len(label_data) if label_data else 0
+            )
+            avg_aug_output_tokens = (
+                total_aug_c_tokens / len(label_data) if label_data else 0
+            )
+            avg_aug_cost = ((avg_aug_input_tokens / 1_000_000) * input_price_per_m) + (
+                (avg_aug_output_tokens / 1_000_000) * output_price_per_m
+            )
+
             # --- Product Reranking ---
             print(f"  - Running Product Reranking ({len(rerank_data)} items)...")
             rerank_tasks = [
-                process_rerank_item(sem, client, item, model_id)
-                for item in rerank_data
+                process_rerank_item(sem, client, item, model_id) for item in rerank_data
             ]
             rerank_results = await asyncio.gather(*rerank_tasks)
 
@@ -468,6 +588,17 @@ async def run_benchmarks_async():
             total_rerank_c_tokens = sum(r[2] for r in rerank_results)
             rerank_details = [r[3] for r in rerank_results]
             avg_rerank_dist = total_rerank_dist / len(rerank_data) if rerank_data else 0
+
+            # Calculate per-item cost for product reranking
+            avg_rerank_input_tokens = (
+                total_rerank_p_tokens / len(rerank_data) if rerank_data else 0
+            )
+            avg_rerank_output_tokens = (
+                total_rerank_c_tokens / len(rerank_data) if rerank_data else 0
+            )
+            avg_rerank_cost = (
+                (avg_rerank_input_tokens / 1_000_000) * input_price_per_m
+            ) + ((avg_rerank_output_tokens / 1_000_000) * output_price_per_m)
 
             total_input_tokens = total_aug_p_tokens + total_rerank_p_tokens
             total_output_tokens = total_aug_c_tokens + total_rerank_c_tokens
@@ -481,44 +612,52 @@ async def run_benchmarks_async():
             end_time = time.time()
             time_taken = end_time - start_time
 
-            results.append({
-                "model": model_name,
-                "id": model_id,
-                "params": params,
-                "price_input": input_price_per_m,
-                "price_output": output_price_per_m,
-                "aug_score": avg_aug_score,
-                "rerank_dist": avg_rerank_dist,
-                "input_tokens": total_input_tokens,
-                "output_tokens": total_output_tokens,
-                "actual_cost": actual_cost,
-                "time_taken": time_taken,
-                "note": model_info.get("note", ""),
-                "details": {
-                    "label_augmentation": label_details,
-                    "product_reranking": rerank_details
+            results.append(
+                {
+                    "model": model_name,
+                    "id": model_id,
+                    "params": params,
+                    "price_input": input_price_per_m,
+                    "price_output": output_price_per_m,
+                    "aug_score": avg_aug_score,
+                    "rerank_dist": avg_rerank_dist,
+                    "avg_aug_cost": avg_aug_cost,
+                    "avg_rerank_cost": avg_rerank_cost,
+                    "input_tokens": total_input_tokens,
+                    "output_tokens": total_output_tokens,
+                    "actual_cost": actual_cost,
+                    "time_taken": time_taken,
+                    "note": model_info.get("note", ""),
+                    "details": {
+                        "label_augmentation": label_details,
+                        "product_reranking": rerank_details,
+                    },
                 }
-            })
+            )
 
-            print(f"    > Aug Score: {avg_aug_score:.4f}, Rerank Dist: {avg_rerank_dist:.4f}, Time: {time_taken:.2f}s, Cost: ${actual_cost:.6f}")
+            print(
+                f"    > Aug Score: {avg_aug_score:.4f}, Rerank Dist: {avg_rerank_dist:.4f}, Time: {time_taken:.2f}s, Cost: ${actual_cost:.6f}, Aug Cost/Item: ${avg_aug_cost:.6f}, Rerank Cost/Item: ${avg_rerank_cost:.6f}"
+            )
 
         except Exception as e:
             print(f"CRITICAL ERROR benchmarking {model_name}: {e}")
-            results.append({
-                "model": model_name,
-                "id": model_id,
-                "params": params,
-                "price_input": input_price_per_m,
-                "price_output": output_price_per_m,
-                "aug_score": 0.0,
-                "rerank_dist": 0.0,
-                "input_tokens": 0,
-                "output_tokens": 0,
-                "actual_cost": 0.0,
-                "time_taken": 0,
-                "note": f"Error: {str(e)}",
-                "details": {}
-            })
+            results.append(
+                {
+                    "model": model_name,
+                    "id": model_id,
+                    "params": params,
+                    "price_input": input_price_per_m,
+                    "price_output": output_price_per_m,
+                    "aug_score": 0.0,
+                    "rerank_dist": 0.0,
+                    "input_tokens": 0,
+                    "output_tokens": 0,
+                    "actual_cost": 0.0,
+                    "time_taken": 0,
+                    "note": f"Error: {str(e)}",
+                    "details": {},
+                }
+            )
             continue
 
     # Sort results
@@ -526,12 +665,12 @@ async def run_benchmarks_async():
 
     # Generate Markdown Report
     markdown_output = "# Benchmark Results\n\n"
-    markdown_output += "| Model | Params | Cost ($) | Label Aug Score | Rerank Dist | Time (s) | Note |\n"
-    markdown_output += "|---|---|---|---|---|---|---|\n"
+    markdown_output += "| Model | Params | Total Cost ($) | Label Aug Score | Rerank Dist | Aug Cost/Item ($) | Rerank Cost/Item ($) | Time (s) | Note |\n"
+    markdown_output += "|---|---|---|---|---|---|---|---|---|\n"
 
     for res in results:
         note = res.get("note", "")
-        markdown_output += f"| {res['model']} | {res['params']} | ${res['actual_cost']:.6f} | {res['aug_score']:.4f} | {res['rerank_dist']:.4f} | {res['time_taken']:.2f} | {note} |\n"
+        markdown_output += f"| {res['model']} | {res['params']} | ${res['actual_cost']:.6f} | {res['aug_score']:.4f} | {res['rerank_dist']:.4f} | ${res['avg_aug_cost']:.6f} | ${res['avg_rerank_cost']:.6f} | {res['time_taken']:.2f} | {note} |\n"
 
     with open("BENCHMARK_RESULTS.md", "w") as f:
         f.write(markdown_output)
@@ -540,7 +679,10 @@ async def run_benchmarks_async():
     with open("BENCHMARK_RESULTS.json", "w") as f:
         json.dump(results, f, indent=4)
 
-    print("\nBenchmark completed. Results saved to BENCHMARK_RESULTS.md and BENCHMARK_RESULTS.json")
+    print(
+        "\nBenchmark completed. Results saved to BENCHMARK_RESULTS.md and BENCHMARK_RESULTS.json"
+    )
+
 
 if __name__ == "__main__":
     asyncio.run(run_benchmarks_async())
