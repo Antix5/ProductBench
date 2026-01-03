@@ -14,8 +14,17 @@
         .card { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.75rem; }
         .table-header { background-color: #334155; color: #f1f5f9; }
         .table-row:hover { background-color: #334155; transition: background-color 0.2s; }
-        .details-row { display: none; background-color: #0f172a; }
-        .details-row.open { display: table-row; }
+
+        /* Modal Styles */
+        #inspect-modal { transition: opacity 0.2s ease-in-out; }
+        #inspect-modal.hidden { opacity: 0; pointer-events: none; }
+        #inspect-modal:not(.hidden) { opacity: 1; pointer-events: auto; }
+
+        /* Custom Scrollbar for Modal */
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; height: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #1e293b; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #64748b; }
     </style>
 </head>
 <body class="p-6">
@@ -33,15 +42,16 @@
                 <div class="h-80 relative w-full">
                     <canvas id="pareto-chart"></canvas>
                 </div>
-                <p class="text-xs text-slate-500 mt-2 text-center">X: Cost to run benchmark ($) [Lower is better] | Y: Label Augmentation Score [Higher is better]</p>
+                <p class="text-xs text-slate-500 mt-2 text-center">X: Cost to run benchmark ($) [Log Scale, Lower is better] | Y: Label Augmentation Score [Higher is better]</p>
             </div>
 
             <!-- Time Chart -->
             <div class="card p-6 shadow-xl">
-                <h2 class="text-xl font-semibold mb-4 text-white">Time Taken (Seconds)</h2>
+                <h2 class="text-xl font-semibold mb-4 text-white">Time vs Performance</h2>
                 <div class="h-80 relative w-full">
                     <canvas id="time-chart"></canvas>
                 </div>
+                <p class="text-xs text-slate-500 mt-2 text-center">X: Time Taken (Seconds) [Log Scale, Lower is better] | Y: Label Augmentation Score [Higher is better]</p>
             </div>
         </div>
 
@@ -58,6 +68,7 @@
                             <th class="p-4">Params</th>
                             <th class="p-4">Cost ($)</th>
                             <th class="p-4">Time (s)</th>
+                            <th class="p-4">Tokens</th>
                             <th class="p-4">Aug Score</th>
                             <th class="p-4">Rerank Dist</th>
                             <th class="p-4 rounded-tr-lg">Action</th>
@@ -68,9 +79,17 @@
                         <tr class="table-row group">
                             <td class="p-4 font-medium text-white flex items-center gap-2">
                                 {{ row.model }}
-                                {% if row.note %}
-                                    <span class="px-2 py-0.5 rounded text-[10px] bg-red-500/20 text-red-300 border border-red-500/30">{{ row.note }}</span>
-                                {% endif %}
+                            </td>
+                            <td class="p-4 text-slate-300">{{ row.params }}</td>
+                            <td class="p-4 font-mono text-emerald-400">{{ row.actual_cost_str }}</td>
+                            <td class="p-4 font-mono text-blue-400">{{ row.time_taken_str }}</td>
+                            <td class="p-4 font-mono text-slate-400">{{ "{:,}".format(row.token_count) }}</td>
+                            <td class="p-4 font-bold text-white">{{ row.label_augmentation_score }}</td>
+                            <td class="p-4 text-slate-300">{{ row.product_reranking_distance }}</td>
+                            <td class="p-4">
+                                <button onclick="openInspectModal({{ loop.index0 }})" class="px-3 py-1 bg-slate-700 hover:bg-slate-600 text-white rounded text-xs transition">
+                                    Inspect
+                                </button>
                             </td>
                             <td class="p-4 text-slate-300">{{ row.params }}</td>
                             <td class="p-4 font-mono text-emerald-400">{{ row.actual_cost_str }}</td>
@@ -137,6 +156,29 @@
         </div>
     </div>
 
+    <!-- Inspect Modal -->
+    <div id="inspect-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4">
+        <div class="bg-slate-900 w-full max-w-6xl h-[90vh] rounded-xl shadow-2xl border border-slate-700 flex flex-col overflow-hidden">
+            <!-- Modal Header -->
+            <div class="p-6 border-b border-slate-700 flex justify-between items-center bg-slate-800">
+                <div>
+                    <h2 id="modal-title" class="text-2xl font-bold text-white">Model Inspection</h2>
+                    <p id="modal-subtitle" class="text-slate-400 text-sm mt-1">Detailed breakdown of benchmark performance</p>
+                </div>
+                <button onclick="closeInspectModal()" class="text-slate-400 hover:text-white transition bg-slate-700 hover:bg-slate-600 rounded-lg p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Modal Content (Scrollable) -->
+            <div class="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-8" id="modal-content">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+    </div>
+
     <script>
         function toggleDetails(id) {
             const row = document.getElementById(id);
@@ -145,26 +187,148 @@
 
         const leaderboardData = {{ leaderboard | tojson }};
 
+        // --- Modal Logic ---
+        const modal = document.getElementById('inspect-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalSubtitle = document.getElementById('modal-subtitle');
+        const modalContent = document.getElementById('modal-content');
+
+        function openInspectModal(index) {
+            const data = leaderboardData[index];
+            modalTitle.textContent = data.model;
+            modalSubtitle.textContent = `Cost: ${data.actual_cost_str} | Time: ${data.time_taken_str} | Score: ${data.label_augmentation_score}`;
+
+            let html = '';
+
+            // Label Augmentation Section
+            if (data.details && data.details.label_augmentation && data.details.label_augmentation.length > 0) {
+                html += `
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-semibold text-blue-400 flex items-center gap-2">
+                            <span>Label Augmentation Results</span>
+                            <span class="text-sm text-slate-500 bg-slate-800 px-2 py-1 rounded-full">${data.details.label_augmentation.length} Items</span>
+                        </h3>
+                        <div class="grid gap-4">
+                `;
+
+                data.details.label_augmentation.forEach(item => {
+                    let scoreBadge = '';
+                    if (item.score >= 0.8) scoreBadge = '<span class="px-2 py-0.5 rounded bg-green-500/20 text-green-400 border border-green-500/30 text-xs">Good</span>';
+                    else if (item.score >= 0.5) scoreBadge = '<span class="px-2 py-0.5 rounded bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 text-xs">OK</span>';
+                    else scoreBadge = '<span class="px-2 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/30 text-xs">Bad</span>';
+
+                    html += `
+                        <div class="bg-slate-800/50 p-4 rounded-lg border border-slate-700 hover:border-slate-600 transition">
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="font-mono text-sm text-slate-300"><span class="text-slate-500">Input:</span> ${escapeHtml(item.input)}</div>
+                                <div class="flex items-center gap-2 font-mono text-sm">
+                                    <span class="text-slate-500">Score:</span> <span class="text-white font-bold">${item.score}</span>
+                                    ${scoreBadge}
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
+                                <div>
+                                    <div class="text-slate-500 mb-1">Clean Output:</div>
+                                    <div class="text-emerald-400 whitespace-pre-wrap bg-slate-900 p-2 rounded border border-slate-800/50 h-32 overflow-y-auto custom-scrollbar">${escapeHtml(item.output || '<Empty>')}</div>
+                                </div>
+                                <div>
+                                    <div class="text-slate-500 mb-1">Raw Response (Debug/Reasoning):</div>
+                                    <div class="text-slate-400 whitespace-pre-wrap bg-slate-950 p-2 rounded border border-slate-800 h-32 overflow-y-auto custom-scrollbar">${escapeHtml(item.raw_output || '<Empty>')}</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                html += `</div></div>`;
+            }
+
+            // Product Reranking Section
+            if (data.details && data.details.product_reranking && data.details.product_reranking.length > 0) {
+                html += `
+                    <div class="space-y-4 pt-8 border-t border-slate-700">
+                        <h3 class="text-xl font-semibold text-purple-400 flex items-center gap-2">
+                            <span>Product Reranking Results</span>
+                            <span class="text-sm text-slate-500 bg-slate-800 px-2 py-1 rounded-full">${data.details.product_reranking.length} Items</span>
+                        </h3>
+                        <div class="grid gap-4">
+                `;
+
+                data.details.product_reranking.forEach(item => {
+                     let distBadge = '';
+                    if (item.distance <= 0.2) distBadge = '<span class="px-2 py-0.5 rounded bg-green-500/20 text-green-400 border border-green-500/30 text-xs">Good</span>';
+                    else if (item.distance <= 0.5) distBadge = '<span class="px-2 py-0.5 rounded bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 text-xs">OK</span>';
+                    else distBadge = '<span class="px-2 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/30 text-xs">Bad</span>';
+
+                    html += `
+                        <div class="bg-slate-800/50 p-4 rounded-lg border border-slate-700 hover:border-slate-600 transition">
+                            <div class="flex justify-between items-start mb-3">
+                                <div class="font-mono text-sm text-slate-300"><span class="text-slate-500">Query:</span> ${escapeHtml(item.query)}</div>
+                                <div class="flex items-center gap-2 font-mono text-sm">
+                                    <span class="text-slate-500">Dist:</span> <span class="text-white font-bold">${item.distance.toFixed(4)}</span>
+                                    ${distBadge}
+                                </div>
+                            </div>
+                             <div class="mb-3">
+                                <span class="text-slate-500 text-xs uppercase font-bold tracking-wider">Products List:</span>
+                                <ol class="list-decimal list-inside text-slate-400 text-xs mt-1 ml-1 space-y-0.5">
+                                    ${item.products.map(p => `<li>${escapeHtml(p)}</li>`).join('')}
+                                </ol>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
+                                <div>
+                                    <div class="text-slate-500 mb-1">Reranked Indices:</div>
+                                    <div class="text-emerald-400 bg-slate-900 p-2 rounded border border-slate-800/50">${JSON.stringify(item.reranked_indices)}</div>
+                                </div>
+                                <div>
+                                    <div class="text-slate-500 mb-1">Raw Response (Debug/Reasoning):</div>
+                                    <div class="text-slate-400 whitespace-pre-wrap bg-slate-950 p-2 rounded border border-slate-800 h-24 overflow-y-auto custom-scrollbar">${escapeHtml(item.raw_output || '<Empty>')}</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                html += `</div></div>`;
+            }
+
+            modalContent.innerHTML = html;
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeInspectModal() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // Escape HTML to prevent XSS in the modal
+        function escapeHtml(text) {
+            if (text == null) return '';
+            return String(text)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
         // --- Prepare Data for Charts ---
-        const validData = leaderboardData.filter(row => !row.note && row.actual_cost >= 0);
+        const validData = leaderboardData.filter(row => {
+            // Include 0 cost models (free), but we need to handle them for log scale later
+            return row.actual_cost >= 0;
+        });
 
         // 1. Pareto Chart (Cost vs Score)
-        // X: Cost (Minimize), Y: Score (Maximize)
         const paretoData = validData.map(row => ({
-            x: row.actual_cost,
+            // Log scale crashes on 0. Use a tiny epsilon for free models.
+            x: row.actual_cost > 0 ? row.actual_cost : 1e-7,
             y: parseFloat(row.label_augmentation_score),
-            label: row.model
+            label: row.model,
+            realCost: row.actual_cost // Store real cost for tooltip
         }));
-
-        // Sort by Cost (Ascending) for Pareto calculation
         paretoData.sort((a, b) => a.x - b.x);
 
         const paretoFrontier = [];
         let maxPerformance = -1;
-
-        // Calculate Frontier: For a given cost, we want the highest score.
-        // We iterate from lowest cost to highest cost.
-        // If the current point has a higher score than the max score seen so far, it is on the frontier.
         for (const point of paretoData) {
             if (point.y > maxPerformance) {
                 maxPerformance = point.y;
@@ -179,7 +343,7 @@
                     {
                         label: 'Models',
                         data: paretoData,
-                        backgroundColor: 'rgba(94, 234, 212, 0.6)', // Teal 300
+                        backgroundColor: 'rgba(94, 234, 212, 0.6)',
                         borderColor: 'rgba(94, 234, 212, 1)',
                         pointRadius: 6,
                         pointHoverRadius: 8
@@ -187,7 +351,7 @@
                     {
                         label: 'Pareto Frontier',
                         data: paretoFrontier,
-                        borderColor: 'rgba(244, 114, 182, 0.8)', // Pink 400
+                        borderColor: 'rgba(244, 114, 182, 0.8)',
                         backgroundColor: 'rgba(244, 114, 182, 0.1)',
                         type: 'line',
                         showLine: true,
@@ -203,11 +367,20 @@
                 maintainAspectRatio: false,
                 scales: {
                     x: {
-                        type: 'linear',
+                        type: 'logarithmic',
                         position: 'bottom',
-                        title: { display: true, text: 'Benchmark Cost ($)', color: '#94a3b8' },
+                        title: { display: true, text: 'Benchmark Cost ($) [Log Scale]', color: '#94a3b8' },
                         grid: { color: '#334155' },
-                        ticks: { color: '#cbd5e1' }
+                        ticks: {
+                            color: '#cbd5e1',
+                            callback: function(value, index, values) {
+                                // Only show 1, 0.1, 0.01 etc labels to avoid clutter
+                                if (value === 100 || value === 10 || value === 1 || value === 0.1 || value === 0.01 || value === 0.001 || value === 0.0001) {
+                                    return '$' + value;
+                                }
+                                return null;
+                            }
+                        }
                     },
                     y: {
                         title: { display: true, text: 'Score', color: '#94a3b8' },
@@ -228,7 +401,72 @@
                             label: function(context) {
                                 let label = context.dataset.data[context.dataIndex].label || '';
                                 if (label) label += ': ';
-                                label += `Cost $${context.parsed.x.toFixed(6)}, Score: ${context.parsed.y}`;
+                                const rawCost = context.dataset.data[context.dataIndex].realCost;
+                                label += `Cost $${rawCost.toFixed(6)}, Score: ${context.parsed.y}`;
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 2. Time vs Performance Chart
+        const timeData = validData.map(row => ({
+            x: row.time_taken > 0 ? row.time_taken : 0.01, // Prevent 0 in log scale
+            y: parseFloat(row.label_augmentation_score),
+            label: row.model
+        }));
+
+        new Chart(document.getElementById('time-chart'), {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Models',
+                    data: timeData,
+                    backgroundColor: 'rgba(56, 189, 248, 0.6)',
+                    borderColor: 'rgba(56, 189, 248, 1)',
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        type: 'logarithmic',
+                        position: 'bottom',
+                        title: { display: true, text: 'Time Taken (Seconds) [Log Scale]', color: '#94a3b8' },
+                        grid: { color: '#334155' },
+                        ticks: {
+                            color: '#cbd5e1',
+                            callback: function(value) {
+                                if (value === 0.1 || value === 1 || value === 10 || value === 100 || value === 1000) return value + 's';
+                                return null;
+                            }
+                         }
+                    },
+                    y: {
+                        title: { display: true, text: 'Score', color: '#94a3b8' },
+                        grid: { color: '#334155' },
+                        ticks: { color: '#cbd5e1' },
+                        min: 0, max: 1.0
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#0f172a',
+                        titleColor: '#e2e8f0',
+                        bodyColor: '#cbd5e1',
+                        borderColor: '#334155',
+                        borderWidth: 1,
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.data[context.dataIndex].label || '';
+                                if (label) label += ': ';
+                                label += `Time ${context.parsed.x.toFixed(2)}s, Score: ${context.parsed.y}`;
                                 return label;
                             }
                         }

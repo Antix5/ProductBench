@@ -147,6 +147,38 @@ except FileNotFoundError:
 
 # --- Async Helper Functions (copied and adapted from libraries) ---
 
+def extract_content_and_reasoning(response):
+    """
+    Extracts content and potential reasoning from an OpenAI/OpenRouter response object.
+    Handles 'reasoning', 'reasoning_content', and refusals.
+    """
+    message = response.choices[0].message
+    content = message.content
+
+    # Check for refusal
+    if getattr(message, 'refusal', None):
+        return None, f"REFUSAL: {message.refusal}"
+
+    # Handle None content (sometimes happens with pure reasoning models or tool calls)
+    if content is None:
+        content = ""
+
+    raw_dump = f"Content: {content}\n"
+
+    # Try to find reasoning
+    reasoning = None
+    if hasattr(message, 'reasoning') and message.reasoning:
+        reasoning = message.reasoning
+    elif hasattr(message, 'reasoning_content') and message.reasoning_content:
+        reasoning = message.reasoning_content
+    # OpenRouter sometimes puts it in extra_fields or directly on the object if using standard OpenAI lib
+    # but the python lib maps known fields.
+
+    if reasoning:
+        raw_dump += f"\n--- Reasoning ---\n{reasoning}\n-----------------"
+
+    return content, raw_dump
+
 async def augment_label_async(client: AsyncOpenAI, label: str, model: str) -> tuple[str, str, int, int]:
     """Uses an LLM to augment the product label (Async). Returns (content, raw_output, prompt_tokens, completion_tokens)."""
     try:
@@ -157,9 +189,11 @@ async def augment_label_async(client: AsyncOpenAI, label: str, model: str) -> tu
                 {"role": "user", "content": f"Augment this product label, output nothing else: '{label}'"}
             ],
             temperature=0.3,
-            max_tokens=60
+            max_tokens=200, # Increased slightly to allow for some reasoning if needed, though we ask for nothing else
+            extra_body={ "include_reasoning": True } # Request reasoning for supported models
         )
-        content = response.choices[0].message.content.strip()
+
+        content, raw_dump = extract_content_and_reasoning(response)
 
         prompt_tokens = 0
         completion_tokens = 0
@@ -167,7 +201,16 @@ async def augment_label_async(client: AsyncOpenAI, label: str, model: str) -> tu
             prompt_tokens = response.usage.prompt_tokens
             completion_tokens = response.usage.completion_tokens
 
-        return content, content, prompt_tokens, completion_tokens
+        if not content and not raw_dump:
+             return f"Augmented: {label} (Empty Response)", "Empty Response Object", prompt_tokens, completion_tokens
+
+        # If content is empty but we have reasoning, maybe the model thought the reasoning was the answer?
+        # Or it just failed to output content.
+        if not content.strip():
+             return f"Augmented: {label} (No Content)", raw_dump, prompt_tokens, completion_tokens
+
+        return content.strip(), raw_dump, prompt_tokens, completion_tokens
+
     except Exception as e:
         # print(f"Error calling OpenAI API (augment): {e}")
         return f"Augmented: {label} (Error)", str(e), 0, 0
@@ -175,6 +218,8 @@ async def augment_label_async(client: AsyncOpenAI, label: str, model: str) -> tu
 async def evaluate_augmentation_async(client: AsyncOpenAI, augmented_label: str, ground_truth: str, model: str) -> float:
     """Evaluates the quality of the augmented label (Async)."""
     if "Augmented:" in augmented_label and "(Error)" in augmented_label:
+         return 0.0
+    if "Augmented:" in augmented_label and "(No Content)" in augmented_label:
          return 0.0
 
     try:
@@ -242,11 +287,12 @@ async def rerank_products_async(client: AsyncOpenAI, query: str, products: list,
                 {"role": "system", "content": "You are a helpful assistant that ranks products."},
                 {"role": "user", "content": prompt}
             ],
-            temperature=0
+            temperature=0,
+            extra_body={ "include_reasoning": True }
         )
 
-        content = response.choices[0].message.content.strip()
-        original_content = content
+        content, raw_dump = extract_content_and_reasoning(response)
+        original_content = raw_dump # Store the full dump for debugging
 
         prompt_tokens = 0
         completion_tokens = 0
@@ -254,20 +300,24 @@ async def rerank_products_async(client: AsyncOpenAI, query: str, products: list,
             prompt_tokens = response.usage.prompt_tokens
             completion_tokens = response.usage.completion_tokens
 
+        if not content:
+             return list(range(len(products))), original_content, prompt_tokens, completion_tokens
+
         # Clean potential markdown code blocks
-        if "```json" in content:
-            content = content.replace("```json", "").replace("```", "")
-        elif "```" in content:
-             content = content.replace("```", "")
+        clean_content = content
+        if "```json" in clean_content:
+            clean_content = clean_content.replace("```json", "").replace("```", "")
+        elif "```" in clean_content:
+             clean_content = clean_content.replace("```", "")
 
         # Try to extract JSON list if there's extra text
-        if "[" in content and "]" in content:
-            start = content.find("[")
-            end = content.rfind("]") + 1
-            content = content[start:end]
+        if "[" in clean_content and "]" in clean_content:
+            start = clean_content.find("[")
+            end = clean_content.rfind("]") + 1
+            clean_content = clean_content[start:end]
 
         try:
-            ranked_indices = json.loads(content)
+            ranked_indices = json.loads(clean_content)
             if isinstance(ranked_indices, list) and all(isinstance(i, int) for i in ranked_indices):
                 valid_indices = [i for i in ranked_indices if 0 <= i < len(products)]
                 existing_set = set(valid_indices)
