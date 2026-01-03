@@ -146,7 +146,7 @@
         const leaderboardData = {{ leaderboard | tojson }};
 
         // --- Prepare Data for Charts ---
-        const validData = leaderboardData.filter(row => !row.note && row.actual_cost > 0);
+        const validData = leaderboardData.filter(row => !row.note && row.actual_cost >= 0);
 
         // 1. Pareto Chart (Cost vs Score)
         // X: Cost (Minimize), Y: Score (Maximize)
