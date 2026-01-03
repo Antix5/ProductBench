@@ -7,7 +7,10 @@
       "Plaquette de fois de canard",
       "Beurre doux Gastronomique 200g"
     ],
-    "ground_truth": [3, 1]
+    "ground_truth": [
+      3,
+      1
+    ]
   },
   {
     "query": "Fromage rapé",
@@ -17,7 +20,10 @@
       "Emmental rapé 200g",
       "Cheddar en bloc"
     ],
-    "ground_truth": [2, 1]
+    "ground_truth": [
+      2,
+      1
+    ]
   },
   {
     "query": "Jus d'orange",
@@ -27,7 +33,9 @@
       "Jus d'orange pressé frais 1L",
       "Boisson à l'orange"
     ],
-    "ground_truth": [2]
+    "ground_truth": [
+      2
+    ]
   },
   {
     "query": "Pain complet",
@@ -37,7 +45,10 @@
       "Pain de seigle",
       "Pain de campagne à la farine complète"
     ],
-    "ground_truth": [3, 2]
+    "ground_truth": [
+      3,
+      2
+    ]
   },
   {
     "query": "Yaourt 0%",
@@ -47,7 +58,9 @@
       "Yaourt aux fruits 0% MG",
       "Yaourt grec"
     ],
-    "ground_truth": [2]
+    "ground_truth": [
+      2
+    ]
   },
   {
     "query": "Chocolat noir dessert",
@@ -57,7 +70,10 @@
       "Chocolat en poudre",
       "Chocolat pâtissier 52% cacao"
     ],
-    "ground_truth": [3, 1]
+    "ground_truth": [
+      3,
+      1
+    ]
   },
   {
     "query": "Eau gazeuse",
@@ -67,7 +83,10 @@
       "Eau minérale naturelle pétillante",
       "Sirop de grenadine"
     ],
-    "ground_truth": [2, 1]
+    "ground_truth": [
+      2,
+      1
+    ]
   },
   {
     "query": "Saucisson à l'ail",
@@ -77,7 +96,9 @@
       "Saucisson sec pur porc",
       "Saucisson à cuire à l'ail fumé"
     ],
-    "ground_truth": [3]
+    "ground_truth": [
+      3
+    ]
   },
   {
     "query": "Pâtes fraîches",
@@ -87,7 +108,9 @@
       "Raviolis frais au boeuf",
       "Semoule de couscous"
     ],
-    "ground_truth": [2]
+    "ground_truth": [
+      2
+    ]
   },
   {
     "query": "Crème solaire enfant",
@@ -97,7 +120,9 @@
       "Huile sèche bronzante",
       "Spray solaire très haute protection 50+ pour enfants"
     ],
-    "ground_truth": [3]
+    "ground_truth": [
+      3
+    ]
   },
   {
     "query": "lessive peaux sensibles",
@@ -107,7 +132,9 @@
       "Lessive hypoallergénique testée dermatologiquement",
       "Détachant avant lavage"
     ],
-    "ground_truth": [2]
+    "ground_truth": [
+      2
+    ]
   },
   {
     "query": "Café en grains",
@@ -117,7 +144,9 @@
       "Café moulu pour expresso",
       "Paquet de café en grains pur arabica"
     ],
-    "ground_truth": [3]
+    "ground_truth": [
+      3
+    ]
   },
   {
     "query": "Thé vert menthe",
@@ -127,7 +156,10 @@
       "Thé vert nature de Chine",
       "Thé vert à la menthe en sachets"
     ],
-    "ground_truth": [3, 2]
+    "ground_truth": [
+      3,
+      2
+    ]
   },
   {
     "query": "Vin rouge Bordeaux",
@@ -137,7 +169,9 @@
       "Saint-Émilion Grand Cru",
       "Vin rosé de Provence"
     ],
-    "ground_truth": [2]
+    "ground_truth": [
+      2
+    ]
   },
   {
     "query": "Bière blonde légère",
@@ -147,7 +181,9 @@
       "Bière blanche fruitée",
       "Pilsner lager à 4.5%"
     ],
-    "ground_truth": [3]
+    "ground_truth": [
+      3
+    ]
   },
   {
     "query": "Céréales petit déjeuner enfant",
@@ -157,7 +193,10 @@
       "Céréales chocolatées enrichies en vitamines",
       "Barre de céréales"
     ],
-    "ground_truth": [2, 0]
+    "ground_truth": [
+      2,
+      0
+    ]
   },
   {
     "query": "Shampooing cheveux gras",
@@ -167,7 +206,10 @@
       "Shampooing purifiant à l'argile",
       "Shampooing sec"
     ],
-    "ground_truth": [2, 3]
+    "ground_truth": [
+      2,
+      3
+    ]
   },
   {
     "query": "Piles AAA",
@@ -177,7 +219,9 @@
       "Chargeur de piles",
       "Lot de 4 piles alcalines AAA"
     ],
-    "ground_truth": [3]
+    "ground_truth": [
+      3
+    ]
   },
   {
     "query": "Nourriture pour chaton",
@@ -187,7 +231,9 @@
       "Litière pour chat",
       "Croquettes complètes pour chaton de 2 à 12 mois"
     ],
-    "ground_truth": [3]
+    "ground_truth": [
+      3
+    ]
   },
   {
     "query": "Gluten free bread",
@@ -197,7 +243,11 @@
       "Galettes de riz",
       "Pain de maïs"
     ],
-    "ground_truth": [1, 2, 3]
+    "ground_truth": [
+      1,
+      2,
+      3
+    ]
   },
   {
     "query": "Huile végétale pour friture",
@@ -207,7 +257,9 @@
       "Huile de tournesol",
       "Huile de sésame"
     ],
-    "ground_truth": [2]
+    "ground_truth": [
+      2
+    ]
   },
   {
     "query": "Lait d'amande",
@@ -217,7 +269,10 @@
       "Crème de coco",
       "Boisson végétale à base d'amandes sans sucre"
     ],
-    "ground_truth": [3, 1]
+    "ground_truth": [
+      3,
+      1
+    ]
   },
   {
     "query": "Gâteau au chocolat",
@@ -227,7 +282,10 @@
       "Fondant au chocolat prêt à cuire",
       "Farine de blé"
     ],
-    "ground_truth": [2, 1]
+    "ground_truth": [
+      2,
+      1
+    ]
   },
   {
     "query": "Dentifrice blancheur",
@@ -237,7 +295,9 @@
       "Brosse à dents électrique",
       "Dentifrice action blancheur au charbon"
     ],
-    "ground_truth": [3]
+    "ground_truth": [
+      3
+    ]
   },
   {
     "query": "Pizza 4 fromages",
@@ -247,7 +307,9 @@
       "Lasanne à la bolognaise",
       "Pizza surgelée aux quatre fromages"
     ],
-    "ground_truth": [3]
+    "ground_truth": [
+      3
+    ]
   },
   {
     "query": "riz thai",
@@ -257,7 +319,10 @@
       "Semoule de blé",
       "Riz parfumé au jasmin"
     ],
-    "ground_truth": [3, 0]
+    "ground_truth": [
+      3,
+      0
+    ]
   },
   {
     "query": "Moutarde forte",
@@ -267,7 +332,10 @@
       "Mayonnaise",
       "Moutarde de Dijon extra-forte"
     ],
-    "ground_truth": [3, 1]
+    "ground_truth": [
+      3,
+      1
+    ]
   },
   {
     "query": "Haricots verts fins",
@@ -277,7 +345,9 @@
       "Flageolets verts",
       "Conserve de haricots verts extra-fins"
     ],
-    "ground_truth": [3]
+    "ground_truth": [
+      3
+    ]
   },
   {
     "query": "Compote de pommes",
@@ -287,7 +357,9 @@
       "Yaourt aux fruits",
       "Gourdes de compote de pommes sans sucre ajouté"
     ],
-    "ground_truth": [3]
+    "ground_truth": [
+      3
+    ]
   },
   {
     "query": "Steak haché pur boeuf",
@@ -297,7 +369,9 @@
       "Steak de soja",
       "Steak haché 5% MG pur boeuf"
     ],
-    "ground_truth": [3]
+    "ground_truth": [
+      3
+    ]
   },
   {
     "query": "Chips sel & vinaigre",
@@ -307,7 +381,9 @@
       "Tuiles apéritives à la crème et oignon",
       "Chips de pomme de terre saveur sel et vinaigre"
     ],
-    "ground_truth": [3]
+    "ground_truth": [
+      3
+    ]
   },
   {
     "query": "Sirop d'érable",
@@ -317,7 +393,11 @@
       "Sirop d'agave",
       "Pur sirop d'érable du Canada"
     ],
-    "ground_truth": [3, 2, 0]
+    "ground_truth": [
+      3,
+      2,
+      0
+    ]
   },
   {
     "query": "Tofu fumé",
@@ -327,7 +407,9 @@
       "Tofu soyeux",
       "Bloc de tofu fumé aux amandes et sésame"
     ],
-    "ground_truth": [3]
+    "ground_truth": [
+      3
+    ]
   },
   {
     "query": "Vinaigre de cidre",
@@ -337,7 +419,9 @@
       "Vinaigre balsamique",
       "Vinaigre de cidre bio non pasteurisé"
     ],
-    "ground_truth": [3]
+    "ground_truth": [
+      3
+    ]
   },
   {
     "query": "farine de sarrasin",
@@ -347,7 +431,9 @@
       "Polenta",
       "Farine de blé noir bio"
     ],
-    "ground_truth": [3]
+    "ground_truth": [
+      3
+    ]
   },
   {
     "query": "pâte feuilletée",
@@ -357,7 +443,10 @@
       "Feuilles de brick",
       "Rouleau de pâte feuilletée pur beurre"
     ],
-    "ground_truth": [3, 0]
+    "ground_truth": [
+      3,
+      0
+    ]
   },
   {
     "query": "petits pois carottes",
@@ -367,7 +456,10 @@
       "Purée de carottes",
       "Conserve de petits pois et jeunes carottes"
     ],
-    "ground_truth": [3, 1]
+    "ground_truth": [
+      3,
+      1
+    ]
   },
   {
     "query": "tablettes lave-vaisselle",
@@ -377,7 +469,9 @@
       "Nettoyant machine",
       "Tablettes lave-vaisselle tout-en-un"
     ],
-    "ground_truth": [3]
+    "ground_truth": [
+      3
+    ]
   },
   {
     "query": "crème dessert chocolat",
@@ -387,7 +481,11 @@
       "Yaourt au chocolat",
       "Danette crème dessert saveur chocolat"
     ],
-    "ground_truth": [3, 0, 2]
+    "ground_truth": [
+      3,
+      0,
+      2
+    ]
   },
   {
     "query": "Jambon blanc découenné dégraissé",
@@ -397,7 +495,9 @@
       "Mousse de canard",
       "2 tranches de jambon cuit supérieur"
     ],
-    "ground_truth": [3]
+    "ground_truth": [
+      3
+    ]
   },
   {
     "query": "Poivre noir",
@@ -407,7 +507,10 @@
       "Poivre blanc de Penja",
       "Moulin à poivre noir de Madagascar"
     ],
-    "ground_truth": [3, 2]
+    "ground_truth": [
+      3,
+      2
+    ]
   },
   {
     "query": "Cacahuètes grillées salées",
@@ -417,7 +520,9 @@
       "Pistaches",
       "Arachides grillées à sec et salées pour apéritif"
     ],
-    "ground_truth": [3]
+    "ground_truth": [
+      3
+    ]
   },
   {
     "query": "Gel douche hydratant",
@@ -427,7 +532,10 @@
       "Exfoliant corporel",
       "Crème de douche nourrissante au beurre de karité"
     ],
-    "ground_truth": [3, 1]
+    "ground_truth": [
+      3,
+      1
+    ]
   },
   {
     "query": "Coton-tiges",
@@ -437,7 +545,10 @@
       "Cure-dents",
       "Bâtonnets ouatés"
     ],
-    "ground_truth": [3, 0]
+    "ground_truth": [
+      3,
+      0
+    ]
   },
   {
     "query": "Sacs congélation",
@@ -447,7 +558,9 @@
       "Sacs poubelle",
       "Sacs avec fermeture zip pour congélateur"
     ],
-    "ground_truth": [3]
+    "ground_truth": [
+      3
+    ]
   },
   {
     "query": "Miel liquide",
@@ -457,7 +570,10 @@
       "Confiture d'abricots",
       "Miel de fleurs liquide"
     ],
-    "ground_truth": [3, 0]
+    "ground_truth": [
+      3,
+      0
+    ]
   },
   {
     "query": "Lentilles corail",
@@ -467,7 +583,9 @@
       "Haricots rouges en conserve",
       "Sachet de lentilles corail sèches"
     ],
-    "ground_truth": [3]
+    "ground_truth": [
+      3
+    ]
   },
   {
     "query": "boisson énergisante",
@@ -477,7 +595,9 @@
       "Boisson isotonique pour le sport",
       "Canette de boisson énergisante à la taurine"
     ],
-    "ground_truth": [3]
+    "ground_truth": [
+      3
+    ]
   },
   {
     "query": "Bouillon de volaille",
@@ -487,7 +607,10 @@
       "Soupe de poulet en brique",
       "Cubes de bouillon de poule dégraissé"
     ],
-    "ground_truth": [3, 1]
+    "ground_truth": [
+      3,
+      1
+    ]
   },
   {
     "query": "Sardines à l'huile",
@@ -497,6 +620,136 @@
       "Anchois à l'huile",
       "Conserve de sardines à l'huile d'olive vierge extra"
     ],
-    "ground_truth": [3]
+    "ground_truth": [
+      3
+    ]
+  },
+  {
+    "query": "iphone 14 pro",
+    "products": [
+      "Apple iPhone 13 128Go",
+      "Samsung Galaxy S23 Ultra",
+      "Coque de protection transparente pour iPhone 14",
+      "Apple iPhone 14 Pro Max 256Go Noir Sidéral"
+    ],
+    "ground_truth": [
+      3,
+      0
+    ]
+  },
+  {
+    "query": "nike air max",
+    "products": [
+      "Adidas Originals Stan Smith",
+      "Nike Air Force 1 '07 Blanc",
+      "Nike Air Max 90 Homme Noir",
+      "Lot de 3 paires de chaussettes Nike"
+    ],
+    "ground_truth": [
+      2,
+      1
+    ]
+  },
+  {
+    "query": "lego star wars",
+    "products": [
+      "Playmobil Chevalier et Dragon",
+      "LEGO Harry Potter Le Château de Poudlard",
+      "LEGO Star Wars Faucon Millenium",
+      "Star Wars : L'Empire Contre-Attaque (DVD)"
+    ],
+    "ground_truth": [
+      2
+    ]
+  },
+  {
+    "query": "ps5 jeux",
+    "products": [
+      "Manette DualSense PS5",
+      "God of War Ragnarök (PS5)",
+      "Console PlayStation 5 Édition Standard",
+      "Carte cadeau PlayStation Store 20€"
+    ],
+    "ground_truth": [
+      1,
+      2
+    ]
+  },
+  {
+    "query": "tv 4k 55p",
+    "products": [
+      "Samsung TV QLED 4K 55 pouces (138cm)",
+      "Support mural pour TV 32-65 pouces",
+      "Câble HDMI 2.1 Ultra High Speed",
+      "LG TV OLED 4K 65 pouces"
+    ],
+    "ground_truth": [
+      0,
+      3
+    ]
+  },
+  {
+    "query": "casque bose",
+    "products": [
+      "Sony WH-1000XM5",
+      "Bose QuietComfort 45",
+      "Écouteurs Bose QuietComfort Earbuds II",
+      "Étui de transport pour casque"
+    ],
+    "ground_truth": [
+      1,
+      2
+    ]
+  },
+  {
+    "query": "aspirateur robot",
+    "products": [
+      "Aspirateur balai Dyson V15",
+      "iRobot Roomba j7+",
+      "Roborock S8",
+      "Sacs pour aspirateur Rowenta"
+    ],
+    "ground_truth": [
+      1,
+      2
+    ]
+  },
+  {
+    "query": "machine à café grain",
+    "products": [
+      "Cafetière filtre Moulinex",
+      "Machine à café Nespresso Vertuo",
+      "De'Longhi Magnifica S (Broyeur à grains)",
+      "Paquet de café en grains 1kg"
+    ],
+    "ground_truth": [
+      2
+    ]
+  },
+  {
+    "query": "ssd 1to",
+    "products": [
+      "Disque dur externe HDD 2To",
+      "Samsung 980 PRO NVMe M.2 SSD 1To",
+      "Clé USB 128Go",
+      "SanDisk SSD Plus 1To SATA III"
+    ],
+    "ground_truth": [
+      1,
+      3
+    ]
+  },
+  {
+    "query": "protéine whey",
+    "products": [
+      "Barre protéinée chocolat",
+      "Shaker pour protéines",
+      "Optimum Nutrition Gold Standard 100% Whey",
+      "Créatine Monohydrate"
+    ],
+    "ground_truth": [
+      2,
+      0
+    ]
   }
 ]

@@ -198,5 +198,85 @@
   {
     "label": "Papier aluminium",
     "ground_truth": "Rouleau de papier aluminium"
+  },
+  {
+    "label": "Coca 33cl",
+    "ground_truth": "Coca-Cola Original Taste Canette 33cl"
+  },
+  {
+    "label": "Nutella 750",
+    "ground_truth": "Pâte à tartiner aux noisettes et au cacao Nutella Pot de 750g"
+  },
+  {
+    "label": "H&S Shmp",
+    "ground_truth": "Shampooing antipelliculaire Head & Shoulders"
+  },
+  {
+    "label": "Pringles Oignon",
+    "ground_truth": "Tuiles salées Pringles Sour Cream & Onion (Crème et Oignon)"
+  },
+  {
+    "label": "St Moret",
+    "ground_truth": "Spécialité fromagère St Môret Ligne & Plaisir"
+  },
+  {
+    "label": "Kind. Bueno",
+    "ground_truth": "Barres chocolatées Kinder Bueno"
+  },
+  {
+    "label": "M&Ms",
+    "ground_truth": "Billes de chocolat M&M's Peanut (Cacahuète)"
+  },
+  {
+    "label": "H. Daza",
+    "ground_truth": "Crème glacée Häagen-Dazs Macadamia Nut Brittle"
+  },
+  {
+    "label": "Lays Barbq",
+    "ground_truth": "Chips Lay's Saveur Barbecue"
+  },
+  {
+    "label": "Red Bull SF",
+    "ground_truth": "Boisson énergisante Red Bull Sugarfree (Sans Sucres)"
+  },
+  {
+    "label": "Sony WH-1000XM5",
+    "ground_truth": "Casque sans fil à réduction de bruit Sony WH-1000XM5"
+  },
+  {
+    "label": "Logi MX Master 3S",
+    "ground_truth": "Souris sans fil performante Logitech MX Master 3S"
+  },
+  {
+    "label": "MacBook Air M2",
+    "ground_truth": "Ordinateur portable Apple MacBook Air avec puce M2"
+  },
+  {
+    "label": "Sam. Gal. S23",
+    "ground_truth": "Smartphone Samsung Galaxy S23 5G"
+  },
+  {
+    "label": "Nespresso Cap.",
+    "ground_truth": "Capsules de café Nespresso Original"
+  },
+  {
+    "label": "Dyson V15",
+    "ground_truth": "Aspirateur sans fil Dyson V15 Detect"
+  },
+  {
+    "label": "Lego Harry P.",
+    "ground_truth": "Jeu de construction LEGO Harry Potter Poudlard"
+  },
+  {
+    "label": "PlaySt. 5",
+    "ground_truth": "Console de jeux Sony PlayStation 5"
+  },
+  {
+    "label": "Xbox Ser. X",
+    "ground_truth": "Console de jeux Microsoft Xbox Series X"
+  },
+  {
+    "label": "Nike AF1",
+    "ground_truth": "Chaussures baskets Nike Air Force 1 '07"
   }
 ]
