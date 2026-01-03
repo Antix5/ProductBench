@@ -65,13 +65,8 @@ def run_benchmarks():
 
         avg_distance = total_distance / len(rerank_data) if rerank_data else 0
 
-        # Adjust placeholder data for better visualization
-        if model == "model-a":
-            cost = 0.5
-            score = avg_score
-        else:
-            cost = 0.7
-            score = avg_score + 0.1
+        cost = 0.0
+        score = avg_score
 
         leaderboard_data.append(
             {
