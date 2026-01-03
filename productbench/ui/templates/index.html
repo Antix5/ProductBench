@@ -91,6 +91,63 @@
                                     Inspect
                                 </button>
                             </td>
+                            <td class="p-4 text-slate-300">{{ row.params }}</td>
+                            <td class="p-4 font-mono text-emerald-400">{{ row.actual_cost_str }}</td>
+                            <td class="p-4 font-mono text-blue-400">{{ row.time_taken_str }}</td>
+                            <td class="p-4 font-bold text-white">{{ row.label_augmentation_score }}</td>
+                            <td class="p-4 text-slate-300">{{ row.product_reranking_distance }}</td>
+                            <td class="p-4">
+                                <button onclick="toggleDetails('details-{{ loop.index }}')" class="px-3 py-1 bg-slate-700 hover:bg-slate-600 text-white rounded text-xs transition">
+                                    Inspect
+                                </button>
+                            </td>
+                        </tr>
+                        <!-- Details Row -->
+                        <tr id="details-{{ loop.index }}" class="details-row border-b border-slate-800">
+                            <td colspan="7" class="p-6">
+                                <div class="space-y-4">
+                                    <h3 class="text-lg font-semibold text-white">Detailed Logs for {{ row.model }}</h3>
+
+                                    {% if row.details.label_augmentation %}
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div class="space-y-2">
+                                            <h4 class="font-medium text-blue-400">Sample Label Augmentation</h4>
+                                            {% set sample = row.details.label_augmentation[0] %}
+                                            <div class="bg-slate-900 p-3 rounded border border-slate-700 font-mono text-xs overflow-auto max-h-40">
+                                                <div class="text-slate-500 mb-1">Input:</div>
+                                                <div class="text-white mb-2">{{ sample.input }}</div>
+                                                <div class="text-slate-500 mb-1">Output:</div>
+                                                <div class="text-emerald-400 mb-2">{{ sample.output }}</div>
+                                                <div class="text-slate-500 mb-1">Raw Output:</div>
+                                                <div class="text-slate-400 whitespace-pre-wrap">{{ sample.raw_output }}</div>
+                                                <div class="text-slate-500 mt-2">Score: {{ sample.score }}</div>
+                                            </div>
+                                        </div>
+
+                                        {% if row.details.product_reranking %}
+                                        <div class="space-y-2">
+                                            <h4 class="font-medium text-purple-400">Sample Product Reranking</h4>
+                                            {% set sample_r = row.details.product_reranking[0] %}
+                                            <div class="bg-slate-900 p-3 rounded border border-slate-700 font-mono text-xs overflow-auto max-h-40">
+                                                 <div class="text-slate-500 mb-1">Query:</div>
+                                                <div class="text-white mb-2">{{ sample_r.query }}</div>
+                                                <div class="text-slate-500 mb-1">Reranked Indices:</div>
+                                                <div class="text-emerald-400 mb-2">{{ sample_r.reranked_indices }}</div>
+                                                <div class="text-slate-500 mb-1">Raw Output:</div>
+                                                <div class="text-slate-400 whitespace-pre-wrap">{{ sample_r.raw_output }}</div>
+                                                <div class="text-slate-500 mt-2">Distance: {{ sample_r.distance }}</div>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="text-right">
+                                         <a href="#" onclick="alert('Full JSON logs available in BENCHMARK_RESULTS.json')" class="text-xs text-slate-500 hover:text-white underline">View full logs</a>
+                                    </div>
+                                    {% else %}
+                                    <p class="text-slate-500 italic">No detailed logs available (Task skipped or failed).</p>
+                                    {% endif %}
+                                </div>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -123,6 +180,11 @@
     </div>
 
     <script>
+        function toggleDetails(id) {
+            const row = document.getElementById(id);
+            row.classList.toggle('open');
+        }
+
         const leaderboardData = {{ leaderboard | tojson }};
 
         // --- Modal Logic ---
@@ -408,6 +470,51 @@
                                 return label;
                             }
                         }
+                    }
+                }
+            }
+        });
+
+        // 2. Time Chart
+        // Bar chart of time taken per model
+        const timeLabels = validData.map(d => d.model);
+        const timeValues = validData.map(d => d.time_taken);
+
+        new Chart(document.getElementById('time-chart'), {
+            type: 'bar',
+            data: {
+                labels: timeLabels,
+                datasets: [{
+                    label: 'Time Taken (s)',
+                    data: timeValues,
+                    backgroundColor: 'rgba(56, 189, 248, 0.6)', // Sky 400
+                    borderColor: 'rgba(56, 189, 248, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y', // Horizontal bar chart is often better for long names
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Seconds', color: '#94a3b8' },
+                        grid: { color: '#334155' },
+                        ticks: { color: '#cbd5e1' }
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: { color: '#e2e8f0' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#0f172a',
+                        titleColor: '#e2e8f0',
+                        bodyColor: '#cbd5e1',
+                        borderColor: '#334155',
+                        borderWidth: 1
                     }
                 }
             }
