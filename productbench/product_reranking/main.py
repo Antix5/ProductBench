@@ -1,32 +1,44 @@
 import json
 import math
 import os
-from openai import OpenAI
+from openai import OpenAI, OpenAIError
+
+# Initialize OpenAI client
+try:
+    if os.environ.get("OPENROUTER_KEY"):
+        default_client = OpenAI(
+            base_url="https://openrouter.ai/api/v1",
+            api_key=os.environ.get("OPENROUTER_KEY")
+        )
+    else:
+        default_client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+except OpenAIError:
+    default_client = None
 
 def load_data(file_path):
   """Loads the product re-ranking data from a JSON file."""
   with open(file_path, 'r') as f:
     return json.load(f)
 
-def rerank_products(query: str, products: list) -> list:
+def rerank_products(query: str, products: list, model: str = "google/gemini-3-flash-preview", client: OpenAI = None) -> list:
   """
   Reranks products using an LLM.
 
   Args:
       query: The user query.
       products: A list of product strings.
+      model: The model to use.
+      client: The OpenAI client (optional).
 
   Returns:
       A list of indices representing the reranked order of products.
   """
-  api_key = os.environ.get("OPENAI_API_KEY")
+  use_client = client if client else default_client
 
-  if not api_key:
+  if not use_client or not use_client.api_key:
       # Fallback if no API key is provided
-      print("Warning: OPENAI_API_KEY not found. Returning original order.")
+      print("Warning: API key not found. Returning original order.")
       return list(range(len(products)))
-
-  client = OpenAI(api_key=api_key)
 
   products_formatted = "\n".join([f"{i}: {p}" for i, p in enumerate(products)])
 
@@ -44,8 +56,8 @@ def rerank_products(query: str, products: list) -> list:
   """
 
   try:
-      response = client.chat.completions.create(
-          model="gpt-3.5-turbo",
+      response = use_client.chat.completions.create(
+          model=model,
           messages=[
               {"role": "system", "content": "You are a helpful assistant that ranks products."},
               {"role": "user", "content": prompt}

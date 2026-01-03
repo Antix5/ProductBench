@@ -5,24 +5,32 @@ from openai import OpenAI, OpenAIError
 
 # Initialize OpenAI client
 try:
-    client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+    if os.environ.get("OPENROUTER_KEY"):
+        default_client = OpenAI(
+            base_url="https://openrouter.ai/api/v1",
+            api_key=os.environ.get("OPENROUTER_KEY")
+        )
+    else:
+        default_client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 except OpenAIError:
-    client = None
+    default_client = None
 
 def load_data(file_path):
   """Loads the label augmentation data from a JSON file."""
   with open(file_path, 'r') as f:
     return json.load(f)
 
-def augment_label(label: str) -> str:
+def augment_label(label: str, model: str = "google/gemini-3-flash-preview", client: OpenAI = None) -> str:
   """Uses an LLM to augment the product label."""
-  if not client or not client.api_key:
+  use_client = client if client else default_client
+
+  if not use_client or not use_client.api_key:
       # Fallback if API key is not available
       return f"Augmented: {label} (No API Key)"
 
   try:
-    response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
+    response = use_client.chat.completions.create(
+        model=model,
         messages=[
             {"role": "system", "content": "You are a helpful assistant that improves product labels. Your goal is to make the label more descriptive and human-readable, expanding abbreviations and adding missing context if possible."},
             {"role": "user", "content": f"Augment this product label: '{label}'"}
@@ -35,17 +43,16 @@ def augment_label(label: str) -> str:
       print(f"Error calling OpenAI API: {e}")
       return f"Augmented: {label} (Error)"
 
-def evaluate_augmentation(augmented_label: str, ground_truth: str) -> float:
+def evaluate_augmentation(augmented_label: str, ground_truth: str, model: str = "google/gemini-3-flash-preview", client: OpenAI = None) -> float:
   """
   Evaluates the quality of the augmented label against the ground truth using an LLM.
   Returns a score between 0.0 and 1.0.
   Falls back to a token overlap metric if the OpenAI API key is missing or an error occurs.
   """
-  api_key = os.environ.get("OPENAI_API_KEY")
+  use_client = client if client else default_client
 
-  if api_key:
+  if use_client and use_client.api_key:
     try:
-      client = OpenAI(api_key=api_key)
       prompt = (
           f"Compare the augmented label with the ground truth label.\n"
           f"Augmented Label: {augmented_label}\n"
@@ -55,8 +62,8 @@ def evaluate_augmentation(augmented_label: str, ground_truth: str) -> float:
           f"Return ONLY the numeric score."
       )
 
-      response = client.chat.completions.create(
-          model="gpt-3.5-turbo",
+      response = use_client.chat.completions.create(
+          model=model,
           messages=[
               {"role": "system", "content": "You are a helpful assistant that evaluates semantic similarity."},
               {"role": "user", "content": prompt}
@@ -71,7 +78,6 @@ def evaluate_augmentation(augmented_label: str, ground_truth: str) -> float:
         return max(0.0, min(1.0, score))
       except ValueError:
         # If LLM returns non-numeric, fallback or log error.
-        # For robustness, we'll try to extract a number or fall back.
         pass
 
     except Exception as e:
