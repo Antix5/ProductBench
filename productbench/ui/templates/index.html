@@ -7,48 +7,127 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #e2e8f0; }
+        .card { background-color: #1e293b; border: 1px solid #334155; border-radius: 0.75rem; }
+        .table-header { background-color: #334155; color: #f1f5f9; }
+        .table-row:hover { background-color: #334155; transition: background-color 0.2s; }
+        .details-row { display: none; background-color: #0f172a; }
+        .details-row.open { display: table-row; }
+    </style>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>ProductBench Leaderboard</h1>
-            <p class="subtitle">Benchmarking LLMs on Product Knowledge Tasks</p>
+<body class="p-6">
+    <div class="max-w-7xl mx-auto space-y-8">
+        <header class="text-center space-y-2">
+            <h1 class="text-4xl font-bold text-white tracking-tight">ProductBench Leaderboard</h1>
+            <p class="text-slate-400 text-lg">Benchmarking LLMs on Product Knowledge Tasks: Price vs Performance</p>
         </header>
 
-        <div class="card chart-card">
-            <h2>Model Size vs. Performance</h2>
-            <div class="chart-container">
-                <canvas id="performance-chart"></canvas>
+        <!-- Charts Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Pareto Chart -->
+            <div class="card p-6 shadow-xl">
+                <h2 class="text-xl font-semibold mb-4 text-white">Price / Performance Frontier</h2>
+                <div class="h-80 relative w-full">
+                    <canvas id="pareto-chart"></canvas>
+                </div>
+                <p class="text-xs text-slate-500 mt-2 text-center">X: Cost to run benchmark ($) [Lower is better] | Y: Label Augmentation Score [Higher is better]</p>
+            </div>
+
+            <!-- Time Chart -->
+            <div class="card p-6 shadow-xl">
+                <h2 class="text-xl font-semibold mb-4 text-white">Time Taken (Seconds)</h2>
+                <div class="h-80 relative w-full">
+                    <canvas id="time-chart"></canvas>
+                </div>
             </div>
         </div>
 
-        <div class="card table-card">
-            <h2>Detailed Results</h2>
-            <div class="table-responsive">
-                <table>
-                    <thead>
+        <!-- Leaderboard Table -->
+        <div class="card overflow-hidden shadow-xl">
+            <div class="p-6 border-b border-slate-700">
+                <h2 class="text-2xl font-semibold text-white">Detailed Results</h2>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                    <thead class="table-header text-xs uppercase font-medium">
                         <tr>
-                            <th>Model</th>
-                            <th>Params</th>
-                            <th>Label Augmentation Score</th>
-                            <th>Product Reranking Distance</th>
-                            <th>Token Count</th>
-                            <th>Note</th>
+                            <th class="p-4 rounded-tl-lg">Model</th>
+                            <th class="p-4">Params</th>
+                            <th class="p-4">Cost ($)</th>
+                            <th class="p-4">Time (s)</th>
+                            <th class="p-4">Aug Score</th>
+                            <th class="p-4">Rerank Dist</th>
+                            <th class="p-4 rounded-tr-lg">Action</th>
                         </tr>
                     </thead>
-                    <tbody id="leaderboard-body">
+                    <tbody id="leaderboard-body" class="divide-y divide-slate-700">
                         {% for row in leaderboard %}
-                        <tr class="{% if row.note %}skipped{% endif %}">
-                            <td class="model-name">{{ row.model }}</td>
-                            <td><span class="badge params-badge">{{ row.params }}</span></td>
-                            <td>{{ row.label_augmentation_score }}</td>
-                            <td>{{ row.product_reranking_distance }}</td>
-                            <td>{{ row.token_count }}</td>
-                            <td>
+                        <tr class="table-row group">
+                            <td class="p-4 font-medium text-white flex items-center gap-2">
+                                {{ row.model }}
                                 {% if row.note %}
-                                    <span class="badge note-badge">{{ row.note }}</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] bg-red-500/20 text-red-300 border border-red-500/30">{{ row.note }}</span>
                                 {% endif %}
+                            </td>
+                            <td class="p-4 text-slate-300">{{ row.params }}</td>
+                            <td class="p-4 font-mono text-emerald-400">{{ row.actual_cost_str }}</td>
+                            <td class="p-4 font-mono text-blue-400">{{ row.time_taken_str }}</td>
+                            <td class="p-4 font-bold text-white">{{ row.label_augmentation_score }}</td>
+                            <td class="p-4 text-slate-300">{{ row.product_reranking_distance }}</td>
+                            <td class="p-4">
+                                <button onclick="toggleDetails('details-{{ loop.index }}')" class="px-3 py-1 bg-slate-700 hover:bg-slate-600 text-white rounded text-xs transition">
+                                    Inspect
+                                </button>
+                            </td>
+                        </tr>
+                        <!-- Details Row -->
+                        <tr id="details-{{ loop.index }}" class="details-row border-b border-slate-800">
+                            <td colspan="7" class="p-6">
+                                <div class="space-y-4">
+                                    <h3 class="text-lg font-semibold text-white">Detailed Logs for {{ row.model }}</h3>
+
+                                    {% if row.details.label_augmentation %}
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div class="space-y-2">
+                                            <h4 class="font-medium text-blue-400">Sample Label Augmentation</h4>
+                                            {% set sample = row.details.label_augmentation[0] %}
+                                            <div class="bg-slate-900 p-3 rounded border border-slate-700 font-mono text-xs overflow-auto max-h-40">
+                                                <div class="text-slate-500 mb-1">Input:</div>
+                                                <div class="text-white mb-2">{{ sample.input }}</div>
+                                                <div class="text-slate-500 mb-1">Output:</div>
+                                                <div class="text-emerald-400 mb-2">{{ sample.output }}</div>
+                                                <div class="text-slate-500 mb-1">Raw Output:</div>
+                                                <div class="text-slate-400 whitespace-pre-wrap">{{ sample.raw_output }}</div>
+                                                <div class="text-slate-500 mt-2">Score: {{ sample.score }}</div>
+                                            </div>
+                                        </div>
+
+                                        {% if row.details.product_reranking %}
+                                        <div class="space-y-2">
+                                            <h4 class="font-medium text-purple-400">Sample Product Reranking</h4>
+                                            {% set sample_r = row.details.product_reranking[0] %}
+                                            <div class="bg-slate-900 p-3 rounded border border-slate-700 font-mono text-xs overflow-auto max-h-40">
+                                                 <div class="text-slate-500 mb-1">Query:</div>
+                                                <div class="text-white mb-2">{{ sample_r.query }}</div>
+                                                <div class="text-slate-500 mb-1">Reranked Indices:</div>
+                                                <div class="text-emerald-400 mb-2">{{ sample_r.reranked_indices }}</div>
+                                                <div class="text-slate-500 mb-1">Raw Output:</div>
+                                                <div class="text-slate-400 whitespace-pre-wrap">{{ sample_r.raw_output }}</div>
+                                                <div class="text-slate-500 mt-2">Distance: {{ sample_r.distance }}</div>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="text-right">
+                                         <a href="#" onclick="alert('Full JSON logs available in BENCHMARK_RESULTS.json')" class="text-xs text-slate-500 hover:text-white underline">View full logs</a>
+                                    </div>
+                                    {% else %}
+                                    <p class="text-slate-500 italic">No detailed logs available (Task skipped or failed).</p>
+                                    {% endif %}
+                                </div>
                             </td>
                         </tr>
                         {% endfor %}
@@ -58,66 +137,66 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        function toggleDetails(id) {
+            const row = document.getElementById(id);
+            row.classList.toggle('open');
+        }
+
         const leaderboardData = {{ leaderboard | tojson }};
 
-        // Filter out skipped models or models with 0 score for the chart if desired
-        // Or keep them to show they are 0.
-        // Let's filter out those with 0 score to make the chart cleaner, or maybe just plot them.
-        // If note is present (skipped), we probably shouldn't plot them or plot them differently.
+        // --- Prepare Data for Charts ---
+        const validData = leaderboardData.filter(row => !row.note && row.actual_cost >= 0);
 
-        const chartData = leaderboardData
-            .filter(row => row.params_val > 0 && !row.note) // Exclude skipped/error models
-            .map(row => ({
-                x: parseFloat(row.params_val),
-                y: parseFloat(row.label_augmentation_score),
-                label: row.model
-            }));
+        // 1. Pareto Chart (Cost vs Score)
+        // X: Cost (Minimize), Y: Score (Maximize)
+        const paretoData = validData.map(row => ({
+            x: row.actual_cost,
+            y: parseFloat(row.label_augmentation_score),
+            label: row.model
+        }));
 
-        // Calculate Pareto Frontier (maximize Y for minimized X? No, usually Maximize Y for given X)
-        // Here X is Size (smaller is better? or bigger is better?)
-        // Usually we want Max Performance (Y) for Min Size (X).
+        // Sort by Cost (Ascending) for Pareto calculation
+        paretoData.sort((a, b) => a.x - b.x);
 
-        chartData.sort((a, b) => a.x - b.x);
         const paretoFrontier = [];
         let maxPerformance = -1;
 
-        // For pareto frontier of Max Score vs Min Size:
-        // We iterate from smallest size to largest.
-        // If current score > max_so_far, it's on the frontier.
-
-        for (const point of chartData) {
+        // Calculate Frontier: For a given cost, we want the highest score.
+        // We iterate from lowest cost to highest cost.
+        // If the current point has a higher score than the max score seen so far, it is on the frontier.
+        for (const point of paretoData) {
             if (point.y > maxPerformance) {
                 maxPerformance = point.y;
                 paretoFrontier.push(point);
             }
         }
 
-        const ctx = document.getElementById('performance-chart').getContext('2d');
-        new Chart(ctx, {
+        new Chart(document.getElementById('pareto-chart'), {
             type: 'scatter',
             data: {
-                datasets: [{
-                    label: 'Models',
-                    data: chartData,
-                    backgroundColor: 'rgba(59, 130, 246, 0.7)',
-                    borderColor: 'rgba(59, 130, 246, 1)',
-                    pointRadius: 6,
-                    pointHoverRadius: 8,
-                    pointBackgroundColor: 'rgba(59, 130, 246, 1)'
-                }, {
-                    label: 'Pareto Frontier',
-                    data: paretoFrontier,
-                    borderColor: 'rgba(16, 185, 129, 0.8)',
-                    backgroundColor: 'rgba(16, 185, 129, 0.2)',
-                    type: 'line',
-                    showLine: true,
-                    fill: false,
-                    pointRadius: 0,
-                    borderWidth: 2,
-                    tension: 0.1
-                }]
+                datasets: [
+                    {
+                        label: 'Models',
+                        data: paretoData,
+                        backgroundColor: 'rgba(94, 234, 212, 0.6)', // Teal 300
+                        borderColor: 'rgba(94, 234, 212, 1)',
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                    },
+                    {
+                        label: 'Pareto Frontier',
+                        data: paretoFrontier,
+                        borderColor: 'rgba(244, 114, 182, 0.8)', // Pink 400
+                        backgroundColor: 'rgba(244, 114, 182, 0.1)',
+                        type: 'line',
+                        showLine: true,
+                        fill: false,
+                        pointRadius: 0,
+                        borderWidth: 2,
+                        tension: 0.1
+                    }
+                ]
             },
             options: {
                 responsive: true,
@@ -126,65 +205,78 @@
                     x: {
                         type: 'linear',
                         position: 'bottom',
-                        title: {
-                            display: true,
-                            text: 'Model Size (Billions of Parameters)',
-                            font: {
-                                size: 14,
-                                weight: '500',
-                                family: 'Inter'
-                            },
-                            color: '#64748b'
-                        },
-                        grid: {
-                            color: '#f1f5f9'
-                        }
+                        title: { display: true, text: 'Benchmark Cost ($)', color: '#94a3b8' },
+                        grid: { color: '#334155' },
+                        ticks: { color: '#cbd5e1' }
                     },
                     y: {
-                        title: {
-                            display: true,
-                            text: 'Label Augmentation Score',
-                            font: {
-                                size: 14,
-                                weight: '500',
-                                family: 'Inter'
-                            },
-                            color: '#64748b'
-                        },
-                        grid: {
-                            color: '#f1f5f9'
-                        },
-                        min: 0,
-                        max: 1.0
+                        title: { display: true, text: 'Score', color: '#94a3b8' },
+                        grid: { color: '#334155' },
+                        ticks: { color: '#cbd5e1' },
+                        min: 0, max: 1.0
                     }
                 },
                 plugins: {
-                    legend: {
-                        position: 'top',
-                        labels: {
-                            font: {
-                                size: 12,
-                                family: 'Inter'
-                            },
-                            usePointStyle: true
-                        }
-                    },
+                    legend: { labels: { color: '#e2e8f0' } },
                     tooltip: {
-                        backgroundColor: 'rgba(15, 23, 42, 0.9)',
-                        titleFont: { family: 'Inter', size: 13 },
-                        bodyFont: { family: 'Inter', size: 12 },
-                        padding: 10,
-                        cornerRadius: 4,
+                        backgroundColor: '#0f172a',
+                        titleColor: '#e2e8f0',
+                        bodyColor: '#cbd5e1',
+                        borderColor: '#334155',
+                        borderWidth: 1,
                         callbacks: {
                             label: function(context) {
                                 let label = context.dataset.data[context.dataIndex].label || '';
-                                if (label) {
-                                    label += ': ';
-                                }
-                                label += `(${context.parsed.x}B params, Score: ${context.parsed.y})`;
+                                if (label) label += ': ';
+                                label += `Cost $${context.parsed.x.toFixed(6)}, Score: ${context.parsed.y}`;
                                 return label;
                             }
                         }
+                    }
+                }
+            }
+        });
+
+        // 2. Time Chart
+        // Bar chart of time taken per model
+        const timeLabels = validData.map(d => d.model);
+        const timeValues = validData.map(d => d.time_taken);
+
+        new Chart(document.getElementById('time-chart'), {
+            type: 'bar',
+            data: {
+                labels: timeLabels,
+                datasets: [{
+                    label: 'Time Taken (s)',
+                    data: timeValues,
+                    backgroundColor: 'rgba(56, 189, 248, 0.6)', // Sky 400
+                    borderColor: 'rgba(56, 189, 248, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y', // Horizontal bar chart is often better for long names
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Seconds', color: '#94a3b8' },
+                        grid: { color: '#334155' },
+                        ticks: { color: '#cbd5e1' }
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: { color: '#e2e8f0' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#0f172a',
+                        titleColor: '#e2e8f0',
+                        bodyColor: '#cbd5e1',
+                        borderColor: '#334155',
+                        borderWidth: 1
                     }
                 }
             }
