@@ -30,6 +30,16 @@ solved (like the need of the /nothink mention).
 The exception to the non thinking model category is gemini flash 3 which is the
 judge model (clearly specified in the leaderboard).
 
+This benchmark is fully reproducible suign the "benchmark runner" script.
+
+## Limitation
+This benchmark being open source on github, it it possible that that the benchmark will be
+added in future LLM training datasets, which they could overfit onto. Model released before the 4th of January 2026
+should be contamination free.
+
+Gemini 3 Pro has been used to get inspirations for some of the examples, especially in languages like German, Spanish and Polish. All examples of the benchmark have been human picked or adjusted.
+The UI and the benchmark logic have been in part vibe coded.
+
 ## Setup
 
 1. **Clone the repository:**
