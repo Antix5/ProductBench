@@ -39,7 +39,7 @@
     "label": "PAIN MIE COMP. 500G",
     "ground_truth": "Pain de mie à la farine de blé complète",
     "product_type": "food",
-    "shelf_category": "grocery"
+    "shelf_category": "bakery"
   },
   {
     "label": "Eau min. nat. 1.5L",
@@ -50,8 +50,8 @@
   {
     "label": "Crème fraîche épaisse",
     "ground_truth": "Crème fraîche épaisse entière à 30% de matière grasse",
-    "product_type": "cosmetics",
-    "shelf_category": "other"
+    "product_type": "food",
+    "shelf_category": "dairy"
   },
   {
     "label": "SCSSON.PUR.PORC Nos Régions ont du talent 200g",
@@ -69,37 +69,37 @@
     "label": "HLE OLV. VIERGE",
     "ground_truth": "Huile d'olive vierge",
     "product_type": "food",
-    "shelf_category": "other"
+    "shelf_category": "oils_vinegars"
   },
   {
     "label": "CHOCO. NOIR 70% Lindt 100G",
     "ground_truth": "Tablette de chocolat noir à 70% de cacao",
     "product_type": "food",
-    "shelf_category": "candy"
+    "shelf_category": "chocolate"
   },
   {
     "label": "CAFFE MLLU ARABICA 250G",
     "ground_truth": "Café moulu",
     "product_type": "food",
-    "shelf_category": "beverages"
+    "shelf_category": "coffee_tea"
   },
   {
     "label": "THON. NAT. 160G à l'huile d'olive",
     "ground_truth": "Conserve de thon dans de l'huile d'olive",
     "product_type": "food",
-    "shelf_category": "other"
+    "shelf_category": "canned_goods"
   },
   {
     "label": "LENTIL.VRT VRAC",
     "ground_truth": "lentilles vertes sèche",
     "product_type": "food",
-    "shelf_category": "grocery"
+    "shelf_category": "dried_goods"
   },
   {
     "label": "LENTIL.VRT 500G BTE",
     "ground_truth": "lentilles vertes cuites en boites",
     "product_type": "food",
-    "shelf_category": "grocery"
+    "shelf_category": "canned_goods"
   },
   {
     "label": "PENNE RIG. LUSTUC",
