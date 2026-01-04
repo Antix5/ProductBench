@@ -76,7 +76,7 @@ def get_benchmark_results():
     return results
 
 
+app = create_app(get_benchmark_results())
+
 if __name__ == "__main__":
-    leaderboard = get_benchmark_results()
-    app = create_app(leaderboard)
     app.run(port=5001, debug=True)
