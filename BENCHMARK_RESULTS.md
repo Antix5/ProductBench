@@ -1,22 +1,74 @@
 # Benchmark Results
 
-| Model | Params | Total Cost ($) | Label Aug Score | Rerank Dist | Aug Cost/Item ($) | Rerank Cost/Item ($) | Time (s) | Note |
-|---|---|---|---|---|---|---|---|---|
-| Gemini 3 flash (Judge) | Unknown | $0.020054 | 0.7967 | 0.0040 | $0.000206 | $0.000125 | 9.83 | This model is here to see how the judge model self evaluate. |
-| Gemini 2.0 flash | Unknown | $0.003697 | 0.7246 | 0.0042 | $0.000039 | $0.000022 | 7.68 | Google's Gemini 2 Flash model. Reference model |
-| Mistral Large 3 2512 | 675B MOE | $0.018544 | 0.6869 | 0.0040 | $0.000202 | $0.000104 | 12.18 |  |
-| Kimi k2 0905 | 1T | $0.015260 | 0.6770 | 0.0134 | $0.000155 | $0.000097 | 12.80 |  |
-| Gemini 2.5 Flash lite | Unknown | $0.003671 | 0.6656 | 0.0070 | $0.000039 | $0.000022 | 7.16 |  |
-| Mimo V2 Flash | 300B | $0.000000 | 0.6607 | 0.0105 | $0.000000 | $0.000000 | 66.80 |  |
-| Deepseek V3.2 | 600B | $0.008402 | 0.6607 | 0.0005 | $0.000089 | $0.000050 | 23.24 |  |
-| Microsoft Phi-4 | 14B | $0.002055 | 0.6180 | 0.0086 | $0.000022 | $0.000012 | 12.93 |  |
-| Mistral Small 3 | 24B | $0.002049 | 0.5967 | 0.0066 | $0.000027 | $0.000006 | 17.03 |  |
-| Ministral 8B 2512 | 14B | $0.005023 | 0.5541 | 0.0463 | $0.000057 | $0.000026 | 7.82 |  |
-| Mistral Nemo 12B | 12B | $0.000700 | 0.5443 | 0.0456 | $0.000008 | $0.000004 | 11.78 |  |
-| Cohere Command R7B | 7B | $0.001564 | 0.5262 | 0.0288 | $0.000014 | $0.000012 | 8.82 |  |
-| Amazon Nova Micro 1.0 | Unknown (Micro) | $0.001286 | 0.5230 | 0.0274 | $0.000014 | $0.000008 | 9.06 |  |
-| Ministral 14B 2512 | 14B | $0.006734 | 0.5016 | 0.0456 | $0.000076 | $0.000035 | 5.61 |  |
-| Google Gemma 3 12B Instruct | 12B | $0.001136 | 0.4705 | 0.0144 | $0.000012 | $0.000007 | 9.16 |  |
-| Ministral 3B 2512 | 14B | $0.003346 | 0.4672 | 0.0243 | $0.000038 | $0.000017 | 6.41 |  |
-| Google Gemma 3 4B Instruct | 4B | $0.000651 | 0.4361 | 0.0330 | $0.000007 | $0.000004 | 7.34 |  |
-| Mistral Ministral 3B | 3B | $0.001324 | 0.3672 | 0.0640 | $0.000015 | $0.000007 | 7.16 |  |
+## Methodology & Nuances
+
+This benchmark focuses on evaluating models for product RAG and recommendation
+systems, specifically testing domain language and noisy label understanding. For
+a detailed explanation, please refer to the
+[Methodology section in the README](README.md#methodology).
+
+**Important Nuances:**
+
+- **Qwen 3:** Excluded for now due to unreliable behavior (requires specific
+  prompts like `/nothink` to work, which is hard to benchmark consistently).
+  Will be reintroduced once fixed.
+- **Gemini Flash 3:** Included as the **Judge** model. It is the only "thinking"
+  model in this specific list, used for evaluation purposes rather than
+  latency-sensitive inference.
+
+| Model                       | Scenario       | Params          | Total Cost ($) | Label Aug Score | Rerank Dist | Aug Cost/Item ($) | Rerank Cost/Item ($) | Time (s) | Note                                                         |
+| --------------------------- | -------------- | --------------- | -------------- | --------------- | ----------- | ----------------- | -------------------- | -------- | ------------------------------------------------------------ |
+| Gemini 3 flash (Judge)      | shelf_category | Unknown         | $0.035598      | 0.9121          | 0.0040      | $0.000212         | $0.000127            | 29.30    | This model is here to see how the judge model self evaluate. |
+| Kimi k2 0905                | shelf_category | 1T              | $0.026492      | 0.8273          | 0.0079      | $0.000160         | $0.000090            | 33.48    |                                                              |
+| Gemini 2.0 flash            | shelf_category | Unknown         | $0.006546      | 0.8227          | 0.0046      | $0.000039         | $0.000022            | 12.45    | Google's Gemini 2 Flash model. Reference model               |
+| Gemini 2.5 Flash lite       | shelf_category | Unknown         | $0.006563      | 0.7924          | 0.0070      | $0.000040         | $0.000022            | 10.15    |                                                              |
+| Mistral Large 3 2512        | shelf_category | 675B MOE        | $0.033750      | 0.7780          | 0.0040      | $0.000207         | $0.000106            | 17.09    |                                                              |
+| Deepseek V3.2               | shelf_category | 600B            | $0.014742      | 0.7773          | 0.0019      | $0.000090         | $0.000047            | 26.18    |                                                              |
+| Mimo V2 Flash               | shelf_category | 300B            | $0.000000      | 0.7114          | 0.0066      | $0.000000         | $0.000000            | 46.57    |                                                              |
+| Google Gemma 3 12B Instruct | shelf_category | 12B             | $0.002012      | 0.6508          | 0.0088      | $0.000012         | $0.000007            | 13.94    |                                                              |
+| Mistral Small 3             | shelf_category | 24B             | $0.002732      | 0.6258          | 0.0079      | $0.000018         | $0.000007            | 18.81    |                                                              |
+| Ministral 14B 2512          | shelf_category | 14B             | $0.012418      | 0.6053          | 0.0300      | $0.000078         | $0.000036            | 12.69    |                                                              |
+| Microsoft Phi-4             | shelf_category | 14B             | $0.003690      | 0.5917          | 0.0079      | $0.000022         | $0.000012            | 14.07    |                                                              |
+| Ministral 8B 2512           | shelf_category | 14B             | $0.009298      | 0.5818          | 0.0340      | $0.000058         | $0.000027            | 11.14    |                                                              |
+| Amazon Nova Micro 1.0       | shelf_category | Unknown (Micro) | $0.002322      | 0.5803          | 0.0264      | $0.000014         | $0.000008            | 13.18    |                                                              |
+| Cohere Command R7B          | shelf_category | 7B              | $0.002622      | 0.5500          | 0.0275      | $0.000015         | $0.000012            | 12.54    |                                                              |
+| Mistral Nemo 12B            | shelf_category | 12B             | $0.001272      | 0.5417          | 0.0222      | $0.000008         | $0.000004            | 15.96    |                                                              |
+| Ministral 3B 2512           | shelf_category | 14B             | $0.006152      | 0.5189          | 0.0364      | $0.000039         | $0.000018            | 11.76    |                                                              |
+| Google Gemma 3 4B Instruct  | shelf_category | 4B              | $0.001157      | 0.4886          | 0.0364      | $0.000007         | $0.000004            | 11.80    |                                                              |
+| Mistral Ministral 3B        | shelf_category | 3B              | $0.002440      | 0.4394          | 0.0558      | $0.000015         | $0.000007            | 9.03     |                                                              |
+| Gemini 3 flash (Judge)      | product_type   | Unknown         | $0.035574      | 0.8818          | 0.0027      | $0.000212         | $0.000127            | 15.38    | This model is here to see how the judge model self evaluate. |
+| Gemini 2.0 flash            | product_type   | Unknown         | $0.006554      | 0.8129          | 0.0090      | $0.000040         | $0.000022            | 14.01    | Google's Gemini 2 Flash model. Reference model               |
+| Kimi k2 0905                | product_type   | 1T              | $0.026771      | 0.7568          | 0.0079      | $0.000158         | $0.000098            | 23.10    |                                                              |
+| Gemini 2.5 Flash lite       | product_type   | Unknown         | $0.006567      | 0.7273          | 0.0070      | $0.000040         | $0.000022            | 10.69    |                                                              |
+| Mistral Large 3 2512        | product_type   | 675B MOE        | $0.033724      | 0.7144          | 0.0067      | $0.000207         | $0.000106            | 16.22    |                                                              |
+| Deepseek V3.2               | product_type   | 600B            | $0.014710      | 0.6909          | 0.0032      | $0.000090         | $0.000047            | 25.65    |                                                              |
+| Mimo V2 Flash               | product_type   | 300B            | $0.000000      | 0.6258          | 0.0114      | $0.000000         | $0.000000            | 48.90    |                                                              |
+| Google Gemma 3 12B Instruct | product_type   | 12B             | $0.002016      | 0.5659          | 0.0144      | $0.000012         | $0.000007            | 14.86    |                                                              |
+| Mistral Small 3             | product_type   | 24B             | $0.002985      | 0.5561          | 0.0093      | $0.000020         | $0.000007            | 20.62    |                                                              |
+| Mistral Nemo 12B            | product_type   | 12B             | $0.001271      | 0.5417          | 0.0301      | $0.000008         | $0.000004            | 13.87    |                                                              |
+| Ministral 8B 2512           | product_type   | 14B             | $0.009284      | 0.5174          | 0.0289      | $0.000058         | $0.000027            | 9.86     |                                                              |
+| Cohere Command R7B          | product_type   | 7B              | $0.002671      | 0.5068          | 0.0295      | $0.000015         | $0.000012            | 13.31    |                                                              |
+| Amazon Nova Micro 1.0       | product_type   | Unknown (Micro) | $0.002312      | 0.5053          | 0.0303      | $0.000014         | $0.000008            | 15.76    |                                                              |
+| Microsoft Phi-4             | product_type   | 14B             | $0.003687      | 0.4992          | 0.0086      | $0.000022         | $0.000013            | 16.42    |                                                              |
+| Ministral 14B 2512          | product_type   | 14B             | $0.012369      | 0.4674          | 0.0243      | $0.000077         | $0.000036            | 11.09    |                                                              |
+| Google Gemma 3 4B Instruct  | product_type   | 4B              | $0.001156      | 0.4030          | 0.0396      | $0.000007         | $0.000004            | 11.97    |                                                              |
+| Mistral Ministral 3B        | product_type   | 3B              | $0.002439      | 0.3720          | 0.0714      | $0.000015         | $0.000007            | 13.83    |                                                              |
+| Ministral 3B 2512           | product_type   | 14B             | $0.006149      | 0.3621          | 0.0328      | $0.000039         | $0.000018            | 11.45    |                                                              |
+| Gemini 3 flash (Judge)      | base           | Unknown         | $0.035058      | 0.8750          | 0.0040      | $0.000209         | $0.000125            | 15.87    | This model is here to see how the judge model self evaluate. |
+| Gemini 2.0 flash            | base           | Unknown         | $0.006484      | 0.7356          | 0.0042      | $0.000039         | $0.000022            | 12.19    | Google's Gemini 2 Flash model. Reference model               |
+| Kimi k2 0905                | base           | 1T              | $0.026040      | 0.6856          | 0.0114      | $0.000155         | $0.000093            | 18.80    |                                                              |
+| Mistral Large 3 2512        | base           | 675B MOE        | $0.033118      | 0.6629          | 0.0046      | $0.000204         | $0.000104            | 18.81    |                                                              |
+| Deepseek V3.2               | base           | 600B            | $0.014517      | 0.6576          | 0.0019      | $0.000089         | $0.000046            | 28.34    |                                                              |
+| Gemini 2.5 Flash lite       | base           | Unknown         | $0.006451      | 0.6439          | 0.0070      | $0.000039         | $0.000022            | 10.57    |                                                              |
+| Mimo V2 Flash               | base           | 300B            | $0.000000      | 0.5818          | 0.0105      | $0.000000         | $0.000000            | 72.23    |                                                              |
+| Mistral Small 3             | base           | 24B             | $0.003581      | 0.4992          | 0.0066      | $0.000024         | $0.000006            | 27.45    |                                                              |
+| Microsoft Phi-4             | base           | 14B             | $0.003621      | 0.4364          | 0.0086      | $0.000022         | $0.000012            | 14.61    |                                                              |
+| Amazon Nova Micro 1.0       | base           | Unknown (Micro) | $0.002265      | 0.4265          | 0.0287      | $0.000014         | $0.000008            | 13.64    |                                                              |
+| Google Gemma 3 12B Instruct | base           | 12B             | $0.001978      | 0.4212          | 0.0130      | $0.000012         | $0.000007            | 15.78    |                                                              |
+| Mistral Nemo 12B            | base           | 12B             | $0.001256      | 0.4182          | 0.0456      | $0.000008         | $0.000004            | 17.20    |                                                              |
+| Ministral 8B 2512           | base           | 14B             | $0.009110      | 0.4038          | 0.0350      | $0.000057         | $0.000026            | 10.45    |                                                              |
+| Ministral 14B 2512          | base           | 14B             | $0.012180      | 0.3841          | 0.0456      | $0.000076         | $0.000035            | 9.56     |                                                              |
+| Cohere Command R7B          | base           | 7B              | $0.002604      | 0.3720          | 0.0288      | $0.000014         | $0.000012            | 12.99    |                                                              |
+| Google Gemma 3 4B Instruct  | base           | 4B              | $0.001146      | 0.3477          | 0.0317      | $0.000007         | $0.000004            | 11.74    |                                                              |
+| Ministral 3B 2512           | base           | 14B             | $0.006044      | 0.2977          | 0.0250      | $0.000038         | $0.000017            | 11.91    |                                                              |
+| Mistral Ministral 3B        | base           | 3B              | $0.002396      | 0.2545          | 0.0590      | $0.000015         | $0.000007            | 9.25     |                                                              |

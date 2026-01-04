@@ -1,24 +1,47 @@
 # ProductBench: LLM Benchmark for Product Knowledge
 
-ProductBench is a benchmark designed to evaluate the product knowledge of Large Language Models (LLMs). It consists of two main tasks:
+ProductBench is a benchmark designed to evaluate the product knowledge of Large
+Language Models (LLMs). It consists of two main tasks:
 
-*   **Label Augmentation:** The LLM is given a condensed or ambiguous product label and must output a clear, human-readable label.
-*   **Product Re-ranking:** The LLM is given a search query and a list of potential product matches, and it must re-rank the products from most to least relevant.
+- **Label Augmentation:** The LLM is given a condensed or ambiguous product
+  label and must output a clear, human-readable label.
+- **Product Re-ranking:** The LLM is given a search query and a list of
+  potential product matches, and it must re-rank the products from most to least
+  relevant.
 
-The project also includes a web-based UI with a leaderboard to visualize the results and a price-to-performance graph.
+The project also includes a web-based UI with a leaderboard to visualize the
+results and a price-to-performance graph.
+
+## Methodology
+
+The goal of this benchmark is to estimate which model would be the most relevant
+for a product RAG system like a recommendation system, and measure both domain
+specific language as well as the ability to understand noisy labels (corrupted
+text, with brands...).
+
+The models currently evaluated are mostly non-thinking ones because they are the
+one where the latency is the smallest.
+
+Qwen 3 model have been tested in a previous iterations of the benchmark but has
+a weird behaviour (unreliable to benchmark), they have therefore been discarded
+for the time being and will certainly be reintroduced when the quirks have been
+solved (like the need of the /nothink mention).
+
+The exception to the non thinking model category is gemini flash 3 which is the
+judge model (clearly specified in the leaderboard).
 
 ## Setup
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/your-username/productbench.git
-    cd productbench
-    ```
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/productbench.git
+   cd productbench
+   ```
 
-2.  **Install the required dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
+2. **Install the required dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 ## Usage
 
@@ -32,13 +55,14 @@ The application will be available at `http://127.0.0.1:5001`.
 
 ## Project Structure
 
-*   `main.py`: The main entry point for running the benchmarks and launching the UI.
-*   `requirements.txt`: The list of Python dependencies.
-*   `productbench/`: The main project directory.
-    *   `data/`: Contains the JSON data for the benchmarks.
-    *   `label_augmentation/`: The logic for the label augmentation task.
-    *   `product_reranking/`: The logic for the product re-ranking task.
-    *   `ui/`: The Flask web application for the leaderboard.
-        *   `app.py`: The Flask application factory.
-        *   `static/`: CSS and JavaScript files.
-        *   `templates/`: HTML templates.
+- `main.py`: The main entry point for running the benchmarks and launching the
+  UI.
+- `requirements.txt`: The list of Python dependencies.
+- `productbench/`: The main project directory.
+  - `data/`: Contains the JSON data for the benchmarks.
+  - `label_augmentation/`: The logic for the label augmentation task.
+  - `product_reranking/`: The logic for the product re-ranking task.
+  - `ui/`: The Flask web application for the leaderboard.
+    - `app.py`: The Flask application factory.
+    - `static/`: CSS and JavaScript files.
+    - `templates/`: HTML templates.

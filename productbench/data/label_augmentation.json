@@ -24,6 +24,12 @@
     "shelf_category": "fruits/vegetables"
   },
   {
+    "label": "Jambon LA VIE 120G",
+    "ground_truth": "Jambon végétal",
+    "product_type": "food",
+    "shelf_category": "meat alternatives"
+  },
+  {
     "label": "HDMI 2.0 ultraspeed / RAYON:MULTIMEDIA",
     "ground_truth": "Câble HDMI haute vitesse",
     "product_type": "non_food",
@@ -364,5 +370,425 @@
     "ground_truth": "Chaussures baskets",
     "product_type": "non_food",
     "shelf_category": "clothing"
+  },
+  {
+    "label": "Pampers Ultra douces",
+    "ground_truth": "Couches pour bébé",
+    "product_type": "non_food",
+    "shelf_category": "baby products"
+  },
+  {
+    "label": "GEL DCH VANILLE 250ml",
+    "ground_truth": "Gel douche corps et cheveux parfum vanille",
+    "product_type": "cosmetics",
+    "shelf_category": "hygiene"
+  },
+  {
+    "label": "TERRINE LAPIN CHAT 400g",
+    "ground_truth": "Pâtée pour chat au lapin",
+    "product_type": "non_food",
+    "shelf_category": "pets"
+  },
+  {
+    "label": "JUS SOJA CALCIUM 1L",
+    "ground_truth": "Boisson végétale au soja enrichie en calcium",
+    "product_type": "food",
+    "shelf_category": "dairy_alternatives"
+  },
+  {
+    "label": "EAU JAVEL 2L C+. LACROIX",
+    "ground_truth": "Eau de Javel désinfectant ménager",
+    "product_type": "non_food",
+    "shelf_category": "household"
+  },
+  {
+    "label": "TOURTEL TWIST CITRON 6x27,5",
+    "ground_truth": "Bière sans alcool au jus de citron",
+    "product_type": "food",
+    "shelf_category": "beverages"
+  },
+  {
+    "label": "LITIERE SILICE 3.8L",
+    "ground_truth": "Litière minérale absorbante pour chat",
+    "product_type": "non_food",
+    "shelf_category": "pets"
+  },
+  {
+    "label": "PQ 6RLX DBL EP. LOTUS",
+    "ground_truth": "Papier toilette double épaisseur",
+    "product_type": "non_food",
+    "shelf_category": "hygiene"
+  },
+  {
+    "label": "LAIT AMANDE INTENSE",
+    "ground_truth": "Boisson à l'amande (lait d'amande)",
+    "product_type": "food",
+    "shelf_category": "dairy_alternatives"
+  },
+  {
+    "label": "ALCOOL MENAG. 90 SUPERIEUR",
+    "ground_truth": "Alcool ménager pour nettoyage (non alimentaire)",
+    "product_type": "non_food",
+    "shelf_category": "household"
+  },
+  {
+    "label": "PT POT P.TERRE/EPINARD 6M",
+    "ground_truth": "Petit pot pour bébé pomme de terre épinards (dès 6 mois)",
+    "product_type": "food",
+    "shelf_category": "baby"
+  },
+  {
+    "label": "COUCHE PAMP. T3 X56",
+    "ground_truth": "Couches pour bébé taille 3",
+    "product_type": "non_food",
+    "shelf_category": "baby"
+  },
+  {
+    "label": "ROYAL C. BOEUF 4KG",
+    "ground_truth": "Croquettes sèches pour chien au boeuf",
+    "product_type": "non_food",
+    "shelf_category": "pets"
+  },
+  {
+    "label": "DEO H. AERO BRUT 200",
+    "ground_truth": "Déodorant homme spray",
+    "product_type": "cosmetics",
+    "shelf_category": "hygiene"
+  },
+  {
+    "label": "TAB LAVE VSL X30 SUN",
+    "ground_truth": "Tablettes pour lave-vaisselle",
+    "product_type": "non_food",
+    "shelf_category": "household"
+  },
+  {
+    "label": "ESSUIE TT RLX X2",
+    "ground_truth": "Rouleaux d'essuie-tout",
+    "product_type": "non_food",
+    "shelf_category": "household"
+  },
+  {
+    "label": "CANARD WC STOP ODEUR",
+    "ground_truth": "Gel nettoyant pour toilettes (Marque Canard)",
+    "product_type": "non_food",
+    "shelf_category": "household"
+  },
+  {
+    "label": "LESSIVE LE CHAT LILAS",
+    "ground_truth": "Lessive liquide pour vêtements",
+    "product_type": "non_food",
+    "shelf_category": "household"
+  },
+  {
+    "label": "PT MARSEIL. LAIT AMANDE",
+    "ground_truth": "Gel douche Le Petit Marseillais au lait d'amande",
+    "product_type": "cosmetics",
+    "shelf_category": "hygiene"
+  },
+  {
+    "label": "1664 BLANC 6X25",
+    "ground_truth": "Bière blanche 1664 (Kronenbourg)",
+    "product_type": "food",
+    "shelf_category": "beverages_alcohol"
+  },
+  {
+    "label": "PAIC CITRON 750ML",
+    "ground_truth": "Liquide vaisselle",
+    "product_type": "non_food",
+    "shelf_category": "household"
+  },
+  {
+    "label": "SOPALIN DECOR",
+    "ground_truth": "Essuie-tout (Papier absorbant)",
+    "product_type": "non_food",
+    "shelf_category": "household"
+  },
+  {
+    "label": "LABEL 5 70CL 40D",
+    "ground_truth": "Whisky blended",
+    "product_type": "food",
+    "shelf_category": "beverages_alcohol"
+  },
+  {
+    "label": "FEUILLE DE CHENE",
+    "ground_truth": "Salade (laitue variété Feuille de Chêne)",
+    "product_type": "food",
+    "shelf_category": "fruits/vegetables"
+  },
+  {
+    "label": "PRESIDENT DOUX PLAQUE",
+    "ground_truth": "Beurre doux (Marque Président)",
+    "product_type": "food",
+    "shelf_category": "dairy"
+  },
+  {
+    "label": "CRISTALINE 1.5L X6",
+    "ground_truth": "Eau de source",
+    "product_type": "food",
+    "shelf_category": "beverages"
+  },
+  {
+    "label": "BN FRAISE X16",
+    "ground_truth": "Biscuits fourrés à la fraise (Biscuiterie Nantaise)",
+    "product_type": "food",
+    "shelf_category": "biscuits_cakes"
+  },
+  {
+    "label": "BOULE QUIES CIRE",
+    "ground_truth": "Protections auditives (Boules Quies)",
+    "product_type": "non_food",
+    "shelf_category": "health"
+  },
+  {
+    "label": "8.6 ORIGINAL 50CL",
+    "ground_truth": "Bière forte (Bavaria 8.6)",
+    "product_type": "food",
+    "shelf_category": "beverages_alcohol"
+  },
+  {
+    "label": "POIRE WILLIAMS 45D",
+    "ground_truth": "Eau de vie de poire (Alcool)",
+    "product_type": "food",
+    "shelf_category": "beverages_alcohol"
+  },
+  {
+    "label": "MICHOKO PAQUET",
+    "ground_truth": "Bonbons caramel et chocolat noir",
+    "product_type": "food",
+    "shelf_category": "candy"
+  },
+  {
+    "label": "PETIT POT JARDINIERE 8M",
+    "ground_truth": "Repas bébé légumes (dès 8 mois)",
+    "product_type": "food",
+    "shelf_category": "baby"
+  },
+  {
+    "label": "CANARD ENCHAINE",
+    "ground_truth": "Journal hebdomadaire satirique",
+    "product_type": "non_food",
+    "shelf_category": "press"
+  },
+  {
+    "label": "DOG CHOW ADULT",
+    "ground_truth": "Croquettes pour chien",
+    "product_type": "non_food",
+    "shelf_category": "pets"
+  },
+  {
+    "label": "FILET DE HARENG SAUR",
+    "ground_truth": "Poisson fumé (Hareng)",
+    "product_type": "food",
+    "shelf_category": "fish_seafood"
+  },
+  {
+    "label": "CLAUSE GAZON RUSTIQUE",
+    "ground_truth": "Semences de pelouse (Jardinage)",
+    "product_type": "non_food",
+    "shelf_category": "garden"
+  },
+  {
+    "label": "BOUNTY SELECT-A-SIZE 6RL",
+    "ground_truth": "Essuie-tout (Papier absorbant)",
+    "product_type": "non_food",
+    "shelf_category": "household"
+  },
+  {
+    "label": "TIDE PODS SPRING MEADOW",
+    "ground_truth": "Capsules de lessive liquide",
+    "product_type": "non_food",
+    "shelf_category": "household"
+  },
+  {
+    "label": "ROBINSONS ORANGE SQUASH",
+    "ground_truth": "Sirop à diluer à l'orange",
+    "product_type": "food",
+    "shelf_category": "beverages"
+  },
+  {
+    "label": "DOVE WHITE BEAUTY BAR",
+    "ground_truth": "Savon solide",
+    "product_type": "cosmetics",
+    "shelf_category": "hygiene"
+  },
+  {
+    "label": "PLANTERS MIXED NUTS",
+    "ground_truth": "Mélange de noix (Cacahuètes, cajou...)",
+    "product_type": "food",
+    "shelf_category": "snacks"
+  },
+  {
+    "label": "FAIRY ORIGINAL 433ML",
+    "ground_truth": "Liquide vaisselle",
+    "product_type": "non_food",
+    "shelf_category": "household"
+  },
+  {
+    "label": "V8 ORIG 100% VEG",
+    "ground_truth": "Jus de légumes",
+    "product_type": "food",
+    "shelf_category": "beverages"
+  },
+  {
+    "label": "MCVITIES DIGESTIVES",
+    "ground_truth": "Biscuits sablés",
+    "product_type": "food",
+    "shelf_category": "biscuits_cakes"
+  },
+  {
+    "label": "PAM ORIGINAL SPRAY",
+    "ground_truth": "Huile de cuisson en spray",
+    "product_type": "food",
+    "shelf_category": "oils_vinegars"
+  },
+  {
+    "label": "LADYFINGERS PACK",
+    "ground_truth": "Biscuits cuillère / Boudoirs",
+    "product_type": "food",
+    "shelf_category": "baking"
+  },
+  {
+    "label": "MAGNUM CLASSIC X4",
+    "ground_truth": "Bâtonnets de glace enrobés de chocolat",
+    "product_type": "food",
+    "shelf_category": "frozen_foods"
+  },
+  {
+    "label": "DRANO MAX GEL",
+    "ground_truth": "Déboucheur de canalisations",
+    "product_type": "non_food",
+    "shelf_category": "household"
+  },
+  {
+    "label": "HALF & HALF 1QT",
+    "ground_truth": "Mélange lait et crème pour café",
+    "product_type": "food",
+    "shelf_category": "dairy"
+  },
+  {
+    "label": "AJAX FÊTE DES FLEURS",
+    "ground_truth": "Nettoyant sol liquide",
+    "product_type": "non_food",
+    "shelf_category": "household"
+  },
+  {
+    "label": "BIRDS EYE FISH FINGERS",
+    "ground_truth": "Bâtonnets de poisson pané",
+    "product_type": "food",
+    "shelf_category": "frozen_foods"
+  },
+  {
+    "label": "VANDAL RATTEN GIFT 200G",
+    "ground_truth": "Poison pour rats (Raticide)",
+    "product_type": "non_food",
+    "shelf_category": "household"
+  },
+  {
+    "label": "TEMPO BOX 80X",
+    "ground_truth": "Mouchoirs en papier",
+    "product_type": "non_food",
+    "shelf_category": "hygiene"
+  },
+  {
+    "label": "PAULANER SPEZI 0.5L",
+    "ground_truth": "Soda mélange Cola et Orange",
+    "product_type": "food",
+    "shelf_category": "beverages"
+  },
+  {
+    "label": "HANDY HULLE IPHONE 13",
+    "ground_truth": "Coque de protection pour téléphone portable",
+    "product_type": "non_food",
+    "shelf_category": "electronics"
+  },
+  {
+    "label": "MAGER QUARK 500G",
+    "ground_truth": "Fromage blanc maigre",
+    "product_type": "food",
+    "shelf_category": "dairy"
+  },
+  {
+    "label": "MEISTER PROPER BAD",
+    "ground_truth": "Spray nettoyant salle de bain",
+    "product_type": "non_food",
+    "shelf_category": "household"
+  },
+  {
+    "label": "JABON ZOTE ROSA",
+    "ground_truth": "Savon de lessive en barre",
+    "product_type": "non_food",
+    "shelf_category": "household"
+  },
+  {
+    "label": "FABULOSO LAVANDA 1L",
+    "ground_truth": "Nettoyant pour sols parfumé",
+    "product_type": "non_food",
+    "shelf_category": "household"
+  },
+  {
+    "label": "PELON PELO RICO",
+    "ground_truth": "Bonbon pâte de tamarin",
+    "product_type": "food",
+    "shelf_category": "candy"
+  },
+  {
+    "label": "SUAVITEL MOMENTOS",
+    "ground_truth": "Adoucissant pour le linge",
+    "product_type": "non_food",
+    "shelf_category": "household"
+  },
+  {
+    "label": "TAJIN CLASICO 142G",
+    "ground_truth": "Mélange d'épices",
+    "product_type": "food",
+    "shelf_category": "spices"
+  },
+  {
+    "label": "KRET GRANULKI 500G",
+    "ground_truth": "Déboucheur de canalisations",
+    "product_type": "non_food",
+    "shelf_category": "household"
+  },
+  {
+    "label": "PTASIE MLECZKO WANILIA",
+    "ground_truth": "Bonbon guimauve enrobée de chocolat",
+    "product_type": "food",
+    "shelf_category": "candy"
+  },
+  {
+    "label": "LUDWIK PLYN MIETA",
+    "ground_truth": "Liquide vaisselle",
+    "product_type": "non_food",
+    "shelf_category": "household"
+  },
+  {
+    "label": "TYMBARK JABLKO MIETA",
+    "ground_truth": "Boisson aux fruits (Pomme et Menthe)",
+    "product_type": "food",
+    "shelf_category": "beverages"
+  },
+  {
+    "label": "ZUBROWKA BISON GRASS",
+    "ground_truth": "Vodka",
+    "product_type": "food",
+    "shelf_category": "beverages_alcohol"
+  },
+  {
+    "label": "KUBUŚ MUS 100G",
+    "ground_truth": "Purée de fruits pour bébé",
+    "product_type": "food",
+    "shelf_category": "baby"
+  },
+  {
+    "label": "KNORR FIX GULASCH",
+    "ground_truth": "Mélange d'épices pour goulash",
+    "product_type": "food",
+    "shelf_category": "spices"
+  },
+  {
+    "label": "WC ENTE FLUSSIG",
+    "ground_truth": "Gel nettoyant WC",
+    "product_type": "non_food",
+    "shelf_category": "household"
   }
 ]
