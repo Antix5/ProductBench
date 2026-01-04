@@ -519,6 +519,22 @@ async def run_benchmarks_async():
     print(f"Using evaluation model: {EVAL_MODEL}")
     print(f"Concurrency Limit: {CONCURRENCY_LIMIT}")
 
+    # Load existing results if available
+    try:
+        with open("BENCHMARK_RESULTS.json", "r") as f:
+            existing_results = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        existing_results = []
+
+    # Map existing results by (model_id, scenario) for easy lookup/update
+    # Note: Using model_id (OpenRouter ID) as unique key + scenario
+    results_map = {}
+    for res in existing_results:
+        # Backward compatibility for old results without scenario
+        scen = res.get("scenario", "base")
+        key = (res.get("id"), scen)
+        results_map[key] = res
+
     # Load data once
     label_data = load_label_data("productbench/data/label_augmentation.json")
     rerank_data = load_rerank_data("productbench/data/product_reranking.json")
@@ -692,27 +708,41 @@ async def run_benchmarks_async():
                 )
             continue
 
+            # Add or update result in map
+            # We treat the new 'results' list as the fresh batch, so we need to merge it back to results_map
+            # But wait, 'results' list contains the just-executed stuff.
+            pass  # Logic handled below
+
+    # Merge fresh results into the persistent map
+    for res in results:
+        key = (res["id"], res["scenario"])
+        results_map[key] = res
+
+    # Convert map back to list
+    final_results = list(results_map.values())
+
     # Sort results
-    results.sort(key=lambda x: (x["scenario"], x["aug_score"]), reverse=True)
+    final_results.sort(key=lambda x: (x.get("scenario", "base"), x.get("aug_score", 0)), reverse=True)
 
     # Generate Markdown Report
     markdown_output = "# Benchmark Results\n\n"
     markdown_output += "| Model | Scenario | Params | Total Cost ($) | Label Aug Score | Rerank Dist | Aug Cost/Item ($) | Rerank Cost/Item ($) | Time (s) | Note |\n"
     markdown_output += "|---|---|---|---|---|---|---|---|---|---|\n"
 
-    for res in results:
+    for res in final_results:
         note = res.get("note", "")
-        markdown_output += f"| {res['model']} | {res['scenario']} | {res['params']} | ${res['actual_cost']:.6f} | {res['aug_score']:.4f} | {res['rerank_dist']:.4f} | ${res['avg_aug_cost']:.6f} | ${res['avg_rerank_cost']:.6f} | {res['time_taken']:.2f} | {note} |\n"
+        scen = res.get("scenario", "base")
+        markdown_output += f"| {res['model']} | {scen} | {res['params']} | ${res.get('actual_cost', 0):.6f} | {res.get('aug_score', 0):.4f} | {res.get('rerank_dist', 0):.4f} | ${res.get('avg_aug_cost', 0):.6f} | ${res.get('avg_rerank_cost', 0):.6f} | {res.get('time_taken', 0):.2f} | {note} |\n"
 
     with open("BENCHMARK_RESULTS.md", "w") as f:
         f.write(markdown_output)
 
     # Save JSON Report
     with open("BENCHMARK_RESULTS.json", "w") as f:
-        json.dump(results, f, indent=4)
+        json.dump(final_results, f, indent=4)
 
     print(
-        "\nBenchmark completed. Results saved to BENCHMARK_RESULTS.md and BENCHMARK_RESULTS.json"
+        "\nBenchmark completed. Results merged and saved to BENCHMARK_RESULTS.md and BENCHMARK_RESULTS.json"
     )
 
 
