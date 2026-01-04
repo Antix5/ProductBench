@@ -22,6 +22,7 @@ def get_benchmark_results():
     for item in data:
         # Normalize fields for the UI
         model = item.get("model", "Unknown")
+        # Handle missing scenario field (backward compatibility)
         scenario = item.get("scenario", "base")
         params_str = item.get("params", "?")
 
