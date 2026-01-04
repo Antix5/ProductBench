@@ -105,13 +105,13 @@
     "label": "PENNE RIG. LUSTUC",
     "ground_truth": "Pâtes alimentaires de semoule de blé dur de forme penne",
     "product_type": "food",
-    "shelf_category": "grocery"
+    "shelf_category": "pasta"
   },
   {
     "label": "MEL di fiore",
     "ground_truth": "Miel",
     "product_type": "food",
-    "shelf_category": "other"
+    "shelf_category": "honey_jams"
   },
   {
     "label": "Vinaigre VINO ROSSO",
@@ -123,25 +123,25 @@
     "label": "Moutarde de Dijon",
     "ground_truth": "Moutarde de Dijon",
     "product_type": "food",
-    "shelf_category": "other"
+    "shelf_category": "condiments"
   },
   {
     "label": "BALEINE IODE",
     "ground_truth": "Sel fin de table iodé",
     "product_type": "food",
-    "shelf_category": "other"
+    "shelf_category": "spices"
   },
   {
     "label": "Poivre noir de kampot moulu",
     "ground_truth": "Poivre noir moulu",
     "product_type": "food",
-    "shelf_category": "other"
+    "shelf_category": "spices"
   },
   {
     "label": "HRB PROVENCE",
     "ground_truth": "Mélange d'herbes aromatiques de Provence",
     "product_type": "food",
-    "shelf_category": "other"
+    "shelf_category": "spices"
   },
   {
     "label": "Oignons jaunes",
@@ -213,37 +213,37 @@
     "label": "Farine",
     "ground_truth": "Farine de blé type T55",
     "product_type": "food",
-    "shelf_category": "grocery"
+    "shelf_category": "baking"
   },
   {
     "label": "Sucre",
     "ground_truth": "Sucre en poudre blanc",
     "product_type": "food",
-    "shelf_category": "grocery"
+    "shelf_category": "baking"
   },
   {
     "label": "Levure chimique",
     "ground_truth": "Levure chimique",
     "product_type": "food",
-    "shelf_category": "other"
+    "shelf_category": "baking"
   },
   {
     "label": "Papier hygienique",
     "ground_truth": "Papier toilette",
     "product_type": "non_food",
-    "shelf_category": "other"
+    "shelf_category": "hygiene"
   },
   {
     "label": "Liquide vaisselle citr. 500ml",
     "ground_truth": "Liquide vaisselle",
-    "product_type": "food",
+    "product_type": "non_food",
     "shelf_category": "household"
   },
   {
     "label": "ALU. ALIM 2M",
     "ground_truth": "Papier aluminium",
     "product_type": "non_food",
-    "shelf_category": "other"
+    "shelf_category": "household"
   },
   {
     "label": "Coca 33cl",
@@ -261,19 +261,19 @@
     "label": "H&S Shmp",
     "ground_truth": "Shampooing",
     "product_type": "cosmetics",
-    "shelf_category": "other"
+    "shelf_category": "hygiene"
   },
   {
     "label": "Pringles Oignon",
     "ground_truth": "Chips de pomme de terre reconstitué",
     "product_type": "food",
-    "shelf_category": "fruits/vegetables"
+    "shelf_category": "chips_snacks"
   },
   {
     "label": "St Moret",
     "ground_truth": "Spécialité fromagère type St Môret",
     "product_type": "food",
-    "shelf_category": "other"
+    "shelf_category": "dairy"
   },
   {
     "label": "Kind. Bueno",
@@ -290,14 +290,14 @@
   {
     "label": "H. Daza",
     "ground_truth": "Crème glacée",
-    "product_type": "cosmetics",
-    "shelf_category": "other"
+    "product_type": "food",
+    "shelf_category": "frozen_foods"
   },
   {
     "label": "Lays Barbq",
     "ground_truth": "Chips saveur barbecue",
     "product_type": "food",
-    "shelf_category": "other"
+    "shelf_category": "chips_snacks"
   },
   {
     "label": "Red Bull SF",
@@ -315,7 +315,7 @@
     "label": "Logi MX Master 3S",
     "ground_truth": "Souris sans fil",
     "product_type": "non_food",
-    "shelf_category": "other"
+    "shelf_category": "electronics"
   },
   {
     "label": "MacBook Air M2",
@@ -326,43 +326,43 @@
   {
     "label": "Sam. Gal. S23",
     "ground_truth": "Smartphone",
-    "product_type": "food",
+    "product_type": "non_food",
     "shelf_category": "electronics"
   },
   {
     "label": "Nespresso Cap.",
     "ground_truth": "Capsules de café",
     "product_type": "food",
-    "shelf_category": "beverages"
+    "shelf_category": "coffee_tea"
   },
   {
     "label": "Dyson V15",
     "ground_truth": "Aspirateur sans fil",
     "product_type": "non_food",
-    "shelf_category": "other"
+    "shelf_category": "appliances"
   },
   {
     "label": "Lego Harry P.",
     "ground_truth": "Jeu de construction LEGO",
     "product_type": "non_food",
-    "shelf_category": "other"
+    "shelf_category": "toys"
   },
   {
     "label": "PlaySt. 5",
     "ground_truth": "Console de jeux",
     "product_type": "non_food",
-    "shelf_category": "other"
+    "shelf_category": "electronics"
   },
   {
     "label": "Xbox Ser. X",
     "ground_truth": "Console de jeux",
     "product_type": "non_food",
-    "shelf_category": "other"
+    "shelf_category": "electronics"
   },
   {
     "label": "Nike AF1",
     "ground_truth": "Chaussures baskets",
     "product_type": "non_food",
-    "shelf_category": "other"
+    "shelf_category": "clothing"
   }
 ]
