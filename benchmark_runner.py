@@ -173,20 +173,11 @@ def extract_content_and_reasoning(response):
 
 
 async def augment_label_async(
-    client: AsyncOpenAI, label: str, model: str
+    client: AsyncOpenAI, label: str, model: str, context: str = None
 ) -> tuple[str, str, int, int]:
     """Uses an LLM to augment the product label (Async). Returns (content, raw_output, prompt_tokens, completion_tokens)."""
     try:
-        response = await client.chat.completions.create(
-            model=model,
-            messages=[
-                {
-                    "role": "system",
-                    "content": """You are an expert E-commerce Query Normalizer. Your task is to extract the core product category and technical specifications from a label, removing specific commercial branding.""",
-                },
-                {
-                    "role": "user",
-                    "content": f"""Analyze the input label and output a clean, generic product description.
+        user_content = f"""Analyze the input label and output a clean, generic product description.
 
             Strict Rules:
             1. **Identify the Category:** You MUST convert the input into its generic product type (e.g., 'iPhone 13' -> 'Smartphone', 'Air Jordan' -> 'Basketball Shoes').
@@ -205,7 +196,21 @@ async def augment_label_async(
             Output: <response>Smartphone 128GB</response>
 
             Input: '{label}'
-            Output:""",
+            Output:"""
+
+        if context:
+             user_content = f"Product Context: {context}\n\n" + user_content
+
+        response = await client.chat.completions.create(
+            model=model,
+            messages=[
+                {
+                    "role": "system",
+                    "content": """You are an expert E-commerce Query Normalizer. Your task is to extract the core product category and technical specifications from a label, removing specific commercial branding.""",
+                },
+                {
+                    "role": "user",
+                    "content": user_content,
                 },
             ],
             temperature=0.3,
@@ -333,7 +338,7 @@ async def evaluate_augmentation_async(
 
 
 async def rerank_products_async(
-    client: AsyncOpenAI, query: str, products: list, model: str
+    client: AsyncOpenAI, query: str, products: list, model: str, context: str = None
 ) -> tuple[list, str, int, int]:
     """Reranks products using an LLM (Async). Returns (indices, raw_output, prompt_tokens, completion_tokens)."""
     products_formatted = "\n".join([f"{i}: {p}" for i, p in enumerate(products)])
@@ -350,6 +355,9 @@ async def rerank_products_async(
     Do not include any explanation, just the JSON list.
     Example output: <response>[1, 0, 3, 2]</response>
     """
+
+    if context:
+        prompt = f"Product Context: {context}\n\n" + prompt
 
     try:
         response = await client.chat.completions.create(
@@ -451,11 +459,11 @@ async def check_model_health_async(client: AsyncOpenAI, model_id: str) -> bool:
 # --- Main Benchmark Logic ---
 
 
-async def process_label_item(sem, client, item, model_id, eval_model):
+async def process_label_item(sem, client, item, model_id, eval_model, context=None):
     """Process a single label augmentation item."""
     async with sem:
         augmented_label, raw_output, p_tokens, c_tokens = await augment_label_async(
-            client, item["label"], model_id
+            client, item["label"], model_id, context=context
         )
         score = await evaluate_augmentation_async(
             client, item["label"], augmented_label, item["ground_truth"], eval_model
@@ -468,15 +476,16 @@ async def process_label_item(sem, client, item, model_id, eval_model):
             "output": augmented_label,
             "raw_output": raw_output,
             "score": score,
+            "context": context
         }
         return score, p_tokens, c_tokens, detail
 
 
-async def process_rerank_item(sem, client, item, model_id):
+async def process_rerank_item(sem, client, item, model_id, context=None):
     """Process a single product reranking item."""
     async with sem:
         reranked_indices, raw_output, p_tokens, c_tokens = await rerank_products_async(
-            client, item["query"], item["products"], model_id
+            client, item["query"], item["products"], model_id, context=context
         )
         distance = calculate_ranking_distance(reranked_indices, item["ground_truth"])
 
@@ -486,6 +495,7 @@ async def process_rerank_item(sem, client, item, model_id):
             "reranked_indices": reranked_indices,
             "raw_output": raw_output,
             "distance": distance,
+            "context": context
         }
 
         return distance, p_tokens, c_tokens, detail
@@ -509,9 +519,27 @@ async def run_benchmarks_async():
     print(f"Using evaluation model: {EVAL_MODEL}")
     print(f"Concurrency Limit: {CONCURRENCY_LIMIT}")
 
+    # Load existing results if available
+    try:
+        with open("BENCHMARK_RESULTS.json", "r") as f:
+            existing_results = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        existing_results = []
+
+    # Map existing results by (model_id, scenario) for easy lookup/update
+    # Note: Using model_id (OpenRouter ID) as unique key + scenario
+    results_map = {}
+    for res in existing_results:
+        # Backward compatibility for old results without scenario
+        scen = res.get("scenario", "base")
+        key = (res.get("id"), scen)
+        results_map[key] = res
+
     # Load data once
     label_data = load_label_data("productbench/data/label_augmentation.json")
     rerank_data = load_rerank_data("productbench/data/product_reranking.json")
+
+    SCENARIOS = ['base', 'product_type', 'shelf_category']
 
     for model_info in MODELS:
         model_name = model_info["model"]
@@ -525,17 +553,146 @@ async def run_benchmarks_async():
 
         print(f"\nBenchmarking: {model_name} ({model_id})")
 
-        start_time = time.time()
-
         try:  # Safety net for the entire model process
             # Health Check
             is_healthy = await check_model_health_async(client, model_id)
             if not is_healthy:
                 print(f"Skipping {model_name} due to health check failure.")
+                # Add skipped result for all scenarios
+                for scenario in SCENARIOS:
+                    results.append(
+                        {
+                            "model": model_name,
+                            "id": model_id,
+                            "scenario": scenario,
+                            "params": params,
+                            "price_input": input_price_per_m,
+                            "price_output": output_price_per_m,
+                            "aug_score": 0.0,
+                            "rerank_dist": 0.0,
+                            "input_tokens": 0,
+                            "output_tokens": 0,
+                            "actual_cost": 0.0,
+                            "time_taken": 0,
+                            "note": "Skipped (Unavailable)",
+                            "details": {},
+                        }
+                    )
+                continue
+
+            for scenario in SCENARIOS:
+                print(f"  > Scenario: {scenario}")
+                start_time = time.time()
+
+                # --- Label Augmentation ---
+                print(f"    - Running Label Augmentation ({len(label_data)} items)...")
+                label_tasks = []
+                for item in label_data:
+                    context = None
+                    if scenario == "product_type":
+                        context = item.get("product_type")
+                    elif scenario == "shelf_category":
+                        context = item.get("shelf_category")
+
+                    label_tasks.append(process_label_item(sem, client, item, model_id, EVAL_MODEL, context))
+
+                label_results = await asyncio.gather(*label_tasks)
+
+                total_aug_score = sum(r[0] for r in label_results)
+                total_aug_p_tokens = sum(r[1] for r in label_results)
+                total_aug_c_tokens = sum(r[2] for r in label_results)
+                label_details = [r[3] for r in label_results]
+                avg_aug_score = total_aug_score / len(label_data) if label_data else 0
+
+                # Calculate per-item cost for label augmentation
+                avg_aug_input_tokens = (
+                    total_aug_p_tokens / len(label_data) if label_data else 0
+                )
+                avg_aug_output_tokens = (
+                    total_aug_c_tokens / len(label_data) if label_data else 0
+                )
+                avg_aug_cost = ((avg_aug_input_tokens / 1_000_000) * input_price_per_m) + (
+                    (avg_aug_output_tokens / 1_000_000) * output_price_per_m
+                )
+
+                # --- Product Reranking ---
+                print(f"    - Running Product Reranking ({len(rerank_data)} items)...")
+                rerank_tasks = []
+                for item in rerank_data:
+                    context = None
+                    if scenario == "product_type":
+                        context = item.get("product_type")
+                    elif scenario == "shelf_category":
+                        context = item.get("shelf_category")
+                    rerank_tasks.append(process_rerank_item(sem, client, item, model_id, context))
+
+                rerank_results = await asyncio.gather(*rerank_tasks)
+
+                total_rerank_dist = sum(r[0] for r in rerank_results)
+                total_rerank_p_tokens = sum(r[1] for r in rerank_results)
+                total_rerank_c_tokens = sum(r[2] for r in rerank_results)
+                rerank_details = [r[3] for r in rerank_results]
+                avg_rerank_dist = total_rerank_dist / len(rerank_data) if rerank_data else 0
+
+                # Calculate per-item cost for product reranking
+                avg_rerank_input_tokens = (
+                    total_rerank_p_tokens / len(rerank_data) if rerank_data else 0
+                )
+                avg_rerank_output_tokens = (
+                    total_rerank_c_tokens / len(rerank_data) if rerank_data else 0
+                )
+                avg_rerank_cost = (
+                    (avg_rerank_input_tokens / 1_000_000) * input_price_per_m
+                ) + ((avg_rerank_output_tokens / 1_000_000) * output_price_per_m)
+
+                total_input_tokens = total_aug_p_tokens + total_rerank_p_tokens
+                total_output_tokens = total_aug_c_tokens + total_rerank_c_tokens
+
+                # Calculate Actual Cost
+                # Price is per 1M tokens.
+                cost_input = (total_input_tokens / 1_000_000) * input_price_per_m
+                cost_output = (total_output_tokens / 1_000_000) * output_price_per_m
+                actual_cost = cost_input + cost_output
+
+                end_time = time.time()
+                time_taken = end_time - start_time
+
                 results.append(
                     {
                         "model": model_name,
                         "id": model_id,
+                        "scenario": scenario,
+                        "params": params,
+                        "price_input": input_price_per_m,
+                        "price_output": output_price_per_m,
+                        "aug_score": avg_aug_score,
+                        "rerank_dist": avg_rerank_dist,
+                        "avg_aug_cost": avg_aug_cost,
+                        "avg_rerank_cost": avg_rerank_cost,
+                        "input_tokens": total_input_tokens,
+                        "output_tokens": total_output_tokens,
+                        "actual_cost": actual_cost,
+                        "time_taken": time_taken,
+                        "note": model_info.get("note", ""),
+                        "details": {
+                            "label_augmentation": label_details,
+                            "product_reranking": rerank_details,
+                        },
+                    }
+                )
+
+                print(
+                    f"      > Aug Score: {avg_aug_score:.4f}, Rerank Dist: {avg_rerank_dist:.4f}, Time: {time_taken:.2f}s, Cost: ${actual_cost:.6f}"
+                )
+
+        except Exception as e:
+            print(f"CRITICAL ERROR benchmarking {model_name}: {e}")
+            for scenario in SCENARIOS:
+                results.append(
+                    {
+                        "model": model_name,
+                        "id": model_id,
+                        "scenario": scenario,
                         "params": params,
                         "price_input": input_price_per_m,
                         "price_output": output_price_per_m,
@@ -545,142 +702,47 @@ async def run_benchmarks_async():
                         "output_tokens": 0,
                         "actual_cost": 0.0,
                         "time_taken": 0,
-                        "note": "Skipped (Unavailable)",
+                        "note": f"Error: {str(e)}",
                         "details": {},
                     }
                 )
-                continue
-
-            # --- Label Augmentation ---
-            print(f"  - Running Label Augmentation ({len(label_data)} items)...")
-            label_tasks = [
-                process_label_item(sem, client, item, model_id, EVAL_MODEL)
-                for item in label_data
-            ]
-            label_results = await asyncio.gather(*label_tasks)
-
-            total_aug_score = sum(r[0] for r in label_results)
-            total_aug_p_tokens = sum(r[1] for r in label_results)
-            total_aug_c_tokens = sum(r[2] for r in label_results)
-            label_details = [r[3] for r in label_results]
-            avg_aug_score = total_aug_score / len(label_data) if label_data else 0
-
-            # Calculate per-item cost for label augmentation
-            avg_aug_input_tokens = (
-                total_aug_p_tokens / len(label_data) if label_data else 0
-            )
-            avg_aug_output_tokens = (
-                total_aug_c_tokens / len(label_data) if label_data else 0
-            )
-            avg_aug_cost = ((avg_aug_input_tokens / 1_000_000) * input_price_per_m) + (
-                (avg_aug_output_tokens / 1_000_000) * output_price_per_m
-            )
-
-            # --- Product Reranking ---
-            print(f"  - Running Product Reranking ({len(rerank_data)} items)...")
-            rerank_tasks = [
-                process_rerank_item(sem, client, item, model_id) for item in rerank_data
-            ]
-            rerank_results = await asyncio.gather(*rerank_tasks)
-
-            total_rerank_dist = sum(r[0] for r in rerank_results)
-            total_rerank_p_tokens = sum(r[1] for r in rerank_results)
-            total_rerank_c_tokens = sum(r[2] for r in rerank_results)
-            rerank_details = [r[3] for r in rerank_results]
-            avg_rerank_dist = total_rerank_dist / len(rerank_data) if rerank_data else 0
-
-            # Calculate per-item cost for product reranking
-            avg_rerank_input_tokens = (
-                total_rerank_p_tokens / len(rerank_data) if rerank_data else 0
-            )
-            avg_rerank_output_tokens = (
-                total_rerank_c_tokens / len(rerank_data) if rerank_data else 0
-            )
-            avg_rerank_cost = (
-                (avg_rerank_input_tokens / 1_000_000) * input_price_per_m
-            ) + ((avg_rerank_output_tokens / 1_000_000) * output_price_per_m)
-
-            total_input_tokens = total_aug_p_tokens + total_rerank_p_tokens
-            total_output_tokens = total_aug_c_tokens + total_rerank_c_tokens
-
-            # Calculate Actual Cost
-            # Price is per 1M tokens.
-            cost_input = (total_input_tokens / 1_000_000) * input_price_per_m
-            cost_output = (total_output_tokens / 1_000_000) * output_price_per_m
-            actual_cost = cost_input + cost_output
-
-            end_time = time.time()
-            time_taken = end_time - start_time
-
-            results.append(
-                {
-                    "model": model_name,
-                    "id": model_id,
-                    "params": params,
-                    "price_input": input_price_per_m,
-                    "price_output": output_price_per_m,
-                    "aug_score": avg_aug_score,
-                    "rerank_dist": avg_rerank_dist,
-                    "avg_aug_cost": avg_aug_cost,
-                    "avg_rerank_cost": avg_rerank_cost,
-                    "input_tokens": total_input_tokens,
-                    "output_tokens": total_output_tokens,
-                    "actual_cost": actual_cost,
-                    "time_taken": time_taken,
-                    "note": model_info.get("note", ""),
-                    "details": {
-                        "label_augmentation": label_details,
-                        "product_reranking": rerank_details,
-                    },
-                }
-            )
-
-            print(
-                f"    > Aug Score: {avg_aug_score:.4f}, Rerank Dist: {avg_rerank_dist:.4f}, Time: {time_taken:.2f}s, Cost: ${actual_cost:.6f}, Aug Cost/Item: ${avg_aug_cost:.6f}, Rerank Cost/Item: ${avg_rerank_cost:.6f}"
-            )
-
-        except Exception as e:
-            print(f"CRITICAL ERROR benchmarking {model_name}: {e}")
-            results.append(
-                {
-                    "model": model_name,
-                    "id": model_id,
-                    "params": params,
-                    "price_input": input_price_per_m,
-                    "price_output": output_price_per_m,
-                    "aug_score": 0.0,
-                    "rerank_dist": 0.0,
-                    "input_tokens": 0,
-                    "output_tokens": 0,
-                    "actual_cost": 0.0,
-                    "time_taken": 0,
-                    "note": f"Error: {str(e)}",
-                    "details": {},
-                }
-            )
             continue
 
+            # Add or update result in map
+            # We treat the new 'results' list as the fresh batch, so we need to merge it back to results_map
+            # But wait, 'results' list contains the just-executed stuff.
+            pass  # Logic handled below
+
+    # Merge fresh results into the persistent map
+    for res in results:
+        key = (res["id"], res["scenario"])
+        results_map[key] = res
+
+    # Convert map back to list
+    final_results = list(results_map.values())
+
     # Sort results
-    results.sort(key=lambda x: x["aug_score"], reverse=True)
+    final_results.sort(key=lambda x: (x.get("scenario", "base"), x.get("aug_score", 0)), reverse=True)
 
     # Generate Markdown Report
     markdown_output = "# Benchmark Results\n\n"
-    markdown_output += "| Model | Params | Total Cost ($) | Label Aug Score | Rerank Dist | Aug Cost/Item ($) | Rerank Cost/Item ($) | Time (s) | Note |\n"
-    markdown_output += "|---|---|---|---|---|---|---|---|---|\n"
+    markdown_output += "| Model | Scenario | Params | Total Cost ($) | Label Aug Score | Rerank Dist | Aug Cost/Item ($) | Rerank Cost/Item ($) | Time (s) | Note |\n"
+    markdown_output += "|---|---|---|---|---|---|---|---|---|---|\n"
 
-    for res in results:
+    for res in final_results:
         note = res.get("note", "")
-        markdown_output += f"| {res['model']} | {res['params']} | ${res['actual_cost']:.6f} | {res['aug_score']:.4f} | {res['rerank_dist']:.4f} | ${res['avg_aug_cost']:.6f} | ${res['avg_rerank_cost']:.6f} | {res['time_taken']:.2f} | {note} |\n"
+        scen = res.get("scenario", "base")
+        markdown_output += f"| {res['model']} | {scen} | {res['params']} | ${res.get('actual_cost', 0):.6f} | {res.get('aug_score', 0):.4f} | {res.get('rerank_dist', 0):.4f} | ${res.get('avg_aug_cost', 0):.6f} | ${res.get('avg_rerank_cost', 0):.6f} | {res.get('time_taken', 0):.2f} | {note} |\n"
 
     with open("BENCHMARK_RESULTS.md", "w") as f:
         f.write(markdown_output)
 
     # Save JSON Report
     with open("BENCHMARK_RESULTS.json", "w") as f:
-        json.dump(results, f, indent=4)
+        json.dump(final_results, f, indent=4)
 
     print(
-        "\nBenchmark completed. Results saved to BENCHMARK_RESULTS.md and BENCHMARK_RESULTS.json"
+        "\nBenchmark completed. Results merged and saved to BENCHMARK_RESULTS.md and BENCHMARK_RESULTS.json"
     )
 
 

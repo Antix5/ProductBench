@@ -22,6 +22,8 @@ def get_benchmark_results():
     for item in data:
         # Normalize fields for the UI
         model = item.get("model", "Unknown")
+        # Handle missing scenario field (backward compatibility)
+        scenario = item.get("scenario", "base")
         params_str = item.get("params", "?")
 
         # Format scores to 4 decimal places string
@@ -52,6 +54,7 @@ def get_benchmark_results():
         results.append(
             {
                 "model": model,
+                "scenario": scenario,
                 "params": params_str,
                 "params_val": params_val,
                 "label_augmentation_score": label_score_str,
