@@ -1,246 +1,368 @@
 [
   {
     "label": "Tétines FIZZ 160g",
-    "ground_truth": "fizzing candy"
+    "ground_truth": "fizzing candy",
+    "product_type": "food",
+    "shelf_category": "candy"
   },
   {
     "label": "BEUR. Doux GOURM. 200g plaq.",
-    "ground_truth": "Beurre doux haut en matière grasse"
+    "ground_truth": "Beurre doux haut en matière grasse",
+    "product_type": "food",
+    "shelf_category": "dairy"
   },
   {
     "label": "PDT vap. 1kg",
-    "ground_truth": "Pommes de terre pour cuisson à la vapeur"
+    "ground_truth": "Pommes de terre pour cuisson à la vapeur",
+    "product_type": "food",
+    "shelf_category": "fruits/vegetables"
   },
   {
     "label": "ORANGE BRICK 1L",
-    "ground_truth": "Jus d'orange en brique"
+    "ground_truth": "Jus d'orange en brique",
+    "product_type": "food",
+    "shelf_category": "fruits/vegetables"
   },
   {
     "label": "HDMI 2.0 ultraspeed / RAYON:MULTIMEDIA",
-    "ground_truth": "Câble HDMI haute vitesse"
+    "ground_truth": "Câble HDMI haute vitesse",
+    "product_type": "non_food",
+    "shelf_category": "electronics"
   },
   {
     "label": "FROMA. RAPE. FONDENT CARRF.CLASSIQUE 200g",
-    "ground_truth": "Fromage à pâte dure rapé (type Emmental ou Gruyère)"
+    "ground_truth": "Fromage à pâte dure rapé (type Emmental ou Gruyère)",
+    "product_type": "food",
+    "shelf_category": "dairy"
   },
   {
     "label": "PAIN MIE COMP. 500G",
-    "ground_truth": "Pain de mie à la farine de blé complète"
+    "ground_truth": "Pain de mie à la farine de blé complète",
+    "product_type": "food",
+    "shelf_category": "grocery"
   },
   {
     "label": "Eau min. nat. 1.5L",
-    "ground_truth": "Eau minérale naturelle 1.5L"
+    "ground_truth": "Eau minérale naturelle 1.5L",
+    "product_type": "food",
+    "shelf_category": "beverages"
   },
   {
     "label": "Crème fraîche épaisse",
-    "ground_truth": "Crème fraîche épaisse entière à 30% de matière grasse"
+    "ground_truth": "Crème fraîche épaisse entière à 30% de matière grasse",
+    "product_type": "cosmetics",
+    "shelf_category": "other"
   },
   {
     "label": "SCSSON.PUR.PORC Nos Régions ont du talent 200g",
-    "ground_truth": "Saucisson sec à base de porc"
+    "ground_truth": "Saucisson sec à base de porc",
+    "product_type": "food",
+    "shelf_category": "meats"
   },
   {
     "label": "YRT NAT",
-    "ground_truth": "Yaourt nature"
+    "ground_truth": "Yaourt nature",
+    "product_type": "food",
+    "shelf_category": "dairy"
   },
   {
     "label": "HLE OLV. VIERGE",
-    "ground_truth": "Huile d'olive vierge"
+    "ground_truth": "Huile d'olive vierge",
+    "product_type": "food",
+    "shelf_category": "other"
   },
   {
     "label": "CHOCO. NOIR 70% Lindt 100G",
-    "ground_truth": "Tablette de chocolat noir à 70% de cacao"
+    "ground_truth": "Tablette de chocolat noir à 70% de cacao",
+    "product_type": "food",
+    "shelf_category": "candy"
   },
   {
     "label": "CAFFE MLLU ARABICA 250G",
-    "ground_truth": "Café moulu"
+    "ground_truth": "Café moulu",
+    "product_type": "food",
+    "shelf_category": "beverages"
   },
   {
     "label": "THON. NAT. 160G à l'huile d'olive",
-    "ground_truth": "Conserve de thon dans de l'huile d'olive"
+    "ground_truth": "Conserve de thon dans de l'huile d'olive",
+    "product_type": "food",
+    "shelf_category": "other"
   },
   {
     "label": "LENTIL.VRT VRAC",
-    "ground_truth": "lentilles vertes sèche"
+    "ground_truth": "lentilles vertes sèche",
+    "product_type": "food",
+    "shelf_category": "grocery"
   },
   {
     "label": "LENTIL.VRT 500G BTE",
-    "ground_truth": "lentilles vertes cuites en boites"
+    "ground_truth": "lentilles vertes cuites en boites",
+    "product_type": "food",
+    "shelf_category": "grocery"
   },
   {
     "label": "PENNE RIG. LUSTUC",
-    "ground_truth": "Pâtes alimentaires de semoule de blé dur de forme penne"
+    "ground_truth": "Pâtes alimentaires de semoule de blé dur de forme penne",
+    "product_type": "food",
+    "shelf_category": "grocery"
   },
   {
     "label": "MEL di fiore",
-    "ground_truth": "Miel"
+    "ground_truth": "Miel",
+    "product_type": "food",
+    "shelf_category": "other"
   },
   {
     "label": "Vinaigre VINO ROSSO",
-    "ground_truth": "Vinaigre de vin rouge"
+    "ground_truth": "Vinaigre de vin rouge",
+    "product_type": "food",
+    "shelf_category": "beverages"
   },
   {
     "label": "Moutarde de Dijon",
-    "ground_truth": "Moutarde de Dijon"
+    "ground_truth": "Moutarde de Dijon",
+    "product_type": "food",
+    "shelf_category": "other"
   },
   {
     "label": "BALEINE IODE",
-    "ground_truth": "Sel fin de table iodé"
+    "ground_truth": "Sel fin de table iodé",
+    "product_type": "food",
+    "shelf_category": "other"
   },
   {
     "label": "Poivre noir de kampot moulu",
-    "ground_truth": "Poivre noir moulu"
+    "ground_truth": "Poivre noir moulu",
+    "product_type": "food",
+    "shelf_category": "other"
   },
   {
     "label": "HRB PROVENCE",
-    "ground_truth": "Mélange d'herbes aromatiques de Provence"
+    "ground_truth": "Mélange d'herbes aromatiques de Provence",
+    "product_type": "food",
+    "shelf_category": "other"
   },
   {
     "label": "Oignons jaunes",
-    "ground_truth": "Oignons jaunes"
+    "ground_truth": "Oignons jaunes",
+    "product_type": "food",
+    "shelf_category": "fruits/vegetables"
   },
   {
     "label": "Ail",
-    "ground_truth": "Ail blanc"
+    "ground_truth": "Ail blanc",
+    "product_type": "food",
+    "shelf_category": "fruits/vegetables"
   },
   {
     "label": "Carottes SURG",
-    "ground_truth": "Carottes surgelées"
+    "ground_truth": "Carottes surgelées",
+    "product_type": "food",
+    "shelf_category": "fruits/vegetables"
   },
   {
     "label": "Tomates",
-    "ground_truth": "Tomates rondes"
+    "ground_truth": "Tomates rondes",
+    "product_type": "food",
+    "shelf_category": "fruits/vegetables"
   },
   {
     "label": "Salade verte",
-    "ground_truth": "Laitue fraîche entière"
+    "ground_truth": "Laitue fraîche entière",
+    "product_type": "food",
+    "shelf_category": "fruits/vegetables"
   },
   {
     "label": "Pommes",
-    "ground_truth": "Pommes"
+    "ground_truth": "Pommes",
+    "product_type": "food",
+    "shelf_category": "fruits/vegetables"
   },
   {
     "label": "BANANA B DE COLOMBIA",
-    "ground_truth": "Bananes Buro"
+    "ground_truth": "Bananes Buro",
+    "product_type": "food",
+    "shelf_category": "fruits/vegetables"
   },
   {
     "label": "ORANGE JUS | Gamme : Fruits",
-    "ground_truth": "Oranges à jus"
+    "ground_truth": "Oranges à jus",
+    "product_type": "food",
+    "shelf_category": "fruits/vegetables"
   },
   {
     "label": "CTRON J",
-    "ground_truth": "Citrons jaunes"
+    "ground_truth": "Citrons jaunes",
+    "product_type": "food",
+    "shelf_category": "fruits/vegetables"
   },
   {
     "label": "Oeufs",
-    "ground_truth": "Oeuf de poule"
+    "ground_truth": "Oeuf de poule",
+    "product_type": "food",
+    "shelf_category": "dairy"
   },
   {
     "label": "Lait UHT bouteille verte",
-    "ground_truth": "Bouteille de lait écrémé stérilisé UHT"
+    "ground_truth": "Bouteille de lait écrémé stérilisé UHT",
+    "product_type": "food",
+    "shelf_category": "dairy"
   },
   {
     "label": "Farine",
-    "ground_truth": "Farine de blé type T55"
+    "ground_truth": "Farine de blé type T55",
+    "product_type": "food",
+    "shelf_category": "grocery"
   },
   {
     "label": "Sucre",
-    "ground_truth": "Sucre en poudre blanc"
+    "ground_truth": "Sucre en poudre blanc",
+    "product_type": "food",
+    "shelf_category": "grocery"
   },
   {
     "label": "Levure chimique",
-    "ground_truth": "Levure chimique"
+    "ground_truth": "Levure chimique",
+    "product_type": "food",
+    "shelf_category": "other"
   },
   {
     "label": "Papier hygienique",
-    "ground_truth": "Papier toilette"
+    "ground_truth": "Papier toilette",
+    "product_type": "non_food",
+    "shelf_category": "other"
   },
   {
     "label": "Liquide vaisselle citr. 500ml",
-    "ground_truth": "Liquide vaisselle"
+    "ground_truth": "Liquide vaisselle",
+    "product_type": "food",
+    "shelf_category": "household"
   },
   {
     "label": "ALU. ALIM 2M",
-    "ground_truth": "Papier aluminium"
+    "ground_truth": "Papier aluminium",
+    "product_type": "non_food",
+    "shelf_category": "other"
   },
   {
     "label": "Coca 33cl",
-    "ground_truth": "Boisson gazeuse coca-cola"
+    "ground_truth": "Boisson gazeuse coca-cola",
+    "product_type": "food",
+    "shelf_category": "beverages"
   },
   {
     "label": "Nutella 750",
-    "ground_truth": "Pâte à tartiner aux noisettes et au cacao Nutella"
+    "ground_truth": "Pâte à tartiner aux noisettes et au cacao Nutella",
+    "product_type": "food",
+    "shelf_category": "candy"
   },
   {
     "label": "H&S Shmp",
-    "ground_truth": "Shampooing"
+    "ground_truth": "Shampooing",
+    "product_type": "cosmetics",
+    "shelf_category": "other"
   },
   {
     "label": "Pringles Oignon",
-    "ground_truth": "Chips de pomme de terre reconstitué"
+    "ground_truth": "Chips de pomme de terre reconstitué",
+    "product_type": "food",
+    "shelf_category": "fruits/vegetables"
   },
   {
     "label": "St Moret",
-    "ground_truth": "Spécialité fromagère type St Môret"
+    "ground_truth": "Spécialité fromagère type St Môret",
+    "product_type": "food",
+    "shelf_category": "other"
   },
   {
     "label": "Kind. Bueno",
-    "ground_truth": "Barres chocolatées"
+    "ground_truth": "Barres chocolatées",
+    "product_type": "food",
+    "shelf_category": "candy"
   },
   {
     "label": "M&Ms",
-    "ground_truth": "Cacahuète enrobé de chocolat"
+    "ground_truth": "Cacahuète enrobé de chocolat",
+    "product_type": "food",
+    "shelf_category": "candy"
   },
   {
     "label": "H. Daza",
-    "ground_truth": "Crème glacée"
+    "ground_truth": "Crème glacée",
+    "product_type": "cosmetics",
+    "shelf_category": "other"
   },
   {
     "label": "Lays Barbq",
-    "ground_truth": "Chips saveur barbecue"
+    "ground_truth": "Chips saveur barbecue",
+    "product_type": "food",
+    "shelf_category": "other"
   },
   {
     "label": "Red Bull SF",
-    "ground_truth": "Boisson énergisante sans sucre"
+    "ground_truth": "Boisson énergisante sans sucre",
+    "product_type": "food",
+    "shelf_category": "beverages"
   },
   {
     "label": "Sony WH-1000XM5",
-    "ground_truth": "Casque sans fil à réduction de bruit"
+    "ground_truth": "Casque sans fil à réduction de bruit",
+    "product_type": "non_food",
+    "shelf_category": "electronics"
   },
   {
     "label": "Logi MX Master 3S",
-    "ground_truth": "Souris sans fil"
+    "ground_truth": "Souris sans fil",
+    "product_type": "non_food",
+    "shelf_category": "other"
   },
   {
     "label": "MacBook Air M2",
-    "ground_truth": "Ordinateur portable puce ARM"
+    "ground_truth": "Ordinateur portable puce ARM",
+    "product_type": "non_food",
+    "shelf_category": "electronics"
   },
   {
     "label": "Sam. Gal. S23",
-    "ground_truth": "Smartphone"
+    "ground_truth": "Smartphone",
+    "product_type": "food",
+    "shelf_category": "electronics"
   },
   {
     "label": "Nespresso Cap.",
-    "ground_truth": "Capsules de café"
+    "ground_truth": "Capsules de café",
+    "product_type": "food",
+    "shelf_category": "beverages"
   },
   {
     "label": "Dyson V15",
-    "ground_truth": "Aspirateur sans fil"
+    "ground_truth": "Aspirateur sans fil",
+    "product_type": "non_food",
+    "shelf_category": "other"
   },
   {
     "label": "Lego Harry P.",
-    "ground_truth": "Jeu de construction LEGO"
+    "ground_truth": "Jeu de construction LEGO",
+    "product_type": "non_food",
+    "shelf_category": "other"
   },
   {
     "label": "PlaySt. 5",
-    "ground_truth": "Console de jeux"
+    "ground_truth": "Console de jeux",
+    "product_type": "non_food",
+    "shelf_category": "other"
   },
   {
     "label": "Xbox Ser. X",
-    "ground_truth": "Console de jeux"
+    "ground_truth": "Console de jeux",
+    "product_type": "non_food",
+    "shelf_category": "other"
   },
   {
     "label": "Nike AF1",
-    "ground_truth": "Chaussures baskets"
+    "ground_truth": "Chaussures baskets",
+    "product_type": "non_food",
+    "shelf_category": "other"
   }
 ]

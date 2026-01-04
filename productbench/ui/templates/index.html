@@ -72,6 +72,15 @@
                     Benchmarking LLMs on Product Knowledge Tasks: Price vs
                     Performance
                 </p>
+                <div class="mt-4 flex justify-center items-center gap-4">
+                    <label for="scenario-select" class="text-white font-medium">Scenario:</label>
+                    <select id="scenario-select" class="bg-slate-700 text-white border border-slate-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="all">All Scenarios</option>
+                        <option value="base">Base (No Context)</option>
+                        <option value="product_type">Product Type</option>
+                        <option value="shelf_category">Shelf Category</option>
+                    </select>
+                </div>
             </header>
 
             <!-- Charts Section -->
@@ -119,6 +128,7 @@
                         >
                             <tr>
                                 <th class="p-4 rounded-tl-lg">Model</th>
+                                <th class="p-4">Scenario</th>
                                 <th class="p-4">Params</th>
                                 <th class="p-4">Total Cost ($)</th>
                                 <th class="p-4">Aug Cost / 10k ($)</th>
@@ -135,11 +145,14 @@
                             class="divide-y divide-slate-700"
                         >
                             {% for row in leaderboard %}
-                            <tr class="table-row group">
+                            <tr class="table-row group" data-scenario="{{ row.scenario }}">
                                 <td
                                     class="p-4 font-medium text-white flex items-center gap-2"
                                 >
                                     {{ row.model }}
+                                </td>
+                                <td class="p-4 text-slate-300 font-mono text-xs">
+                                    {{ row.scenario }}
                                 </td>
                                 <td class="p-4 text-slate-300">
                                     {{ row.params }}
@@ -248,6 +261,35 @@
 
         <script>
             const leaderboardData = {{ leaderboard | tojson }};
+            let currentScenario = 'all';
+
+            // --- Scenario Filtering ---
+            const scenarioSelect = document.getElementById('scenario-select');
+            const tableRows = document.querySelectorAll('#leaderboard-body .table-row');
+
+            scenarioSelect.addEventListener('change', (e) => {
+                currentScenario = e.target.value;
+                filterResults();
+            });
+
+            function filterResults() {
+                // Filter Table
+                tableRows.forEach(row => {
+                    if (currentScenario === 'all' || row.dataset.scenario === currentScenario) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+
+                // Filter Charts
+                const filteredData = leaderboardData.filter(row => {
+                     return (currentScenario === 'all' || row.scenario === currentScenario) && row.actual_cost >= 0;
+                });
+
+                updateCharts(filteredData);
+            }
+
 
             // --- Modal Logic ---
             const modal = document.getElementById('inspect-modal');
@@ -257,7 +299,7 @@
 
             function openInspectModal(index) {
                 const data = leaderboardData[index];
-                modalTitle.textContent = data.model;
+                modalTitle.textContent = `${data.model} (${data.scenario})`;
                 modalSubtitle.textContent = `Total Cost: ${data.actual_cost_str} | Aug Cost: $${(data.avg_aug_cost * 10000).toFixed(2)} / 10k | Rerank Cost: $${(data.avg_rerank_cost * 10000).toFixed(2)} / 10k | Time: ${data.time_taken_str} | Score: ${data.label_augmentation_score}`;
 
                 let html = '';
@@ -288,6 +330,7 @@
                                         ${scoreBadge}
                                     </div>
                                 </div>
+                                <div class="mb-2 text-xs font-mono text-slate-400">Context: ${escapeHtml(item.context || 'None')}</div>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
                                     <div>
                                         <div class="text-slate-500 mb-1">Clean Output:</div>
@@ -330,6 +373,7 @@
                                         ${distBadge}
                                     </div>
                                 </div>
+                                <div class="mb-2 text-xs font-mono text-slate-400">Context: ${escapeHtml(item.context || 'None')}</div>
                                  <div class="mb-3">
                                     <span class="text-slate-500 text-xs uppercase font-bold tracking-wider">Products List:</span>
                                     <ol class="list-decimal list-inside text-slate-400 text-xs mt-1 ml-1 space-y-0.5">
@@ -373,169 +417,175 @@
                     .replace(/'/g, "&#039;");
             }
 
-            // --- Prepare Data for Charts ---
-            const validData = leaderboardData.filter(row => {
-                // Include 0 cost models (free), but we need to handle them for log scale later
-                return row.actual_cost >= 0;
-            });
+            // --- Chart Instances ---
+            let paretoChart;
+            let timeChart;
 
-            // 1. Pareto Chart (Cost vs Score)
-            const paretoData = validData.map(row => ({
-                // Log scale crashes on 0. Use a tiny epsilon for free models.
-                x: row.actual_cost > 0 ? row.actual_cost : 1e-7,
-                y: parseFloat(row.label_augmentation_score),
-                label: row.model,
-                realCost: row.actual_cost // Store real cost for tooltip
-            }));
-            paretoData.sort((a, b) => a.x - b.x);
+            function updateCharts(data) {
+                // 1. Pareto Chart
+                const paretoData = data.map(row => ({
+                    x: row.actual_cost > 0 ? row.actual_cost : 1e-7,
+                    y: parseFloat(row.label_augmentation_score),
+                    label: row.model,
+                    scenario: row.scenario,
+                    realCost: row.actual_cost
+                }));
+                paretoData.sort((a, b) => a.x - b.x);
 
-            const paretoFrontier = [];
-            let maxPerformance = -1;
-            for (const point of paretoData) {
-                if (point.y > maxPerformance) {
-                    maxPerformance = point.y;
-                    paretoFrontier.push(point);
+                const paretoFrontier = [];
+                let maxPerformance = -1;
+                for (const point of paretoData) {
+                    if (point.y > maxPerformance) {
+                        maxPerformance = point.y;
+                        paretoFrontier.push(point);
+                    }
                 }
-            }
 
-            new Chart(document.getElementById('pareto-chart'), {
-                type: 'scatter',
-                data: {
-                    datasets: [
-                        {
+                if (paretoChart) paretoChart.destroy();
+                paretoChart = new Chart(document.getElementById('pareto-chart'), {
+                    type: 'scatter',
+                    data: {
+                        datasets: [
+                            {
+                                label: 'Models',
+                                data: paretoData,
+                                backgroundColor: 'rgba(94, 234, 212, 0.6)',
+                                borderColor: 'rgba(94, 234, 212, 1)',
+                                pointRadius: 6,
+                                pointHoverRadius: 8
+                            },
+                            {
+                                label: 'Pareto Frontier',
+                                data: paretoFrontier,
+                                borderColor: 'rgba(244, 114, 182, 0.8)',
+                                backgroundColor: 'rgba(244, 114, 182, 0.1)',
+                                type: 'line',
+                                showLine: true,
+                                fill: false,
+                                pointRadius: 0,
+                                borderWidth: 2,
+                                tension: 0.1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                type: 'logarithmic',
+                                position: 'bottom',
+                                title: { display: true, text: 'Benchmark Cost ($) [Log Scale]', color: '#94a3b8' },
+                                grid: { color: '#334155' },
+                                ticks: {
+                                    color: '#cbd5e1',
+                                    callback: function(value) {
+                                        if (value === 100 || value === 10 || value === 1 || value === 0.1 || value === 0.01 || value === 0.001 || value === 0.0001) {
+                                            return '$' + value;
+                                        }
+                                        return null;
+                                    }
+                                }
+                            },
+                            y: {
+                                title: { display: true, text: 'Score', color: '#94a3b8' },
+                                grid: { color: '#334155' },
+                                ticks: { color: '#cbd5e1' },
+                                min: 0, max: 1.0
+                            }
+                        },
+                        plugins: {
+                            legend: { labels: { color: '#e2e8f0' } },
+                            tooltip: {
+                                backgroundColor: '#0f172a',
+                                titleColor: '#e2e8f0',
+                                bodyColor: '#cbd5e1',
+                                borderColor: '#334155',
+                                borderWidth: 1,
+                                callbacks: {
+                                    label: function(context) {
+                                        const point = context.dataset.data[context.dataIndex];
+                                        let label = point.label || '';
+                                        if (label) label += ` (${point.scenario}): `;
+                                        label += `Total Cost $${point.realCost.toFixed(6)}, Score: ${point.y}`;
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // 2. Time Chart
+                const timeData = data.map(row => ({
+                    x: row.time_taken > 0 ? row.time_taken : 0.01,
+                    y: parseFloat(row.label_augmentation_score),
+                    label: row.model,
+                    scenario: row.scenario
+                }));
+
+                if (timeChart) timeChart.destroy();
+                timeChart = new Chart(document.getElementById('time-chart'), {
+                    type: 'scatter',
+                    data: {
+                        datasets: [{
                             label: 'Models',
-                            data: paretoData,
-                            backgroundColor: 'rgba(94, 234, 212, 0.6)',
-                            borderColor: 'rgba(94, 234, 212, 1)',
+                            data: timeData,
+                            backgroundColor: 'rgba(56, 189, 248, 0.6)',
+                            borderColor: 'rgba(56, 189, 248, 1)',
                             pointRadius: 6,
                             pointHoverRadius: 8
-                        },
-                        {
-                            label: 'Pareto Frontier',
-                            data: paretoFrontier,
-                            borderColor: 'rgba(244, 114, 182, 0.8)',
-                            backgroundColor: 'rgba(244, 114, 182, 0.1)',
-                            type: 'line',
-                            showLine: true,
-                            fill: false,
-                            pointRadius: 0,
-                            borderWidth: 2,
-                            tension: 0.1
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: {
-                            type: 'logarithmic',
-                            position: 'bottom',
-                            title: { display: true, text: 'Benchmark Cost ($) [Log Scale]', color: '#94a3b8' },
-                            grid: { color: '#334155' },
-                            ticks: {
-                                color: '#cbd5e1',
-                                callback: function(value, index, values) {
-                                    // Only show 1, 0.1, 0.01 etc labels to avoid clutter
-                                    if (value === 100 || value === 10 || value === 1 || value === 0.1 || value === 0.01 || value === 0.001 || value === 0.0001) {
-                                        return '$' + value;
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                type: 'logarithmic',
+                                position: 'bottom',
+                                title: { display: true, text: 'Time Taken (Seconds) [Log Scale]', color: '#94a3b8' },
+                                grid: { color: '#334155' },
+                                ticks: {
+                                    color: '#cbd5e1',
+                                    callback: function(value) {
+                                        if (value === 0.1 || value === 1 || value === 10 || value === 100 || value === 1000) return value + 's';
+                                        return null;
                                     }
-                                    return null;
-                                }
+                                 }
+                            },
+                            y: {
+                                title: { display: true, text: 'Score', color: '#94a3b8' },
+                                grid: { color: '#334155' },
+                                ticks: { color: '#cbd5e1' },
+                                min: 0, max: 1.0
                             }
                         },
-                        y: {
-                            title: { display: true, text: 'Score', color: '#94a3b8' },
-                            grid: { color: '#334155' },
-                            ticks: { color: '#cbd5e1' },
-                            min: 0, max: 1.0
-                        }
-                    },
-                    plugins: {
-                        legend: { labels: { color: '#e2e8f0' } },
-                        tooltip: {
-                            backgroundColor: '#0f172a',
-                            titleColor: '#e2e8f0',
-                            bodyColor: '#cbd5e1',
-                            borderColor: '#334155',
-                            borderWidth: 1,
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.dataset.data[context.dataIndex].label || '';
-                                    if (label) label += ': ';
-                                    const rawCost = context.dataset.data[context.dataIndex].realCost;
-                                    label += `Total Cost $${rawCost.toFixed(6)}, Score: ${context.parsed.y}`;
-                                    return label;
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: '#0f172a',
+                                titleColor: '#e2e8f0',
+                                bodyColor: '#cbd5e1',
+                                borderColor: '#334155',
+                                borderWidth: 1,
+                                callbacks: {
+                                    label: function(context) {
+                                        const point = context.dataset.data[context.dataIndex];
+                                        let label = point.label || '';
+                                        if (label) label += ` (${point.scenario}): `;
+                                        label += `Time ${point.x.toFixed(2)}s, Score: ${point.y}`;
+                                        return label;
+                                    }
                                 }
                             }
                         }
                     }
-                }
-            });
+                });
+            }
 
-            // 2. Time vs Performance Chart
-            const timeData = validData.map(row => ({
-                x: row.time_taken > 0 ? row.time_taken : 0.01, // Prevent 0 in log scale
-                y: parseFloat(row.label_augmentation_score),
-                label: row.model
-            }));
-
-            new Chart(document.getElementById('time-chart'), {
-                type: 'scatter',
-                data: {
-                    datasets: [{
-                        label: 'Models',
-                        data: timeData,
-                        backgroundColor: 'rgba(56, 189, 248, 0.6)',
-                        borderColor: 'rgba(56, 189, 248, 1)',
-                        pointRadius: 6,
-                        pointHoverRadius: 8
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: {
-                            type: 'logarithmic',
-                            position: 'bottom',
-                            title: { display: true, text: 'Time Taken (Seconds) [Log Scale]', color: '#94a3b8' },
-                            grid: { color: '#334155' },
-                            ticks: {
-                                color: '#cbd5e1',
-                                callback: function(value) {
-                                    if (value === 0.1 || value === 1 || value === 10 || value === 100 || value === 1000) return value + 's';
-                                    return null;
-                                }
-                             }
-                        },
-                        y: {
-                            title: { display: true, text: 'Score', color: '#94a3b8' },
-                            grid: { color: '#334155' },
-                            ticks: { color: '#cbd5e1' },
-                            min: 0, max: 1.0
-                        }
-                    },
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            backgroundColor: '#0f172a',
-                            titleColor: '#e2e8f0',
-                            bodyColor: '#cbd5e1',
-                            borderColor: '#334155',
-                            borderWidth: 1,
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.dataset.data[context.dataIndex].label || '';
-                                    if (label) label += ': ';
-                                    label += `Time ${context.parsed.x.toFixed(2)}s, Score: ${context.parsed.y}`;
-                                    return label;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
+            // Initialize charts
+            updateCharts(leaderboardData);
         </script>
     </body>
 </html>

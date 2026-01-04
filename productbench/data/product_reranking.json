@@ -10,7 +10,9 @@
     "ground_truth": [
       3,
       1
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "other"
   },
   {
     "query": "Fromage rapé",
@@ -23,7 +25,9 @@
     "ground_truth": [
       2,
       1
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "dairy"
   },
   {
     "query": "Jus d'orange",
@@ -35,7 +39,9 @@
     ],
     "ground_truth": [
       2
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "beverages"
   },
   {
     "query": "Pain complet",
@@ -48,7 +54,9 @@
     "ground_truth": [
       3,
       2
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "grocery"
   },
   {
     "query": "Yaourt 0%",
@@ -60,7 +68,9 @@
     ],
     "ground_truth": [
       2
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "dairy"
   },
   {
     "query": "Chocolat noir dessert",
@@ -73,7 +83,9 @@
     "ground_truth": [
       3,
       1
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "sweets"
   },
   {
     "query": "Eau gazeuse",
@@ -86,7 +98,9 @@
     "ground_truth": [
       2,
       1
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "beverages"
   },
   {
     "query": "Saucisson à l'ail",
@@ -98,7 +112,9 @@
     ],
     "ground_truth": [
       3
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "meats_fish"
   },
   {
     "query": "Pâtes fraîches",
@@ -110,7 +126,9 @@
     ],
     "ground_truth": [
       2
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "grocery"
   },
   {
     "query": "Crème solaire enfant",
@@ -122,7 +140,9 @@
     ],
     "ground_truth": [
       3
-    ]
+    ],
+    "product_type": "cosmetics",
+    "shelf_category": "other"
   },
   {
     "query": "lessive peaux sensibles",
@@ -134,7 +154,9 @@
     ],
     "ground_truth": [
       2
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "beverages"
   },
   {
     "query": "Café en grains",
@@ -146,7 +168,9 @@
     ],
     "ground_truth": [
       3
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "beverages"
   },
   {
     "query": "Thé vert menthe",
@@ -159,7 +183,9 @@
     "ground_truth": [
       3,
       2
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "beverages"
   },
   {
     "query": "Vin rouge Bordeaux",
@@ -171,7 +197,9 @@
     ],
     "ground_truth": [
       2
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "beverages"
   },
   {
     "query": "Bière blonde légère",
@@ -183,7 +211,9 @@
     ],
     "ground_truth": [
       3
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "beverages"
   },
   {
     "query": "Céréales petit déjeuner enfant",
@@ -196,7 +226,9 @@
     "ground_truth": [
       2,
       0
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "grocery"
   },
   {
     "query": "Shampooing cheveux gras",
@@ -209,7 +241,9 @@
     "ground_truth": [
       2,
       3
-    ]
+    ],
+    "product_type": "cosmetics",
+    "shelf_category": "other"
   },
   {
     "query": "Piles AAA",
@@ -221,7 +255,9 @@
     ],
     "ground_truth": [
       3
-    ]
+    ],
+    "product_type": "non_food",
+    "shelf_category": "other"
   },
   {
     "query": "Nourriture pour chaton",
@@ -233,7 +269,9 @@
     ],
     "ground_truth": [
       3
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "other"
   },
   {
     "query": "Gluten free bread",
@@ -247,7 +285,9 @@
       1,
       2,
       3
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "other"
   },
   {
     "query": "Huile végétale pour friture",
@@ -259,7 +299,9 @@
     ],
     "ground_truth": [
       2
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "grocery"
   },
   {
     "query": "Lait d'amande",
@@ -272,7 +314,9 @@
     "ground_truth": [
       3,
       1
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "dairy"
   },
   {
     "query": "Gâteau au chocolat",
@@ -285,7 +329,9 @@
     "ground_truth": [
       2,
       1
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "sweets"
   },
   {
     "query": "Dentifrice blancheur",
@@ -297,7 +343,9 @@
     ],
     "ground_truth": [
       3
-    ]
+    ],
+    "product_type": "cosmetics",
+    "shelf_category": "other"
   },
   {
     "query": "Pizza 4 fromages",
@@ -309,7 +357,9 @@
     ],
     "ground_truth": [
       3
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "dairy"
   },
   {
     "query": "riz thai",
@@ -322,7 +372,9 @@
     "ground_truth": [
       3,
       0
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "grocery"
   },
   {
     "query": "Moutarde forte",
@@ -335,7 +387,9 @@
     "ground_truth": [
       3,
       1
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "other"
   },
   {
     "query": "Haricots verts fins",
@@ -347,7 +401,9 @@
     ],
     "ground_truth": [
       3
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "fruits/vegetables"
   },
   {
     "query": "Compote de pommes",
@@ -359,7 +415,9 @@
     ],
     "ground_truth": [
       3
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "other"
   },
   {
     "query": "Steak haché pur boeuf",
@@ -371,7 +429,9 @@
     ],
     "ground_truth": [
       3
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "meats_fish"
   },
   {
     "query": "Chips sel & vinaigre",
@@ -383,7 +443,9 @@
     ],
     "ground_truth": [
       3
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "beverages"
   },
   {
     "query": "Sirop d'érable",
@@ -397,7 +459,9 @@
       3,
       2,
       0
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "sweets"
   },
   {
     "query": "Tofu fumé",
@@ -409,7 +473,9 @@
     ],
     "ground_truth": [
       3
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "other"
   },
   {
     "query": "Vinaigre de cidre",
@@ -421,7 +487,9 @@
     ],
     "ground_truth": [
       3
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "beverages"
   },
   {
     "query": "farine de sarrasin",
@@ -433,7 +501,9 @@
     ],
     "ground_truth": [
       3
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "grocery"
   },
   {
     "query": "pâte feuilletée",
@@ -446,7 +516,9 @@
     "ground_truth": [
       3,
       0
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "grocery"
   },
   {
     "query": "petits pois carottes",
@@ -459,7 +531,9 @@
     "ground_truth": [
       3,
       1
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "fruits/vegetables"
   },
   {
     "query": "tablettes lave-vaisselle",
@@ -471,7 +545,9 @@
     ],
     "ground_truth": [
       3
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "household"
   },
   {
     "query": "crème dessert chocolat",
@@ -485,7 +561,9 @@
       3,
       0,
       2
-    ]
+    ],
+    "product_type": "cosmetics",
+    "shelf_category": "sweets"
   },
   {
     "query": "Jambon blanc découenné dégraissé",
@@ -497,7 +575,9 @@
     ],
     "ground_truth": [
       3
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "meats_fish"
   },
   {
     "query": "Poivre noir",
@@ -510,7 +590,9 @@
     "ground_truth": [
       3,
       2
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "other"
   },
   {
     "query": "Cacahuètes grillées salées",
@@ -522,7 +604,9 @@
     ],
     "ground_truth": [
       3
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "other"
   },
   {
     "query": "Gel douche hydratant",
@@ -535,7 +619,9 @@
     "ground_truth": [
       3,
       1
-    ]
+    ],
+    "product_type": "cosmetics",
+    "shelf_category": "other"
   },
   {
     "query": "Coton-tiges",
@@ -548,7 +634,9 @@
     "ground_truth": [
       3,
       0
-    ]
+    ],
+    "product_type": "non_food",
+    "shelf_category": "other"
   },
   {
     "query": "Sacs congélation",
@@ -560,7 +648,9 @@
     ],
     "ground_truth": [
       3
-    ]
+    ],
+    "product_type": "non_food",
+    "shelf_category": "other"
   },
   {
     "query": "Miel liquide",
@@ -573,7 +663,9 @@
     "ground_truth": [
       3,
       0
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "sweets"
   },
   {
     "query": "Lentilles corail",
@@ -585,7 +677,9 @@
     ],
     "ground_truth": [
       3
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "grocery"
   },
   {
     "query": "boisson énergisante",
@@ -597,7 +691,9 @@
     ],
     "ground_truth": [
       3
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "beverages"
   },
   {
     "query": "Bouillon de volaille",
@@ -610,7 +706,9 @@
     "ground_truth": [
       3,
       1
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "other"
   },
   {
     "query": "Sardines à l'huile",
@@ -622,7 +720,9 @@
     ],
     "ground_truth": [
       3
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "meats_fish"
   },
   {
     "query": "iphone 14 pro",
@@ -635,7 +735,9 @@
     "ground_truth": [
       3,
       0
-    ]
+    ],
+    "product_type": "non_food",
+    "shelf_category": "electronics"
   },
   {
     "query": "nike air max",
@@ -648,7 +750,9 @@
     "ground_truth": [
       2,
       1
-    ]
+    ],
+    "product_type": "non_food",
+    "shelf_category": "other"
   },
   {
     "query": "lego star wars",
@@ -660,7 +764,9 @@
     ],
     "ground_truth": [
       2
-    ]
+    ],
+    "product_type": "non_food",
+    "shelf_category": "other"
   },
   {
     "query": "ps5 jeux",
@@ -673,7 +779,9 @@
     "ground_truth": [
       1,
       2
-    ]
+    ],
+    "product_type": "non_food",
+    "shelf_category": "electronics"
   },
   {
     "query": "tv 4k 55p",
@@ -686,7 +794,9 @@
     "ground_truth": [
       0,
       3
-    ]
+    ],
+    "product_type": "non_food",
+    "shelf_category": "electronics"
   },
   {
     "query": "casque bose",
@@ -699,7 +809,9 @@
     "ground_truth": [
       1,
       2
-    ]
+    ],
+    "product_type": "non_food",
+    "shelf_category": "electronics"
   },
   {
     "query": "aspirateur robot",
@@ -712,7 +824,9 @@
     "ground_truth": [
       1,
       2
-    ]
+    ],
+    "product_type": "non_food",
+    "shelf_category": "electronics"
   },
   {
     "query": "machine à café grain",
@@ -724,7 +838,9 @@
     ],
     "ground_truth": [
       2
-    ]
+    ],
+    "product_type": "non_food",
+    "shelf_category": "beverages"
   },
   {
     "query": "ssd 1to",
@@ -737,7 +853,9 @@
     "ground_truth": [
       1,
       3
-    ]
+    ],
+    "product_type": "non_food",
+    "shelf_category": "electronics"
   },
   {
     "query": "protéine whey",
@@ -750,6 +868,8 @@
     "ground_truth": [
       2,
       0
-    ]
+    ],
+    "product_type": "food",
+    "shelf_category": "other"
   }
 ]
