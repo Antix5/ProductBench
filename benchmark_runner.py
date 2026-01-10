@@ -127,6 +127,36 @@ MODELS = [
         "params": "Unknown (Micro)",
         "note": "",
     },
+    {
+        "model": "GPT OSS 20B",
+        "openrouter_id": "openai/gpt-oss-20b",
+        "params": "20B",
+        "note": "",
+    },
+    {
+        "model": "GPT OSS 120B",
+        "openrouter_id": "openai/gpt-oss-120b",
+        "params": "120B",
+        "note": "",
+    },
+    {
+        "model": "GPT-5 Nano",
+        "openrouter_id": "openai/gpt-5-nano",
+        "params": "Unknown",
+        "note": "",
+    },
+    {
+        "model": "GPT-5 Mini",
+        "openrouter_id": "openai/gpt-5-mini",
+        "params": "Unknown",
+        "note": "",
+    },
+    {
+        "model": "Hermes 4 70B",
+        "openrouter_id": "nousresearch/hermes-4-70b",
+        "params": "70B",
+        "note": "",
+    },
 ]
 
 

@@ -21,6 +21,11 @@
 | Ministral 3B 2512 | shelf_category | 14B | $0.006152 | 0.5189 | 0.0364 | $0.000039 | $0.000018 | 11.76 |  |
 | Google Gemma 3 4B Instruct | shelf_category | 4B | $0.001157 | 0.4886 | 0.0364 | $0.000007 | $0.000004 | 11.80 |  |
 | Mistral Ministral 3B | shelf_category | 3B | $0.002440 | 0.4394 | 0.0558 | $0.000015 | $0.000007 | 9.03 |  |
+| GPT OSS 20B | shelf_category | 20B | $0.000000 | 0.0000 | 0.0000 | $0.000000 | $0.000000 | 0.00 | Skipped (Unavailable) |
+| GPT OSS 120B | shelf_category | 120B | $0.000000 | 0.0000 | 0.0000 | $0.000000 | $0.000000 | 0.00 | Skipped (Unavailable) |
+| GPT-5 Nano | shelf_category | Unknown | $0.000000 | 0.0000 | 0.0000 | $0.000000 | $0.000000 | 0.00 | Skipped (Unavailable) |
+| GPT-5 Mini | shelf_category | Unknown | $0.000000 | 0.0000 | 0.0000 | $0.000000 | $0.000000 | 0.00 | Skipped (Unavailable) |
+| Hermes 4 70B | shelf_category | 70B | $0.000000 | 0.0000 | 0.0000 | $0.000000 | $0.000000 | 0.00 | Skipped (Unavailable) |
 | Gemini 3 flash (Judge) | product_type | Unknown | $0.035574 | 0.8818 | 0.0027 | $0.000212 | $0.000127 | 15.38 | This model is here to see how the judge model self evaluate. |
 | Gemini 2.5 Flash | product_type | Unknown | $0.022633 | 0.8485 | 0.0056 | $0.000132 | $0.000087 | 12.47 | Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. |
 | Gemini 2.0 flash | product_type | Unknown | $0.006554 | 0.8129 | 0.0090 | $0.000040 | $0.000022 | 14.01 | Google's Gemini 2 Flash model. Reference model |
@@ -40,6 +45,11 @@
 | Google Gemma 3 4B Instruct | product_type | 4B | $0.001156 | 0.4030 | 0.0396 | $0.000007 | $0.000004 | 11.97 |  |
 | Mistral Ministral 3B | product_type | 3B | $0.002439 | 0.3720 | 0.0714 | $0.000015 | $0.000007 | 13.83 |  |
 | Ministral 3B 2512 | product_type | 14B | $0.006149 | 0.3621 | 0.0328 | $0.000039 | $0.000018 | 11.45 |  |
+| GPT OSS 20B | product_type | 20B | $0.000000 | 0.0000 | 0.0000 | $0.000000 | $0.000000 | 0.00 | Skipped (Unavailable) |
+| GPT OSS 120B | product_type | 120B | $0.000000 | 0.0000 | 0.0000 | $0.000000 | $0.000000 | 0.00 | Skipped (Unavailable) |
+| GPT-5 Nano | product_type | Unknown | $0.000000 | 0.0000 | 0.0000 | $0.000000 | $0.000000 | 0.00 | Skipped (Unavailable) |
+| GPT-5 Mini | product_type | Unknown | $0.000000 | 0.0000 | 0.0000 | $0.000000 | $0.000000 | 0.00 | Skipped (Unavailable) |
+| Hermes 4 70B | product_type | 70B | $0.000000 | 0.0000 | 0.0000 | $0.000000 | $0.000000 | 0.00 | Skipped (Unavailable) |
 | Gemini 3 flash (Judge) | base | Unknown | $0.035058 | 0.8750 | 0.0040 | $0.000209 | $0.000125 | 15.87 | This model is here to see how the judge model self evaluate. |
 | Gemini 2.5 Flash | base | Unknown | $0.022282 | 0.7750 | 0.0075 | $0.000130 | $0.000086 | 12.64 | Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. |
 | Gemini 2.0 flash | base | Unknown | $0.006484 | 0.7356 | 0.0042 | $0.000039 | $0.000022 | 12.19 | Google's Gemini 2 Flash model. Reference model |
@@ -59,3 +69,8 @@
 | Google Gemma 3 4B Instruct | base | 4B | $0.001146 | 0.3477 | 0.0317 | $0.000007 | $0.000004 | 11.74 |  |
 | Ministral 3B 2512 | base | 14B | $0.006044 | 0.2977 | 0.0250 | $0.000038 | $0.000017 | 11.91 |  |
 | Mistral Ministral 3B | base | 3B | $0.002396 | 0.2545 | 0.0590 | $0.000015 | $0.000007 | 9.25 |  |
+| GPT OSS 20B | base | 20B | $0.000000 | 0.0000 | 0.0000 | $0.000000 | $0.000000 | 0.00 | Skipped (Unavailable) |
+| GPT OSS 120B | base | 120B | $0.000000 | 0.0000 | 0.0000 | $0.000000 | $0.000000 | 0.00 | Skipped (Unavailable) |
+| GPT-5 Nano | base | Unknown | $0.000000 | 0.0000 | 0.0000 | $0.000000 | $0.000000 | 0.00 | Skipped (Unavailable) |
+| GPT-5 Mini | base | Unknown | $0.000000 | 0.0000 | 0.0000 | $0.000000 | $0.000000 | 0.00 | Skipped (Unavailable) |
+| Hermes 4 70B | base | 70B | $0.000000 | 0.0000 | 0.0000 | $0.000000 | $0.000000 | 0.00 | Skipped (Unavailable) |
