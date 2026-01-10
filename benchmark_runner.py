@@ -252,7 +252,11 @@ async def augment_label_async(
             temperature=0.3,
             max_tokens=200,  # Increased slightly to allow for some reasoning if needed, though we ask for nothing else
             extra_body={
-                "include_reasoning": False
+                "reasoning": {
+                    "enabled": False,  # Explicitly turn off reasoning
+                    "effort": "none",   # Redundant backup to ensure 0 reasoning tokens
+                    "exclude": True
+                }
             },  # Request reasoning for supported models
         )
 
@@ -406,7 +410,13 @@ async def rerank_products_async(
                 {"role": "user", "content": prompt},
             ],
             temperature=0,
-            extra_body={"include_reasoning": False},
+            extra_body={
+                "reasoning": {
+                    "enabled": False,  # Explicitly turn off reasoning
+                    "effort": "none",   # Redundant backup to ensure 0 reasoning tokens
+                    "exclude": True
+                }
+            },
         )
 
         content, raw_dump = extract_content_and_reasoning(response)

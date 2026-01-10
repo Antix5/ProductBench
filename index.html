@@ -70,7 +70,13 @@
                 </h1>
                 <p class="text-slate-400 text-lg">
                     Benchmarking LLMs on Product Knowledge Tasks: Price vs
-                    Performance
+                    Performance<br/>
+                    Information: Some models are not included properly. This is in part due to the inability to disable reasoning for some model via
+                    the openrouter API, this benchmark being latency sensitive, this was a key aspect of it. This also explain why GPT models have null score, those models
+                    are not designed to be used in non reasoning way. To support those models, the benchmark would need to be adapted to allow reasoning, which would make it less
+                    relevent to determine low latency workhorse models.
+
+                
                 </p>
                 <div class="mt-4 flex justify-center items-center gap-4">
                     <label for="scenario-select" class="text-white font-medium">Scenario:</label>

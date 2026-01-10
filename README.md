@@ -55,13 +55,13 @@ The UI and the benchmark logic have been in part vibe coded.
 
 ## Usage
 
-To run the benchmarks and launch the web UI, execute the `main.py` script:
+To run the benchmarks, execute the `benchmark_runner.py` script:
 
 ```bash
-python main.py
+python benchmark_runner.py
 ```
 
-The application will be available at `http://127.0.0.1:5001`.
+The website is a static one, so just go on index.html to see the leaderboard at the end
 
 ## Project Structure
 
