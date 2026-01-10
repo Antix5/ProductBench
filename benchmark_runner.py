@@ -116,6 +116,12 @@ MODELS = [
         "note": "",
     },
     {
+        "model": "Gemini 2.5 Flash",
+        "openrouter_id": "google/gemini-2.5-flash",
+        "params": "Unknown",
+        "note": "Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks.",
+    },
+    {
         "model": "Amazon Nova Micro 1.0",
         "openrouter_id": "amazon/nova-micro-v1",
         "params": "Unknown (Micro)",
