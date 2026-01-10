@@ -546,20 +546,31 @@ async def run_benchmarks_async():
         model_id = model_info["openrouter_id"]
         params = model_info["params"]
 
+        # Determine which scenarios are missing for this model
+        scenarios_to_run = []
+        for scenario in SCENARIOS:
+            if (model_id, scenario) not in results_map:
+                scenarios_to_run.append(scenario)
+
+        if not scenarios_to_run:
+            print(f"Skipping {model_name} ({model_id}) - All scenarios already benchmarked.")
+            continue
+
         # Get Pricing
         price_data = PRICING_MAP.get(model_id, {"input": 0.0, "output": 0.0})
         input_price_per_m = price_data.get("input", 0.0)
         output_price_per_m = price_data.get("output", 0.0)
 
         print(f"\nBenchmarking: {model_name} ({model_id})")
+        print(f"  > Missing scenarios: {', '.join(scenarios_to_run)}")
 
         try:  # Safety net for the entire model process
             # Health Check
             is_healthy = await check_model_health_async(client, model_id)
             if not is_healthy:
                 print(f"Skipping {model_name} due to health check failure.")
-                # Add skipped result for all scenarios
-                for scenario in SCENARIOS:
+                # Add skipped result for all MISSING scenarios
+                for scenario in scenarios_to_run:
                     results.append(
                         {
                             "model": model_name,
@@ -580,7 +591,7 @@ async def run_benchmarks_async():
                     )
                 continue
 
-            for scenario in SCENARIOS:
+            for scenario in scenarios_to_run:
                 print(f"  > Scenario: {scenario}")
                 start_time = time.time()
 
@@ -687,7 +698,7 @@ async def run_benchmarks_async():
 
         except Exception as e:
             print(f"CRITICAL ERROR benchmarking {model_name}: {e}")
-            for scenario in SCENARIOS:
+            for scenario in scenarios_to_run:
                 results.append(
                     {
                         "model": model_name,
