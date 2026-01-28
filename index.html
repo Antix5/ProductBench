@@ -630,11 +630,64 @@
             function escapeHtml(text) {
                 if (text == null) return '';
                 return String(text)
-                    .replace(/&/g, "&amp;")
-                    .replace(/</g, "&lt;")
-                    .replace(/>/g, "&gt;")
-                    .replace(/"/g, "&quot;")
+                    .replace(/&/g, "&")
+                    .replace(/</g, "<")
+                    .replace(/>/g, ">")
+                    .replace(/"/g, '"')
                     .replace(/'/g, "&#039;");
+            }
+
+            // --- Outlier Filtering for Charts ---
+            function filterOutliers(data, keys, multiplier = 2.0) {
+                // Filter out extreme outliers using IQR method.
+                // Only removes really big outliers (using multiplier 2.0 instead of 1.5).
+                // 
+                // Args:
+                //   data: Array of data objects
+                //   keys: Array of keys to check for outliers (e.g., ['actual_cost', 'time_taken'])
+                //   multiplier: IQR multiplier (default 2.0 for extreme outliers only)
+                // 
+                // Returns:
+                //   Filtered array with outliers removed
+                if (!data || data.length < 10) return data; // Not enough data for meaningful outlier detection
+                
+                let filtered = [...data];
+                
+                for (const key of keys) {
+                    const values = filtered.map(d => d[key]).filter(v => v !== undefined && v !== null && !isNaN(v));
+                    if (values.length < 10) continue;
+                    
+                    // Sort values to calculate percentiles
+                    values.sort((a, b) => a - b);
+                    
+                    // Calculate Q1 (25th percentile) and Q3 (75th percentile)
+                    const q1Idx = Math.floor(values.length * 0.25);
+                    const q3Idx = Math.floor(values.length * 0.75);
+                    const q1 = values[q1Idx];
+                    const q3 = values[q3Idx];
+                    
+                    // Calculate IQR
+                    const iqr = q3 - q1;
+                    
+                    // Define bounds (using multiplier for extreme outliers only)
+                    const lowerBound = q1 - multiplier * iqr;
+                    const upperBound = q3 + multiplier * iqr;
+                    
+                    // Filter out outliers
+                    const beforeCount = filtered.length;
+                    filtered = filtered.filter(d => {
+                        const val = d[key];
+                        if (val === undefined || val === null || isNaN(val)) return true;
+                        return val >= lowerBound && val <= upperBound;
+                    });
+                    
+                    const removed = beforeCount - filtered.length;
+                    if (removed > 0) {
+                        console.log(`Filtered out ${removed} outliers from ${key} (bounds: ${lowerBound.toFixed(2)} - ${upperBound.toFixed(2)})`);
+                    }
+                }
+                
+                return filtered;
             }
 
             // --- Chart Instances ---
@@ -642,8 +695,11 @@
             let timeChart;
 
             function updateCharts(data) {
+                // Filter outliers for charts only (keep all data in tables)
+                const filteredData = filterOutliers(data, ['actual_cost', 'time_taken'], 2.0);
+                
                 // 1. Pareto Chart
-                const paretoData = data.map(row => ({
+                const paretoData = filteredData.map(row => ({
                     x: row.actual_cost > 0 ? row.actual_cost : 1e-7,
                     y: parseFloat(row.label_augmentation_score),
                     label: row.model,
@@ -736,8 +792,8 @@
                     }
                 });
 
-                // 2. Time Chart
-                const timeData = data.map(row => ({
+                // 2. Time Chart (use filtered data)
+                const timeData = filteredData.map(row => ({
                     x: row.time_taken > 0 ? row.time_taken : 0.01,
                     y: parseFloat(row.label_augmentation_score),
                     label: row.model,
@@ -955,15 +1011,19 @@
             function updateRerankCharts() {
                 const data = getFilteredRerankData();
                 
-                // Performance scatter chart
-                const llmPoints = data.filter(d => d.type === 'llm').map(d => ({
+                // Filter outliers for charts only (keep all data in tables)
+                // Filter by both time_per_item and rerank_dist (more aggressive: 1.5x multiplier)
+                const chartData = filterOutliers(data, ['time_per_item', 'rerank_dist'], 1.5);
+                
+                // Performance scatter chart (use filtered data)
+                const llmPoints = chartData.filter(d => d.type === 'llm').map(d => ({
                     x: d.time_per_item > 0 ? d.time_per_item : 0.001,
                     y: d.rerank_dist,
                     label: d.model,
                     scenario: d.scenario
                 }));
                 
-                const localPoints = data.filter(d => d.type === 'local').map(d => ({
+                const localPoints = chartData.filter(d => d.type === 'local').map(d => ({
                     x: d.time_per_item > 0 ? d.time_per_item : 0.001,
                     y: d.rerank_dist,
                     label: d.model,
@@ -1004,8 +1064,8 @@
                             y: {
                                 title: { display: true, text: 'Rerank Distance (Lower is Better)', color: '#94a3b8' },
                                 grid: { color: '#334155' },
-                                ticks: { color: '#cbd5e1' },
-                                min: 0, max: 1
+                                ticks: { color: '#cbd5e1' }
+                                // Auto-scale to use full height
                             }
                         },
                         plugins: {
@@ -1019,15 +1079,15 @@
                     }
                 });
 
-                // Comparison bar chart
-                const models = [...new Set(data.map(d => d.model))];
+                // Comparison bar chart (use filtered data)
+                const models = [...new Set(chartData.map(d => d.model))];
                 const scenarios = ['base', 'product_type', 'shelf_category'];
                 const colors = ['rgba(148, 163, 184, 0.8)', 'rgba(56, 189, 248, 0.8)', 'rgba(244, 114, 182, 0.8)'];
                 
                 const datasets = scenarios.map((scenario, idx) => ({
                     label: scenario,
                     data: models.map(model => {
-                        const match = data.find(d => d.model === model && (d.scenario === scenario || (scenario === 'base' && !d.scenario)));
+                        const match = chartData.find(d => d.model === model && (d.scenario === scenario || (scenario === 'base' && !d.scenario)));
                         return match ? match.rerank_dist : null;
                     }),
                     backgroundColor: colors[idx]
@@ -1045,8 +1105,8 @@
                             y: { 
                                 title: { display: true, text: 'Rerank Distance (Lower is Better)', color: '#94a3b8' },
                                 ticks: { color: '#cbd5e1' },
-                                grid: { color: '#334155' },
-                                min: 0, max: 1
+                                grid: { color: '#334155' }
+                                // Auto-scale to use full height
                             }
                         },
                         plugins: { legend: { labels: { color: '#e2e8f0' } } }

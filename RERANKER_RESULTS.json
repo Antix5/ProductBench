@@ -4363,5 +4363,4370 @@
                 }
             ]
         }
+    },
+    {
+        "model": "product-reranker-mmBERT-small",
+        "type": "local_reranker",
+        "scenario": "base",
+        "params": "Small",
+        "device": "mps:0",
+        "rerank_dist": 0.10046350190784924,
+        "time_taken": 5.74,
+        "avg_time_per_item": 0.0957,
+        "note": "",
+        "details": {
+            "product_reranking": [
+                {
+                    "query": "BEUR. Doux GOURM. 200g plaq.",
+                    "products": [
+                        "Beurre sal\u00e9 all\u00e9g\u00e9 20% de mati\u00e8re grasse",
+                        "Beurre ou huile de beurre 80%",
+                        "Plaquette de fois de canard",
+                        "Beurre doux Gastronomique 200g"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        0,
+                        2
+                    ],
+                    "scores": [
+                        0.8236,
+                        0.0423,
+                        0.0356,
+                        0.0088
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 1.8818
+                },
+                {
+                    "query": "Fromage rap\u00e9",
+                    "products": [
+                        "Mozzarella en tranches",
+                        "Parmesan en copeaux",
+                        "Emmental rap\u00e9 200g",
+                        "Cheddar en bloc"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        0,
+                        3,
+                        1
+                    ],
+                    "scores": [
+                        0.7033,
+                        0.0174,
+                        0.0118,
+                        0.0078
+                    ],
+                    "distance": 0.1227846846619507,
+                    "context": null,
+                    "time": 0.1892
+                },
+                {
+                    "query": "Jus d'orange",
+                    "products": [
+                        "Nectar d'orange",
+                        "Jus de pomme pur jus",
+                        "Jus d'orange press\u00e9 frais 1L",
+                        "Boisson \u00e0 l'orange"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        2,
+                        3,
+                        1
+                    ],
+                    "scores": [
+                        0.7362,
+                        0.6457,
+                        0.5334,
+                        0.0438
+                    ],
+                    "distance": 0.36907024642854247,
+                    "context": null,
+                    "time": 0.1263
+                },
+                {
+                    "query": "Pain complet",
+                    "products": [
+                        "Baguette tradition",
+                        "Pain de mie blanc",
+                        "Pain de seigle",
+                        "Pain de campagne \u00e0 la farine compl\u00e8te"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.2899,
+                        0.1268,
+                        0.1084,
+                        0.017
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.4566
+                },
+                {
+                    "query": "Yaourt 0%",
+                    "products": [
+                        "Yaourt nature au lait entier",
+                        "Fromage blanc 20% MG",
+                        "Yaourt aux fruits 0% MG",
+                        "Yaourt grec"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        3,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.4806,
+                        0.1457,
+                        0.0921,
+                        0.0141
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0195
+                },
+                {
+                    "query": "Chocolat noir dessert",
+                    "products": [
+                        "Tablette de chocolat au lait",
+                        "Chocolat noir 70% d\u00e9gustation",
+                        "Chocolat en poudre",
+                        "Chocolat p\u00e2tissier 52% cacao"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        3,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.8335,
+                        0.1972,
+                        0.1004,
+                        0.0979
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.019
+                },
+                {
+                    "query": "Eau gazeuse",
+                    "products": [
+                        "Eau de source plate 1.5L",
+                        "Limonade artisanale",
+                        "Eau min\u00e9rale naturelle p\u00e9tillante",
+                        "Sirop de grenadine"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        2,
+                        3,
+                        1
+                    ],
+                    "scores": [
+                        0.2679,
+                        0.1718,
+                        0.0197,
+                        0.0182
+                    ],
+                    "distance": 0.34907907019286744,
+                    "context": null,
+                    "time": 0.5121
+                },
+                {
+                    "query": "Saucisson \u00e0 l'ail",
+                    "products": [
+                        "Saucisse de Morteau",
+                        "Chorizo doux",
+                        "Saucisson sec pur porc",
+                        "Saucisson \u00e0 cuire \u00e0 l'ail fum\u00e9"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.9958,
+                        0.6753,
+                        0.535,
+                        0.0255
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0495
+                },
+                {
+                    "query": "P\u00e2tes fra\u00eeches",
+                    "products": [
+                        "Penne rigate (s\u00e8ches)",
+                        "Nouilles chinoises instantan\u00e9es",
+                        "Raviolis frais au boeuf",
+                        "Semoule de couscous"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "scores": [
+                        0.0278,
+                        0.0256,
+                        0.0158,
+                        0.0125
+                    ],
+                    "distance": 0.5,
+                    "context": null,
+                    "time": 0.0198
+                },
+                {
+                    "query": "Cr\u00e8me solaire enfant",
+                    "products": [
+                        "Lait apr\u00e8s-soleil",
+                        "Cr\u00e8me solaire SPF 30 adulte",
+                        "Huile s\u00e8che bronzante",
+                        "Spray solaire tr\u00e8s haute protection 50+ pour enfants"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        3,
+                        0,
+                        2
+                    ],
+                    "scores": [
+                        0.9909,
+                        0.8896,
+                        0.0846,
+                        0.051
+                    ],
+                    "distance": 0.36907024642854247,
+                    "context": null,
+                    "time": 0.0203
+                },
+                {
+                    "query": "lessive peaux sensibles",
+                    "products": [
+                        "Assouplissant concentr\u00e9",
+                        "Lessive liquide classique",
+                        "Lessive hypoallerg\u00e9nique test\u00e9e dermatologiquement",
+                        "D\u00e9tachant avant lavage"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        1,
+                        3,
+                        0
+                    ],
+                    "scores": [
+                        0.8804,
+                        0.2976,
+                        0.196,
+                        0.0143
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0468
+                },
+                {
+                    "query": "Caf\u00e9 en grains",
+                    "products": [
+                        "Caf\u00e9 soluble",
+                        "Dosettes de caf\u00e9 compatibles",
+                        "Caf\u00e9 moulu pour expresso",
+                        "Paquet de caf\u00e9 en grains pur arabica"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        2,
+                        1
+                    ],
+                    "scores": [
+                        0.482,
+                        0.3324,
+                        0.1123,
+                        0.0998
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0219
+                },
+                {
+                    "query": "Th\u00e9 vert menthe",
+                    "products": [
+                        "Infusion verveine",
+                        "Th\u00e9 noir English Breakfast",
+                        "Th\u00e9 vert nature de Chine",
+                        "Th\u00e9 vert \u00e0 la menthe en sachets"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.9702,
+                        0.4295,
+                        0.089,
+                        0.0543
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.4036
+                },
+                {
+                    "query": "Vin rouge Bordeaux",
+                    "products": [
+                        "Vin blanc d'Alsace",
+                        "Champagne brut",
+                        "Saint-\u00c9milion Grand Cru",
+                        "Vin ros\u00e9 de Provence"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        2,
+                        1
+                    ],
+                    "scores": [
+                        0.8159,
+                        0.6474,
+                        0.098,
+                        0.0294
+                    ],
+                    "distance": 0.5,
+                    "context": null,
+                    "time": 0.0193
+                },
+                {
+                    "query": "Bi\u00e8re blonde l\u00e9g\u00e8re",
+                    "products": [
+                        "Bi\u00e8re brune d'abbaye",
+                        "Cidre brut",
+                        "Bi\u00e8re blanche fruit\u00e9e",
+                        "Pilsner lager \u00e0 4.5%"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        2,
+                        3,
+                        1
+                    ],
+                    "scores": [
+                        0.9458,
+                        0.7619,
+                        0.0311,
+                        0.0107
+                    ],
+                    "distance": 0.5,
+                    "context": null,
+                    "time": 0.0183
+                },
+                {
+                    "query": "C\u00e9r\u00e9ales petit d\u00e9jeuner enfant",
+                    "products": [
+                        "Muesli croustillant aux fruits secs",
+                        "Flocons d'avoine bio",
+                        "C\u00e9r\u00e9ales chocolat\u00e9es enrichies en vitamines",
+                        "Barre de c\u00e9r\u00e9ales"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        3,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.3987,
+                        0.1737,
+                        0.0242,
+                        0.0135
+                    ],
+                    "distance": 0.1227846846619507,
+                    "context": null,
+                    "time": 0.0194
+                },
+                {
+                    "query": "Shampooing cheveux gras",
+                    "products": [
+                        "Apr\u00e8s-shampooing pour cheveux secs",
+                        "Masque capillaire nourrissant",
+                        "Shampooing purifiant \u00e0 l'argile",
+                        "Shampooing sec"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        2,
+                        3,
+                        1
+                    ],
+                    "scores": [
+                        0.9909,
+                        0.7207,
+                        0.5538,
+                        0.1324
+                    ],
+                    "distance": 0.3065735963827292,
+                    "context": null,
+                    "time": 0.0184
+                },
+                {
+                    "query": "Piles AAA",
+                    "products": [
+                        "Batterie externe pour smartphone",
+                        "Piles AA rechargeables",
+                        "Chargeur de piles",
+                        "Lot de 4 piles alcalines AAA"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        3,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.9999,
+                        0.9996,
+                        0.9049,
+                        0.2487
+                    ],
+                    "distance": 0.36907024642854247,
+                    "context": null,
+                    "time": 0.0191
+                },
+                {
+                    "query": "Nourriture pour chaton",
+                    "products": [
+                        "Croquettes pour chien adulte",
+                        "P\u00e2t\u00e9e pour chat senior",
+                        "Liti\u00e8re pour chat",
+                        "Croquettes compl\u00e8tes pour chaton de 2 \u00e0 12 mois"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.8252,
+                        0.7479,
+                        0.3997,
+                        0.1347
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0455
+                },
+                {
+                    "query": "Gluten free bread",
+                    "products": [
+                        "Pain de mie complet",
+                        "Pr\u00e9paration pour pain sans gluten",
+                        "Galettes de riz",
+                        "Pain de ma\u00efs"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        0,
+                        3,
+                        2
+                    ],
+                    "scores": [
+                        0.9578,
+                        0.1701,
+                        0.1369,
+                        0.0499
+                    ],
+                    "distance": 0.09397456446531771,
+                    "context": null,
+                    "time": 0.0205
+                },
+                {
+                    "query": "Huile v\u00e9g\u00e9tale pour friture",
+                    "products": [
+                        "Huile d'olive vierge extra",
+                        "Vinaigre balsamique",
+                        "Huile de tournesol",
+                        "Huile de s\u00e9same"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        2,
+                        1
+                    ],
+                    "scores": [
+                        0.5583,
+                        0.4928,
+                        0.3912,
+                        0.0484
+                    ],
+                    "distance": 0.5,
+                    "context": null,
+                    "time": 0.019
+                },
+                {
+                    "query": "Lait d'amande",
+                    "products": [
+                        "Lait de vache entier",
+                        "Boisson au soja",
+                        "Cr\u00e8me de coco",
+                        "Boisson v\u00e9g\u00e9tale \u00e0 base d'amandes sans sucre"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        1,
+                        2
+                    ],
+                    "scores": [
+                        0.3383,
+                        0.0934,
+                        0.0451,
+                        0.0376
+                    ],
+                    "distance": 0.08027921085181244,
+                    "context": null,
+                    "time": 0.0207
+                },
+                {
+                    "query": "G\u00e2teau au chocolat",
+                    "products": [
+                        "Tarte aux pommes",
+                        "Mousse au chocolat",
+                        "Fondant au chocolat pr\u00eat \u00e0 cuire",
+                        "Farine de bl\u00e9"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        2,
+                        0,
+                        3
+                    ],
+                    "scores": [
+                        0.157,
+                        0.0934,
+                        0.0572,
+                        0.005
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.4119
+                },
+                {
+                    "query": "Dentifrice blancheur",
+                    "products": [
+                        "Bain de bouche protection caries",
+                        "Dentifrice dents sensibles",
+                        "Brosse \u00e0 dents \u00e9lectrique",
+                        "Dentifrice action blancheur au charbon"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.952,
+                        0.5172,
+                        0.0371,
+                        0.0349
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0286
+                },
+                {
+                    "query": "Pizza 4 fromages",
+                    "products": [
+                        "Quiche lorraine",
+                        "Pizza Reine (jambon, champignons)",
+                        "Lasanne \u00e0 la bolognaise",
+                        "Pizza surgel\u00e9e aux quatre fromages"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.9991,
+                        0.1923,
+                        0.0357,
+                        0.0138
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0211
+                },
+                {
+                    "query": "riz thai",
+                    "products": [
+                        "Riz basmati",
+                        "Riz rond pour risotto",
+                        "Semoule de bl\u00e9",
+                        "Riz parfum\u00e9 au jasmin"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        3,
+                        1,
+                        2
+                    ],
+                    "scores": [
+                        0.4389,
+                        0.4103,
+                        0.2603,
+                        0.061
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.3918
+                },
+                {
+                    "query": "Moutarde forte",
+                    "products": [
+                        "Ketchup",
+                        "Moutarde \u00e0 l'ancienne",
+                        "Mayonnaise",
+                        "Moutarde de Dijon extra-forte"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.9808,
+                        0.8523,
+                        0.0404,
+                        0.0156
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0208
+                },
+                {
+                    "query": "Haricots verts fins",
+                    "products": [
+                        "Petits pois en conserve",
+                        "Haricots blancs secs",
+                        "Flageolets verts",
+                        "Conserve de haricots verts extra-fins"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.9491,
+                        0.8597,
+                        0.0576,
+                        0.0194
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0489
+                },
+                {
+                    "query": "Compote de pommes",
+                    "products": [
+                        "Confiture de fraises",
+                        "Pur\u00e9e de pommes de terre",
+                        "Yaourt aux fruits",
+                        "Gourdes de compote de pommes sans sucre ajout\u00e9"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        0,
+                        2
+                    ],
+                    "scores": [
+                        0.5434,
+                        0.3582,
+                        0.0769,
+                        0.0248
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0195
+                },
+                {
+                    "query": "Steak hach\u00e9 pur boeuf",
+                    "products": [
+                        "Saucisses de porc",
+                        "Escalope de dinde",
+                        "Steak de soja",
+                        "Steak hach\u00e9 5% MG pur boeuf"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.9987,
+                        0.1818,
+                        0.1036,
+                        0.0186
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0198
+                },
+                {
+                    "query": "Chips sel & vinaigre",
+                    "products": [
+                        "Bretzels sal\u00e9s",
+                        "Chips saveur paprika",
+                        "Tuiles ap\u00e9ritives \u00e0 la cr\u00e8me et oignon",
+                        "Chips de pomme de terre saveur sel et vinaigre"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.8729,
+                        0.0763,
+                        0.0255,
+                        0.0156
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0202
+                },
+                {
+                    "query": "Sirop d'\u00e9rable",
+                    "products": [
+                        "Miel d'acacia",
+                        "Sucre en poudre",
+                        "Sirop d'agave",
+                        "Pur sirop d'\u00e9rable du Canada"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        3,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.9965,
+                        0.9575,
+                        0.1082,
+                        0.0331
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0216
+                },
+                {
+                    "query": "Tofu fum\u00e9",
+                    "products": [
+                        "Seitan nature",
+                        "Tempeh",
+                        "Tofu soyeux",
+                        "Bloc de tofu fum\u00e9 aux amandes et s\u00e9same"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.7326,
+                        0.4066,
+                        0.0253,
+                        0.0109
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0217
+                },
+                {
+                    "query": "Vinaigre de cidre",
+                    "products": [
+                        "Vinaigre de vin rouge",
+                        "Jus de citron",
+                        "Vinaigre balsamique",
+                        "Vinaigre de cidre bio non pasteuris\u00e9"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.767,
+                        0.246,
+                        0.1484,
+                        0.0814
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.022
+                },
+                {
+                    "query": "farine de sarrasin",
+                    "products": [
+                        "Farine de bl\u00e9 T55",
+                        "F\u00e9cule de ma\u00efs (Ma\u00efzena)",
+                        "Polenta",
+                        "Farine de bl\u00e9 noir bio"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        0,
+                        2
+                    ],
+                    "scores": [
+                        0.0585,
+                        0.0567,
+                        0.0343,
+                        0.0071
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.023
+                },
+                {
+                    "query": "p\u00e2te feuillet\u00e9e",
+                    "products": [
+                        "P\u00e2te bris\u00e9e",
+                        "P\u00e2te \u00e0 pizza",
+                        "Feuilles de brick",
+                        "Rouleau de p\u00e2te feuillet\u00e9e pur beurre"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        3,
+                        1,
+                        2
+                    ],
+                    "scores": [
+                        0.7685,
+                        0.5859,
+                        0.1125,
+                        0.0247
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0215
+                },
+                {
+                    "query": "petits pois carottes",
+                    "products": [
+                        "Conserve de ma\u00efs doux",
+                        "Jardini\u00e8re de l\u00e9gumes",
+                        "Pur\u00e9e de carottes",
+                        "Conserve de petits pois et jeunes carottes"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.9026,
+                        0.0716,
+                        0.0284,
+                        0.0087
+                    ],
+                    "distance": 0.08027921085181244,
+                    "context": null,
+                    "time": 0.0241
+                },
+                {
+                    "query": "tablettes lave-vaisselle",
+                    "products": [
+                        "Liquide de rin\u00e7age",
+                        "Sel r\u00e9g\u00e9n\u00e9rant",
+                        "Nettoyant machine",
+                        "Tablettes lave-vaisselle tout-en-un"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        1.0,
+                        0.0841,
+                        0.0129,
+                        0.0086
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.1
+                },
+                {
+                    "query": "cr\u00e8me dessert chocolat",
+                    "products": [
+                        "Mousse au chocolat",
+                        "Flan au caramel",
+                        "Yaourt au chocolat",
+                        "Danette cr\u00e8me dessert saveur chocolat"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        2,
+                        1
+                    ],
+                    "scores": [
+                        0.9605,
+                        0.1778,
+                        0.0856,
+                        0.0151
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.018
+                },
+                {
+                    "query": "Jambon blanc d\u00e9couenn\u00e9 d\u00e9graiss\u00e9",
+                    "products": [
+                        "Jambon cru de Parme",
+                        "Lardons fum\u00e9s",
+                        "Mousse de canard",
+                        "2 tranches de jambon cuit sup\u00e9rieur"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        2,
+                        1
+                    ],
+                    "scores": [
+                        0.1635,
+                        0.1118,
+                        0.004,
+                        0.0039
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0185
+                },
+                {
+                    "query": "Poivre noir",
+                    "products": [
+                        "Piment de Cayenne",
+                        "Baies roses",
+                        "Poivre blanc de Penja",
+                        "Moulin \u00e0 poivre noir de Madagascar"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.3515,
+                        0.2204,
+                        0.0173,
+                        0.0135
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0184
+                },
+                {
+                    "query": "Cacahu\u00e8tes grill\u00e9es sal\u00e9es",
+                    "products": [
+                        "Noix de cajou non sal\u00e9es",
+                        "Amandes effil\u00e9es",
+                        "Pistaches",
+                        "Arachides grill\u00e9es \u00e0 sec et sal\u00e9es pour ap\u00e9ritif"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        2,
+                        1
+                    ],
+                    "scores": [
+                        0.5673,
+                        0.1064,
+                        0.0254,
+                        0.0205
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0483
+                },
+                {
+                    "query": "Gel douche hydratant",
+                    "products": [
+                        "Savon de Marseille",
+                        "Huile de douche surgras",
+                        "Exfoliant corporel",
+                        "Cr\u00e8me de douche nourrissante au beurre de karit\u00e9"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.8881,
+                        0.69,
+                        0.4689,
+                        0.0783
+                    ],
+                    "distance": 0.08027921085181244,
+                    "context": null,
+                    "time": 0.0196
+                },
+                {
+                    "query": "Coton-tiges",
+                    "products": [
+                        "Disques de coton d\u00e9maquillants",
+                        "Lingettes pour b\u00e9b\u00e9",
+                        "Cure-dents",
+                        "B\u00e2tonnets ouat\u00e9s"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        2,
+                        1,
+                        3
+                    ],
+                    "scores": [
+                        0.532,
+                        0.0332,
+                        0.0126,
+                        0.0124
+                    ],
+                    "distance": 0.1227846846619507,
+                    "context": null,
+                    "time": 0.0198
+                },
+                {
+                    "query": "Sacs cong\u00e9lation",
+                    "products": [
+                        "Film alimentaire \u00e9tirable",
+                        "Papier aluminium",
+                        "Sacs poubelle",
+                        "Sacs avec fermeture zip pour cong\u00e9lateur"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.9996,
+                        0.9865,
+                        0.1075,
+                        0.0204
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0206
+                },
+                {
+                    "query": "Miel liquide",
+                    "products": [
+                        "Miel cr\u00e9meux",
+                        "Sirop d'\u00e9rable",
+                        "Confiture d'abricots",
+                        "Miel de fleurs liquide"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        3,
+                        1,
+                        2
+                    ],
+                    "scores": [
+                        0.9264,
+                        0.8876,
+                        0.0397,
+                        0.0135
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0189
+                },
+                {
+                    "query": "Lentilles corail",
+                    "products": [
+                        "Lentilles vertes du Puy",
+                        "Pois chiches secs",
+                        "Haricots rouges en conserve",
+                        "Sachet de lentilles corail s\u00e8ches"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        1,
+                        2
+                    ],
+                    "scores": [
+                        0.9274,
+                        0.3926,
+                        0.018,
+                        0.015
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0198
+                },
+                {
+                    "query": "boisson \u00e9nergisante",
+                    "products": [
+                        "Jus de fruits multivitamin\u00e9",
+                        "Caf\u00e9 froid",
+                        "Boisson isotonique pour le sport",
+                        "Canette de boisson \u00e9nergisante \u00e0 la taurine"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.9271,
+                        0.7141,
+                        0.0772,
+                        0.0451
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.022
+                },
+                {
+                    "query": "Bouillon de volaille",
+                    "products": [
+                        "Fond de veau",
+                        "Bouillon de l\u00e9gumes",
+                        "Soupe de poulet en brique",
+                        "Cubes de bouillon de poule d\u00e9graiss\u00e9"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        0,
+                        3,
+                        2
+                    ],
+                    "scores": [
+                        0.4194,
+                        0.0935,
+                        0.0887,
+                        0.0426
+                    ],
+                    "distance": 0.08027921085181244,
+                    "context": null,
+                    "time": 0.0217
+                },
+                {
+                    "query": "Sardines \u00e0 l'huile",
+                    "products": [
+                        "Filets de maquereaux \u00e0 la moutarde",
+                        "Thon au naturel",
+                        "Anchois \u00e0 l'huile",
+                        "Conserve de sardines \u00e0 l'huile d'olive vierge extra"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.8708,
+                        0.2587,
+                        0.0398,
+                        0.011
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0277
+                },
+                {
+                    "query": "iphone 14 pro",
+                    "products": [
+                        "Apple iPhone 13 128Go",
+                        "Samsung Galaxy S23 Ultra",
+                        "Coque de protection transparente pour iPhone 14",
+                        "Apple iPhone 14 Pro Max 256Go Noir Sid\u00e9ral"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        2,
+                        3,
+                        1
+                    ],
+                    "scores": [
+                        0.9982,
+                        0.9975,
+                        0.9972,
+                        0.6018
+                    ],
+                    "distance": 0.08027921085181244,
+                    "context": null,
+                    "time": 0.03
+                },
+                {
+                    "query": "nike air max",
+                    "products": [
+                        "Adidas Originals Stan Smith",
+                        "Nike Air Force 1 '07 Blanc",
+                        "Nike Air Max 90 Homme Noir",
+                        "Lot de 3 paires de chaussettes Nike"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        1,
+                        3,
+                        0
+                    ],
+                    "scores": [
+                        0.9989,
+                        0.9673,
+                        0.9358,
+                        0.294
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0234
+                },
+                {
+                    "query": "lego star wars",
+                    "products": [
+                        "Playmobil Chevalier et Dragon",
+                        "LEGO Harry Potter Le Ch\u00e2teau de Poudlard",
+                        "LEGO Star Wars Faucon Millenium",
+                        "Star Wars : L'Empire Contre-Attaque (DVD)"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        3,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.9989,
+                        0.9958,
+                        0.9372,
+                        0.8493
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0256
+                },
+                {
+                    "query": "ps5 jeux",
+                    "products": [
+                        "Manette DualSense PS5",
+                        "God of War Ragnar\u00f6k (PS5)",
+                        "Console PlayStation 5 \u00c9dition Standard",
+                        "Carte cadeau PlayStation Store 20\u20ac"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        2,
+                        0,
+                        3
+                    ],
+                    "scores": [
+                        0.9972,
+                        0.994,
+                        0.9936,
+                        0.7849
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0252
+                },
+                {
+                    "query": "tv 4k 55p",
+                    "products": [
+                        "Samsung TV QLED 4K 55 pouces (138cm)",
+                        "Support mural pour TV 32-65 pouces",
+                        "C\u00e2ble HDMI 2.1 Ultra High Speed",
+                        "LG TV OLED 4K 65 pouces"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        3,
+                        1,
+                        2
+                    ],
+                    "scores": [
+                        1.0,
+                        1.0,
+                        0.9964,
+                        0.9199
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.0615
+                },
+                {
+                    "query": "casque bose",
+                    "products": [
+                        "Sony WH-1000XM5",
+                        "Bose QuietComfort 45",
+                        "\u00c9couteurs Bose QuietComfort Earbuds II",
+                        "\u00c9tui de transport pour casque"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.9187,
+                        0.9098,
+                        0.4914,
+                        0.2854
+                    ],
+                    "distance": 0.34907907019286744,
+                    "context": null,
+                    "time": 0.0245
+                },
+                {
+                    "query": "aspirateur robot",
+                    "products": [
+                        "Aspirateur balai Dyson V15",
+                        "iRobot Roomba j7+",
+                        "Roborock S8",
+                        "Sacs pour aspirateur Rowenta"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        3,
+                        1,
+                        2
+                    ],
+                    "scores": [
+                        0.9675,
+                        0.8965,
+                        0.6956,
+                        0.3014
+                    ],
+                    "distance": 0.4293582810446799,
+                    "context": null,
+                    "time": 0.0233
+                },
+                {
+                    "query": "machine \u00e0 caf\u00e9 grain",
+                    "products": [
+                        "Cafeti\u00e8re filtre Moulinex",
+                        "Machine \u00e0 caf\u00e9 Nespresso Vertuo",
+                        "De'Longhi Magnifica S (Broyeur \u00e0 grains)",
+                        "Paquet de caf\u00e9 en grains 1kg"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        3,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.7634,
+                        0.6117,
+                        0.2054,
+                        0.0472
+                    ],
+                    "distance": 0.5,
+                    "context": null,
+                    "time": 0.024
+                },
+                {
+                    "query": "ssd 1to",
+                    "products": [
+                        "Disque dur externe HDD 2To",
+                        "Samsung 980 PRO NVMe M.2 SSD 1To",
+                        "Cl\u00e9 USB 128Go",
+                        "SanDisk SSD Plus 1To SATA III"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        3,
+                        0,
+                        2
+                    ],
+                    "scores": [
+                        1.0,
+                        1.0,
+                        0.9881,
+                        0.5907
+                    ],
+                    "distance": 0.0,
+                    "context": null,
+                    "time": 0.025
+                },
+                {
+                    "query": "prot\u00e9ine whey",
+                    "products": [
+                        "Barre prot\u00e9in\u00e9e chocolat",
+                        "Shaker pour prot\u00e9ines",
+                        "Optimum Nutrition Gold Standard 100% Whey",
+                        "Cr\u00e9atine Monohydrate"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        1,
+                        3,
+                        0
+                    ],
+                    "scores": [
+                        0.5548,
+                        0.2839,
+                        0.1191,
+                        0.0782
+                    ],
+                    "distance": 0.1227846846619507,
+                    "context": null,
+                    "time": 0.0231
+                }
+            ]
+        }
+    },
+    {
+        "model": "product-reranker-mmBERT-small",
+        "type": "local_reranker",
+        "scenario": "product_type",
+        "params": "Small",
+        "device": "mps:0",
+        "rerank_dist": 0.10046350190784924,
+        "time_taken": 1.37,
+        "avg_time_per_item": 0.0229,
+        "note": "",
+        "details": {
+            "product_reranking": [
+                {
+                    "query": "BEUR. Doux GOURM. 200g plaq.",
+                    "products": [
+                        "Beurre sal\u00e9 all\u00e9g\u00e9 20% de mati\u00e8re grasse",
+                        "Beurre ou huile de beurre 80%",
+                        "Plaquette de fois de canard",
+                        "Beurre doux Gastronomique 200g"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        0,
+                        2
+                    ],
+                    "scores": [
+                        0.8236,
+                        0.0423,
+                        0.0356,
+                        0.0088
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0324
+                },
+                {
+                    "query": "Fromage rap\u00e9",
+                    "products": [
+                        "Mozzarella en tranches",
+                        "Parmesan en copeaux",
+                        "Emmental rap\u00e9 200g",
+                        "Cheddar en bloc"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        0,
+                        3,
+                        1
+                    ],
+                    "scores": [
+                        0.7033,
+                        0.0174,
+                        0.0118,
+                        0.0078
+                    ],
+                    "distance": 0.1227846846619507,
+                    "context": "food",
+                    "time": 0.0226
+                },
+                {
+                    "query": "Jus d'orange",
+                    "products": [
+                        "Nectar d'orange",
+                        "Jus de pomme pur jus",
+                        "Jus d'orange press\u00e9 frais 1L",
+                        "Boisson \u00e0 l'orange"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        2,
+                        3,
+                        1
+                    ],
+                    "scores": [
+                        0.7362,
+                        0.6457,
+                        0.5334,
+                        0.0438
+                    ],
+                    "distance": 0.36907024642854247,
+                    "context": "food",
+                    "time": 0.0233
+                },
+                {
+                    "query": "Pain complet",
+                    "products": [
+                        "Baguette tradition",
+                        "Pain de mie blanc",
+                        "Pain de seigle",
+                        "Pain de campagne \u00e0 la farine compl\u00e8te"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.2899,
+                        0.1268,
+                        0.1084,
+                        0.017
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0232
+                },
+                {
+                    "query": "Yaourt 0%",
+                    "products": [
+                        "Yaourt nature au lait entier",
+                        "Fromage blanc 20% MG",
+                        "Yaourt aux fruits 0% MG",
+                        "Yaourt grec"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        3,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.4806,
+                        0.1457,
+                        0.0921,
+                        0.0141
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0218
+                },
+                {
+                    "query": "Chocolat noir dessert",
+                    "products": [
+                        "Tablette de chocolat au lait",
+                        "Chocolat noir 70% d\u00e9gustation",
+                        "Chocolat en poudre",
+                        "Chocolat p\u00e2tissier 52% cacao"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        3,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.8335,
+                        0.1972,
+                        0.1004,
+                        0.0979
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0238
+                },
+                {
+                    "query": "Eau gazeuse",
+                    "products": [
+                        "Eau de source plate 1.5L",
+                        "Limonade artisanale",
+                        "Eau min\u00e9rale naturelle p\u00e9tillante",
+                        "Sirop de grenadine"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        2,
+                        3,
+                        1
+                    ],
+                    "scores": [
+                        0.2679,
+                        0.1718,
+                        0.0197,
+                        0.0182
+                    ],
+                    "distance": 0.34907907019286744,
+                    "context": "food",
+                    "time": 0.0242
+                },
+                {
+                    "query": "Saucisson \u00e0 l'ail",
+                    "products": [
+                        "Saucisse de Morteau",
+                        "Chorizo doux",
+                        "Saucisson sec pur porc",
+                        "Saucisson \u00e0 cuire \u00e0 l'ail fum\u00e9"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.9958,
+                        0.6753,
+                        0.535,
+                        0.0255
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0225
+                },
+                {
+                    "query": "P\u00e2tes fra\u00eeches",
+                    "products": [
+                        "Penne rigate (s\u00e8ches)",
+                        "Nouilles chinoises instantan\u00e9es",
+                        "Raviolis frais au boeuf",
+                        "Semoule de couscous"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "scores": [
+                        0.0278,
+                        0.0256,
+                        0.0158,
+                        0.0125
+                    ],
+                    "distance": 0.5,
+                    "context": "food",
+                    "time": 0.0226
+                },
+                {
+                    "query": "Cr\u00e8me solaire enfant",
+                    "products": [
+                        "Lait apr\u00e8s-soleil",
+                        "Cr\u00e8me solaire SPF 30 adulte",
+                        "Huile s\u00e8che bronzante",
+                        "Spray solaire tr\u00e8s haute protection 50+ pour enfants"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        3,
+                        0,
+                        2
+                    ],
+                    "scores": [
+                        0.9909,
+                        0.8896,
+                        0.0846,
+                        0.051
+                    ],
+                    "distance": 0.36907024642854247,
+                    "context": "cosmetics",
+                    "time": 0.0217
+                },
+                {
+                    "query": "lessive peaux sensibles",
+                    "products": [
+                        "Assouplissant concentr\u00e9",
+                        "Lessive liquide classique",
+                        "Lessive hypoallerg\u00e9nique test\u00e9e dermatologiquement",
+                        "D\u00e9tachant avant lavage"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        1,
+                        3,
+                        0
+                    ],
+                    "scores": [
+                        0.8804,
+                        0.2976,
+                        0.196,
+                        0.0143
+                    ],
+                    "distance": 0.0,
+                    "context": "non_food",
+                    "time": 0.0221
+                },
+                {
+                    "query": "Caf\u00e9 en grains",
+                    "products": [
+                        "Caf\u00e9 soluble",
+                        "Dosettes de caf\u00e9 compatibles",
+                        "Caf\u00e9 moulu pour expresso",
+                        "Paquet de caf\u00e9 en grains pur arabica"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        2,
+                        1
+                    ],
+                    "scores": [
+                        0.482,
+                        0.3324,
+                        0.1123,
+                        0.0998
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0227
+                },
+                {
+                    "query": "Th\u00e9 vert menthe",
+                    "products": [
+                        "Infusion verveine",
+                        "Th\u00e9 noir English Breakfast",
+                        "Th\u00e9 vert nature de Chine",
+                        "Th\u00e9 vert \u00e0 la menthe en sachets"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.9702,
+                        0.4295,
+                        0.089,
+                        0.0543
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0216
+                },
+                {
+                    "query": "Vin rouge Bordeaux",
+                    "products": [
+                        "Vin blanc d'Alsace",
+                        "Champagne brut",
+                        "Saint-\u00c9milion Grand Cru",
+                        "Vin ros\u00e9 de Provence"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        2,
+                        1
+                    ],
+                    "scores": [
+                        0.8159,
+                        0.6474,
+                        0.098,
+                        0.0294
+                    ],
+                    "distance": 0.5,
+                    "context": "food",
+                    "time": 0.0212
+                },
+                {
+                    "query": "Bi\u00e8re blonde l\u00e9g\u00e8re",
+                    "products": [
+                        "Bi\u00e8re brune d'abbaye",
+                        "Cidre brut",
+                        "Bi\u00e8re blanche fruit\u00e9e",
+                        "Pilsner lager \u00e0 4.5%"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        2,
+                        3,
+                        1
+                    ],
+                    "scores": [
+                        0.9458,
+                        0.7619,
+                        0.0311,
+                        0.0107
+                    ],
+                    "distance": 0.5,
+                    "context": "food",
+                    "time": 0.0201
+                },
+                {
+                    "query": "C\u00e9r\u00e9ales petit d\u00e9jeuner enfant",
+                    "products": [
+                        "Muesli croustillant aux fruits secs",
+                        "Flocons d'avoine bio",
+                        "C\u00e9r\u00e9ales chocolat\u00e9es enrichies en vitamines",
+                        "Barre de c\u00e9r\u00e9ales"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        3,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.3987,
+                        0.1737,
+                        0.0242,
+                        0.0135
+                    ],
+                    "distance": 0.1227846846619507,
+                    "context": "food",
+                    "time": 0.0233
+                },
+                {
+                    "query": "Shampooing cheveux gras",
+                    "products": [
+                        "Apr\u00e8s-shampooing pour cheveux secs",
+                        "Masque capillaire nourrissant",
+                        "Shampooing purifiant \u00e0 l'argile",
+                        "Shampooing sec"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        2,
+                        3,
+                        1
+                    ],
+                    "scores": [
+                        0.9909,
+                        0.7207,
+                        0.5538,
+                        0.1324
+                    ],
+                    "distance": 0.3065735963827292,
+                    "context": "cosmetics",
+                    "time": 0.0206
+                },
+                {
+                    "query": "Piles AAA",
+                    "products": [
+                        "Batterie externe pour smartphone",
+                        "Piles AA rechargeables",
+                        "Chargeur de piles",
+                        "Lot de 4 piles alcalines AAA"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        3,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.9999,
+                        0.9996,
+                        0.9049,
+                        0.2487
+                    ],
+                    "distance": 0.36907024642854247,
+                    "context": "non_food",
+                    "time": 0.0229
+                },
+                {
+                    "query": "Nourriture pour chaton",
+                    "products": [
+                        "Croquettes pour chien adulte",
+                        "P\u00e2t\u00e9e pour chat senior",
+                        "Liti\u00e8re pour chat",
+                        "Croquettes compl\u00e8tes pour chaton de 2 \u00e0 12 mois"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.8252,
+                        0.7479,
+                        0.3997,
+                        0.1347
+                    ],
+                    "distance": 0.0,
+                    "context": "non_food",
+                    "time": 0.0255
+                },
+                {
+                    "query": "Gluten free bread",
+                    "products": [
+                        "Pain de mie complet",
+                        "Pr\u00e9paration pour pain sans gluten",
+                        "Galettes de riz",
+                        "Pain de ma\u00efs"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        0,
+                        3,
+                        2
+                    ],
+                    "scores": [
+                        0.9578,
+                        0.1701,
+                        0.1369,
+                        0.0499
+                    ],
+                    "distance": 0.09397456446531771,
+                    "context": "food",
+                    "time": 0.0219
+                },
+                {
+                    "query": "Huile v\u00e9g\u00e9tale pour friture",
+                    "products": [
+                        "Huile d'olive vierge extra",
+                        "Vinaigre balsamique",
+                        "Huile de tournesol",
+                        "Huile de s\u00e9same"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        2,
+                        1
+                    ],
+                    "scores": [
+                        0.5583,
+                        0.4928,
+                        0.3912,
+                        0.0484
+                    ],
+                    "distance": 0.5,
+                    "context": "food",
+                    "time": 0.0198
+                },
+                {
+                    "query": "Lait d'amande",
+                    "products": [
+                        "Lait de vache entier",
+                        "Boisson au soja",
+                        "Cr\u00e8me de coco",
+                        "Boisson v\u00e9g\u00e9tale \u00e0 base d'amandes sans sucre"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        1,
+                        2
+                    ],
+                    "scores": [
+                        0.3383,
+                        0.0934,
+                        0.0451,
+                        0.0376
+                    ],
+                    "distance": 0.08027921085181244,
+                    "context": "food",
+                    "time": 0.0217
+                },
+                {
+                    "query": "G\u00e2teau au chocolat",
+                    "products": [
+                        "Tarte aux pommes",
+                        "Mousse au chocolat",
+                        "Fondant au chocolat pr\u00eat \u00e0 cuire",
+                        "Farine de bl\u00e9"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        2,
+                        0,
+                        3
+                    ],
+                    "scores": [
+                        0.157,
+                        0.0934,
+                        0.0572,
+                        0.005
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0206
+                },
+                {
+                    "query": "Dentifrice blancheur",
+                    "products": [
+                        "Bain de bouche protection caries",
+                        "Dentifrice dents sensibles",
+                        "Brosse \u00e0 dents \u00e9lectrique",
+                        "Dentifrice action blancheur au charbon"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.952,
+                        0.5172,
+                        0.0371,
+                        0.0349
+                    ],
+                    "distance": 0.0,
+                    "context": "cosmetics",
+                    "time": 0.0205
+                },
+                {
+                    "query": "Pizza 4 fromages",
+                    "products": [
+                        "Quiche lorraine",
+                        "Pizza Reine (jambon, champignons)",
+                        "Lasanne \u00e0 la bolognaise",
+                        "Pizza surgel\u00e9e aux quatre fromages"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.9991,
+                        0.1923,
+                        0.0357,
+                        0.0138
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.021
+                },
+                {
+                    "query": "riz thai",
+                    "products": [
+                        "Riz basmati",
+                        "Riz rond pour risotto",
+                        "Semoule de bl\u00e9",
+                        "Riz parfum\u00e9 au jasmin"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        3,
+                        1,
+                        2
+                    ],
+                    "scores": [
+                        0.4389,
+                        0.4103,
+                        0.2603,
+                        0.061
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0213
+                },
+                {
+                    "query": "Moutarde forte",
+                    "products": [
+                        "Ketchup",
+                        "Moutarde \u00e0 l'ancienne",
+                        "Mayonnaise",
+                        "Moutarde de Dijon extra-forte"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.9808,
+                        0.8523,
+                        0.0404,
+                        0.0156
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0214
+                },
+                {
+                    "query": "Haricots verts fins",
+                    "products": [
+                        "Petits pois en conserve",
+                        "Haricots blancs secs",
+                        "Flageolets verts",
+                        "Conserve de haricots verts extra-fins"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.9491,
+                        0.8597,
+                        0.0576,
+                        0.0194
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0215
+                },
+                {
+                    "query": "Compote de pommes",
+                    "products": [
+                        "Confiture de fraises",
+                        "Pur\u00e9e de pommes de terre",
+                        "Yaourt aux fruits",
+                        "Gourdes de compote de pommes sans sucre ajout\u00e9"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        0,
+                        2
+                    ],
+                    "scores": [
+                        0.5434,
+                        0.3582,
+                        0.0769,
+                        0.0248
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0219
+                },
+                {
+                    "query": "Steak hach\u00e9 pur boeuf",
+                    "products": [
+                        "Saucisses de porc",
+                        "Escalope de dinde",
+                        "Steak de soja",
+                        "Steak hach\u00e9 5% MG pur boeuf"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.9987,
+                        0.1818,
+                        0.1036,
+                        0.0186
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0219
+                },
+                {
+                    "query": "Chips sel & vinaigre",
+                    "products": [
+                        "Bretzels sal\u00e9s",
+                        "Chips saveur paprika",
+                        "Tuiles ap\u00e9ritives \u00e0 la cr\u00e8me et oignon",
+                        "Chips de pomme de terre saveur sel et vinaigre"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.8729,
+                        0.0763,
+                        0.0255,
+                        0.0156
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0225
+                },
+                {
+                    "query": "Sirop d'\u00e9rable",
+                    "products": [
+                        "Miel d'acacia",
+                        "Sucre en poudre",
+                        "Sirop d'agave",
+                        "Pur sirop d'\u00e9rable du Canada"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        3,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.9965,
+                        0.9575,
+                        0.1082,
+                        0.0331
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0228
+                },
+                {
+                    "query": "Tofu fum\u00e9",
+                    "products": [
+                        "Seitan nature",
+                        "Tempeh",
+                        "Tofu soyeux",
+                        "Bloc de tofu fum\u00e9 aux amandes et s\u00e9same"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.7326,
+                        0.4066,
+                        0.0253,
+                        0.0109
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0224
+                },
+                {
+                    "query": "Vinaigre de cidre",
+                    "products": [
+                        "Vinaigre de vin rouge",
+                        "Jus de citron",
+                        "Vinaigre balsamique",
+                        "Vinaigre de cidre bio non pasteuris\u00e9"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.767,
+                        0.246,
+                        0.1484,
+                        0.0814
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0231
+                },
+                {
+                    "query": "farine de sarrasin",
+                    "products": [
+                        "Farine de bl\u00e9 T55",
+                        "F\u00e9cule de ma\u00efs (Ma\u00efzena)",
+                        "Polenta",
+                        "Farine de bl\u00e9 noir bio"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        0,
+                        2
+                    ],
+                    "scores": [
+                        0.0585,
+                        0.0567,
+                        0.0343,
+                        0.0071
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0238
+                },
+                {
+                    "query": "p\u00e2te feuillet\u00e9e",
+                    "products": [
+                        "P\u00e2te bris\u00e9e",
+                        "P\u00e2te \u00e0 pizza",
+                        "Feuilles de brick",
+                        "Rouleau de p\u00e2te feuillet\u00e9e pur beurre"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        3,
+                        1,
+                        2
+                    ],
+                    "scores": [
+                        0.7685,
+                        0.5859,
+                        0.1125,
+                        0.0247
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0222
+                },
+                {
+                    "query": "petits pois carottes",
+                    "products": [
+                        "Conserve de ma\u00efs doux",
+                        "Jardini\u00e8re de l\u00e9gumes",
+                        "Pur\u00e9e de carottes",
+                        "Conserve de petits pois et jeunes carottes"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.9026,
+                        0.0716,
+                        0.0284,
+                        0.0087
+                    ],
+                    "distance": 0.08027921085181244,
+                    "context": "food",
+                    "time": 0.0237
+                },
+                {
+                    "query": "tablettes lave-vaisselle",
+                    "products": [
+                        "Liquide de rin\u00e7age",
+                        "Sel r\u00e9g\u00e9n\u00e9rant",
+                        "Nettoyant machine",
+                        "Tablettes lave-vaisselle tout-en-un"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        1.0,
+                        0.0841,
+                        0.0129,
+                        0.0086
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0292
+                },
+                {
+                    "query": "cr\u00e8me dessert chocolat",
+                    "products": [
+                        "Mousse au chocolat",
+                        "Flan au caramel",
+                        "Yaourt au chocolat",
+                        "Danette cr\u00e8me dessert saveur chocolat"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        2,
+                        1
+                    ],
+                    "scores": [
+                        0.9605,
+                        0.1778,
+                        0.0856,
+                        0.0151
+                    ],
+                    "distance": 0.0,
+                    "context": "cosmetics",
+                    "time": 0.0266
+                },
+                {
+                    "query": "Jambon blanc d\u00e9couenn\u00e9 d\u00e9graiss\u00e9",
+                    "products": [
+                        "Jambon cru de Parme",
+                        "Lardons fum\u00e9s",
+                        "Mousse de canard",
+                        "2 tranches de jambon cuit sup\u00e9rieur"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        2,
+                        1
+                    ],
+                    "scores": [
+                        0.1635,
+                        0.1118,
+                        0.004,
+                        0.0039
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0248
+                },
+                {
+                    "query": "Poivre noir",
+                    "products": [
+                        "Piment de Cayenne",
+                        "Baies roses",
+                        "Poivre blanc de Penja",
+                        "Moulin \u00e0 poivre noir de Madagascar"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.3515,
+                        0.2204,
+                        0.0173,
+                        0.0135
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0238
+                },
+                {
+                    "query": "Cacahu\u00e8tes grill\u00e9es sal\u00e9es",
+                    "products": [
+                        "Noix de cajou non sal\u00e9es",
+                        "Amandes effil\u00e9es",
+                        "Pistaches",
+                        "Arachides grill\u00e9es \u00e0 sec et sal\u00e9es pour ap\u00e9ritif"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        2,
+                        1
+                    ],
+                    "scores": [
+                        0.5673,
+                        0.1064,
+                        0.0254,
+                        0.0205
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0259
+                },
+                {
+                    "query": "Gel douche hydratant",
+                    "products": [
+                        "Savon de Marseille",
+                        "Huile de douche surgras",
+                        "Exfoliant corporel",
+                        "Cr\u00e8me de douche nourrissante au beurre de karit\u00e9"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.8881,
+                        0.69,
+                        0.4689,
+                        0.0783
+                    ],
+                    "distance": 0.08027921085181244,
+                    "context": "cosmetics",
+                    "time": 0.0241
+                },
+                {
+                    "query": "Coton-tiges",
+                    "products": [
+                        "Disques de coton d\u00e9maquillants",
+                        "Lingettes pour b\u00e9b\u00e9",
+                        "Cure-dents",
+                        "B\u00e2tonnets ouat\u00e9s"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        2,
+                        1,
+                        3
+                    ],
+                    "scores": [
+                        0.532,
+                        0.0332,
+                        0.0126,
+                        0.0124
+                    ],
+                    "distance": 0.1227846846619507,
+                    "context": "non_food",
+                    "time": 0.0224
+                },
+                {
+                    "query": "Sacs cong\u00e9lation",
+                    "products": [
+                        "Film alimentaire \u00e9tirable",
+                        "Papier aluminium",
+                        "Sacs poubelle",
+                        "Sacs avec fermeture zip pour cong\u00e9lateur"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.9996,
+                        0.9865,
+                        0.1075,
+                        0.0204
+                    ],
+                    "distance": 0.0,
+                    "context": "non_food",
+                    "time": 0.0231
+                },
+                {
+                    "query": "Miel liquide",
+                    "products": [
+                        "Miel cr\u00e9meux",
+                        "Sirop d'\u00e9rable",
+                        "Confiture d'abricots",
+                        "Miel de fleurs liquide"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        3,
+                        1,
+                        2
+                    ],
+                    "scores": [
+                        0.9264,
+                        0.8876,
+                        0.0397,
+                        0.0135
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0223
+                },
+                {
+                    "query": "Lentilles corail",
+                    "products": [
+                        "Lentilles vertes du Puy",
+                        "Pois chiches secs",
+                        "Haricots rouges en conserve",
+                        "Sachet de lentilles corail s\u00e8ches"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        1,
+                        2
+                    ],
+                    "scores": [
+                        0.9274,
+                        0.3926,
+                        0.018,
+                        0.015
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0223
+                },
+                {
+                    "query": "boisson \u00e9nergisante",
+                    "products": [
+                        "Jus de fruits multivitamin\u00e9",
+                        "Caf\u00e9 froid",
+                        "Boisson isotonique pour le sport",
+                        "Canette de boisson \u00e9nergisante \u00e0 la taurine"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.9271,
+                        0.7141,
+                        0.0772,
+                        0.0451
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0228
+                },
+                {
+                    "query": "Bouillon de volaille",
+                    "products": [
+                        "Fond de veau",
+                        "Bouillon de l\u00e9gumes",
+                        "Soupe de poulet en brique",
+                        "Cubes de bouillon de poule d\u00e9graiss\u00e9"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        0,
+                        3,
+                        2
+                    ],
+                    "scores": [
+                        0.4194,
+                        0.0935,
+                        0.0887,
+                        0.0426
+                    ],
+                    "distance": 0.08027921085181244,
+                    "context": "food",
+                    "time": 0.0216
+                },
+                {
+                    "query": "Sardines \u00e0 l'huile",
+                    "products": [
+                        "Filets de maquereaux \u00e0 la moutarde",
+                        "Thon au naturel",
+                        "Anchois \u00e0 l'huile",
+                        "Conserve de sardines \u00e0 l'huile d'olive vierge extra"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.8708,
+                        0.2587,
+                        0.0398,
+                        0.011
+                    ],
+                    "distance": 0.0,
+                    "context": "food",
+                    "time": 0.0267
+                },
+                {
+                    "query": "iphone 14 pro",
+                    "products": [
+                        "Apple iPhone 13 128Go",
+                        "Samsung Galaxy S23 Ultra",
+                        "Coque de protection transparente pour iPhone 14",
+                        "Apple iPhone 14 Pro Max 256Go Noir Sid\u00e9ral"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        2,
+                        3,
+                        1
+                    ],
+                    "scores": [
+                        0.9982,
+                        0.9975,
+                        0.9972,
+                        0.6018
+                    ],
+                    "distance": 0.08027921085181244,
+                    "context": "non_food",
+                    "time": 0.0276
+                },
+                {
+                    "query": "nike air max",
+                    "products": [
+                        "Adidas Originals Stan Smith",
+                        "Nike Air Force 1 '07 Blanc",
+                        "Nike Air Max 90 Homme Noir",
+                        "Lot de 3 paires de chaussettes Nike"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        1,
+                        3,
+                        0
+                    ],
+                    "scores": [
+                        0.9989,
+                        0.9673,
+                        0.9358,
+                        0.294
+                    ],
+                    "distance": 0.0,
+                    "context": "non_food",
+                    "time": 0.0208
+                },
+                {
+                    "query": "lego star wars",
+                    "products": [
+                        "Playmobil Chevalier et Dragon",
+                        "LEGO Harry Potter Le Ch\u00e2teau de Poudlard",
+                        "LEGO Star Wars Faucon Millenium",
+                        "Star Wars : L'Empire Contre-Attaque (DVD)"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        3,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.9989,
+                        0.9958,
+                        0.9372,
+                        0.8493
+                    ],
+                    "distance": 0.0,
+                    "context": "non_food",
+                    "time": 0.0227
+                },
+                {
+                    "query": "ps5 jeux",
+                    "products": [
+                        "Manette DualSense PS5",
+                        "God of War Ragnar\u00f6k (PS5)",
+                        "Console PlayStation 5 \u00c9dition Standard",
+                        "Carte cadeau PlayStation Store 20\u20ac"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        2,
+                        0,
+                        3
+                    ],
+                    "scores": [
+                        0.9972,
+                        0.994,
+                        0.9936,
+                        0.7849
+                    ],
+                    "distance": 0.0,
+                    "context": "non_food",
+                    "time": 0.0215
+                },
+                {
+                    "query": "tv 4k 55p",
+                    "products": [
+                        "Samsung TV QLED 4K 55 pouces (138cm)",
+                        "Support mural pour TV 32-65 pouces",
+                        "C\u00e2ble HDMI 2.1 Ultra High Speed",
+                        "LG TV OLED 4K 65 pouces"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        3,
+                        1,
+                        2
+                    ],
+                    "scores": [
+                        1.0,
+                        1.0,
+                        0.9964,
+                        0.9199
+                    ],
+                    "distance": 0.0,
+                    "context": "non_food",
+                    "time": 0.0254
+                },
+                {
+                    "query": "casque bose",
+                    "products": [
+                        "Sony WH-1000XM5",
+                        "Bose QuietComfort 45",
+                        "\u00c9couteurs Bose QuietComfort Earbuds II",
+                        "\u00c9tui de transport pour casque"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.9187,
+                        0.9098,
+                        0.4914,
+                        0.2854
+                    ],
+                    "distance": 0.34907907019286744,
+                    "context": "non_food",
+                    "time": 0.0207
+                },
+                {
+                    "query": "aspirateur robot",
+                    "products": [
+                        "Aspirateur balai Dyson V15",
+                        "iRobot Roomba j7+",
+                        "Roborock S8",
+                        "Sacs pour aspirateur Rowenta"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        3,
+                        1,
+                        2
+                    ],
+                    "scores": [
+                        0.9675,
+                        0.8965,
+                        0.6956,
+                        0.3014
+                    ],
+                    "distance": 0.4293582810446799,
+                    "context": "non_food",
+                    "time": 0.0194
+                },
+                {
+                    "query": "machine \u00e0 caf\u00e9 grain",
+                    "products": [
+                        "Cafeti\u00e8re filtre Moulinex",
+                        "Machine \u00e0 caf\u00e9 Nespresso Vertuo",
+                        "De'Longhi Magnifica S (Broyeur \u00e0 grains)",
+                        "Paquet de caf\u00e9 en grains 1kg"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        3,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.7634,
+                        0.6117,
+                        0.2054,
+                        0.0472
+                    ],
+                    "distance": 0.5,
+                    "context": "non_food",
+                    "time": 0.0228
+                },
+                {
+                    "query": "ssd 1to",
+                    "products": [
+                        "Disque dur externe HDD 2To",
+                        "Samsung 980 PRO NVMe M.2 SSD 1To",
+                        "Cl\u00e9 USB 128Go",
+                        "SanDisk SSD Plus 1To SATA III"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        3,
+                        0,
+                        2
+                    ],
+                    "scores": [
+                        1.0,
+                        1.0,
+                        0.9881,
+                        0.5907
+                    ],
+                    "distance": 0.0,
+                    "context": "non_food",
+                    "time": 0.0225
+                },
+                {
+                    "query": "prot\u00e9ine whey",
+                    "products": [
+                        "Barre prot\u00e9in\u00e9e chocolat",
+                        "Shaker pour prot\u00e9ines",
+                        "Optimum Nutrition Gold Standard 100% Whey",
+                        "Cr\u00e9atine Monohydrate"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        1,
+                        3,
+                        0
+                    ],
+                    "scores": [
+                        0.5548,
+                        0.2839,
+                        0.1191,
+                        0.0782
+                    ],
+                    "distance": 0.1227846846619507,
+                    "context": "food",
+                    "time": 0.0214
+                }
+            ]
+        }
+    },
+    {
+        "model": "product-reranker-mmBERT-small",
+        "type": "local_reranker",
+        "scenario": "shelf_category",
+        "params": "Small",
+        "device": "mps:0",
+        "rerank_dist": 0.10046350190784924,
+        "time_taken": 1.38,
+        "avg_time_per_item": 0.023,
+        "note": "",
+        "details": {
+            "product_reranking": [
+                {
+                    "query": "BEUR. Doux GOURM. 200g plaq.",
+                    "products": [
+                        "Beurre sal\u00e9 all\u00e9g\u00e9 20% de mati\u00e8re grasse",
+                        "Beurre ou huile de beurre 80%",
+                        "Plaquette de fois de canard",
+                        "Beurre doux Gastronomique 200g"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        0,
+                        2
+                    ],
+                    "scores": [
+                        0.8236,
+                        0.0423,
+                        0.0356,
+                        0.0088
+                    ],
+                    "distance": 0.0,
+                    "context": "dairy",
+                    "time": 0.03
+                },
+                {
+                    "query": "Fromage rap\u00e9",
+                    "products": [
+                        "Mozzarella en tranches",
+                        "Parmesan en copeaux",
+                        "Emmental rap\u00e9 200g",
+                        "Cheddar en bloc"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        0,
+                        3,
+                        1
+                    ],
+                    "scores": [
+                        0.7033,
+                        0.0174,
+                        0.0118,
+                        0.0078
+                    ],
+                    "distance": 0.1227846846619507,
+                    "context": "dairy",
+                    "time": 0.0194
+                },
+                {
+                    "query": "Jus d'orange",
+                    "products": [
+                        "Nectar d'orange",
+                        "Jus de pomme pur jus",
+                        "Jus d'orange press\u00e9 frais 1L",
+                        "Boisson \u00e0 l'orange"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        2,
+                        3,
+                        1
+                    ],
+                    "scores": [
+                        0.7362,
+                        0.6457,
+                        0.5334,
+                        0.0438
+                    ],
+                    "distance": 0.36907024642854247,
+                    "context": "beverages",
+                    "time": 0.0229
+                },
+                {
+                    "query": "Pain complet",
+                    "products": [
+                        "Baguette tradition",
+                        "Pain de mie blanc",
+                        "Pain de seigle",
+                        "Pain de campagne \u00e0 la farine compl\u00e8te"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.2899,
+                        0.1268,
+                        0.1084,
+                        0.017
+                    ],
+                    "distance": 0.0,
+                    "context": "bakery",
+                    "time": 0.0233
+                },
+                {
+                    "query": "Yaourt 0%",
+                    "products": [
+                        "Yaourt nature au lait entier",
+                        "Fromage blanc 20% MG",
+                        "Yaourt aux fruits 0% MG",
+                        "Yaourt grec"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        3,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.4806,
+                        0.1457,
+                        0.0921,
+                        0.0141
+                    ],
+                    "distance": 0.0,
+                    "context": "dairy",
+                    "time": 0.021
+                },
+                {
+                    "query": "Chocolat noir dessert",
+                    "products": [
+                        "Tablette de chocolat au lait",
+                        "Chocolat noir 70% d\u00e9gustation",
+                        "Chocolat en poudre",
+                        "Chocolat p\u00e2tissier 52% cacao"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        3,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.8335,
+                        0.1972,
+                        0.1004,
+                        0.0979
+                    ],
+                    "distance": 0.0,
+                    "context": "sweets",
+                    "time": 0.0232
+                },
+                {
+                    "query": "Eau gazeuse",
+                    "products": [
+                        "Eau de source plate 1.5L",
+                        "Limonade artisanale",
+                        "Eau min\u00e9rale naturelle p\u00e9tillante",
+                        "Sirop de grenadine"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        2,
+                        3,
+                        1
+                    ],
+                    "scores": [
+                        0.2679,
+                        0.1718,
+                        0.0197,
+                        0.0182
+                    ],
+                    "distance": 0.34907907019286744,
+                    "context": "beverages",
+                    "time": 0.0247
+                },
+                {
+                    "query": "Saucisson \u00e0 l'ail",
+                    "products": [
+                        "Saucisse de Morteau",
+                        "Chorizo doux",
+                        "Saucisson sec pur porc",
+                        "Saucisson \u00e0 cuire \u00e0 l'ail fum\u00e9"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.9958,
+                        0.6753,
+                        0.535,
+                        0.0255
+                    ],
+                    "distance": 0.0,
+                    "context": "meats_fish",
+                    "time": 0.0233
+                },
+                {
+                    "query": "P\u00e2tes fra\u00eeches",
+                    "products": [
+                        "Penne rigate (s\u00e8ches)",
+                        "Nouilles chinoises instantan\u00e9es",
+                        "Raviolis frais au boeuf",
+                        "Semoule de couscous"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        1,
+                        2,
+                        3
+                    ],
+                    "scores": [
+                        0.0278,
+                        0.0256,
+                        0.0158,
+                        0.0125
+                    ],
+                    "distance": 0.5,
+                    "context": "pasta",
+                    "time": 0.0422
+                },
+                {
+                    "query": "Cr\u00e8me solaire enfant",
+                    "products": [
+                        "Lait apr\u00e8s-soleil",
+                        "Cr\u00e8me solaire SPF 30 adulte",
+                        "Huile s\u00e8che bronzante",
+                        "Spray solaire tr\u00e8s haute protection 50+ pour enfants"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        3,
+                        0,
+                        2
+                    ],
+                    "scores": [
+                        0.9909,
+                        0.8896,
+                        0.0846,
+                        0.051
+                    ],
+                    "distance": 0.36907024642854247,
+                    "context": "hygiene",
+                    "time": 0.0735
+                },
+                {
+                    "query": "lessive peaux sensibles",
+                    "products": [
+                        "Assouplissant concentr\u00e9",
+                        "Lessive liquide classique",
+                        "Lessive hypoallerg\u00e9nique test\u00e9e dermatologiquement",
+                        "D\u00e9tachant avant lavage"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        1,
+                        3,
+                        0
+                    ],
+                    "scores": [
+                        0.8804,
+                        0.2976,
+                        0.196,
+                        0.0143
+                    ],
+                    "distance": 0.0,
+                    "context": "household",
+                    "time": 0.0262
+                },
+                {
+                    "query": "Caf\u00e9 en grains",
+                    "products": [
+                        "Caf\u00e9 soluble",
+                        "Dosettes de caf\u00e9 compatibles",
+                        "Caf\u00e9 moulu pour expresso",
+                        "Paquet de caf\u00e9 en grains pur arabica"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        2,
+                        1
+                    ],
+                    "scores": [
+                        0.482,
+                        0.3324,
+                        0.1123,
+                        0.0998
+                    ],
+                    "distance": 0.0,
+                    "context": "beverages",
+                    "time": 0.0281
+                },
+                {
+                    "query": "Th\u00e9 vert menthe",
+                    "products": [
+                        "Infusion verveine",
+                        "Th\u00e9 noir English Breakfast",
+                        "Th\u00e9 vert nature de Chine",
+                        "Th\u00e9 vert \u00e0 la menthe en sachets"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.9702,
+                        0.4295,
+                        0.089,
+                        0.0543
+                    ],
+                    "distance": 0.0,
+                    "context": "beverages",
+                    "time": 0.0274
+                },
+                {
+                    "query": "Vin rouge Bordeaux",
+                    "products": [
+                        "Vin blanc d'Alsace",
+                        "Champagne brut",
+                        "Saint-\u00c9milion Grand Cru",
+                        "Vin ros\u00e9 de Provence"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        2,
+                        1
+                    ],
+                    "scores": [
+                        0.8159,
+                        0.6474,
+                        0.098,
+                        0.0294
+                    ],
+                    "distance": 0.5,
+                    "context": "beverages",
+                    "time": 0.0182
+                },
+                {
+                    "query": "Bi\u00e8re blonde l\u00e9g\u00e8re",
+                    "products": [
+                        "Bi\u00e8re brune d'abbaye",
+                        "Cidre brut",
+                        "Bi\u00e8re blanche fruit\u00e9e",
+                        "Pilsner lager \u00e0 4.5%"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        2,
+                        3,
+                        1
+                    ],
+                    "scores": [
+                        0.9458,
+                        0.7619,
+                        0.0311,
+                        0.0107
+                    ],
+                    "distance": 0.5,
+                    "context": "beverages",
+                    "time": 0.0174
+                },
+                {
+                    "query": "C\u00e9r\u00e9ales petit d\u00e9jeuner enfant",
+                    "products": [
+                        "Muesli croustillant aux fruits secs",
+                        "Flocons d'avoine bio",
+                        "C\u00e9r\u00e9ales chocolat\u00e9es enrichies en vitamines",
+                        "Barre de c\u00e9r\u00e9ales"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        3,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.3987,
+                        0.1737,
+                        0.0242,
+                        0.0135
+                    ],
+                    "distance": 0.1227846846619507,
+                    "context": "breakfast",
+                    "time": 0.0187
+                },
+                {
+                    "query": "Shampooing cheveux gras",
+                    "products": [
+                        "Apr\u00e8s-shampooing pour cheveux secs",
+                        "Masque capillaire nourrissant",
+                        "Shampooing purifiant \u00e0 l'argile",
+                        "Shampooing sec"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        2,
+                        3,
+                        1
+                    ],
+                    "scores": [
+                        0.9909,
+                        0.7207,
+                        0.5538,
+                        0.1324
+                    ],
+                    "distance": 0.3065735963827292,
+                    "context": "hygiene",
+                    "time": 0.0182
+                },
+                {
+                    "query": "Piles AAA",
+                    "products": [
+                        "Batterie externe pour smartphone",
+                        "Piles AA rechargeables",
+                        "Chargeur de piles",
+                        "Lot de 4 piles alcalines AAA"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        3,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.9999,
+                        0.9996,
+                        0.9049,
+                        0.2487
+                    ],
+                    "distance": 0.36907024642854247,
+                    "context": "electronics",
+                    "time": 0.0193
+                },
+                {
+                    "query": "Nourriture pour chaton",
+                    "products": [
+                        "Croquettes pour chien adulte",
+                        "P\u00e2t\u00e9e pour chat senior",
+                        "Liti\u00e8re pour chat",
+                        "Croquettes compl\u00e8tes pour chaton de 2 \u00e0 12 mois"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.8252,
+                        0.7479,
+                        0.3997,
+                        0.1347
+                    ],
+                    "distance": 0.0,
+                    "context": "pets",
+                    "time": 0.0203
+                },
+                {
+                    "query": "Gluten free bread",
+                    "products": [
+                        "Pain de mie complet",
+                        "Pr\u00e9paration pour pain sans gluten",
+                        "Galettes de riz",
+                        "Pain de ma\u00efs"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        0,
+                        3,
+                        2
+                    ],
+                    "scores": [
+                        0.9578,
+                        0.1701,
+                        0.1369,
+                        0.0499
+                    ],
+                    "distance": 0.09397456446531771,
+                    "context": "bakery",
+                    "time": 0.0197
+                },
+                {
+                    "query": "Huile v\u00e9g\u00e9tale pour friture",
+                    "products": [
+                        "Huile d'olive vierge extra",
+                        "Vinaigre balsamique",
+                        "Huile de tournesol",
+                        "Huile de s\u00e9same"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        2,
+                        1
+                    ],
+                    "scores": [
+                        0.5583,
+                        0.4928,
+                        0.3912,
+                        0.0484
+                    ],
+                    "distance": 0.5,
+                    "context": "oils_vinegars",
+                    "time": 0.0198
+                },
+                {
+                    "query": "Lait d'amande",
+                    "products": [
+                        "Lait de vache entier",
+                        "Boisson au soja",
+                        "Cr\u00e8me de coco",
+                        "Boisson v\u00e9g\u00e9tale \u00e0 base d'amandes sans sucre"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        1,
+                        2
+                    ],
+                    "scores": [
+                        0.3383,
+                        0.0934,
+                        0.0451,
+                        0.0376
+                    ],
+                    "distance": 0.08027921085181244,
+                    "context": "dairy",
+                    "time": 0.0204
+                },
+                {
+                    "query": "G\u00e2teau au chocolat",
+                    "products": [
+                        "Tarte aux pommes",
+                        "Mousse au chocolat",
+                        "Fondant au chocolat pr\u00eat \u00e0 cuire",
+                        "Farine de bl\u00e9"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        2,
+                        0,
+                        3
+                    ],
+                    "scores": [
+                        0.157,
+                        0.0934,
+                        0.0572,
+                        0.005
+                    ],
+                    "distance": 0.0,
+                    "context": "sweets",
+                    "time": 0.0207
+                },
+                {
+                    "query": "Dentifrice blancheur",
+                    "products": [
+                        "Bain de bouche protection caries",
+                        "Dentifrice dents sensibles",
+                        "Brosse \u00e0 dents \u00e9lectrique",
+                        "Dentifrice action blancheur au charbon"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.952,
+                        0.5172,
+                        0.0371,
+                        0.0349
+                    ],
+                    "distance": 0.0,
+                    "context": "hygiene",
+                    "time": 0.019
+                },
+                {
+                    "query": "Pizza 4 fromages",
+                    "products": [
+                        "Quiche lorraine",
+                        "Pizza Reine (jambon, champignons)",
+                        "Lasanne \u00e0 la bolognaise",
+                        "Pizza surgel\u00e9e aux quatre fromages"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.9991,
+                        0.1923,
+                        0.0357,
+                        0.0138
+                    ],
+                    "distance": 0.0,
+                    "context": "dairy",
+                    "time": 0.02
+                },
+                {
+                    "query": "riz thai",
+                    "products": [
+                        "Riz basmati",
+                        "Riz rond pour risotto",
+                        "Semoule de bl\u00e9",
+                        "Riz parfum\u00e9 au jasmin"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        3,
+                        1,
+                        2
+                    ],
+                    "scores": [
+                        0.4389,
+                        0.4103,
+                        0.2603,
+                        0.061
+                    ],
+                    "distance": 0.0,
+                    "context": "dried_goods",
+                    "time": 0.0213
+                },
+                {
+                    "query": "Moutarde forte",
+                    "products": [
+                        "Ketchup",
+                        "Moutarde \u00e0 l'ancienne",
+                        "Mayonnaise",
+                        "Moutarde de Dijon extra-forte"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.9808,
+                        0.8523,
+                        0.0404,
+                        0.0156
+                    ],
+                    "distance": 0.0,
+                    "context": "condiments",
+                    "time": 0.0237
+                },
+                {
+                    "query": "Haricots verts fins",
+                    "products": [
+                        "Petits pois en conserve",
+                        "Haricots blancs secs",
+                        "Flageolets verts",
+                        "Conserve de haricots verts extra-fins"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.9491,
+                        0.8597,
+                        0.0576,
+                        0.0194
+                    ],
+                    "distance": 0.0,
+                    "context": "fruits/vegetables",
+                    "time": 0.025
+                },
+                {
+                    "query": "Compote de pommes",
+                    "products": [
+                        "Confiture de fraises",
+                        "Pur\u00e9e de pommes de terre",
+                        "Yaourt aux fruits",
+                        "Gourdes de compote de pommes sans sucre ajout\u00e9"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        0,
+                        2
+                    ],
+                    "scores": [
+                        0.5434,
+                        0.3582,
+                        0.0769,
+                        0.0248
+                    ],
+                    "distance": 0.0,
+                    "context": "sweets",
+                    "time": 0.026
+                },
+                {
+                    "query": "Steak hach\u00e9 pur boeuf",
+                    "products": [
+                        "Saucisses de porc",
+                        "Escalope de dinde",
+                        "Steak de soja",
+                        "Steak hach\u00e9 5% MG pur boeuf"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.9987,
+                        0.1818,
+                        0.1036,
+                        0.0186
+                    ],
+                    "distance": 0.0,
+                    "context": "meats_fish",
+                    "time": 0.0262
+                },
+                {
+                    "query": "Chips sel & vinaigre",
+                    "products": [
+                        "Bretzels sal\u00e9s",
+                        "Chips saveur paprika",
+                        "Tuiles ap\u00e9ritives \u00e0 la cr\u00e8me et oignon",
+                        "Chips de pomme de terre saveur sel et vinaigre"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.8729,
+                        0.0763,
+                        0.0255,
+                        0.0156
+                    ],
+                    "distance": 0.0,
+                    "context": "beverages",
+                    "time": 0.0271
+                },
+                {
+                    "query": "Sirop d'\u00e9rable",
+                    "products": [
+                        "Miel d'acacia",
+                        "Sucre en poudre",
+                        "Sirop d'agave",
+                        "Pur sirop d'\u00e9rable du Canada"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        3,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.9965,
+                        0.9575,
+                        0.1082,
+                        0.0331
+                    ],
+                    "distance": 0.0,
+                    "context": "sweets",
+                    "time": 0.0251
+                },
+                {
+                    "query": "Tofu fum\u00e9",
+                    "products": [
+                        "Seitan nature",
+                        "Tempeh",
+                        "Tofu soyeux",
+                        "Bloc de tofu fum\u00e9 aux amandes et s\u00e9same"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.7326,
+                        0.4066,
+                        0.0253,
+                        0.0109
+                    ],
+                    "distance": 0.0,
+                    "context": "other",
+                    "time": 0.0249
+                },
+                {
+                    "query": "Vinaigre de cidre",
+                    "products": [
+                        "Vinaigre de vin rouge",
+                        "Jus de citron",
+                        "Vinaigre balsamique",
+                        "Vinaigre de cidre bio non pasteuris\u00e9"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.767,
+                        0.246,
+                        0.1484,
+                        0.0814
+                    ],
+                    "distance": 0.0,
+                    "context": "beverages",
+                    "time": 0.0241
+                },
+                {
+                    "query": "farine de sarrasin",
+                    "products": [
+                        "Farine de bl\u00e9 T55",
+                        "F\u00e9cule de ma\u00efs (Ma\u00efzena)",
+                        "Polenta",
+                        "Farine de bl\u00e9 noir bio"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        1,
+                        0,
+                        2
+                    ],
+                    "scores": [
+                        0.0585,
+                        0.0567,
+                        0.0343,
+                        0.0071
+                    ],
+                    "distance": 0.0,
+                    "context": "baking",
+                    "time": 0.0247
+                },
+                {
+                    "query": "p\u00e2te feuillet\u00e9e",
+                    "products": [
+                        "P\u00e2te bris\u00e9e",
+                        "P\u00e2te \u00e0 pizza",
+                        "Feuilles de brick",
+                        "Rouleau de p\u00e2te feuillet\u00e9e pur beurre"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        3,
+                        1,
+                        2
+                    ],
+                    "scores": [
+                        0.7685,
+                        0.5859,
+                        0.1125,
+                        0.0247
+                    ],
+                    "distance": 0.0,
+                    "context": "bakery",
+                    "time": 0.02
+                },
+                {
+                    "query": "petits pois carottes",
+                    "products": [
+                        "Conserve de ma\u00efs doux",
+                        "Jardini\u00e8re de l\u00e9gumes",
+                        "Pur\u00e9e de carottes",
+                        "Conserve de petits pois et jeunes carottes"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.9026,
+                        0.0716,
+                        0.0284,
+                        0.0087
+                    ],
+                    "distance": 0.08027921085181244,
+                    "context": "fruits/vegetables",
+                    "time": 0.0205
+                },
+                {
+                    "query": "tablettes lave-vaisselle",
+                    "products": [
+                        "Liquide de rin\u00e7age",
+                        "Sel r\u00e9g\u00e9n\u00e9rant",
+                        "Nettoyant machine",
+                        "Tablettes lave-vaisselle tout-en-un"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        1.0,
+                        0.0841,
+                        0.0129,
+                        0.0086
+                    ],
+                    "distance": 0.0,
+                    "context": "household",
+                    "time": 0.0216
+                },
+                {
+                    "query": "cr\u00e8me dessert chocolat",
+                    "products": [
+                        "Mousse au chocolat",
+                        "Flan au caramel",
+                        "Yaourt au chocolat",
+                        "Danette cr\u00e8me dessert saveur chocolat"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        2,
+                        1
+                    ],
+                    "scores": [
+                        0.9605,
+                        0.1778,
+                        0.0856,
+                        0.0151
+                    ],
+                    "distance": 0.0,
+                    "context": "sweets",
+                    "time": 0.0199
+                },
+                {
+                    "query": "Jambon blanc d\u00e9couenn\u00e9 d\u00e9graiss\u00e9",
+                    "products": [
+                        "Jambon cru de Parme",
+                        "Lardons fum\u00e9s",
+                        "Mousse de canard",
+                        "2 tranches de jambon cuit sup\u00e9rieur"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        2,
+                        1
+                    ],
+                    "scores": [
+                        0.1635,
+                        0.1118,
+                        0.004,
+                        0.0039
+                    ],
+                    "distance": 0.0,
+                    "context": "meats_fish",
+                    "time": 0.0214
+                },
+                {
+                    "query": "Poivre noir",
+                    "products": [
+                        "Piment de Cayenne",
+                        "Baies roses",
+                        "Poivre blanc de Penja",
+                        "Moulin \u00e0 poivre noir de Madagascar"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.3515,
+                        0.2204,
+                        0.0173,
+                        0.0135
+                    ],
+                    "distance": 0.0,
+                    "context": "spices",
+                    "time": 0.0201
+                },
+                {
+                    "query": "Cacahu\u00e8tes grill\u00e9es sal\u00e9es",
+                    "products": [
+                        "Noix de cajou non sal\u00e9es",
+                        "Amandes effil\u00e9es",
+                        "Pistaches",
+                        "Arachides grill\u00e9es \u00e0 sec et sal\u00e9es pour ap\u00e9ritif"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        2,
+                        1
+                    ],
+                    "scores": [
+                        0.5673,
+                        0.1064,
+                        0.0254,
+                        0.0205
+                    ],
+                    "distance": 0.0,
+                    "context": "chips_snacks",
+                    "time": 0.0226
+                },
+                {
+                    "query": "Gel douche hydratant",
+                    "products": [
+                        "Savon de Marseille",
+                        "Huile de douche surgras",
+                        "Exfoliant corporel",
+                        "Cr\u00e8me de douche nourrissante au beurre de karit\u00e9"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.8881,
+                        0.69,
+                        0.4689,
+                        0.0783
+                    ],
+                    "distance": 0.08027921085181244,
+                    "context": "hygiene",
+                    "time": 0.0203
+                },
+                {
+                    "query": "Coton-tiges",
+                    "products": [
+                        "Disques de coton d\u00e9maquillants",
+                        "Lingettes pour b\u00e9b\u00e9",
+                        "Cure-dents",
+                        "B\u00e2tonnets ouat\u00e9s"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        2,
+                        1,
+                        3
+                    ],
+                    "scores": [
+                        0.532,
+                        0.0332,
+                        0.0126,
+                        0.0124
+                    ],
+                    "distance": 0.1227846846619507,
+                    "context": "hygiene",
+                    "time": 0.02
+                },
+                {
+                    "query": "Sacs cong\u00e9lation",
+                    "products": [
+                        "Film alimentaire \u00e9tirable",
+                        "Papier aluminium",
+                        "Sacs poubelle",
+                        "Sacs avec fermeture zip pour cong\u00e9lateur"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.9996,
+                        0.9865,
+                        0.1075,
+                        0.0204
+                    ],
+                    "distance": 0.0,
+                    "context": "household",
+                    "time": 0.0201
+                },
+                {
+                    "query": "Miel liquide",
+                    "products": [
+                        "Miel cr\u00e9meux",
+                        "Sirop d'\u00e9rable",
+                        "Confiture d'abricots",
+                        "Miel de fleurs liquide"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        3,
+                        1,
+                        2
+                    ],
+                    "scores": [
+                        0.9264,
+                        0.8876,
+                        0.0397,
+                        0.0135
+                    ],
+                    "distance": 0.0,
+                    "context": "sweets",
+                    "time": 0.0198
+                },
+                {
+                    "query": "Lentilles corail",
+                    "products": [
+                        "Lentilles vertes du Puy",
+                        "Pois chiches secs",
+                        "Haricots rouges en conserve",
+                        "Sachet de lentilles corail s\u00e8ches"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        0,
+                        1,
+                        2
+                    ],
+                    "scores": [
+                        0.9274,
+                        0.3926,
+                        0.018,
+                        0.015
+                    ],
+                    "distance": 0.0,
+                    "context": "dried_goods",
+                    "time": 0.0185
+                },
+                {
+                    "query": "boisson \u00e9nergisante",
+                    "products": [
+                        "Jus de fruits multivitamin\u00e9",
+                        "Caf\u00e9 froid",
+                        "Boisson isotonique pour le sport",
+                        "Canette de boisson \u00e9nergisante \u00e0 la taurine"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.9271,
+                        0.7141,
+                        0.0772,
+                        0.0451
+                    ],
+                    "distance": 0.0,
+                    "context": "beverages",
+                    "time": 0.0202
+                },
+                {
+                    "query": "Bouillon de volaille",
+                    "products": [
+                        "Fond de veau",
+                        "Bouillon de l\u00e9gumes",
+                        "Soupe de poulet en brique",
+                        "Cubes de bouillon de poule d\u00e9graiss\u00e9"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        0,
+                        3,
+                        2
+                    ],
+                    "scores": [
+                        0.4194,
+                        0.0935,
+                        0.0887,
+                        0.0426
+                    ],
+                    "distance": 0.08027921085181244,
+                    "context": "condiments",
+                    "time": 0.0174
+                },
+                {
+                    "query": "Sardines \u00e0 l'huile",
+                    "products": [
+                        "Filets de maquereaux \u00e0 la moutarde",
+                        "Thon au naturel",
+                        "Anchois \u00e0 l'huile",
+                        "Conserve de sardines \u00e0 l'huile d'olive vierge extra"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.8708,
+                        0.2587,
+                        0.0398,
+                        0.011
+                    ],
+                    "distance": 0.0,
+                    "context": "meats_fish",
+                    "time": 0.0229
+                },
+                {
+                    "query": "iphone 14 pro",
+                    "products": [
+                        "Apple iPhone 13 128Go",
+                        "Samsung Galaxy S23 Ultra",
+                        "Coque de protection transparente pour iPhone 14",
+                        "Apple iPhone 14 Pro Max 256Go Noir Sid\u00e9ral"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        2,
+                        3,
+                        1
+                    ],
+                    "scores": [
+                        0.9982,
+                        0.9975,
+                        0.9972,
+                        0.6018
+                    ],
+                    "distance": 0.08027921085181244,
+                    "context": "electronics",
+                    "time": 0.023
+                },
+                {
+                    "query": "nike air max",
+                    "products": [
+                        "Adidas Originals Stan Smith",
+                        "Nike Air Force 1 '07 Blanc",
+                        "Nike Air Max 90 Homme Noir",
+                        "Lot de 3 paires de chaussettes Nike"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        1,
+                        3,
+                        0
+                    ],
+                    "scores": [
+                        0.9989,
+                        0.9673,
+                        0.9358,
+                        0.294
+                    ],
+                    "distance": 0.0,
+                    "context": "clothing",
+                    "time": 0.0191
+                },
+                {
+                    "query": "lego star wars",
+                    "products": [
+                        "Playmobil Chevalier et Dragon",
+                        "LEGO Harry Potter Le Ch\u00e2teau de Poudlard",
+                        "LEGO Star Wars Faucon Millenium",
+                        "Star Wars : L'Empire Contre-Attaque (DVD)"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        3,
+                        1,
+                        0
+                    ],
+                    "scores": [
+                        0.9989,
+                        0.9958,
+                        0.9372,
+                        0.8493
+                    ],
+                    "distance": 0.0,
+                    "context": "toys",
+                    "time": 0.0216
+                },
+                {
+                    "query": "ps5 jeux",
+                    "products": [
+                        "Manette DualSense PS5",
+                        "God of War Ragnar\u00f6k (PS5)",
+                        "Console PlayStation 5 \u00c9dition Standard",
+                        "Carte cadeau PlayStation Store 20\u20ac"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        2,
+                        0,
+                        3
+                    ],
+                    "scores": [
+                        0.9972,
+                        0.994,
+                        0.9936,
+                        0.7849
+                    ],
+                    "distance": 0.0,
+                    "context": "electronics",
+                    "time": 0.0218
+                },
+                {
+                    "query": "tv 4k 55p",
+                    "products": [
+                        "Samsung TV QLED 4K 55 pouces (138cm)",
+                        "Support mural pour TV 32-65 pouces",
+                        "C\u00e2ble HDMI 2.1 Ultra High Speed",
+                        "LG TV OLED 4K 65 pouces"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        3,
+                        1,
+                        2
+                    ],
+                    "scores": [
+                        1.0,
+                        1.0,
+                        0.9964,
+                        0.9199
+                    ],
+                    "distance": 0.0,
+                    "context": "electronics",
+                    "time": 0.0258
+                },
+                {
+                    "query": "casque bose",
+                    "products": [
+                        "Sony WH-1000XM5",
+                        "Bose QuietComfort 45",
+                        "\u00c9couteurs Bose QuietComfort Earbuds II",
+                        "\u00c9tui de transport pour casque"
+                    ],
+                    "reranked_indices": [
+                        3,
+                        2,
+                        0,
+                        1
+                    ],
+                    "scores": [
+                        0.9187,
+                        0.9098,
+                        0.4914,
+                        0.2854
+                    ],
+                    "distance": 0.34907907019286744,
+                    "context": "electronics",
+                    "time": 0.0199
+                },
+                {
+                    "query": "aspirateur robot",
+                    "products": [
+                        "Aspirateur balai Dyson V15",
+                        "iRobot Roomba j7+",
+                        "Roborock S8",
+                        "Sacs pour aspirateur Rowenta"
+                    ],
+                    "reranked_indices": [
+                        0,
+                        3,
+                        1,
+                        2
+                    ],
+                    "scores": [
+                        0.9675,
+                        0.8965,
+                        0.6956,
+                        0.3014
+                    ],
+                    "distance": 0.4293582810446799,
+                    "context": "electronics",
+                    "time": 0.0191
+                },
+                {
+                    "query": "machine \u00e0 caf\u00e9 grain",
+                    "products": [
+                        "Cafeti\u00e8re filtre Moulinex",
+                        "Machine \u00e0 caf\u00e9 Nespresso Vertuo",
+                        "De'Longhi Magnifica S (Broyeur \u00e0 grains)",
+                        "Paquet de caf\u00e9 en grains 1kg"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        3,
+                        2,
+                        0
+                    ],
+                    "scores": [
+                        0.7634,
+                        0.6117,
+                        0.2054,
+                        0.0472
+                    ],
+                    "distance": 0.5,
+                    "context": "appliances",
+                    "time": 0.02
+                },
+                {
+                    "query": "ssd 1to",
+                    "products": [
+                        "Disque dur externe HDD 2To",
+                        "Samsung 980 PRO NVMe M.2 SSD 1To",
+                        "Cl\u00e9 USB 128Go",
+                        "SanDisk SSD Plus 1To SATA III"
+                    ],
+                    "reranked_indices": [
+                        1,
+                        3,
+                        0,
+                        2
+                    ],
+                    "scores": [
+                        1.0,
+                        1.0,
+                        0.9881,
+                        0.5907
+                    ],
+                    "distance": 0.0,
+                    "context": "electronics",
+                    "time": 0.0204
+                },
+                {
+                    "query": "prot\u00e9ine whey",
+                    "products": [
+                        "Barre prot\u00e9in\u00e9e chocolat",
+                        "Shaker pour prot\u00e9ines",
+                        "Optimum Nutrition Gold Standard 100% Whey",
+                        "Cr\u00e9atine Monohydrate"
+                    ],
+                    "reranked_indices": [
+                        2,
+                        1,
+                        3,
+                        0
+                    ],
+                    "scores": [
+                        0.5548,
+                        0.2839,
+                        0.1191,
+                        0.0782
+                    ],
+                    "distance": 0.1227846846619507,
+                    "context": "sports_nutrition",
+                    "time": 0.0188
+                }
+            ]
+        }
     }
 ]
