@@ -157,6 +157,18 @@ MODELS = [
         "params": "70B",
         "note": "",
     },
+    {
+        "model": "Kimi K2.5",
+        "openrouter_id": "moonshotai/kimi-k2.5",
+        "params": "1T",
+        "note": "",
+    },
+    {
+        "model" : "Kat Coder Pro",
+        "openrouter_id": "kwaipilot/kat-coder-pro",
+        "params" : "Unknown",
+        "note": "",
+    }
 ]
 
 
