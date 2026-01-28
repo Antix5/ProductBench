@@ -32,6 +32,39 @@
                 transition: background-color 0.2s;
             }
 
+            /* Tab Styles */
+            .tab-btn {
+                transition: all 0.2s;
+                border-bottom: 3px solid transparent;
+            }
+            .tab-btn.active {
+                color: #38bdf8;
+                border-bottom-color: #38bdf8;
+            }
+            .tab-btn:not(.active) {
+                color: #94a3b8;
+            }
+            .tab-btn:not(.active):hover {
+                color: #e2e8f0;
+            }
+
+            /* Toggle Button Styles */
+            .toggle-btn {
+                transition: all 0.2s;
+            }
+            .toggle-btn.active {
+                background-color: #3b82f6;
+                color: white;
+            }
+            .toggle-btn:not(.active) {
+                background-color: #1e293b;
+                color: #94a3b8;
+                border: 1px solid #334155;
+            }
+            .toggle-btn:not(.active):hover {
+                background-color: #334155;
+            }
+
             /* Modal Styles */
             #inspect-modal {
                 transition: opacity 0.2s ease-in-out;
@@ -69,16 +102,29 @@
                     ProductBench Leaderboard
                 </h1>
                 <p class="text-slate-400 text-lg">
-                    Benchmarking LLMs on Product Knowledge Tasks: Price vs
-                    Performance<br/>
+                    Benchmarking LLMs and Local Rerankers on Product Knowledge Tasks: Price vs Performance
+                </p>
+                <p class="text-sm text-slate-500">
                     Information: Some models are not included properly. This is in part due to the inability to disable reasoning for some model via
                     the openrouter API, this benchmark being latency sensitive, this was a key aspect of it. This also explain why GPT models have null score, those models
                     are not designed to be used in non reasoning way. To support those models, the benchmark would need to be adapted to allow reasoning, which would make it less
                     relevent to determine low latency workhorse models.
-
-                
                 </p>
-                <div class="mt-4 flex justify-center items-center gap-4">
+                
+                <!-- Main Navigation Tabs -->
+                <div class="flex justify-center gap-8 mt-6 border-b border-slate-700">
+                    <button id="main-tab-overview" class="tab-btn active px-4 py-3 font-medium text-lg" onclick="switchMainTab('overview')">
+                        📊 Overview
+                    </button>
+                    <button id="main-tab-reranking" class="tab-btn px-4 py-3 font-medium text-lg" onclick="switchMainTab('reranking')">
+                        🔄 Reranking Comparison
+                    </button>
+                </div>
+            </header>
+
+            <!-- Overview Tab Content -->
+            <div id="overview-section" class="space-y-8">
+                <div class="flex justify-center items-center gap-4">
                     <label for="scenario-select" class="text-white font-medium">Scenario:</label>
                     <select id="scenario-select" class="bg-slate-700 text-white border border-slate-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="all">All Scenarios</option>
@@ -87,7 +133,6 @@
                         <option value="shelf_category">Shelf Category</option>
                     </select>
                 </div>
-            </header>
 
             <!-- Charts Section -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -156,6 +201,95 @@
                 </div>
             </div>
         </div>
+        <!-- End Overview Section -->
+
+        <!-- Reranking Comparison Tab Content -->
+        <div id="reranking-section" class="space-y-8 hidden">
+            <!-- Controls -->
+            <div class="card p-4 flex flex-wrap justify-center items-center gap-4">
+                <label for="rerank-scenario-select" class="text-white font-medium">Scenario:</label>
+                <select id="rerank-scenario-select" class="bg-slate-700 text-white border border-slate-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="all">All Scenarios</option>
+                    <option value="base">Base (No Context)</option>
+                    <option value="product_type">Product Type</option>
+                    <option value="shelf_category">Shelf Category</option>
+                </select>
+                
+                <div class="h-6 w-px bg-slate-600 mx-2"></div>
+                
+                <span class="text-slate-400 text-sm">Show:</span>
+                <button id="rerank-toggle-llm" class="toggle-btn active px-3 py-1 rounded text-sm font-medium" onclick="toggleRerankType('llm')">
+                    LLM Rerankers
+                </button>
+                <button id="rerank-toggle-local" class="toggle-btn active px-3 py-1 rounded text-sm font-medium" onclick="toggleRerankType('local')">
+                    Local Rerankers
+                </button>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Performance Chart -->
+                <div class="card p-6 shadow-xl">
+                    <h2 class="text-xl font-semibold mb-4 text-white">
+                        Reranking Performance
+                    </h2>
+                    <div class="h-80 relative w-full">
+                        <canvas id="rerank-perf-chart"></canvas>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-2 text-center">
+                        X: Time per Item (seconds) [Log Scale, Lower is better] | Y: Rerank Distance [Lower is better]
+                    </p>
+                </div>
+
+                <!-- Distance Comparison Chart -->
+                <div class="card p-6 shadow-xl">
+                    <h2 class="text-xl font-semibold mb-4 text-white">
+                        Distance Comparison
+                    </h2>
+                    <div class="h-80 relative w-full">
+                        <canvas id="rerank-compare-chart"></canvas>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-2 text-center">
+                        Lower distance is better. Comparing LLM vs Local rerankers.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Reranking Leaderboard Table -->
+            <div class="card overflow-hidden shadow-xl">
+                <div class="p-6 border-b border-slate-700 flex justify-between items-center">
+                    <h2 class="text-2xl font-semibold text-white">
+                        Reranking Results
+                    </h2>
+                    <div class="flex gap-2 text-xs">
+                        <span class="px-2 py-1 rounded bg-sky-500/20 text-sky-400 border border-sky-500/30">LLM Reranker</span>
+                        <span class="px-2 py-1 rounded bg-pink-500/20 text-pink-400 border border-pink-500/30">Local Reranker</span>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="table-header text-xs uppercase font-medium">
+                            <tr>
+                                <th class="p-4 rounded-tl-lg">Model</th>
+                                <th class="p-4">Type</th>
+                                <th class="p-4">Scenario</th>
+                                <th class="p-4">Params</th>
+                                <th class="p-4">Cost/Time</th>
+                                <th class="p-4">Time/Item</th>
+                                <th class="p-4">Total Time</th>
+                                <th class="p-4">Rerank Dist</th>
+                                <th class="p-4">Device</th>
+                                <th class="p-4 rounded-tr-lg">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reranker-leaderboard-body" class="divide-y divide-slate-700">
+                            <!-- Rows will be injected by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- End Reranking Section -->
 
         <!-- Inspect Modal -->
         <div
@@ -669,6 +803,310 @@
                     }
                 });
             }
+
+            // ========== RERANKING TAB FUNCTIONALITY ==========
+            
+            let llmRerankData = [];
+            let localRerankData = [];
+            let rerankScenario = 'all';
+            let showRerankLLM = true;
+            let showRerankLocal = true;
+            let rerankPerfChart;
+            let rerankCompareChart;
+
+            // Load reranking data on init
+            async function loadRerankingData() {
+                try {
+                    // Load LLM reranking data from BENCHMARK_RESULTS
+                    llmRerankData = leaderboardData.map(item => ({
+                        ...item,
+                        type: 'llm',
+                        rerank_dist: item.rerank_dist || 0,
+                        time_per_item: (item.time_taken / 60) || 0, // Estimate
+                        cost_display: item.avg_rerank_cost ? `$${(item.avg_rerank_cost * 10000).toFixed(2)} / 10k` : 'N/A'
+                    }));
+
+                    // Load local reranker data
+                    try {
+                        const response = await fetch('RERANKER_RESULTS.json');
+                        if (response.ok) {
+                            const data = await response.json();
+                            localRerankData = data.map(item => ({
+                                ...item,
+                                type: 'local',
+                                rerank_dist: item.rerank_dist || 0,
+                                time_per_item: item.avg_time_per_item || 0,
+                                cost_display: `${(item.avg_time_per_item || 0).toFixed(4)}s`,
+                                device: item.device || 'cpu'
+                            }));
+                        }
+                    } catch (e) {
+                        console.log('No local reranker results found');
+                    }
+
+                    renderRerankTable();
+                    updateRerankCharts();
+                } catch (error) {
+                    console.error('Error loading reranking data:', error);
+                }
+            }
+
+            // Main tab switching
+            window.switchMainTab = function(tab) {
+                document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                document.getElementById(`main-tab-${tab}`).classList.add('active');
+
+                if (tab === 'overview') {
+                    document.getElementById('overview-section').classList.remove('hidden');
+                    document.getElementById('reranking-section').classList.add('hidden');
+                } else {
+                    document.getElementById('overview-section').classList.add('hidden');
+                    document.getElementById('reranking-section').classList.remove('hidden');
+                    // Load reranking data if not already loaded
+                    if (localRerankData.length === 0 && llmRerankData.length === 0) {
+                        loadRerankingData();
+                    }
+                }
+            };
+
+            // Toggle reranker types
+            window.toggleRerankType = function(type) {
+                if (type === 'llm') {
+                    showRerankLLM = !showRerankLLM;
+                    document.getElementById('rerank-toggle-llm').classList.toggle('active', showRerankLLM);
+                } else {
+                    showRerankLocal = !showRerankLocal;
+                    document.getElementById('rerank-toggle-local').classList.toggle('active', showRerankLocal);
+                }
+                renderRerankTable();
+                updateRerankCharts();
+            };
+
+            // Get filtered reranking data
+            function getFilteredRerankData() {
+                let data = [];
+                if (showRerankLLM) data = data.concat(llmRerankData);
+                if (showRerankLocal) data = data.concat(localRerankData);
+                
+                if (rerankScenario !== 'all') {
+                    data = data.filter(item => item.scenario === rerankScenario);
+                }
+                
+                // Sort by distance (lower is better)
+                data.sort((a, b) => a.rerank_dist - b.rerank_dist);
+                return data;
+            }
+
+            // Render reranking table
+            function renderRerankTable() {
+                const tbody = document.getElementById('reranker-leaderboard-body');
+                tbody.innerHTML = '';
+                
+                const data = getFilteredRerankData();
+                
+                if (data.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="10" class="p-4 text-center text-slate-400">
+                                No reranking results match the current filters.
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+                
+                data.forEach((row, index) => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'table-row group';
+                    
+                    const typeBadge = row.type === 'llm' 
+                        ? '<span class="px-2 py-0.5 rounded bg-sky-500/20 text-sky-400 border border-sky-500/30 text-xs">LLM</span>'
+                        : '<span class="px-2 py-0.5 rounded bg-pink-500/20 text-pink-400 border border-pink-500/30 text-xs">Local</span>';
+                    
+                    const deviceDisplay = row.type === 'llm' ? 'API' : (row.device || 'cpu');
+                    const distColor = row.rerank_dist < 0.3 ? 'text-green-400' : row.rerank_dist < 0.6 ? 'text-yellow-400' : 'text-red-400';
+                    
+                    tr.innerHTML = `
+                        <td class="p-4 font-medium text-white">${escapeHtml(row.model)}</td>
+                        <td class="p-4">${typeBadge}</td>
+                        <td class="p-4 text-slate-300 font-mono text-xs">${escapeHtml(row.scenario || 'base')}</td>
+                        <td class="p-4 text-slate-300">${escapeHtml(row.params)}</td>
+                        <td class="p-4 font-mono ${row.type === 'llm' ? 'text-emerald-400' : 'text-blue-400'}">${row.cost_display}</td>
+                        <td class="p-4 font-mono text-slate-300">${row.time_per_item ? row.time_per_item.toFixed(4) + 's' : 'N/A'}</td>
+                        <td class="p-4 font-mono text-blue-400">${row.time_taken ? row.time_taken.toFixed(2) + 's' : 'N/A'}</td>
+                        <td class="p-4 font-bold ${distColor}">${row.rerank_dist.toFixed(4)}</td>
+                        <td class="p-4 text-slate-400 text-xs">${deviceDisplay}</td>
+                        <td class="p-4">
+                            <button onclick="openRerankInspectModal(${index})" class="px-3 py-1 bg-slate-700 hover:bg-slate-600 text-white rounded text-xs transition">Inspect</button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+
+            // Reranking scenario filter
+            document.getElementById('rerank-scenario-select').addEventListener('change', (e) => {
+                rerankScenario = e.target.value;
+                renderRerankTable();
+                updateRerankCharts();
+            });
+
+            // Update reranking charts
+            function updateRerankCharts() {
+                const data = getFilteredRerankData();
+                
+                // Performance scatter chart
+                const llmPoints = data.filter(d => d.type === 'llm').map(d => ({
+                    x: d.time_per_item > 0 ? d.time_per_item : 0.001,
+                    y: d.rerank_dist,
+                    label: d.model,
+                    scenario: d.scenario
+                }));
+                
+                const localPoints = data.filter(d => d.type === 'local').map(d => ({
+                    x: d.time_per_item > 0 ? d.time_per_item : 0.001,
+                    y: d.rerank_dist,
+                    label: d.model,
+                    scenario: d.scenario
+                }));
+
+                if (rerankPerfChart) rerankPerfChart.destroy();
+                rerankPerfChart = new Chart(document.getElementById('rerank-perf-chart'), {
+                    type: 'scatter',
+                    data: {
+                        datasets: [
+                            {
+                                label: 'LLM Rerankers',
+                                data: llmPoints,
+                                backgroundColor: 'rgba(56, 189, 248, 0.6)',
+                                borderColor: 'rgba(56, 189, 248, 1)',
+                                pointRadius: 8
+                            },
+                            {
+                                label: 'Local Rerankers',
+                                data: localPoints,
+                                backgroundColor: 'rgba(244, 114, 182, 0.6)',
+                                borderColor: 'rgba(244, 114, 182, 1)',
+                                pointRadius: 8
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                type: 'logarithmic',
+                                title: { display: true, text: 'Time per Item (s) [Log]', color: '#94a3b8' },
+                                grid: { color: '#334155' },
+                                ticks: { color: '#cbd5e1' }
+                            },
+                            y: {
+                                title: { display: true, text: 'Rerank Distance (Lower is Better)', color: '#94a3b8' },
+                                grid: { color: '#334155' },
+                                ticks: { color: '#cbd5e1' },
+                                min: 0, max: 1
+                            }
+                        },
+                        plugins: {
+                            legend: { labels: { color: '#e2e8f0' } },
+                            tooltip: {
+                                callbacks: {
+                                    label: (ctx) => `${ctx.raw.label} (${ctx.raw.scenario}): Dist=${ctx.raw.y.toFixed(4)}, Time=${ctx.raw.x.toFixed(4)}s`
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Comparison bar chart
+                const models = [...new Set(data.map(d => d.model))];
+                const scenarios = ['base', 'product_type', 'shelf_category'];
+                const colors = ['rgba(148, 163, 184, 0.8)', 'rgba(56, 189, 248, 0.8)', 'rgba(244, 114, 182, 0.8)'];
+                
+                const datasets = scenarios.map((scenario, idx) => ({
+                    label: scenario,
+                    data: models.map(model => {
+                        const match = data.find(d => d.model === model && (d.scenario === scenario || (scenario === 'base' && !d.scenario)));
+                        return match ? match.rerank_dist : null;
+                    }),
+                    backgroundColor: colors[idx]
+                }));
+
+                if (rerankCompareChart) rerankCompareChart.destroy();
+                rerankCompareChart = new Chart(document.getElementById('rerank-compare-chart'), {
+                    type: 'bar',
+                    data: { labels: models, datasets },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: { ticks: { color: '#cbd5e1' }, grid: { color: '#334155' } },
+                            y: { 
+                                title: { display: true, text: 'Rerank Distance (Lower is Better)', color: '#94a3b8' },
+                                ticks: { color: '#cbd5e1' },
+                                grid: { color: '#334155' },
+                                min: 0, max: 1
+                            }
+                        },
+                        plugins: { legend: { labels: { color: '#e2e8f0' } } }
+                    }
+                });
+            }
+
+            // Open inspect modal for reranking
+            window.openRerankInspectModal = function(index) {
+                const data = getFilteredRerankData();
+                const item = data[index];
+                if (!item || !item.details) return;
+
+                const typeLabel = item.type === 'llm' ? 'LLM Reranker' : 'Local Reranker';
+                const typeColor = item.type === 'llm' ? 'text-sky-400' : 'text-pink-400';
+                
+                modalTitle.innerHTML = `${escapeHtml(item.model)} <span class="${typeColor} text-lg">(${typeLabel})</span>`;
+                modalSubtitle.textContent = `Scenario: ${item.scenario || 'base'} | Distance: ${item.rerank_dist.toFixed(4)} | Time: ${item.time_taken?.toFixed(2) || 'N/A'}s`;
+
+                let html = '';
+                if (item.details.product_reranking && item.details.product_reranking.length > 0) {
+                    html += `
+                        <div class="space-y-4">
+                            <h3 class="text-xl font-semibold text-purple-400">Product Reranking Results (${item.details.product_reranking.length} Items)</h3>
+                            <div class="grid gap-4">
+                    `;
+                    item.details.product_reranking.forEach(rerankItem => {
+                        const distBadge = rerankItem.distance <= 0.2 ? '<span class="px-2 py-0.5 rounded bg-green-500/20 text-green-400 text-xs">Good</span>' :
+                                         rerankItem.distance <= 0.5 ? '<span class="px-2 py-0.5 rounded bg-yellow-500/20 text-yellow-400 text-xs">OK</span>' :
+                                         '<span class="px-2 py-0.5 rounded bg-red-500/20 text-red-400 text-xs">Bad</span>';
+                        
+                        html += `
+                            <div class="bg-slate-800/50 p-4 rounded-lg border border-slate-700">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div class="font-mono text-sm text-slate-300">Query: ${escapeHtml(rerankItem.query)}</div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-white font-bold">${rerankItem.distance.toFixed(4)}</span>
+                                        ${distBadge}
+                                    </div>
+                                </div>
+                                <div class="text-xs text-slate-400 mb-2">Context: ${escapeHtml(rerankItem.context || 'None')}</div>
+                                ${rerankItem.scores ? `<div class="text-xs text-slate-500 mb-2">Scores: ${JSON.stringify(rerankItem.scores)}</div>` : ''}
+                                <div class="text-xs">
+                                    <span class="text-slate-500">Reranked Order:</span>
+                                    <ol class="list-decimal ml-4 mt-1 text-slate-400">
+                                        ${rerankItem.reranked_indices.map(idx => `<li>${escapeHtml(rerankItem.products[idx])}</li>`).join('')}
+                                    </ol>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    html += '</div></div>';
+                } else {
+                    html = '<div class="text-center text-slate-400 py-8">No detailed reranking data available.</div>';
+                }
+
+                modalContent.innerHTML = html;
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            };
 
             // Start
             init();
