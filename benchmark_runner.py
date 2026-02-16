@@ -168,6 +168,48 @@ MODELS = [
         "openrouter_id": "kwaipilot/kat-coder-pro",
         "params" : "Unknown",
         "note": "",
+    },
+    {
+        "model" : "Mistral Small Creative",
+        "openrouter_id": "mistralai/mistral-small-creative",
+        "params" : "24B",
+        "note": "",
+    },
+    {
+        "model" : "Gemini 2.5 Flash Lite Preview",
+        "openrouter_id": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "params" : "Unknown",
+        "note": "",
+    },
+    {
+        "model" : "GPT-4.1 Nano",
+        "openrouter_id": "openai/gpt-4.1-nano",
+        "params" : "Unknown",
+        "note": "",
+    },
+    {
+        "model" : "Llama 3.3 70B Instruct",
+        "openrouter_id": "meta-llama/llama-3.3-70b-instruct",
+        "params" : "70B",
+        "note": "",
+    },
+    {
+        "model" : "Llama 3.3 Nemotron Super 49B v1.5",
+        "openrouter_id": "nvidia/llama-3.3-nemotron-super-49b-v1.5",
+        "params" : "7B",
+        "note": "",
+    },
+    {
+        "model" : "GPT-4o Mini",
+        "openrouter_id": "openai/gpt-4o-mini",
+        "params" : "Unknown",
+        "note": "",
+    },
+    {
+        "model" : "Olmo 3.1 32B Instruct",
+        "openrouter_id": "allenai/olmo-3.1-32b-instruct",
+        "params" : "32B",
+        "note": "",
     }
 ]
 

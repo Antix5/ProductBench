@@ -1418,5 +1418,9 @@
     "kwaipilot/kat-coder-pro": {
         "input": 0.207,
         "output": 0.828
+    },
+    "allenai/olmo-3.1-32b-instruct": {
+            "input": 0.20,
+            "output": 0.60
     }
 }
