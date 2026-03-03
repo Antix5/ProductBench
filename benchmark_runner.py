@@ -235,6 +235,12 @@ MODELS = [
         "params" : "24B",
         "note": "",
     },
+    {
+        "model" : "Mistral Small 3.2",
+        "openrouter_id": "mistralai/mistral-small-3.2-24b-instruct",
+        "params" : "24B",
+        "note": "",
+    }
 ]
 
 
