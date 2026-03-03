@@ -210,7 +210,31 @@ MODELS = [
         "openrouter_id": "allenai/olmo-3.1-32b-instruct",
         "params" : "32B",
         "note": "",
-    }
+    },
+    {
+        "model" : "Gemini 3.1 Flash Lite Preview",
+        "openrouter_id": "google/gemini-3.1-flash-lite-preview",
+        "params" : "Unknown",
+        "note": "",
+    },
+    {
+        "model" : "Seed 2.0 Mini",
+        "openrouter_id": "bytedance-seed/seed-2.0-mini",
+        "params" : "Unknown",
+        "note": "",
+    },
+    {
+        "model" : "Qwen 3.5 Flash 02-23",
+        "openrouter_id": "qwen/qwen3.5-flash-02-23",
+        "params" : "Unknown",
+        "note": "",
+    },
+    {
+        "model" : "Liquid LFM 2 24B A2B",
+        "openrouter_id": "liquid/lfm-2-24b-a2b",
+        "params" : "24B",
+        "note": "",
+    },
 ]
 
 
