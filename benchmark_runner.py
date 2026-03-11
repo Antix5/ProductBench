@@ -240,6 +240,18 @@ MODELS = [
         "openrouter_id": "mistralai/mistral-small-3.2-24b-instruct",
         "params" : "24B",
         "note": "",
+    },
+    {
+        "model" : "Mercury 2",
+        "openrouter_id": "inception/mercury-2",
+        "params" : "Unknown",
+        "note": "",
+    },
+    {
+        "model" : "Qwen 3.5 9B",
+        "openrouter_id": "qwen/qwen3.5-9b",
+        "params" : "Unknown",
+        "note": "",
     }
 ]
 

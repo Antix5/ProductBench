@@ -1438,5 +1438,13 @@
   "liquid/lfm-2-24b-a2b": {
     "input": 0.03,
     "output": 0.12
+  },
+  "inception/mercury-2": {
+    "input": 0.25,
+    "output": 0.75
+  },
+  "qwen/qwen3.5-9b": {
+      "input": 0.10,
+      "output": 0.15
   }
 }
