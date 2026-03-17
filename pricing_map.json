@@ -1446,5 +1446,9 @@
   "qwen/qwen3.5-9b": {
       "input": 0.10,
       "output": 0.15
+  },
+  "mistralai/mistral-small-2603": {
+      "input": 0.15,
+      "output": 0.60
   }
 }

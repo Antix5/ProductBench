@@ -252,6 +252,13 @@ MODELS = [
         "openrouter_id": "qwen/qwen3.5-9b",
         "params" : "Unknown",
         "note": "",
+    },
+    {
+        "model" : "Mistral Small 2603",
+        "openrouter_id": "mistralai/mistral-small-2603",
+        "params" : "112B MOE",
+        "note": "",
+
     }
 ]
 
