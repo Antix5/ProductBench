@@ -1450,5 +1450,13 @@
   "mistralai/mistral-small-2603": {
       "input": 0.15,
       "output": 0.60
+  },
+  "google/gemma-4-31b-it": {
+    "input": 0.14,
+    "output": 0.40
+  },
+  "google/gemma-4-26b-a4b-it": {
+    "input": 0.13,
+    "output": 0.40
   }
 }
