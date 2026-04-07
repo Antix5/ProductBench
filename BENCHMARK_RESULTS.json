@@ -6477,7 +6477,7 @@
         }
     },
     {
-        "model": "Gemini 4 31B Instruct",
+        "model": "Gemma 4 31B Instruct",
         "id": "google/gemma-4-31b-it",
         "scenario": "shelf_category",
         "params": "31B",
@@ -21590,7 +21590,7 @@
         }
     },
     {
-        "model": "Gemini 4 26B A4B Instruct",
+        "model": "Gemma 4 26B A4B Instruct",
         "id": "google/gemma-4-26b-a4b-it",
         "scenario": "shelf_category",
         "params": "26B",
@@ -105791,7 +105791,7 @@
         }
     },
     {
-        "model": "Gemini 4 31B Instruct",
+        "model": "Gemma 4 31B Instruct",
         "id": "google/gemma-4-31b-it",
         "scenario": "product_type",
         "params": "31B",
@@ -112268,7 +112268,7 @@
         }
     },
     {
-        "model": "Gemini 4 26B A4B Instruct",
+        "model": "Gemma 4 26B A4B Instruct",
         "id": "google/gemma-4-26b-a4b-it",
         "scenario": "product_type",
         "params": "26B",
@@ -196469,7 +196469,7 @@
         }
     },
     {
-        "model": "Gemini 4 31B Instruct",
+        "model": "Gemma 4 31B Instruct",
         "id": "google/gemma-4-31b-it",
         "scenario": "base",
         "params": "31B",
@@ -209423,7 +209423,7 @@
         }
     },
     {
-        "model": "Gemini 4 26B A4B Instruct",
+        "model": "Gemma 4 26B A4B Instruct",
         "id": "google/gemma-4-26b-a4b-it",
         "scenario": "base",
         "params": "26B",

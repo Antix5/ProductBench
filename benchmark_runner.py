@@ -260,13 +260,13 @@ MODELS = [
         "note": "",
     },
     {
-        "model" : "Gemini 4 31B Instruct",
+        "model" : "Gemma 4 31B Instruct",
         "openrouter_id": "google/gemma-4-31b-it",
         "params" : "31B",
         "note": "",
     },
     {
-        "model" : "Gemini 4 26B A4B Instruct",
+        "model" : "Gemma 4 26B A4B Instruct",
         "openrouter_id": "google/gemma-4-26b-a4b-it",
         "params" : "26B",
         "note": "",
