@@ -5,6 +5,7 @@ import re
 import time
 
 from openai import AsyncOpenAI
+from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 
 from productbench.label_augmentation.main import load_data as load_label_data
 from productbench.product_reranking.main import calculate_ranking_distance
@@ -270,9 +271,28 @@ MODELS = [
         "openrouter_id": "google/gemma-4-26b-a4b-it",
         "params" : "26B",
         "note": "",
-    }
+    },
+    {
+        "model" : "Deepseek V4 Pro",
+        "openrouter_id": "deepseek/deepseek-v4-pro",
+        "deepinfra_id": "deepseek-ai/DeepSeek-V4-Pro",
+        "params" : "1.6T A49B",
+        "note": "",
+    },
+    {
+        "model" : "Deepseek V4 Flash",
+        "openrouter_id": "deepseek/deepseek-v4-flash",
+        "deepinfra_id": "deepseek-ai/DeepSeek-V4-Flash",
+        "params" : "284B A13B",
+        "note": "",
+    },
+    {
+        "model" : "Kimi K2.6",
+        "openrouter_id": "moonshotai/kimi-k2.6",
+        "params" : "1.1T",
+        "note": "",
+    },
 ]
-
 
 # Semaphore to limit concurrent requests
 CONCURRENCY_LIMIT = 20
@@ -322,7 +342,113 @@ def extract_content_and_reasoning(response):
     return content, raw_dump
 
 
+@retry(
+    stop=stop_after_attempt(5),
+    wait=wait_exponential(multiplier=1, min=1, max=60),
+    retry=retry_if_exception_type(Exception),
+    reraise=True
+)
+async def _augment_label_with_retry(
+    client: AsyncOpenAI, label: str, model: str, context: str | None
+) -> tuple[str, str, int, int]:
+    """Internal function with retry logic for label augmentation."""
+    user_content = f"""Analyze the input label and output a clean, generic product description.
+
+        Strict Rules:
+        1. **Identify the Category:** You MUST convert the input into its generic product type (e.g., 'iPhone 13' -> 'Smartphone', 'Air Jordan' -> 'Basketball Shoes').
+        2. **Remove Brand Names:** Do not include the manufacturer or brand name (e.g., remove 'Samsung', 'Nike', 'Apple', 'Sony') unless it is essential to describe the object type (e.g., 'Jeep').
+        3. **Keep Key Specs:** Retain important technical details (e.g., '5G', '128GB', 'Wireless', 'Men\'s').
+        4. **No Fluff:** Remove marketing words ('Promo', 'Best', 'Sale').
+        5. **Output:** Return ONLY the cleaned descriptive string between <response> and </response> tags
+        Examples:
+        Input: 'SAM GAL S21 5G 128GB PROMO!!'
+        Output: <response>5G Smartphone 128GB</response>
+
+        Input: 'NK Air Zoom Pegasus 38 M - RUN'
+        Output: <response>Men's Running Shoes</response>
+
+        Input: 'PXL 5 GOOGLE 128'
+        Output: <response>Smartphone 128GB</response>
+
+        Input: '{label}'
+        Output:"""
+
+    if context:
+            user_content = f"Product Context: {context}\n\n" + user_content
+
+    response = await client.chat.completions.create(
+        model=model,
+        messages=[
+            {
+                "role": "system",
+                "content": """You are an expert E-commerce Query Normalizer. Your task is to extract the core product category and technical specifications from a label, removing specific commercial branding.""",
+            },
+            {
+                "role": "user",
+                "content": user_content,
+            },
+        ],
+        temperature=0.3,
+        max_tokens=1000,
+        extra_body={
+            "reasoning": {
+                "enabled": False,  # Explicitly turn off reasoning
+                "effort": "none",   # Redundant backup to ensure 0 reasoning tokens
+                "exclude": True
+            }
+        },
+    )
+
+    content, raw_dump = extract_content_and_reasoning(response)
+
+    prompt_tokens = 0
+    completion_tokens = 0
+    if response.usage:
+        prompt_tokens = response.usage.prompt_tokens
+        completion_tokens = response.usage.completion_tokens
+
+    if not content and not raw_dump:
+        return (
+            "",
+            "Empty Response Object",
+            prompt_tokens,
+            completion_tokens,
+        )
+
+    # If content is empty but we have reasoning, maybe the model thought the reasoning was the answer?
+    # Or it just failed to output content.
+    if not content.strip():  # pyright: ignore[reportOptionalMemberAccess]
+        return (
+            "",
+            raw_dump,
+            prompt_tokens,
+            completion_tokens,
+        )
+
+    # Use regex to extract content between <response> tags
+    content_str = str(content) if content is not None else ""
+
+    match = re.search(r"<response>(.*?)</response>", content_str, re.DOTALL)
+    if match:
+        content = match.group(1).strip()
+    else:
+        # Model didn't use response tags, return empty string for automatic 0 score
+        return "", raw_dump, prompt_tokens, completion_tokens
+
+    return content.strip(), raw_dump, prompt_tokens, completion_tokens  # pyright: ignore[reportOptionalMemberAccess]
+
+
 async def augment_label_async(
+    client: AsyncOpenAI, label: str, model: str, context: str = None
+) -> tuple[str, str, int, int]:
+    """Uses an LLM to augment the product label (Async). Returns (content, raw_output, prompt_tokens, completion_tokens)."""
+    try:
+        return await _augment_label_with_retry(client, label, model, context)
+    except Exception as e:
+        return f"Augmented: {label} (Error)", str(e), 0, 0
+
+
+async def augment_label_async_old(
     client: AsyncOpenAI, label: str, model: str, context: str = None
 ) -> tuple[str, str, int, int]:
     """Uses an LLM to augment the product label (Async). Returns (content, raw_output, prompt_tokens, completion_tokens)."""
@@ -364,14 +490,14 @@ async def augment_label_async(
                 },
             ],
             temperature=0.3,
-            max_tokens=200,  # Increased slightly to allow for some reasoning if needed, though we ask for nothing else
+            max_tokens=1000,
             extra_body={
                 "reasoning": {
                     "enabled": False,  # Explicitly turn off reasoning
                     "effort": "none",   # Redundant backup to ensure 0 reasoning tokens
                     "exclude": True
                 }
-            },  # Request reasoning for supported models
+            },
         )
 
         content, raw_dump = extract_content_and_reasoning(response)
@@ -411,9 +537,7 @@ async def augment_label_async(
             return "", raw_dump, prompt_tokens, completion_tokens
 
         return content.strip(), raw_dump, prompt_tokens, completion_tokens  # pyright: ignore[reportOptionalMemberAccess]
-
     except Exception as e:
-        # print(f"Error calling OpenAI API (augment): {e}")
         return f"Augmented: {label} (Error)", str(e), 0, 0
 
 
@@ -524,6 +648,7 @@ async def rerank_products_async(
                 {"role": "user", "content": prompt},
             ],
             temperature=0,
+            max_tokens=1000,
             extra_body={
                 "reasoning": {
                     "enabled": False,  # Explicitly turn off reasoning
@@ -667,10 +792,21 @@ async def run_benchmarks_async():
         print("Error: OPENROUTER_KEY environment variable not set.")
         return
 
-    client = AsyncOpenAI(
+    deepinfra_key = os.environ.get("DEEPINFRA_KEY")
+
+    # Create clients
+    openrouter_client = AsyncOpenAI(
         base_url="https://openrouter.ai/api/v1",
         api_key=openrouter_key,
     )
+
+    deepinfra_client = None
+    if deepinfra_key:
+        deepinfra_client = AsyncOpenAI(
+            base_url="https://api.deepinfra.com/v1/openai",
+            api_key=deepinfra_key,
+        )
+        print("DeepInfra client configured.")
 
     results = []
     sem = asyncio.Semaphore(CONCURRENCY_LIMIT)
@@ -704,6 +840,7 @@ async def run_benchmarks_async():
     for model_info in MODELS:
         model_name = model_info["model"]
         model_id = model_info["openrouter_id"]
+        deepinfra_id = model_info.get("deepinfra_id")
         params = model_info["params"]
 
         # Determine which scenarios are missing for this model
@@ -724,32 +861,29 @@ async def run_benchmarks_async():
         print(f"\nBenchmarking: {model_name} ({model_id})")
         print(f"  > Missing scenarios: {', '.join(scenarios_to_run)}")
 
+        # Determine which client and model ID to use (DeepInfra first if available)
+        active_client = openrouter_client
+        active_model_id = model_id
+        
+        if deepinfra_id and deepinfra_client:
+            print(f"  > Using DeepInfra as primary provider")
+            active_client = deepinfra_client
+            active_model_id = deepinfra_id
+
         try:  # Safety net for the entire model process
             # Health Check
-            is_healthy = await check_model_health_async(client, model_id)
+            is_healthy = await check_model_health_async(active_client, active_model_id)
             if not is_healthy:
-                print(f"Skipping {model_name} due to health check failure.")
-                # Add skipped result for all MISSING scenarios
-                for scenario in scenarios_to_run:
-                    results.append(
-                        {
-                            "model": model_name,
-                            "id": model_id,
-                            "scenario": scenario,
-                            "params": params,
-                            "price_input": input_price_per_m,
-                            "price_output": output_price_per_m,
-                            "aug_score": 0.0,
-                            "rerank_dist": 0.0,
-                            "input_tokens": 0,
-                            "output_tokens": 0,
-                            "actual_cost": 0.0,
-                            "time_taken": 0,
-                            "note": "Skipped (Unavailable)",
-                            "details": {},
-                        }
-                    )
-                continue
+                # Try fallback to OpenRouter if DeepInfra fails
+                if active_client == deepinfra_client and deepinfra_client:
+                    print(f"  > DeepInfra health check failed, trying OpenRouter fallback...")
+                    active_client = openrouter_client
+                    active_model_id = model_id
+                    is_healthy = await check_model_health_async(active_client, active_model_id)
+                
+                if not is_healthy:
+                    print(f"Skipping {model_name} due to health check failure.")
+                    continue
 
             for scenario in scenarios_to_run:
                 print(f"  > Scenario: {scenario}")
@@ -765,7 +899,7 @@ async def run_benchmarks_async():
                     elif scenario == "shelf_category":
                         context = item.get("shelf_category")
 
-                    label_tasks.append(process_label_item(sem, client, item, model_id, EVAL_MODEL, context))
+                    label_tasks.append(process_label_item(sem, active_client, item, active_model_id, EVAL_MODEL, context))
 
                 label_results = await asyncio.gather(*label_tasks)
 
@@ -795,7 +929,7 @@ async def run_benchmarks_async():
                         context = item.get("product_type")
                     elif scenario == "shelf_category":
                         context = item.get("shelf_category")
-                    rerank_tasks.append(process_rerank_item(sem, client, item, model_id, context))
+                    rerank_tasks.append(process_rerank_item(sem, active_client, item, active_model_id, context))
 
                 rerank_results = await asyncio.gather(*rerank_tasks)
 
@@ -858,31 +992,7 @@ async def run_benchmarks_async():
 
         except Exception as e:
             print(f"CRITICAL ERROR benchmarking {model_name}: {e}")
-            for scenario in scenarios_to_run:
-                results.append(
-                    {
-                        "model": model_name,
-                        "id": model_id,
-                        "scenario": scenario,
-                        "params": params,
-                        "price_input": input_price_per_m,
-                        "price_output": output_price_per_m,
-                        "aug_score": 0.0,
-                        "rerank_dist": 0.0,
-                        "input_tokens": 0,
-                        "output_tokens": 0,
-                        "actual_cost": 0.0,
-                        "time_taken": 0,
-                        "note": f"Error: {str(e)}",
-                        "details": {},
-                    }
-                )
             continue
-
-            # Add or update result in map
-            # We treat the new 'results' list as the fresh batch, so we need to merge it back to results_map
-            # But wait, 'results' list contains the just-executed stuff.
-            pass  # Logic handled below
 
     # Merge fresh results into the persistent map
     for res in results:

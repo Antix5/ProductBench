@@ -10,6 +10,7 @@
 | Gemini 2.0 flash | shelf_category | Unknown | $0.006546 | 0.8227 | 0.0046 | $0.000039 | $0.000022 | 12.45 | Google's Gemini 2 Flash model. Reference model |
 | Kimi K2.5 | shelf_category | 1T | $0.040331 | 0.8182 | 0.0046 | $0.000237 | $0.000151 | 24.95 |  |
 | Gemini 2.5 Flash lite | shelf_category | Unknown | $0.006563 | 0.7924 | 0.0070 | $0.000040 | $0.000022 | 10.15 |  |
+| Kimi K2.6 | shelf_category | 1.1T | $0.050858 | 0.7917 | 0.0032 | $0.000301 | $0.000185 | 118.01 |  |
 | Mistral Large 3 2512 | shelf_category | 675B MOE | $0.033750 | 0.7780 | 0.0040 | $0.000207 | $0.000106 | 17.09 |  |
 | Deepseek V3.2 | shelf_category | 600B | $0.014742 | 0.7773 | 0.0019 | $0.000090 | $0.000047 | 26.18 |  |
 | Gemma 4 26B A4B Instruct | shelf_category | 26B | $0.009110 | 0.7773 | 0.0046 | $0.000055 | $0.000031 | 35.66 |  |
@@ -41,6 +42,8 @@
 | GPT-4o Mini | shelf_category | Unknown | $0.009589 | 0.0886 | 0.0053 | $0.000057 | $0.000034 | 22.37 |  |
 | Mercury 2 | shelf_category | Unknown | $0.015477 | 0.0827 | 0.0122 | $0.000093 | $0.000054 | 16.05 |  |
 | Olmo 3.1 32B Instruct | shelf_category | 32B | $0.012619 | 0.0382 | 0.0393 | $0.000076 | $0.000043 | 18.74 |  |
+| Deepseek V4 Pro | shelf_category | 1.6T A49B | $0.101393 | 0.0265 | 0.0046 | $0.000621 | $0.000323 | 37.37 |  |
+| Deepseek V4 Flash | shelf_category | 284B A13B | $0.008209 | 0.0152 | 0.0000 | $0.000050 | $0.000027 | 20.57 |  |
 | GPT OSS 20B | shelf_category | 20B | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 8.15 |  |
 | GPT OSS 120B | shelf_category | 120B | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 7.13 |  |
 | GPT-5 Nano | shelf_category | Unknown | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 6.68 |  |
@@ -51,6 +54,7 @@
 | Gemini 2.0 flash | product_type | Unknown | $0.006554 | 0.8129 | 0.0090 | $0.000040 | $0.000022 | 14.01 | Google's Gemini 2 Flash model. Reference model |
 | Kimi K2.5 | product_type | 1T | $0.040256 | 0.7758 | 0.0046 | $0.000237 | $0.000151 | 29.48 |  |
 | Kimi k2 0905 | product_type | 1T | $0.026771 | 0.7568 | 0.0079 | $0.000158 | $0.000098 | 23.10 |  |
+| Kimi K2.6 | product_type | 1.1T | $0.052057 | 0.7417 | 0.0140 | $0.000310 | $0.000185 | 67.62 |  |
 | Gemma 4 31B Instruct | product_type | 31B | $0.009768 | 0.7379 | 0.0061 | $0.000059 | $0.000033 | 94.41 |  |
 | Gemini 2.5 Flash lite | product_type | Unknown | $0.006567 | 0.7273 | 0.0070 | $0.000040 | $0.000022 | 10.69 |  |
 | Mistral Large 3 2512 | product_type | 675B MOE | $0.033724 | 0.7144 | 0.0067 | $0.000207 | $0.000106 | 16.22 |  |
@@ -84,15 +88,18 @@
 | Llama 3.3 70B Instruct | product_type | 70B | $0.006505 | 0.2904 | 0.0067 | $0.000039 | $0.000023 | 21.23 |  |
 | GPT-4.1 Nano | product_type | Unknown | $0.006443 | 0.2513 | 0.0110 | $0.000038 | $0.000023 | 17.51 |  |
 | Liquid LFM 2 24B A2B | product_type | 24B | $0.002127 | 0.1155 | 0.0467 | $0.000013 | $0.000008 | 20.50 |  |
+| Deepseek V4 Pro | product_type | 1.6T A49B | $0.101526 | 0.0576 | 0.0059 | $0.000622 | $0.000323 | 17.83 |  |
 | GPT OSS 20B | product_type | 20B | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 8.39 |  |
 | GPT OSS 120B | product_type | 120B | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 6.86 |  |
 | GPT-5 Nano | product_type | Unknown | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 6.98 |  |
 | GPT-5 Mini | product_type | Unknown | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 7.16 |  |
+| Deepseek V4 Flash | product_type | 284B A13B | $0.008196 | 0.0000 | 0.0013 | $0.000050 | $0.000027 | 24.40 |  |
 | Gemini 3 flash (Judge) | base | Unknown | $0.035058 | 0.8750 | 0.0040 | $0.000209 | $0.000125 | 15.87 | This model is here to see how the judge model self evaluate. |
 | Gemini 3.1 Flash Lite Preview | base | Unknown | $0.016849 | 0.7992 | 0.0074 | $0.000100 | $0.000061 | 23.81 |  |
 | Gemini 2.5 Flash | base | Unknown | $0.022282 | 0.7750 | 0.0075 | $0.000130 | $0.000086 | 12.64 | Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. |
 | Gemini 2.0 flash | base | Unknown | $0.006484 | 0.7356 | 0.0042 | $0.000039 | $0.000022 | 12.19 | Google's Gemini 2 Flash model. Reference model |
 | Kimi K2.5 | base | 1T | $0.039544 | 0.7318 | 0.0040 | $0.000232 | $0.000148 | 22.80 |  |
+| Kimi K2.6 | base | 1.1T | $0.053724 | 0.7189 | 0.0207 | $0.000298 | $0.000241 | 82.34 |  |
 | Gemma 4 31B Instruct | base | 31B | $0.009575 | 0.6981 | 0.0061 | $0.000058 | $0.000032 | 630.63 |  |
 | Kimi k2 0905 | base | 1T | $0.026040 | 0.6856 | 0.0114 | $0.000155 | $0.000093 | 18.80 |  |
 | Mistral Large 3 2512 | base | 675B MOE | $0.033118 | 0.6629 | 0.0046 | $0.000204 | $0.000104 | 18.81 |  |
@@ -127,6 +134,8 @@
 | Ministral 3B 2512 | base | 14B | $0.006044 | 0.2977 | 0.0250 | $0.000038 | $0.000017 | 11.91 |  |
 | Liquid LFM 2 24B A2B | base | 24B | $0.002092 | 0.2939 | 0.0522 | $0.000013 | $0.000007 | 17.00 |  |
 | Mistral Ministral 3B | base | 3B | $0.002396 | 0.2545 | 0.0590 | $0.000015 | $0.000007 | 9.25 |  |
+| Deepseek V4 Pro | base | 1.6T A49B | $0.099866 | 0.1318 | 0.0046 | $0.000613 | $0.000316 | 63.49 |  |
+| Deepseek V4 Flash | base | 284B A13B | $0.008150 | 0.1174 | 0.0034 | $0.000050 | $0.000027 | 68.02 |  |
 | GPT OSS 20B | base | 20B | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 8.09 |  |
 | GPT OSS 120B | base | 120B | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 7.14 |  |
 | GPT-5 Nano | base | Unknown | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 6.67 |  |

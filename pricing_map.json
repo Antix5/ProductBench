@@ -1458,5 +1458,19 @@
   "google/gemma-4-26b-a4b-it": {
     "input": 0.13,
     "output": 0.40
+  },
+  "deepseek/deepseek-v4-pro":
+  {
+    "input": 1.74,
+    "output": 3.48
+  },
+  "deepseek/deepseek-v4-flash":
+  {
+    "input": 0.14,
+    "output": 0.28
+  },
+  "moonshotai/kimi-k2.6": {
+    "input": 0.75,
+    "output": 3.50
   }
 }
