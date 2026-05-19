@@ -292,6 +292,20 @@ MODELS = [
         "params" : "1.1T",
         "note": "",
     },
+    {
+        "model" : "Mistral Medium 3.5",
+        "openrouter_id": "mistralai/mistral-medium-3-5",
+        "params" : "Unknown",
+        "note": "",
+    },
+    {
+        "model" : "Gemini 3.5 Flash (Flex)",
+        "openrouter_id": "google/gemini-3.5-flash",
+        "params" : "Unknown",
+        "service_tier": "flex",
+        "reasoning_mandatory": True,
+        "note": "Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled.",
+    },
 ]
 
 # Semaphore to limit concurrent requests
@@ -349,7 +363,7 @@ def extract_content_and_reasoning(response):
     reraise=True
 )
 async def _augment_label_with_retry(
-    client: AsyncOpenAI, label: str, model: str, context: str | None
+    client: AsyncOpenAI, label: str, model: str, context: str | None, service_tier: str | None = None, reasoning_mandatory: bool = False
 ) -> tuple[str, str, int, int]:
     """Internal function with retry logic for label augmentation."""
     user_content = f"""Analyze the input label and output a clean, generic product description.
@@ -376,6 +390,21 @@ async def _augment_label_with_retry(
     if context:
             user_content = f"Product Context: {context}\n\n" + user_content
 
+    extra: dict[str, object] = {}
+    if reasoning_mandatory:
+        extra["reasoning"] = {
+            "effort": "low",
+            "exclude": True
+        }
+    else:
+        extra["reasoning"] = {
+            "enabled": False,
+            "effort": "none",
+            "exclude": True
+        }
+    if service_tier:
+        extra["service_tier"] = service_tier
+
     response = await client.chat.completions.create(
         model=model,
         messages=[
@@ -390,13 +419,7 @@ async def _augment_label_with_retry(
         ],
         temperature=0.3,
         max_tokens=1000,
-        extra_body={
-            "reasoning": {
-                "enabled": False,  # Explicitly turn off reasoning
-                "effort": "none",   # Redundant backup to ensure 0 reasoning tokens
-                "exclude": True
-            }
-        },
+        extra_body=extra,
     )
 
     content, raw_dump = extract_content_and_reasoning(response)
@@ -439,11 +462,11 @@ async def _augment_label_with_retry(
 
 
 async def augment_label_async(
-    client: AsyncOpenAI, label: str, model: str, context: str = None
+    client: AsyncOpenAI, label: str, model: str, context: str | None = None, service_tier: str | None = None, reasoning_mandatory: bool = False
 ) -> tuple[str, str, int, int]:
     """Uses an LLM to augment the product label (Async). Returns (content, raw_output, prompt_tokens, completion_tokens)."""
     try:
-        return await _augment_label_with_retry(client, label, model, context)
+        return await _augment_label_with_retry(client, label, model, context, service_tier=service_tier, reasoning_mandatory=reasoning_mandatory)
     except Exception as e:
         return f"Augmented: {label} (Error)", str(e), 0, 0
 
@@ -616,8 +639,8 @@ async def evaluate_augmentation_async(
 
 
 async def rerank_products_async(
-    client: AsyncOpenAI, query: str, products: list, model: str, context: str = None
-) -> tuple[list, str, int, int]:
+    client: AsyncOpenAI, query: str, products: list[str], model: str, context: str | None = None, service_tier: str | None = None, reasoning_mandatory: bool = False
+) -> tuple[list[int], str, int, int]:
     """Reranks products using an LLM (Async). Returns (indices, raw_output, prompt_tokens, completion_tokens)."""
     products_formatted = "\n".join([f"{i}: {p}" for i, p in enumerate(products)])
 
@@ -638,6 +661,21 @@ async def rerank_products_async(
         prompt = f"Product Context: {context}\n\n" + prompt
 
     try:
+        extra: dict[str, object] = {}
+        if reasoning_mandatory:
+            extra["reasoning"] = {
+                "effort": "low",
+                "exclude": True
+            }
+        else:
+            extra["reasoning"] = {
+                "enabled": False,
+                "effort": "none",
+                "exclude": True
+            }
+        if service_tier:
+            extra["service_tier"] = service_tier
+
         response = await client.chat.completions.create(
             model=model,
             messages=[
@@ -649,13 +687,7 @@ async def rerank_products_async(
             ],
             temperature=0,
             max_tokens=1000,
-            extra_body={
-                "reasoning": {
-                    "enabled": False,  # Explicitly turn off reasoning
-                    "effort": "none",   # Redundant backup to ensure 0 reasoning tokens
-                    "exclude": True
-                }
-            },
+            extra_body=extra,
         )
 
         content, raw_dump = extract_content_and_reasoning(response)
@@ -725,15 +757,23 @@ async def rerank_products_async(
         return list(range(len(products))), str(e), 0, 0
 
 
-async def check_model_health_async(client: AsyncOpenAI, model_id: str) -> bool:
+async def check_model_health_async(client: AsyncOpenAI, model_id: str, service_tier: str | None = None) -> bool:
     """Checks if the model is available (Async)."""
     print(f"  Checking health of {model_id}...")
     try:
+        extra: dict[str, object] | None = None
+        if service_tier:
+            extra = {"service_tier": service_tier}
+
+        # Flex tier has higher latency, so allow more time
+        health_timeout = 60 if service_tier == "flex" else 10
+
         await client.chat.completions.create(
             model=model_id,
             messages=[{"role": "user", "content": "Hi"}],
             max_tokens=16,
-            timeout=10,
+            timeout=health_timeout,
+            extra_body=extra,
         )
         return True
     except Exception as e:
@@ -744,11 +784,11 @@ async def check_model_health_async(client: AsyncOpenAI, model_id: str) -> bool:
 # --- Main Benchmark Logic ---
 
 
-async def process_label_item(sem, client, item, model_id, eval_model, context=None):
+async def process_label_item(sem, client, item, model_id, eval_model, context=None, service_tier=None, reasoning_mandatory=False):
     """Process a single label augmentation item."""
     async with sem:
         augmented_label, raw_output, p_tokens, c_tokens = await augment_label_async(
-            client, item["label"], model_id, context=context
+            client, item["label"], model_id, context=context, service_tier=service_tier, reasoning_mandatory=reasoning_mandatory
         )
         score = await evaluate_augmentation_async(
             client, item["label"], augmented_label, item["ground_truth"], eval_model
@@ -766,11 +806,11 @@ async def process_label_item(sem, client, item, model_id, eval_model, context=No
         return score, p_tokens, c_tokens, detail
 
 
-async def process_rerank_item(sem, client, item, model_id, context=None):
+async def process_rerank_item(sem, client, item, model_id, context=None, service_tier=None, reasoning_mandatory=False):
     """Process a single product reranking item."""
     async with sem:
         reranked_indices, raw_output, p_tokens, c_tokens = await rerank_products_async(
-            client, item["query"], item["products"], model_id, context=context
+            client, item["query"], item["products"], model_id, context=context, service_tier=service_tier, reasoning_mandatory=reasoning_mandatory
         )
         distance = calculate_ranking_distance(reranked_indices, item["ground_truth"])
 
@@ -841,6 +881,8 @@ async def run_benchmarks_async():
         model_name = model_info["model"]
         model_id = model_info["openrouter_id"]
         deepinfra_id = model_info.get("deepinfra_id")
+        service_tier = model_info.get("service_tier")
+        reasoning_mandatory = bool(model_info.get("reasoning_mandatory", False))
         params = model_info["params"]
 
         # Determine which scenarios are missing for this model
@@ -872,14 +914,14 @@ async def run_benchmarks_async():
 
         try:  # Safety net for the entire model process
             # Health Check
-            is_healthy = await check_model_health_async(active_client, active_model_id)
+            is_healthy = await check_model_health_async(active_client, active_model_id, service_tier=service_tier)
             if not is_healthy:
                 # Try fallback to OpenRouter if DeepInfra fails
                 if active_client == deepinfra_client and deepinfra_client:
                     print(f"  > DeepInfra health check failed, trying OpenRouter fallback...")
                     active_client = openrouter_client
                     active_model_id = model_id
-                    is_healthy = await check_model_health_async(active_client, active_model_id)
+                    is_healthy = await check_model_health_async(active_client, active_model_id, service_tier=service_tier)
                 
                 if not is_healthy:
                     print(f"Skipping {model_name} due to health check failure.")
@@ -899,7 +941,7 @@ async def run_benchmarks_async():
                     elif scenario == "shelf_category":
                         context = item.get("shelf_category")
 
-                    label_tasks.append(process_label_item(sem, active_client, item, active_model_id, EVAL_MODEL, context))
+                    label_tasks.append(process_label_item(sem, active_client, item, active_model_id, EVAL_MODEL, context, service_tier=service_tier, reasoning_mandatory=reasoning_mandatory))
 
                 label_results = await asyncio.gather(*label_tasks)
 
@@ -929,7 +971,7 @@ async def run_benchmarks_async():
                         context = item.get("product_type")
                     elif scenario == "shelf_category":
                         context = item.get("shelf_category")
-                    rerank_tasks.append(process_rerank_item(sem, active_client, item, active_model_id, context))
+                    rerank_tasks.append(process_rerank_item(sem, active_client, item, active_model_id, context, service_tier=service_tier, reasoning_mandatory=reasoning_mandatory))
 
                 rerank_results = await asyncio.gather(*rerank_tasks)
 

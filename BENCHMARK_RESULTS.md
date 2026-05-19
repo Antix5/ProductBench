@@ -2,6 +2,7 @@
 
 | Model | Scenario | Params | Total Cost ($) | Label Aug Score | Rerank Dist | Aug Cost/Item ($) | Rerank Cost/Item ($) | Time (s) | Note |
 |---|---|---|---|---|---|---|---|---|---|
+| Gemini 3.5 Flash (Flex) | shelf_category | Unknown | $0.244763 | 0.9212 | 0.0142 | $0.001232 | $0.001368 | 161.45 | Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled. |
 | Gemini 3 flash (Judge) | shelf_category | Unknown | $0.035598 | 0.9121 | 0.0040 | $0.000212 | $0.000127 | 29.30 | This model is here to see how the judge model self evaluate. |
 | Gemini 3.1 Flash Lite Preview | shelf_category | Unknown | $0.014444 | 0.8818 | 0.2893 | $0.000102 | $0.000017 | 25.81 |  |
 | Gemini 2.5 Flash | shelf_category | Unknown | $0.022652 | 0.8758 | 0.0051 | $0.000132 | $0.000087 | 18.48 | Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. |
@@ -14,6 +15,7 @@
 | Mistral Large 3 2512 | shelf_category | 675B MOE | $0.033750 | 0.7780 | 0.0040 | $0.000207 | $0.000106 | 17.09 |  |
 | Deepseek V3.2 | shelf_category | 600B | $0.014742 | 0.7773 | 0.0019 | $0.000090 | $0.000047 | 26.18 |  |
 | Gemma 4 26B A4B Instruct | shelf_category | 26B | $0.009110 | 0.7773 | 0.0046 | $0.000055 | $0.000031 | 35.66 |  |
+| Mistral Medium 3.5 | shelf_category | Unknown | $0.111639 | 0.7727 | 0.0040 | $0.000669 | $0.000388 | 27.23 |  |
 | Kat Coder Pro | shelf_category | Unknown | $0.014120 | 0.7402 | 0.0120 | $0.000084 | $0.000050 | 31.13 |  |
 | Mimo V2 Flash | shelf_category | 300B | $0.000000 | 0.7114 | 0.0066 | $0.000000 | $0.000000 | 46.57 |  |
 | Mistral Small 2603 | shelf_category | 112B MOE | $0.010789 | 0.6864 | 0.0212 | $0.000065 | $0.000036 | 13.29 |  |
@@ -48,6 +50,7 @@
 | GPT OSS 120B | shelf_category | 120B | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 7.13 |  |
 | GPT-5 Nano | shelf_category | Unknown | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 6.68 |  |
 | GPT-5 Mini | shelf_category | Unknown | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 6.62 |  |
+| Gemini 3.5 Flash (Flex) | product_type | Unknown | $0.237330 | 0.9030 | 0.0061 | $0.001183 | $0.001354 | 158.54 | Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled. |
 | Gemini 3 flash (Judge) | product_type | Unknown | $0.035574 | 0.8818 | 0.0027 | $0.000212 | $0.000127 | 15.38 | This model is here to see how the judge model self evaluate. |
 | Gemini 3.1 Flash Lite Preview | product_type | Unknown | $0.017144 | 0.8636 | 0.0074 | $0.000102 | $0.000062 | 22.62 |  |
 | Gemini 2.5 Flash | product_type | Unknown | $0.022633 | 0.8485 | 0.0056 | $0.000132 | $0.000087 | 12.47 | Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. |
@@ -57,6 +60,7 @@
 | Kimi K2.6 | product_type | 1.1T | $0.052057 | 0.7417 | 0.0140 | $0.000310 | $0.000185 | 67.62 |  |
 | Gemma 4 31B Instruct | product_type | 31B | $0.009768 | 0.7379 | 0.0061 | $0.000059 | $0.000033 | 94.41 |  |
 | Gemini 2.5 Flash lite | product_type | Unknown | $0.006567 | 0.7273 | 0.0070 | $0.000040 | $0.000022 | 10.69 |  |
+| Mistral Medium 3.5 | product_type | Unknown | $0.111431 | 0.7189 | 0.0040 | $0.000668 | $0.000388 | 18.25 |  |
 | Mistral Large 3 2512 | product_type | 675B MOE | $0.033724 | 0.7144 | 0.0067 | $0.000207 | $0.000106 | 16.22 |  |
 | Gemma 4 26B A4B Instruct | product_type | 26B | $0.009106 | 0.6924 | 0.0046 | $0.000055 | $0.000031 | 33.50 |  |
 | Deepseek V3.2 | product_type | 600B | $0.014710 | 0.6909 | 0.0032 | $0.000090 | $0.000047 | 25.65 |  |
@@ -94,6 +98,7 @@
 | GPT-5 Nano | product_type | Unknown | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 6.98 |  |
 | GPT-5 Mini | product_type | Unknown | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 7.16 |  |
 | Deepseek V4 Flash | product_type | 284B A13B | $0.008196 | 0.0000 | 0.0013 | $0.000050 | $0.000027 | 24.40 |  |
+| Gemini 3.5 Flash (Flex) | base | Unknown | $0.243792 | 0.8962 | 0.0034 | $0.001183 | $0.001461 | 148.54 | Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled. |
 | Gemini 3 flash (Judge) | base | Unknown | $0.035058 | 0.8750 | 0.0040 | $0.000209 | $0.000125 | 15.87 | This model is here to see how the judge model self evaluate. |
 | Gemini 3.1 Flash Lite Preview | base | Unknown | $0.016849 | 0.7992 | 0.0074 | $0.000100 | $0.000061 | 23.81 |  |
 | Gemini 2.5 Flash | base | Unknown | $0.022282 | 0.7750 | 0.0075 | $0.000130 | $0.000086 | 12.64 | Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. |
@@ -108,6 +113,7 @@
 | Gemini 2.5 Flash Lite Preview | base | Unknown | $0.006480 | 0.6303 | 0.0046 | $0.000039 | $0.000022 | 12.91 |  |
 | Gemma 4 26B A4B Instruct | base | 26B | $0.008955 | 0.6303 | 0.0059 | $0.000054 | $0.000030 | 48.14 |  |
 | Kat Coder Pro | base | Unknown | $0.013885 | 0.6076 | 0.0108 | $0.000083 | $0.000048 | 38.47 |  |
+| Mistral Medium 3.5 | base | Unknown | $0.109796 | 0.6015 | 0.0040 | $0.000658 | $0.000381 | 32.13 |  |
 | Mimo V2 Flash | base | 300B | $0.000000 | 0.5818 | 0.0105 | $0.000000 | $0.000000 | 72.23 |  |
 | GPT-4o Mini | base | Unknown | $0.009417 | 0.5727 | 0.0064 | $0.000056 | $0.000034 | 15.61 |  |
 | Qwen 3.5 Flash 02-23 | base | Unknown | $0.006356 | 0.5417 | 0.1231 | $0.000041 | $0.000016 | 21.90 |  |

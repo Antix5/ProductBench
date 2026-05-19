@@ -1444,33 +1444,39 @@
     "output": 0.75
   },
   "qwen/qwen3.5-9b": {
-      "input": 0.10,
-      "output": 0.15
+    "input": 0.1,
+    "output": 0.15
   },
   "mistralai/mistral-small-2603": {
-      "input": 0.15,
-      "output": 0.60
+    "input": 0.15,
+    "output": 0.6
   },
   "google/gemma-4-31b-it": {
     "input": 0.14,
-    "output": 0.40
+    "output": 0.4
   },
   "google/gemma-4-26b-a4b-it": {
     "input": 0.13,
-    "output": 0.40
+    "output": 0.4
   },
-  "deepseek/deepseek-v4-pro":
-  {
+  "deepseek/deepseek-v4-pro": {
     "input": 1.74,
     "output": 3.48
   },
-  "deepseek/deepseek-v4-flash":
-  {
+  "deepseek/deepseek-v4-flash": {
     "input": 0.14,
     "output": 0.28
   },
   "moonshotai/kimi-k2.6": {
     "input": 0.75,
-    "output": 3.50
+    "output": 3.5
+  },
+  "google/gemini-3.5-flash": {
+    "input": 0.75,
+    "output": 4.5
+  },
+  "mistralai/mistral-medium-3-5": {
+    "input": 1.5,
+    "output": 7.5
   }
 }
