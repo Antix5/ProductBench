@@ -306,6 +306,21 @@ MODELS = [
         "reasoning_mandatory": True,
         "note": "Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled.",
     },
+    {
+        "model" : "Gemini 3.6 Flash (Flex)",
+        "openrouter_id": "google/gemini-3.6-flash",
+        "params" : "Unknown",
+        "service_tier": "flex",
+        "reasoning_mandatory": True,
+        "note": "Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled.",
+    },
+    {
+        "model" : "Gemini 3.5 Flash Lite",
+        "openrouter_id": "google/gemini-3.5-flash-lite",
+        "params" : "Unknown",
+        "reasoning_mandatory": True,
+        "note": "",
+    }
 ]
 
 # Semaphore to limit concurrent requests

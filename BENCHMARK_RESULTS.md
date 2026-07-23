@@ -3,9 +3,11 @@
 | Model | Scenario | Params | Total Cost ($) | Label Aug Score | Rerank Dist | Aug Cost/Item ($) | Rerank Cost/Item ($) | Time (s) | Note |
 |---|---|---|---|---|---|---|---|---|---|
 | Gemini 3.5 Flash (Flex) | shelf_category | Unknown | $0.244763 | 0.9212 | 0.0142 | $0.001232 | $0.001368 | 161.45 | Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled. |
+| Gemini 3.6 Flash (Flex) | shelf_category | Unknown | $0.201363 | 0.9212 | 0.0040 | $0.000973 | $0.001216 | 130.40 | Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled. |
 | Gemini 3 flash (Judge) | shelf_category | Unknown | $0.035598 | 0.9121 | 0.0040 | $0.000212 | $0.000127 | 29.30 | This model is here to see how the judge model self evaluate. |
 | Gemini 3.1 Flash Lite Preview | shelf_category | Unknown | $0.014444 | 0.8818 | 0.2893 | $0.000102 | $0.000017 | 25.81 |  |
 | Gemini 2.5 Flash | shelf_category | Unknown | $0.022652 | 0.8758 | 0.0051 | $0.000132 | $0.000087 | 18.48 | Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. |
+| Gemini 3.5 Flash Lite | shelf_category | Unknown | $0.023045 | 0.8682 | 0.0079 | $0.000135 | $0.000088 | 15.50 |  |
 | Gemma 4 31B Instruct | shelf_category | 31B | $0.009770 | 0.8568 | 0.0061 | $0.000059 | $0.000033 | 87.46 |  |
 | Kimi k2 0905 | shelf_category | 1T | $0.026492 | 0.8273 | 0.0079 | $0.000160 | $0.000090 | 33.48 |  |
 | Gemini 2.0 flash | shelf_category | Unknown | $0.006546 | 0.8227 | 0.0046 | $0.000039 | $0.000022 | 12.45 | Google's Gemini 2 Flash model. Reference model |
@@ -50,10 +52,12 @@
 | GPT OSS 120B | shelf_category | 120B | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 7.13 |  |
 | GPT-5 Nano | shelf_category | Unknown | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 6.68 |  |
 | GPT-5 Mini | shelf_category | Unknown | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 6.62 |  |
+| Gemini 3.6 Flash (Flex) | product_type | Unknown | $0.195525 | 0.9182 | 0.0054 | $0.000933 | $0.001205 | 127.55 | Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled. |
 | Gemini 3.5 Flash (Flex) | product_type | Unknown | $0.237330 | 0.9030 | 0.0061 | $0.001183 | $0.001354 | 158.54 | Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled. |
 | Gemini 3 flash (Judge) | product_type | Unknown | $0.035574 | 0.8818 | 0.0027 | $0.000212 | $0.000127 | 15.38 | This model is here to see how the judge model self evaluate. |
 | Gemini 3.1 Flash Lite Preview | product_type | Unknown | $0.017144 | 0.8636 | 0.0074 | $0.000102 | $0.000062 | 22.62 |  |
 | Gemini 2.5 Flash | product_type | Unknown | $0.022633 | 0.8485 | 0.0056 | $0.000132 | $0.000087 | 12.47 | Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. |
+| Gemini 3.5 Flash Lite | product_type | Unknown | $0.023226 | 0.8265 | 0.0067 | $0.000136 | $0.000088 | 15.92 |  |
 | Gemini 2.0 flash | product_type | Unknown | $0.006554 | 0.8129 | 0.0090 | $0.000040 | $0.000022 | 14.01 | Google's Gemini 2 Flash model. Reference model |
 | Kimi K2.5 | product_type | 1T | $0.040256 | 0.7758 | 0.0046 | $0.000237 | $0.000151 | 29.48 |  |
 | Kimi k2 0905 | product_type | 1T | $0.026771 | 0.7568 | 0.0079 | $0.000158 | $0.000098 | 23.10 |  |
@@ -98,10 +102,12 @@
 | GPT-5 Nano | product_type | Unknown | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 6.98 |  |
 | GPT-5 Mini | product_type | Unknown | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 7.16 |  |
 | Deepseek V4 Flash | product_type | 284B A13B | $0.008196 | 0.0000 | 0.0013 | $0.000050 | $0.000027 | 24.40 |  |
+| Gemini 3.6 Flash (Flex) | base | Unknown | $0.193545 | 0.9038 | 0.0061 | $0.000945 | $0.001147 | 119.43 | Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled. |
 | Gemini 3.5 Flash (Flex) | base | Unknown | $0.243792 | 0.8962 | 0.0034 | $0.001183 | $0.001461 | 148.54 | Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled. |
 | Gemini 3 flash (Judge) | base | Unknown | $0.035058 | 0.8750 | 0.0040 | $0.000209 | $0.000125 | 15.87 | This model is here to see how the judge model self evaluate. |
 | Gemini 3.1 Flash Lite Preview | base | Unknown | $0.016849 | 0.7992 | 0.0074 | $0.000100 | $0.000061 | 23.81 |  |
 | Gemini 2.5 Flash | base | Unknown | $0.022282 | 0.7750 | 0.0075 | $0.000130 | $0.000086 | 12.64 | Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. |
+| Gemini 3.5 Flash Lite | base | Unknown | $0.022966 | 0.7712 | 0.0046 | $0.000135 | $0.000086 | 19.44 |  |
 | Gemini 2.0 flash | base | Unknown | $0.006484 | 0.7356 | 0.0042 | $0.000039 | $0.000022 | 12.19 | Google's Gemini 2 Flash model. Reference model |
 | Kimi K2.5 | base | 1T | $0.039544 | 0.7318 | 0.0040 | $0.000232 | $0.000148 | 22.80 |  |
 | Kimi K2.6 | base | 1.1T | $0.053724 | 0.7189 | 0.0207 | $0.000298 | $0.000241 | 82.34 |  |
