@@ -320,6 +320,13 @@ MODELS = [
         "params" : "Unknown",
         "reasoning_mandatory": True,
         "note": "",
+    },
+    {
+        "model" : "GPT 5.6 Luna",
+        "openrouter_id": "openai/gpt-5.6-luna",
+        "params" : "Unknown",
+        "reasoning_mandatory": True,
+        "note": "",
     }
 ]
 

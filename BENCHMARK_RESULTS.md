@@ -5,6 +5,7 @@
 | Gemini 3.5 Flash (Flex) | shelf_category | Unknown | $0.244763 | 0.9212 | 0.0142 | $0.001232 | $0.001368 | 161.45 | Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled. |
 | Gemini 3.6 Flash (Flex) | shelf_category | Unknown | $0.201363 | 0.9212 | 0.0040 | $0.000973 | $0.001216 | 130.40 | Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled. |
 | Gemini 3 flash (Judge) | shelf_category | Unknown | $0.035598 | 0.9121 | 0.0040 | $0.000212 | $0.000127 | 29.30 | This model is here to see how the judge model self evaluate. |
+| GPT 5.6 Luna | shelf_category | Unknown | $0.119320 | 0.8871 | 0.0072 | $0.000765 | $0.000305 | 24.11 |  |
 | Gemini 3.1 Flash Lite Preview | shelf_category | Unknown | $0.014444 | 0.8818 | 0.2893 | $0.000102 | $0.000017 | 25.81 |  |
 | Gemini 2.5 Flash | shelf_category | Unknown | $0.022652 | 0.8758 | 0.0051 | $0.000132 | $0.000087 | 18.48 | Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. |
 | Gemini 3.5 Flash Lite | shelf_category | Unknown | $0.023045 | 0.8682 | 0.0079 | $0.000135 | $0.000088 | 15.50 |  |
@@ -54,6 +55,7 @@
 | GPT-5 Mini | shelf_category | Unknown | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 6.62 |  |
 | Gemini 3.6 Flash (Flex) | product_type | Unknown | $0.195525 | 0.9182 | 0.0054 | $0.000933 | $0.001205 | 127.55 | Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled. |
 | Gemini 3.5 Flash (Flex) | product_type | Unknown | $0.237330 | 0.9030 | 0.0061 | $0.001183 | $0.001354 | 158.54 | Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled. |
+| GPT 5.6 Luna | product_type | Unknown | $0.126773 | 0.8909 | 0.0086 | $0.000824 | $0.000300 | 36.24 |  |
 | Gemini 3 flash (Judge) | product_type | Unknown | $0.035574 | 0.8818 | 0.0027 | $0.000212 | $0.000127 | 15.38 | This model is here to see how the judge model self evaluate. |
 | Gemini 3.1 Flash Lite Preview | product_type | Unknown | $0.017144 | 0.8636 | 0.0074 | $0.000102 | $0.000062 | 22.62 |  |
 | Gemini 2.5 Flash | product_type | Unknown | $0.022633 | 0.8485 | 0.0056 | $0.000132 | $0.000087 | 12.47 | Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. |
@@ -105,6 +107,7 @@
 | Gemini 3.6 Flash (Flex) | base | Unknown | $0.193545 | 0.9038 | 0.0061 | $0.000945 | $0.001147 | 119.43 | Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled. |
 | Gemini 3.5 Flash (Flex) | base | Unknown | $0.243792 | 0.8962 | 0.0034 | $0.001183 | $0.001461 | 148.54 | Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled. |
 | Gemini 3 flash (Judge) | base | Unknown | $0.035058 | 0.8750 | 0.0040 | $0.000209 | $0.000125 | 15.87 | This model is here to see how the judge model self evaluate. |
+| GPT 5.6 Luna | base | Unknown | $0.133085 | 0.8273 | 0.0072 | $0.000875 | $0.000293 | 38.10 |  |
 | Gemini 3.1 Flash Lite Preview | base | Unknown | $0.016849 | 0.7992 | 0.0074 | $0.000100 | $0.000061 | 23.81 |  |
 | Gemini 2.5 Flash | base | Unknown | $0.022282 | 0.7750 | 0.0075 | $0.000130 | $0.000086 | 12.64 | Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. |
 | Gemini 3.5 Flash Lite | base | Unknown | $0.022966 | 0.7712 | 0.0046 | $0.000135 | $0.000086 | 19.44 |  |
