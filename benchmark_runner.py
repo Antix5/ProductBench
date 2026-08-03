@@ -327,6 +327,13 @@ MODELS = [
         "params" : "Unknown",
         "reasoning_mandatory": True,
         "note": "",
+    },
+    {
+        "model" : "Deepseek V4 Flash 0731",
+        "openrouter_id": "deepseek/deepseek-v4-flash-0731",
+        "params" : "300B",
+        "reasoning_mandatory": True,
+        "note": "",
     }
 ]
 
