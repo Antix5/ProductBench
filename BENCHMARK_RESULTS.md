@@ -2,6 +2,7 @@
 
 | Model | Scenario | Params | Total Cost ($) | Label Aug Score | Rerank Dist | Aug Cost/Item ($) | Rerank Cost/Item ($) | Time (s) | Note |
 |---|---|---|---|---|---|---|---|---|---|
+| Gemini 3.7 Flash (priceoff) | shelf_category | Unknown | $0.080985 | 0.9402 | 0.0040 | $0.000383 | $0.000508 | 37.86 |  |
 | Gemini 3.5 Flash (Flex) | shelf_category | Unknown | $0.244763 | 0.9212 | 0.0142 | $0.001232 | $0.001368 | 161.45 | Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled. |
 | Gemini 3.6 Flash (Flex) | shelf_category | Unknown | $0.201363 | 0.9212 | 0.0040 | $0.000973 | $0.001216 | 130.40 | Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled. |
 | Gemini 3 flash (Judge) | shelf_category | Unknown | $0.035598 | 0.9121 | 0.0040 | $0.000212 | $0.000127 | 29.30 | This model is here to see how the judge model self evaluate. |
@@ -16,11 +17,13 @@
 | Deepseek V4 Flash 0731 | shelf_category | 300B | $0.019803 | 0.8023 | 0.0544 | $0.000098 | $0.000114 | 284.09 |  |
 | Gemini 2.5 Flash lite | shelf_category | Unknown | $0.006563 | 0.7924 | 0.0070 | $0.000040 | $0.000022 | 10.15 |  |
 | Kimi K2.6 | shelf_category | 1.1T | $0.050858 | 0.7917 | 0.0032 | $0.000301 | $0.000185 | 118.01 |  |
+| GLM 5.2 | shelf_category | 753B | $0.089667 | 0.7902 | 0.0027 | $0.000541 | $0.000304 | 45.00 |  |
 | Mistral Large 3 2512 | shelf_category | 675B MOE | $0.033750 | 0.7780 | 0.0040 | $0.000207 | $0.000106 | 17.09 |  |
 | Deepseek V3.2 | shelf_category | 600B | $0.014742 | 0.7773 | 0.0019 | $0.000090 | $0.000047 | 26.18 |  |
 | Gemma 4 26B A4B Instruct | shelf_category | 26B | $0.009110 | 0.7773 | 0.0046 | $0.000055 | $0.000031 | 35.66 |  |
 | Mistral Medium 3.5 | shelf_category | Unknown | $0.111639 | 0.7727 | 0.0040 | $0.000669 | $0.000388 | 27.23 |  |
 | Kat Coder Pro | shelf_category | Unknown | $0.014120 | 0.7402 | 0.0120 | $0.000084 | $0.000050 | 31.13 |  |
+| Qwen3.8 27b | shelf_category | 27B | $0.032016 | 0.7174 | 0.0064 | $0.000187 | $0.000122 | 41.06 |  |
 | Mimo V2 Flash | shelf_category | 300B | $0.000000 | 0.7114 | 0.0066 | $0.000000 | $0.000000 | 46.57 |  |
 | Mistral Small 2603 | shelf_category | 112B MOE | $0.010789 | 0.6864 | 0.0212 | $0.000065 | $0.000036 | 13.29 |  |
 | Hermes 4 70B | shelf_category | 70B | $0.007166 | 0.6712 | 0.0080 | $0.000043 | $0.000025 | 11.81 |  |
@@ -29,6 +32,7 @@
 | Mistral Small 3.2 | shelf_category | 24B | $0.003673 | 0.6492 | 0.1808 | $0.000025 | $0.000007 | 21.73 |  |
 | Mistral Small 3 | shelf_category | 24B | $0.002732 | 0.6258 | 0.0079 | $0.000018 | $0.000007 | 18.81 |  |
 | Ministral 14B 2512 | shelf_category | 14B | $0.012418 | 0.6053 | 0.0300 | $0.000078 | $0.000036 | 12.69 |  |
+| Nemotron 3.5 Lightning | shelf_category | 30B | $0.005394 | 0.6008 | 0.0090 | $0.000033 | $0.000017 | 12.20 |  |
 | Seed 2.0 Mini | shelf_category | Unknown | $0.008172 | 0.5970 | 0.0224 | $0.000050 | $0.000026 | 29.58 |  |
 | Microsoft Phi-4 | shelf_category | 14B | $0.003690 | 0.5917 | 0.0079 | $0.000022 | $0.000012 | 14.07 |  |
 | Ministral 8B 2512 | shelf_category | 14B | $0.009298 | 0.5818 | 0.0340 | $0.000058 | $0.000027 | 11.14 |  |
@@ -41,6 +45,7 @@
 | Mistral Ministral 3B | shelf_category | 3B | $0.002440 | 0.4394 | 0.0558 | $0.000015 | $0.000007 | 9.03 |  |
 | GPT-4.1 Nano | shelf_category | Unknown | $0.006457 | 0.4174 | 0.0116 | $0.000038 | $0.000023 | 17.49 |  |
 | Liquid LFM 2 24B A2B | shelf_category | 24B | $0.002127 | 0.3992 | 0.0521 | $0.000013 | $0.000008 | 17.08 |  |
+| Deepseek v4 pro 0813 | shelf_category | Unknown | $0.079831 | 0.3697 | 0.0101 | $0.000464 | $0.000310 | 79.54 |  |
 | Llama 3.3 70B Instruct | shelf_category | 70B | $0.006503 | 0.2864 | 0.0067 | $0.000039 | $0.000023 | 25.38 |  |
 | Llama 3.3 Nemotron Super 49B v1.5 | shelf_category | 7B | $0.006770 | 0.2555 | 0.0187 | $0.000040 | $0.000025 | 18.62 |  |
 | Mistral Small Creative | shelf_category | 24B | $0.006758 | 0.1747 | 0.0266 | $0.000041 | $0.000021 | 23.42 |  |
@@ -54,6 +59,7 @@
 | GPT OSS 120B | shelf_category | 120B | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 7.13 |  |
 | GPT-5 Nano | shelf_category | Unknown | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 6.68 |  |
 | GPT-5 Mini | shelf_category | Unknown | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 6.62 |  |
+| Gemini 3.7 Flash (priceoff) | product_type | Unknown | $0.087427 | 0.9258 | 0.0061 | $0.000425 | $0.000522 | 38.91 |  |
 | Gemini 3.6 Flash (Flex) | product_type | Unknown | $0.195525 | 0.9182 | 0.0054 | $0.000933 | $0.001205 | 127.55 | Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled. |
 | Gemini 3.5 Flash (Flex) | product_type | Unknown | $0.237330 | 0.9030 | 0.0061 | $0.001183 | $0.001354 | 158.54 | Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled. |
 | GPT 5.6 Luna | product_type | Unknown | $0.126773 | 0.8909 | 0.0086 | $0.000824 | $0.000300 | 36.24 |  |
@@ -66,12 +72,14 @@
 | Kimi k2 0905 | product_type | 1T | $0.026771 | 0.7568 | 0.0079 | $0.000158 | $0.000098 | 23.10 |  |
 | Kimi K2.6 | product_type | 1.1T | $0.052057 | 0.7417 | 0.0140 | $0.000310 | $0.000185 | 67.62 |  |
 | Gemma 4 31B Instruct | product_type | 31B | $0.009768 | 0.7379 | 0.0061 | $0.000059 | $0.000033 | 94.41 |  |
+| GLM 5.2 | product_type | 753B | $0.089363 | 0.7379 | 0.0067 | $0.000538 | $0.000305 | 29.46 |  |
 | Gemini 2.5 Flash lite | product_type | Unknown | $0.006567 | 0.7273 | 0.0070 | $0.000040 | $0.000022 | 10.69 |  |
 | Mistral Medium 3.5 | product_type | Unknown | $0.111431 | 0.7189 | 0.0040 | $0.000668 | $0.000388 | 18.25 |  |
 | Mistral Large 3 2512 | product_type | 675B MOE | $0.033724 | 0.7144 | 0.0067 | $0.000207 | $0.000106 | 16.22 |  |
 | Deepseek V4 Flash 0731 | product_type | 300B | $0.020059 | 0.6955 | 0.0435 | $0.000102 | $0.000111 | 308.69 |  |
 | Gemma 4 26B A4B Instruct | product_type | 26B | $0.009106 | 0.6924 | 0.0046 | $0.000055 | $0.000031 | 33.50 |  |
 | Deepseek V3.2 | product_type | 600B | $0.014710 | 0.6909 | 0.0032 | $0.000090 | $0.000047 | 25.65 |  |
+| Qwen3.8 27b | product_type | 27B | $0.031873 | 0.6727 | 0.0079 | $0.000186 | $0.000122 | 59.50 |  |
 | Gemini 2.5 Flash Lite Preview | product_type | Unknown | $0.006587 | 0.6641 | 0.0059 | $0.000040 | $0.000022 | 29.68 |  |
 | Kat Coder Pro | product_type | Unknown | $0.014067 | 0.6485 | 0.0106 | $0.000084 | $0.000050 | 28.06 |  |
 | Hermes 4 70B | product_type | 70B | $0.007151 | 0.6341 | 0.0094 | $0.000043 | $0.000025 | 11.23 |  |
@@ -89,6 +97,7 @@
 | Cohere Command R7B | product_type | 7B | $0.002671 | 0.5068 | 0.0295 | $0.000015 | $0.000012 | 13.31 |  |
 | Amazon Nova Micro 1.0 | product_type | Unknown (Micro) | $0.002312 | 0.5053 | 0.0303 | $0.000014 | $0.000008 | 15.76 |  |
 | Microsoft Phi-4 | product_type | 14B | $0.003687 | 0.4992 | 0.0086 | $0.000022 | $0.000013 | 16.42 |  |
+| Nemotron 3.5 Lightning | product_type | 30B | $0.005372 | 0.4985 | 0.0153 | $0.000033 | $0.000017 | 12.29 |  |
 | Mercury 2 | product_type | Unknown | $0.015352 | 0.4871 | 0.0108 | $0.000092 | $0.000054 | 11.05 |  |
 | Ministral 14B 2512 | product_type | 14B | $0.012369 | 0.4674 | 0.0243 | $0.000077 | $0.000036 | 11.09 |  |
 | GPT-4o Mini | product_type | Unknown | $0.009578 | 0.4668 | 0.0066 | $0.000057 | $0.000034 | 18.58 |  |
@@ -96,6 +105,7 @@
 | Olmo 3.1 32B Instruct | product_type | 32B | $0.012618 | 0.3788 | 0.0342 | $0.000076 | $0.000043 | 14.02 |  |
 | Llama 3.3 Nemotron Super 49B v1.5 | product_type | 7B | $0.006766 | 0.3785 | 0.0187 | $0.000040 | $0.000025 | 17.70 |  |
 | Mistral Ministral 3B | product_type | 3B | $0.002439 | 0.3720 | 0.0714 | $0.000015 | $0.000007 | 13.83 |  |
+| Deepseek v4 pro 0813 | product_type | Unknown | $0.085317 | 0.3667 | 0.0164 | $0.000473 | $0.000382 | 133.91 |  |
 | Ministral 3B 2512 | product_type | 14B | $0.006149 | 0.3621 | 0.0328 | $0.000039 | $0.000018 | 11.45 |  |
 | Llama 3.3 70B Instruct | product_type | 70B | $0.006505 | 0.2904 | 0.0067 | $0.000039 | $0.000023 | 21.23 |  |
 | GPT-4.1 Nano | product_type | Unknown | $0.006443 | 0.2513 | 0.0110 | $0.000038 | $0.000023 | 17.51 |  |
@@ -106,6 +116,7 @@
 | GPT-5 Nano | product_type | Unknown | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 6.98 |  |
 | GPT-5 Mini | product_type | Unknown | $0.000000 | 0.0076 | 0.4089 | $0.000000 | $0.000000 | 7.16 |  |
 | Deepseek V4 Flash | product_type | 284B A13B | $0.008196 | 0.0000 | 0.0013 | $0.000050 | $0.000027 | 24.40 |  |
+| Gemini 3.7 Flash (priceoff) | base | Unknown | $0.090551 | 0.9061 | 0.0074 | $0.000449 | $0.000521 | 37.08 |  |
 | Gemini 3.6 Flash (Flex) | base | Unknown | $0.193545 | 0.9038 | 0.0061 | $0.000945 | $0.001147 | 119.43 | Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled. |
 | Gemini 3.5 Flash (Flex) | base | Unknown | $0.243792 | 0.8962 | 0.0034 | $0.001183 | $0.001461 | 148.54 | Flex pricing tier (half the cost, higher latency). Reasoning cannot be disabled. |
 | Gemini 3 flash (Judge) | base | Unknown | $0.035058 | 0.8750 | 0.0040 | $0.000209 | $0.000125 | 15.87 | This model is here to see how the judge model self evaluate. |
@@ -117,6 +128,7 @@
 | Kimi K2.5 | base | 1T | $0.039544 | 0.7318 | 0.0040 | $0.000232 | $0.000148 | 22.80 |  |
 | Kimi K2.6 | base | 1.1T | $0.053724 | 0.7189 | 0.0207 | $0.000298 | $0.000241 | 82.34 |  |
 | Gemma 4 31B Instruct | base | 31B | $0.009575 | 0.6981 | 0.0061 | $0.000058 | $0.000032 | 630.63 |  |
+| GLM 5.2 | base | 753B | $0.086065 | 0.6909 | 0.0032 | $0.000517 | $0.000298 | 34.95 |  |
 | Kimi k2 0905 | base | 1T | $0.026040 | 0.6856 | 0.0114 | $0.000155 | $0.000093 | 18.80 |  |
 | Deepseek V4 Flash 0731 | base | 300B | $0.020841 | 0.6644 | 0.0373 | $0.000108 | $0.000109 | 475.84 |  |
 | Mistral Large 3 2512 | base | 675B MOE | $0.033118 | 0.6629 | 0.0046 | $0.000204 | $0.000104 | 18.81 |  |
@@ -128,6 +140,7 @@
 | Mistral Medium 3.5 | base | Unknown | $0.109796 | 0.6015 | 0.0040 | $0.000658 | $0.000381 | 32.13 |  |
 | Mimo V2 Flash | base | 300B | $0.000000 | 0.5818 | 0.0105 | $0.000000 | $0.000000 | 72.23 |  |
 | GPT-4o Mini | base | Unknown | $0.009417 | 0.5727 | 0.0064 | $0.000056 | $0.000034 | 15.61 |  |
+| Qwen3.8 27b | base | 27B | $0.031453 | 0.5432 | 0.0071 | $0.000184 | $0.000119 | 35.84 |  |
 | Qwen 3.5 Flash 02-23 | base | Unknown | $0.006356 | 0.5417 | 0.1231 | $0.000041 | $0.000016 | 21.90 |  |
 | Mistral Small 3.2 | base | 24B | $0.003937 | 0.5341 | 0.0072 | $0.000024 | $0.000012 | 22.51 |  |
 | Hermes 4 70B | base | 70B | $0.007042 | 0.5182 | 0.0096 | $0.000042 | $0.000025 | 11.93 |  |
@@ -140,6 +153,7 @@
 | Microsoft Phi-4 | base | 14B | $0.003621 | 0.4364 | 0.0086 | $0.000022 | $0.000012 | 14.61 |  |
 | GPT-4.1 Nano | base | Unknown | $0.006373 | 0.4333 | 0.0116 | $0.000038 | $0.000023 | 19.05 |  |
 | Amazon Nova Micro 1.0 | base | Unknown (Micro) | $0.002265 | 0.4265 | 0.0287 | $0.000014 | $0.000008 | 13.64 |  |
+| Nemotron 3.5 Lightning | base | 30B | $0.005324 | 0.4250 | 0.0153 | $0.000033 | $0.000017 | 12.14 |  |
 | Google Gemma 3 12B Instruct | base | 12B | $0.001978 | 0.4212 | 0.0130 | $0.000012 | $0.000007 | 15.78 |  |
 | Mistral Nemo 12B | base | 12B | $0.001256 | 0.4182 | 0.0456 | $0.000008 | $0.000004 | 17.20 |  |
 | Ministral 8B 2512 | base | 14B | $0.009110 | 0.4038 | 0.0350 | $0.000057 | $0.000026 | 10.45 |  |
@@ -149,6 +163,7 @@
 | Google Gemma 3 4B Instruct | base | 4B | $0.001146 | 0.3477 | 0.0317 | $0.000007 | $0.000004 | 11.74 |  |
 | Mercury 2 | base | Unknown | $0.015235 | 0.3394 | 0.0135 | $0.000091 | $0.000053 | 12.16 |  |
 | Olmo 3.1 32B Instruct | base | 32B | $0.012418 | 0.3341 | 0.0410 | $0.000075 | $0.000042 | 14.06 |  |
+| Deepseek v4 pro 0813 | base | Unknown | $0.080748 | 0.3008 | 0.0112 | $0.000485 | $0.000279 | 94.94 |  |
 | Ministral 3B 2512 | base | 14B | $0.006044 | 0.2977 | 0.0250 | $0.000038 | $0.000017 | 11.91 |  |
 | Liquid LFM 2 24B A2B | base | 24B | $0.002092 | 0.2939 | 0.0522 | $0.000013 | $0.000007 | 17.00 |  |
 | Mistral Ministral 3B | base | 3B | $0.002396 | 0.2545 | 0.0590 | $0.000015 | $0.000007 | 9.25 |  |

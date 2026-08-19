@@ -334,6 +334,41 @@ MODELS = [
         "params" : "300B",
         "reasoning_mandatory": True,
         "note": "",
+    },
+    {
+        "model" : "GLM 5.2",
+        "openrouter_id": "z-ai/glm-5.2",
+        "params" : "753B",
+        "reasoning_mandatory": False,
+        "note": ""
+    },
+    {
+        "model" : "Qwen3.8 27b",
+        "openrouter_id" : "qwen/qwen3.8-27b",
+        "params" : "27B",
+        "reasoning_mandatory": False,
+        "note": ""
+    },
+    {
+        "model" : "Gemini 3.7 Flash (priceoff)",
+        "openrouter_id" : "google/gemini-3.7-flash",
+        "params" : "Unknown",
+        "reasoning_mandatory": True,
+        "note": "",
+    },
+    {
+        "model": "Deepseek v4 pro 0813",
+        "openrouter_id" : "deepseek/deepseek-v4-pro-0813",
+        "params" : "Unknown",
+        "reasoning_mandatory": False,
+        "note": "",
+    },
+    {
+        "model": "Nemotron 3.5 Lightning",
+        "openrouter_id" : "nvidia/nemotron-3.5-lightning",
+        "params" : "30B",
+        "reasoning_mandatory": False,
+        "note": "",
     }
 ]
 
